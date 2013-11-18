@@ -16,5 +16,6 @@ public class Main {
             e.printStackTrace();
         }
         GameWindow.getInstance();
+        System.out.println("Test");
     }
 }
