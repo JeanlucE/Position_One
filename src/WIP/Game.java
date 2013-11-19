@@ -42,11 +42,15 @@ public class Game {
                 new StaticGraphicsComponent(Resource.enemy_DOWN),
                 new PhysicsComponent(40, 40));
 
+
+
         currentWorld = new World();
         ((Floor) currentWorld.getReal(6, 6)).dropItem(new Weapon_Melee("Caster Blaster", 0, 0, 1, 1.0f,
                 new ItemGraphicsComponent()));
         ((Floor) currentWorld.getReal(6, 7)).dropItem(new Weapon_Magic("Matador",0, 0, 1, 10, 1.0f,
                 Weapon_Magic.Element.FIRE, new ItemGraphicsComponent()));
+        currentWorld.addActor(player);
+        currentWorld.addActor(enemy);
         DebugLog.write("New Game started");
 
         renderer = Renderer.getInstance();

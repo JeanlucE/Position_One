@@ -16,8 +16,6 @@ import java.lang.reflect.Field;
  */
 public class Character extends Actor {
 
-    private final Game game;
-
     //region Stats
     private int level;
     private int experience;
@@ -69,7 +67,6 @@ public class Character extends Actor {
                 new PhysicsComponent(30, 30));
         ((ActorGraphicsComponent)this.getGraphic()).setParent(this);
 
-        this.game = game;
         this.level = level;
         this.experience = experience;
         this.skillPoints = skillPoints;

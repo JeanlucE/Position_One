@@ -4,8 +4,7 @@ import Components.GraphicsComponent;
 import Components.PhysicsComponent;
 import Components.StaticGraphicsComponent;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,6 +16,7 @@ import java.util.Map;
  */
 public class World {
     private Map<Position, WorldSpace> worldSpaceMap = new HashMap<>();
+    private List<Actor> actors = new ArrayList<>();
 
     public World() {
         int tilesize = 40;
@@ -68,14 +68,18 @@ public class World {
         setReal(xReal, yReal, worldSpace);
     }
 
-    void setReal(int x, int y, WorldSpace worldSpace){
+    void setReal(int x, int y, WorldSpace worldSpace) {
         worldSpaceMap.put(new Position(x, y), worldSpace);
+    }
+
+    void addActor(Actor a) {
+        actors.add(a);
     }
 
     /*
     This method resolves boolean collision between the gameworld and another gameobject (e.g. a player).
     It does this by getting the position of all 4 corners of the gameobject's colider and then checks if any of those
-    corners would clip into a wall when the game obejct move to the next Position.
+    corners would clip into a wall when the game object move to the next Position.
     If none of the corners clips a collidable world space (e.g. a wall) the method returns true.
     If any of the corners clips a collidable world space (e.g. a wall) the method returns false.
      */
@@ -88,9 +92,10 @@ public class World {
             if (!canMove)
                 break;
         }
-        return canMove;
+        return canMove && canMoveTo(actor, nextPosition);
     }
 
+    //Returns if the position that is passed has any collidable gameobject
     boolean canMoveTo(int x, int y) {
         int xReal = x / 40;
         int yReal = y / 40;
@@ -99,5 +104,41 @@ public class World {
 
     boolean canMoveTo(Position position) {
         return canMoveTo(position.getX(), position.getY());
+    }
+
+    /*
+    This method resolves collisions between the player and any enemy (for now) and any further actors in the scene.
+    TODO make this between all actors
+     */
+    boolean canMoveTo(Actor actor, Position nextPosition) {
+        boolean canMove = true;
+        for (int i = 0; i < actors.size() && canMove; i++) {
+            if (actor != actors.get(i)) {
+                Position[] thisCorners = actor.getCollider().getCorners(nextPosition);
+                Position[] otherCorners = actors.get(i).getCollider().getCorners(actors.get(i)
+                        .getTransform().getPosition());
+
+
+                //If player is above enemy
+                if (thisCorners[2].getY() > otherCorners[0].getY()) {
+                    canMove = true;
+                    //If player is below enemy
+                } else if (thisCorners[0].getY() < otherCorners[2].getY()) {
+                    canMove = true;
+                    //If player is at the same height as the enemy
+                } else {
+                    //If player is left of the enemy
+                    if (thisCorners[1].getX() < otherCorners[0].getX())
+                        canMove = true;
+                        //if player is right of the enemy
+                    else if (thisCorners[0].getX() > otherCorners[1].getX())
+                        canMove = true;
+                    else
+                        canMove = false;
+
+                }
+            }
+        }
+        return canMove;
     }
 }
