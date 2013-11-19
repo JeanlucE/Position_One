@@ -7,6 +7,8 @@ import Items.Weapon_Melee;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -24,6 +26,7 @@ public class Game {
     private World currentWorld;
     private final Renderer renderer;
     private final GameLoop gameLoop;
+    private List<Actor> actors = new ArrayList<>();
 
     //Singleton Design Pattern
     public static Game getInstance() {
@@ -49,8 +52,8 @@ public class Game {
                 new ItemGraphicsComponent()));
         ((Floor) currentWorld.getReal(6, 7)).dropItem(new Weapon_Magic("Matador",0, 0, 1, 10, 1.0f,
                 Weapon_Magic.Element.FIRE, new ItemGraphicsComponent()));
-        currentWorld.addActor(player);
-        currentWorld.addActor(enemy);
+        addActor(player);
+        addActor(enemy);
         DebugLog.write("New Game started");
 
         renderer = Renderer.getInstance();
@@ -61,6 +64,14 @@ public class Game {
         gameLoop = new GameLoop();
         Timer refresh = new Timer(15, gameLoop);
         refresh.start();
+    }
+
+    public List<Actor> getActors(){
+        return actors;
+    }
+
+    public void addActor(Actor actor){
+        actors.add(actor);
     }
 
     public int getFrameRate() {
@@ -93,8 +104,9 @@ public class Game {
         long milliseconds = System.currentTimeMillis();
 
         public void actionPerformed(ActionEvent e) {
-            getPlayer().update();
-            getEnemy().update();
+            for (Actor a: actors){
+                a.update();
+            }
             getRenderer().repaint();
 
             //Functionality to count frames and show frame rate circa every second

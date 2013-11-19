@@ -26,14 +26,20 @@ public class Enemy extends NPC {
         }
     }
 
+    //DEBUGGING
+    private int xMinSpeed = 0;
+    private int xMaxSpeed = 2;
+    private int yMinSpeed = 0;
+    private int yMaxSpeed = 2;
+    private int direction = -1;
+    private Random random = new Random();
     private void randomVel(){
-        Random random = new Random();
-        int xMinSpeed = 0;
-        int xMaxSpeed = 2;
-        int yMinSpeed = 0;
-        int yMaxSpeed = 2;
+        if(getTransform().getPosition().equals(new Position(40, 40))
+                || (getTransform().getPosition().getX() >= 700 && getTransform().getPosition().getY() >= 700))
+            direction = direction * -1;
+        currentXVelocity = (random.nextInt(xMaxSpeed) + 1 + xMinSpeed) * direction;
+        currentYVelocity = (random.nextInt(yMaxSpeed) + 1 + yMinSpeed) * direction;
 
-        currentXVelocity = random.nextInt(xMaxSpeed) + xMinSpeed + 1;
-        currentYVelocity = random.nextInt(yMaxSpeed) + yMinSpeed + 1;
+
     }
 }

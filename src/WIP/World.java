@@ -16,7 +16,6 @@ import java.util.*;
  */
 public class World {
     private Map<Position, WorldSpace> worldSpaceMap = new HashMap<>();
-    private List<Actor> actors = new ArrayList<>();
 
     public World() {
         int tilesize = 40;
@@ -72,10 +71,6 @@ public class World {
         worldSpaceMap.put(new Position(x, y), worldSpace);
     }
 
-    void addActor(Actor a) {
-        actors.add(a);
-    }
-
     /*
     This method resolves boolean collision between the gameworld and another gameobject (e.g. a player).
     It does this by getting the position of all 4 corners of the gameobject's colider and then checks if any of those
@@ -112,6 +107,7 @@ public class World {
      */
     boolean canMoveTo(Actor actor, Position nextPosition) {
         boolean canMove = true;
+        List<Actor> actors = Game.getInstance().getActors();
         for (int i = 0; i < actors.size() && canMove; i++) {
             if (actor != actors.get(i)) {
                 Position[] thisCorners = actor.getCollider().getCorners(nextPosition);

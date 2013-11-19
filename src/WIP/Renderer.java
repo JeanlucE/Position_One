@@ -129,6 +129,7 @@ public class Renderer extends JPanel {
     }
 
     private void drawEnemy() {
+        //TODO Take all of this and put it in Camera.class
         Enemy enemy = Game.getInstance().getEnemy();
         Position playerPos = Game.getInstance().getPlayer().getTransform().getPosition();
         Position p = enemy.getTransform().getPosition().clone();
