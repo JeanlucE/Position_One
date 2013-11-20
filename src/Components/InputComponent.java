@@ -136,7 +136,11 @@ public class InputComponent extends InputMap {
         actionMap.put("d_pressed", translateRight);
         actionMap.put("d_released", stopX);
         actionMap.put("space_pressed", spaceDown);
-        actionMap.put("space_released", spaceUp);
+        //actionMap.put("space_released", spaceUp);
+    }
+
+    public void resetSpacePressed(){
+        spacePressed = false;
     }
 
     public ActionMap getActionMap() {

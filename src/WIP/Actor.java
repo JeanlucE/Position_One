@@ -17,7 +17,7 @@ public abstract class Actor extends GameObject {
     private String name;
     private int maxHealth;
     private int currentHealth;
-    protected int currentXVelocity, currentYVelocity;
+    private int currentXVelocity, currentYVelocity;
 
     protected Actor(String name, Transform transform, GraphicsComponent graphic, PhysicsComponent collider) {
         super(transform, graphic);
@@ -64,6 +64,14 @@ public abstract class Actor extends GameObject {
         this.currentYVelocity = yVel;
     }
 
+    public int getXVel() {
+        return currentXVelocity;
+    }
+
+    public int getYVel() {
+        return currentYVelocity;
+    }
+
     public String getName() {
         return name;
     }
@@ -91,10 +99,13 @@ public abstract class Actor extends GameObject {
 
     public void damage(int damage) {
         currentHealth -= damage;
+        DebugLog.write("Damaged enemy "  + name + " for " + damage + " damage.");
         if (currentHealth <= 0)
             death();
+
     }
 
     private void death() {
+        DebugLog.write("Enemy " + name + " is dead.");
     }
 }

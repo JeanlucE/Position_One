@@ -1,6 +1,7 @@
 package WIP;
 
 import Components.*;
+import Items.Weapon;
 import Items.Weapon_Magic;
 import Items.Weapon_Melee;
 
@@ -37,9 +38,12 @@ public class Game {
     }
 
     private Game() {
+        Weapon weapon = new Weapon_Melee("Caster Blaster", 0, 0, 100, 1.0f,
+                new ItemGraphicsComponent());
         player = new Character(this, "Ned Stark");
         player.getTransform().getPosition().setX(200);
         player.getTransform().getPosition().setY(200);
+        player.equip(weapon);
 
         enemy = new Enemy("Chu Chu", 100, new Transform(new Position(40, 40)),
                 new StaticGraphicsComponent(Resource.enemy_DOWN),
@@ -48,8 +52,6 @@ public class Game {
 
 
         currentWorld = new World();
-        ((Floor) currentWorld.getReal(6, 6)).dropItem(new Weapon_Melee("Caster Blaster", 0, 0, 1, 1.0f,
-                new ItemGraphicsComponent()));
         ((Floor) currentWorld.getReal(6, 7)).dropItem(new Weapon_Magic("Matador",0, 0, 1, 10, 1.0f,
                 Weapon_Magic.Element.FIRE, new ItemGraphicsComponent()));
         addActor(player);

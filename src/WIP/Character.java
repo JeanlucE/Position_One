@@ -7,6 +7,7 @@ import Components.Resource;
 import Items.*;
 
 import java.lang.reflect.Field;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -88,15 +89,16 @@ public class Character extends Actor {
 
     public void update() {
         //TODO update direction player is facing from here
-        currentXVelocity = InputComponent.getInstance().getXAxis() * moveSpeed;
-        currentYVelocity = InputComponent.getInstance().getYAxis() * moveSpeed;
-        if (currentXVelocity != 0 || currentYVelocity != 0) {
+        setXVel(InputComponent.getInstance().getXAxis() * moveSpeed);
+        setYVel(InputComponent.getInstance().getYAxis() * moveSpeed);
+        if (getXVel() != 0 || getYVel() != 0) {
             move();
         }
 
         boolean use = InputComponent.getInstance().getSpacePressed();
         if(use){
-
+            attack();
+            InputComponent.getInstance().resetSpacePressed();
         }
     }
     //endregion
@@ -145,8 +147,41 @@ public class Character extends Actor {
     }
 
     private void attack(){
-        int range = ((Weapon)getMainHand()).getBaseRange();
+        //TODO attacking with colliders
+        float range = 0.5f;
         int damage = ((Weapon)getMainHand()).getBaseDamage();
+        List<Actor> actors = Game.getInstance().getActors();
+        for (Actor a: actors){
+
+            if (!a.equals(this)) {
+                Position[] phy = a.getCollider().getCorners(a.getTransform().getPosition());
+                switch (getTransform().getDirection()){
+                    case NORTH:
+                        if(a.getTransform().getPosition().getY() <= getTransform().getPosition().getY() + range * Renderer.TILESIZE){
+                            a.damage(damage);
+                        }
+                        break;
+                    case SOUTH:
+                        if(a.getTransform().getPosition().getY() >= getTransform().getPosition().getY() - range *
+                                Renderer.TILESIZE){
+                            a.damage(damage);
+                        }
+                        break;
+                    case WEST:
+                        if(a.getTransform().getPosition().getX() + 40 >= getTransform().getPosition().getX() - range *
+                                Renderer.TILESIZE){
+                            a.damage(damage);
+                        }
+                        break;
+                    case EAST:
+                        if(a.getTransform().getPosition().getX() <= getTransform().getPosition().getX() + range *
+                                Renderer.TILESIZE){
+                            a.damage(damage);
+                        }
+                        break;
+                }
+            }
+        }
 
     }
 

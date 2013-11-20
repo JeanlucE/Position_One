@@ -20,8 +20,8 @@ public class Enemy extends NPC {
     }
 
     public void update(){
-        randomVel();
-        if (currentXVelocity != 0 || currentYVelocity != 0) {
+        //randomVel();
+        if (getXVel() != 0 || getYVel() != 0) {
             move();
         }
     }
@@ -37,8 +37,8 @@ public class Enemy extends NPC {
         if(getTransform().getPosition().equals(new Position(40, 40))
                 || (getTransform().getPosition().getX() >= 700 && getTransform().getPosition().getY() >= 700))
             direction = direction * -1;
-        currentXVelocity = (random.nextInt(xMaxSpeed) + 1 + xMinSpeed) * direction;
-        currentYVelocity = (random.nextInt(yMaxSpeed) + 1 + yMinSpeed) * direction;
+        setXVel((random.nextInt(xMaxSpeed) + 1 + xMinSpeed) * direction);
+        setYVel((random.nextInt(yMaxSpeed) + 1 + yMinSpeed) * direction);
 
 
     }
