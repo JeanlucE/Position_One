@@ -9,7 +9,8 @@ import java.util.Map;
  * Date: 11.11.13
  * Time: 17:26
  * <p/>
- * This class determines which spaces of the world are on screen and occludes the rest
+ * This class determines which spaces of the world are on screen and occludes the rest.
+ * This class also converts all world coordinates to draw coordinates
  */
 public class Camera {
     private static Camera instance = null;
@@ -34,7 +35,7 @@ public class Camera {
         clipY = screenHeight / 2 + Renderer.TILESIZE;
     }
 
-    public Map<Position, WorldSpace> toRender() {
+    public Map<Position, WorldSpace> worldToRender() {
         this.world = Game.getInstance().getCurrentWorld();
         this.parent = Game.getInstance().getPlayer().getTransform().getPosition();
         Map<Position, WorldSpace> visibleSpaces = new HashMap<>(100);
@@ -72,5 +73,16 @@ public class Camera {
 
     public Position getParentPosition() {
         return new Position(screenWidth / 2, screenHeight / 2);
+    }
+
+    public Map<Actor, Position> actorsToRender(){
+        Map<Actor, Position> actorPositionMap = new HashMap<>();
+        for (Actor a: Game.getInstance().getActors()){
+            Position drawPosition = a.getTransform().getPosition().clone();
+            drawPosition.setX(screenWidth / 2 + (drawPosition.getX() - parent.getX()));
+            drawPosition.setY(screenHeight / 2 + (drawPosition.getY() - parent.getY()));
+            actorPositionMap.put(a, drawPosition);
+        }
+        return actorPositionMap;
     }
 }

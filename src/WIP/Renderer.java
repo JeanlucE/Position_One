@@ -49,12 +49,15 @@ public class Renderer extends JPanel {
         g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        Map<Position, WorldSpace> toRender = Camera.getInstance().toRender();
+        Map<Position, WorldSpace> toRender = Camera.getInstance().worldToRender();
 
         drawWorld(toRender);
         drawItems(toRender);
+
+        //DEBUGGING
         drawPlayer();
-        drawEnemy();
+
+        drawActors();
         drawGUI();
 
         MouseInputComponent mouseListener = MouseInputComponent.getInstance();
@@ -72,12 +75,8 @@ public class Renderer extends JPanel {
         GameWindow.getInstance().setTitle("Frames:" + String.valueOf(Game.getInstance().getFrameRate()));
     }
 
-    private void drawImage(BufferedImage image, Position position) {
-        g2d.drawImage(image, position.getX(), screenHeight - (30 + position.getY()), 30, 30, this);
-    }
-
-    private void drawImage(BufferedImage image, int x, int y) {
-        g2d.drawImage(image, x, screenHeight - y, this);
+    private void drawImage(GameObject go, Position position) {
+        //TODO implement once ive got some sprites for walls and floors
     }
 
     //DEBUGGING draws walls and floors as white and black rectangles until i have some sprites
@@ -111,31 +110,30 @@ public class Renderer extends JPanel {
         }
     }
 
+    //DEBUGGING draws player position and collider
     private void drawPlayer() {
         Game game = Game.getInstance();
-        //DEBUGGING Draws players collison box
+        //Collider
         g2d.setColor(Color.RED);
         Position playerDrawPos = Camera.getInstance().getParentPosition();
         PhysicsComponent collider = game.getPlayer().getCollider();
         g2d.drawRect(playerDrawPos.getX(), playerDrawPos.getY() - collider.getHeight(),
                 collider.getWidth(), collider.getHeight());
 
-        //Draws Player image
-        drawImage(game.getPlayer().getGraphic().getImage(), playerDrawPos);
-
+        //Position
         g2d.setColor(Color.RED);
         Position playerPos = game.getPlayer().getTransform().getPosition();
         g2d.drawString(playerPos.toString(), playerDrawPos.getX() - 5, playerDrawPos.getY() + 10);
     }
 
-    private void drawEnemy() {
-        //TODO Take all of this and put it in Camera.class
-        Enemy enemy = Game.getInstance().getEnemy();
-        Position playerPos = Game.getInstance().getPlayer().getTransform().getPosition();
-        Position p = enemy.getTransform().getPosition().clone();
-        p.setX(screenWidth / 2 + (p.getX() - playerPos.getX()));
-        p.setY(screenHeight / 2 + (p.getY() - playerPos.getY()));
-        g2d.drawImage(enemy.getGraphic().getImage(), p.getX(), 400 - (40 + p.getY()), 40, 40, this);
+    private void drawActors(){
+        Map <Actor, Position> actorPositionMap = Camera.getInstance().actorsToRender();
+        for (Actor a: actorPositionMap.keySet()){
+            Position drawPosition = actorPositionMap.get(a);
+            PhysicsComponent phys = a.getCollider();
+            g2d.drawImage(a.getGraphic().getImage(), drawPosition.getX(), 400 - (phys.getHeight() + drawPosition.getY()),
+                    phys.getWidth(), phys.getHeight(), this);
+        }
     }
 
     private void drawGUI() {
