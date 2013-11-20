@@ -1,6 +1,7 @@
 package Items;
 
 import Components.GraphicsComponent;
+import Components.ItemGraphicsComponent;
 import WIP.DebugLog;
 import WIP.Position;
 
@@ -15,7 +16,7 @@ public abstract class Equipment extends Item {
     private int skillRequirement;
     private final EquipmentClass equipmentClass;
 
-    protected Equipment(String name, int level, int skillRequirement, EquipmentClass type, GraphicsComponent g) {
+    protected Equipment(String name, int level, int skillRequirement, EquipmentClass type, ItemGraphicsComponent g) {
         super(name, new Position(), g);
         this.level = level;
         this.skillRequirement = skillRequirement;

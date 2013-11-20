@@ -1,6 +1,7 @@
 package Items;
 
 import Components.GraphicsComponent;
+import Components.ItemGraphicsComponent;
 import WIP.DebugLog;
 
 /**
@@ -16,7 +17,7 @@ public class Armour extends Equipment {
     private final ArmourType armourType;
 
     public Armour(String name, int level, int skillRequirement, EquipmentClass armourClass, int defence,
-                  ArmourType armourType, GraphicsComponent g) {
+                  ArmourType armourType, ItemGraphicsComponent g) {
         super(name, level, skillRequirement, armourClass, g);
         this.defence = defence;
         this.armourType = armourType;

@@ -1,6 +1,7 @@
 package Items;
 
 import Components.GraphicsComponent;
+import Components.ItemGraphicsComponent;
 import WIP.DebugLog;
 
 /**
@@ -23,7 +24,7 @@ public class Weapon_Magic extends Weapon {
 
     public Weapon_Magic
             (String name, int level, int intelligenceRequirement, int baseDamage, int baseRange, float useTime,
-             Element element, GraphicsComponent g) {
+             Element element, ItemGraphicsComponent g) {
         super(name, level, intelligenceRequirement, baseDamage, baseRange, useTime, EquipmentClass.MAGIC, g);
         this.element = element;
         DebugLog.write("New Magic Weapon created: " + name);

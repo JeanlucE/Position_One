@@ -19,6 +19,13 @@ public class InputComponent extends InputMap {
     private final ActionMap actionMap;
     private int XAxis, YAxis;
 
+    private final Action translateUp, translateDown, translateLeft, translateRight;
+
+    private final Action stopX, stopY;
+
+    private final Action spaceDown, spaceUp;
+    private boolean spacePressed;
+
     public static InputComponent getInstance() {
         if (instance == null) {
             instance = new InputComponent();
@@ -62,7 +69,6 @@ public class InputComponent extends InputMap {
             @Override
             public void actionPerformed(ActionEvent e) {
                 YAxis = +1;
-                //getGame().getPlayer().setYVel(speed);
                 getGame().getPlayer().getTransform().setDirection(Direction.NORTH);
             }
         };
@@ -71,7 +77,6 @@ public class InputComponent extends InputMap {
             @Override
             public void actionPerformed(ActionEvent e) {
                 YAxis = -1;
-                //getGame().getPlayer().setYVel(-speed);
                 getGame().getPlayer().getTransform().setDirection(Direction.SOUTH);
             }
         };
@@ -80,7 +85,6 @@ public class InputComponent extends InputMap {
             @Override
             public void actionPerformed(ActionEvent e) {
                 XAxis = -1;
-                //getGame().getPlayer().setXVel(-speed);
                 getGame().getPlayer().getTransform().setDirection(Direction.WEST);
             }
         };
@@ -89,7 +93,6 @@ public class InputComponent extends InputMap {
             @Override
             public void actionPerformed(ActionEvent e) {
                 XAxis = +1;
-                //getGame().getPlayer().setXVel(speed);
                 getGame().getPlayer().getTransform().setDirection(Direction.EAST);
             }
         };
@@ -98,14 +101,28 @@ public class InputComponent extends InputMap {
             @Override
             public void actionPerformed(ActionEvent e) {
                 XAxis = 0;
-                //getGame().getPlayer().setXVel(0);
             }
         };
         stopY = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 YAxis = 0;
-                //getGame().getPlayer().setYVel(0);
+            }
+        };
+
+        spaceDown = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                spacePressed = true;
+                System.out.println("Space down");
+            }
+        };
+
+        spaceUp = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                spacePressed = false;
+                System.out.println("Space up");
             }
         };
 
@@ -118,6 +135,8 @@ public class InputComponent extends InputMap {
         actionMap.put("a_pressed", translateLeft);
         actionMap.put("d_pressed", translateRight);
         actionMap.put("d_released", stopX);
+        actionMap.put("space_pressed", spaceDown);
+        actionMap.put("space_released", spaceUp);
     }
 
     public ActionMap getActionMap() {
@@ -128,17 +147,15 @@ public class InputComponent extends InputMap {
         return Game.getInstance();
     }
 
-    public int getXAxis(){
+    public int getXAxis() {
         return XAxis;
     }
 
-    public int getYAxis(){
+    public int getYAxis() {
         return YAxis;
     }
 
-    private int speed = 3;
-
-    private final Action translateUp, translateDown, translateLeft, translateRight;
-
-    private final Action stopX, stopY;
+    public boolean getSpacePressed(){
+        return spacePressed;
+    }
 }

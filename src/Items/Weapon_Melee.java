@@ -1,6 +1,7 @@
 package Items;
 
 import Components.GraphicsComponent;
+import Components.ItemGraphicsComponent;
 import WIP.DebugLog;
 
 /**
@@ -19,7 +20,7 @@ import WIP.DebugLog;
 public class Weapon_Melee extends Weapon {
 
     public Weapon_Melee(String name, int level, int strengthRequirement, int baseDamage, float useTime,
-                        GraphicsComponent g) {
+                        ItemGraphicsComponent g) {
         //All melee weapons have a range of 1 block
         super(name, level, strengthRequirement, baseDamage, 1, useTime, EquipmentClass.MELEE, g);
         DebugLog.write("New Melee Weapon created: " + name);

@@ -1,6 +1,7 @@
 package Items;
 
 import Components.GraphicsComponent;
+import Components.ItemGraphicsComponent;
 import WIP.DebugLog;
 
 /**
@@ -22,8 +23,16 @@ public abstract class Weapon extends Equipment {
     private float useTime;
     //endregion
 
+    /*
+    Creates a weapon with the level requirement and skill requirement to wear it.
+    Base damage determines the damage of the weapon without skill bonuses.
+    Base range determines the range of the weapon in percentage of the tilesize.
+    Use time determines how long the delay between 2 attacks is.
+    The weaponClass defines what skill is required to equip its weapon.
+    GraphicsComponent
+     */
     protected Weapon(String name, int level, int skillRequirement, int baseDamage, int baseRange, float useTime,
-                     EquipmentClass weaponClass, GraphicsComponent g) {
+                     EquipmentClass weaponClass, ItemGraphicsComponent g) {
         super(name, level, skillRequirement, weaponClass, g);
         this.baseDamage = baseDamage;
         this.baseRange = baseRange;

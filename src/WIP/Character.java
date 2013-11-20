@@ -87,10 +87,16 @@ public class Character extends Actor {
     }
 
     public void update() {
+        //TODO update direction player is facing from here
         currentXVelocity = InputComponent.getInstance().getXAxis() * moveSpeed;
         currentYVelocity = InputComponent.getInstance().getYAxis() * moveSpeed;
         if (currentXVelocity != 0 || currentYVelocity != 0) {
             move();
+        }
+
+        boolean use = InputComponent.getInstance().getSpacePressed();
+        if(use){
+
         }
     }
     //endregion
@@ -136,6 +142,12 @@ public class Character extends Actor {
         legsSlot = new EquipmentSlot(Armour.class);
         mainHandSlot = new EquipmentSlot(Weapon.class);
         offHandSlot = new EquipmentSlot(Armour.class);
+    }
+
+    private void attack(){
+        int range = ((Weapon)getMainHand()).getBaseRange();
+        int damage = ((Weapon)getMainHand()).getBaseDamage();
+
     }
 
     //region Health, Mana, Stamina

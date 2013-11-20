@@ -1,6 +1,7 @@
 package Items;
 
 import Components.GraphicsComponent;
+import Components.ItemGraphicsComponent;
 import WIP.DebugLog;
 
 /**
@@ -19,7 +20,7 @@ import WIP.DebugLog;
  */
 public class Weapon_Ranged extends Weapon {
     public Weapon_Ranged(String name, int level, int dexterityRequirement, int baseDamage, int baseRange,
-                         float useTime, GraphicsComponent g) {
+                         float useTime, ItemGraphicsComponent g) {
         super(name, level, dexterityRequirement, baseDamage, baseRange, useTime, EquipmentClass.RANGED, g);
         DebugLog.write("New Ranged Weapon created: " + name);
     }
