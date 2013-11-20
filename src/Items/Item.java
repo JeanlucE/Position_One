@@ -1,10 +1,9 @@
 package Items;
 
-import Components.GraphicsComponent;
 import Components.ItemGraphicsComponent;
 import WIP.DebugLog;
 import WIP.GameObject;
-import WIP.Position;
+import WIP.Vector;
 import WIP.Transform;
 
 /**
@@ -16,7 +15,7 @@ import WIP.Transform;
 public abstract class Item extends GameObject {
     private String name;
 
-    Item(String name, Position position, ItemGraphicsComponent g) {
+    Item(String name, Vector position, ItemGraphicsComponent g) {
         super(new Transform(position), g);
         this.name = name;
     }

@@ -1,6 +1,6 @@
 package Components;
 
-import WIP.Direction;
+import WIP.Vector;
 import WIP.Game;
 
 import javax.swing.*;
@@ -69,7 +69,7 @@ public class InputComponent extends InputMap {
             @Override
             public void actionPerformed(ActionEvent e) {
                 YAxis = +1;
-                getGame().getPlayer().getTransform().setDirection(Direction.NORTH);
+                getGame().getPlayer().getTransform().setDirection(Vector.NORTH);
             }
         };
 
@@ -77,7 +77,7 @@ public class InputComponent extends InputMap {
             @Override
             public void actionPerformed(ActionEvent e) {
                 YAxis = -1;
-                getGame().getPlayer().getTransform().setDirection(Direction.SOUTH);
+                getGame().getPlayer().getTransform().setDirection(Vector.SOUTH);
             }
         };
 
@@ -85,7 +85,7 @@ public class InputComponent extends InputMap {
             @Override
             public void actionPerformed(ActionEvent e) {
                 XAxis = -1;
-                getGame().getPlayer().getTransform().setDirection(Direction.WEST);
+                getGame().getPlayer().getTransform().setDirection(Vector.WEST);
             }
         };
 
@@ -93,7 +93,7 @@ public class InputComponent extends InputMap {
             @Override
             public void actionPerformed(ActionEvent e) {
                 XAxis = +1;
-                getGame().getPlayer().getTransform().setDirection(Direction.EAST);
+                getGame().getPlayer().getTransform().setDirection(Vector.EAST);
             }
         };
 

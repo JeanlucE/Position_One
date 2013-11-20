@@ -1,6 +1,7 @@
 package Components;
 
 import WIP.GameObject;
+import WIP.Vector;
 
 import java.awt.image.BufferedImage;
 
@@ -23,18 +24,16 @@ public class ActorGraphicsComponent extends GraphicsComponent {
     }
 
     public BufferedImage getImage() {
-        switch (parent.getTransform().getDirection()) {
-            case NORTH:
-                return image[0];
-            case SOUTH:
-                return image[1];
-            case WEST:
-                return image[2];
-            case EAST:
-                return image[3];
-            default:
-                return image[0];
-        }
+        if (parent.getTransform().getDirection().equals(Vector.NORTH))
+            return image[0];
+        else if (parent.getTransform().getDirection().equals(Vector.SOUTH))
+            return image[1];
+        else if (parent.getTransform().getDirection().equals(Vector.WEST))
+            return image[2];
+        else if (parent.getTransform().getDirection().equals(Vector.EAST))
+            return image[3];
+        else
+            return image[0];
     }
 
     //This must be called right after the actors graphic component is created

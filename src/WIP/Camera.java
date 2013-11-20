@@ -15,11 +15,11 @@ import java.util.Map;
 public class Camera {
     private static Camera instance = null;
     private World world;
-    private Position parent;
+    private Vector parent;
     private int clipX, clipY;
     private int screenWidth, screenHeight;
-    private Map<Position, WorldSpace> floors;
-    private Map<Position, WorldSpace> walls;
+    private Map<Vector, WorldSpace> floors;
+    private Map<Vector, WorldSpace> walls;
 
     public static Camera getInstance() {
         if (instance == null) {
@@ -35,10 +35,10 @@ public class Camera {
         clipY = screenHeight / 2 + Renderer.TILESIZE;
     }
 
-    public Map<Position, WorldSpace> worldToRender() {
+    public Map<Vector, WorldSpace> worldToRender() {
         this.world = Game.getInstance().getCurrentWorld();
         this.parent = Game.getInstance().getPlayer().getTransform().getPosition();
-        Map<Position, WorldSpace> visibleSpaces = new HashMap<>(100);
+        Map<Vector, WorldSpace> visibleSpaces = new HashMap<>(100);
         floors = new HashMap<>(100);
         walls = new HashMap<>(100);
 
@@ -53,7 +53,7 @@ public class Camera {
             //From top to bottom
             for (int y = southClip; y < northClip; y += Renderer.TILESIZE) {
                 WorldSpace worldSpace = world.get(x, y);
-                Position worldPosition = new Position(x - x % Renderer.TILESIZE, y - y % Renderer.TILESIZE);
+                Vector worldPosition = new Vector(x - x % Renderer.TILESIZE, y - y % Renderer.TILESIZE);
                 if (worldSpace instanceof Wall) {
                     walls.put(worldPosition, worldSpace);
                 } else {
@@ -71,14 +71,14 @@ public class Camera {
         return visibleSpaces;
     }
 
-    public Position getParentPosition() {
-        return new Position(screenWidth / 2, screenHeight / 2);
+    public Vector getParentPosition() {
+        return new Vector(screenWidth / 2, screenHeight / 2);
     }
 
-    public Map<Actor, Position> actorsToRender(){
-        Map<Actor, Position> actorPositionMap = new HashMap<>();
+    public Map<Actor, Vector> actorsToRender(){
+        Map<Actor, Vector> actorPositionMap = new HashMap<>();
         for (Actor a: Game.getInstance().getActors()){
-            Position drawPosition = a.getTransform().getPosition().clone();
+            Vector drawPosition = a.getTransform().getPosition().clone();
             drawPosition.setX(screenWidth / 2 + (drawPosition.getX() - parent.getX()));
             drawPosition.setY(screenHeight / 2 + (drawPosition.getY() - parent.getY()));
             actorPositionMap.put(a, drawPosition);

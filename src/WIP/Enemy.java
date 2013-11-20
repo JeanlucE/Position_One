@@ -34,7 +34,7 @@ public class Enemy extends NPC {
     private int direction = -1;
     private Random random = new Random();
     private void randomVel(){
-        if(getTransform().getPosition().equals(new Position(40, 40))
+        if(getTransform().getPosition().equals(new Vector(40, 40))
                 || (getTransform().getPosition().getX() >= 700 && getTransform().getPosition().getY() >= 700))
             direction = direction * -1;
         setXVel((random.nextInt(xMaxSpeed) + 1 + xMinSpeed) * direction);

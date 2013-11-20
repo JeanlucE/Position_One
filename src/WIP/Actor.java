@@ -36,7 +36,7 @@ public abstract class Actor extends GameObject {
     }
 
     public void move() {
-        Position currentPosition = getTransform().getPosition();
+        Vector currentPosition = getTransform().getPosition();
         World world = Game.getInstance().getCurrentWorld();
 
         //If player can move to inputted position, move there

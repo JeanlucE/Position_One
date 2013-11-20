@@ -15,7 +15,7 @@ import java.util.*;
  * Saves the position of all walls, floors and later: other gameobjects(chests, doors)
  */
 public class World {
-    private Map<Position, WorldSpace> worldSpaceMap = new HashMap<>();
+    private Map<Vector, WorldSpace> worldSpaceMap = new HashMap<>();
 
     public World() {
         int tilesize = 40;
@@ -24,31 +24,31 @@ public class World {
         GraphicsComponent g = new StaticGraphicsComponent();
         PhysicsComponent boxCollider = new PhysicsComponent(tilesize, tilesize);
         for (int i = 0; i < roomsize * tilesize; i += tilesize) {
-            set(i, 0, new Wall(new Transform(new Position(i, 0)), g, boxCollider));
-            set(i, (roomsize - 1) * tilesize, new Wall(new Transform(new Position(i, (roomsize - 1) * tilesize)), g,
+            set(i, 0, new Wall(new Transform(new Vector(i, 0)), g, boxCollider));
+            set(i, (roomsize - 1) * tilesize, new Wall(new Transform(new Vector(i, (roomsize - 1) * tilesize)), g,
                     boxCollider));
         }
         for (int i = 40; i < (roomsize - 1) * tilesize; i += tilesize) {
-            set(0, i, new Wall(new Transform(new Position(0, i)), g, boxCollider));
-            set((roomsize - 1) * tilesize, i, new Wall(new Transform(new Position((roomsize - 1) * tilesize, i)), g,
+            set(0, i, new Wall(new Transform(new Vector(0, i)), g, boxCollider));
+            set((roomsize - 1) * tilesize, i, new Wall(new Transform(new Vector((roomsize - 1) * tilesize, i)), g,
                     boxCollider));
             for (int j = 40; j < (roomsize - 1) * tilesize; j += tilesize) {
                 //Floor
-                set(i, j, new Floor(new Transform(new Position(i, j)), g));
+                set(i, j, new Floor(new Transform(new Vector(i, j)), g));
             }
         }
 
-        set(120, 120, new Wall(new Transform(new Position(120, 120)), g, boxCollider));
-        set(120, 160, new Wall(new Transform(new Position(120, 160)), g, boxCollider));
-        set(120, 200, new Wall(new Transform(new Position(120, 200)), g, boxCollider));
-        set(160, 200, new Wall(new Transform(new Position(160, 200)), g, boxCollider));
-        set(240, 200, new Wall(new Transform(new Position(240, 200)), g, boxCollider));
+        set(120, 120, new Wall(new Transform(new Vector(120, 120)), g, boxCollider));
+        set(120, 160, new Wall(new Transform(new Vector(120, 160)), g, boxCollider));
+        set(120, 200, new Wall(new Transform(new Vector(120, 200)), g, boxCollider));
+        set(160, 200, new Wall(new Transform(new Vector(160, 200)), g, boxCollider));
+        set(240, 200, new Wall(new Transform(new Vector(240, 200)), g, boxCollider));
         DebugLog.write("New World created with size: " + worldSpaceMap.size());
     }
 
     //DEBUGGING
     public WorldSpace getReal(int x, int y) {
-        return worldSpaceMap.get(new Position(x, y));
+        return worldSpaceMap.get(new Vector(x, y));
     }
 
     public WorldSpace get(int x, int y) {
@@ -57,7 +57,7 @@ public class World {
         return getReal(xReal, yReal);
     }
 
-    public WorldSpace get(Position position) {
+    public WorldSpace get(Vector position) {
         return get(position.getX(), position.getY());
     }
 
@@ -68,7 +68,7 @@ public class World {
     }
 
     void setReal(int x, int y, WorldSpace worldSpace) {
-        worldSpaceMap.put(new Position(x, y), worldSpace);
+        worldSpaceMap.put(new Vector(x, y), worldSpace);
     }
 
     /*
@@ -78,11 +78,11 @@ public class World {
     If none of the corners clips a collidable world space (e.g. a wall) the method returns true.
     If any of the corners clips a collidable world space (e.g. a wall) the method returns false.
      */
-    public boolean resolveCollision(Actor actor, Position nextPosition) {
+    public boolean resolveCollision(Actor actor, Vector nextPosition) {
         //TODO if player cant move directly to the given position, test if he can still move nearer to that position
         PhysicsComponent collider = actor.getCollider();
         boolean canMove = false;
-        for (Position p : collider.getCorners(nextPosition)) {
+        for (Vector p : collider.getCorners(nextPosition)) {
             canMove = canMoveTo(p);
             if (!canMove)
                 break;
@@ -94,10 +94,10 @@ public class World {
     boolean canMoveTo(int x, int y) {
         int xReal = x / 40;
         int yReal = y / 40;
-        return !worldSpaceMap.get(new Position(xReal, yReal)).isCollidable();
+        return !worldSpaceMap.get(new Vector(xReal, yReal)).isCollidable();
     }
 
-    boolean canMoveTo(Position position) {
+    boolean canMoveTo(Vector position) {
         return canMoveTo(position.getX(), position.getY());
     }
 
@@ -105,18 +105,23 @@ public class World {
     This method resolves collisions between the player and any enemy (for now) and any further actors in the scene.
     TODO make this between all actors
      */
-    boolean canMoveTo(Actor actor, Position nextPosition) {
+    boolean canMoveTo(Actor actor, Vector nextPosition) {
         boolean canMove = true;
         List<Actor> actors = Game.getInstance().getActors();
         for (int i = 0; i < actors.size() && canMove; i++) {
             if (actor != actors.get(i)) {
-                Position[] thisCorners = actor.getCollider().getCorners(nextPosition);
-                Position[] otherCorners = actors.get(i).getCollider().getCorners(actors.get(i)
+                Vector[] thisCorners = actor.getCollider().getCorners(nextPosition);
+                Vector[] otherCorners = actors.get(i).getCollider().getCorners(actors.get(i)
                         .getTransform().getPosition());
 
+                boolean actorAbove = thisCorners[2].getY() > otherCorners[0].getY();
+                boolean actorBelow = thisCorners[0].getY() < otherCorners[2].getY();
+                boolean actorLeftOf = thisCorners[1].getX() < otherCorners[0].getX();
+                boolean actorRightOf = thisCorners[0].getX() > otherCorners[1].getX();
 
+                canMove = actorAbove || actorBelow || actorLeftOf || actorRightOf;
                 //If player is above enemy
-                if (thisCorners[2].getY() > otherCorners[0].getY()) {
+                /*if (thisCorners[2].getY() > otherCorners[0].getY()) {
                     canMove = true;
                     //If player is below enemy
                 } else if (thisCorners[0].getY() < otherCorners[2].getY()) {
@@ -132,7 +137,7 @@ public class World {
                     else
                         canMove = false;
 
-                }
+                }*/
             }
         }
         return canMove;

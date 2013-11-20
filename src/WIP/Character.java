@@ -66,7 +66,7 @@ public class Character extends Actor {
                         Resource.player_RIGHT
                 }),
                 new PhysicsComponent(30, 30));
-        ((ActorGraphicsComponent)this.getGraphic()).setParent(this);
+        ((ActorGraphicsComponent) this.getGraphic()).setParent(this);
 
         this.level = level;
         this.experience = experience;
@@ -96,7 +96,7 @@ public class Character extends Actor {
         }
 
         boolean use = InputComponent.getInstance().getSpacePressed();
-        if(use){
+        if (use) {
             attack();
             InputComponent.getInstance().resetSpacePressed();
         }
@@ -146,39 +146,37 @@ public class Character extends Actor {
         offHandSlot = new EquipmentSlot(Armour.class);
     }
 
-    private void attack(){
+    private void attack() {
         //TODO attacking with colliders
         float range = 0.5f;
-        int damage = ((Weapon)getMainHand()).getBaseDamage();
+        int damage = ((Weapon) getMainHand()).getBaseDamage();
         List<Actor> actors = Game.getInstance().getActors();
-        for (Actor a: actors){
-
+        for (Actor a : actors) {
             if (!a.equals(this)) {
-                Position[] phy = a.getCollider().getCorners(a.getTransform().getPosition());
-                switch (getTransform().getDirection()){
-                    case NORTH:
-                        if(a.getTransform().getPosition().getY() <= getTransform().getPosition().getY() + range * Renderer.TILESIZE){
-                            a.damage(damage);
-                        }
-                        break;
-                    case SOUTH:
-                        if(a.getTransform().getPosition().getY() >= getTransform().getPosition().getY() - range *
-                                Renderer.TILESIZE){
-                            a.damage(damage);
-                        }
-                        break;
-                    case WEST:
-                        if(a.getTransform().getPosition().getX() + 40 >= getTransform().getPosition().getX() - range *
-                                Renderer.TILESIZE){
-                            a.damage(damage);
-                        }
-                        break;
-                    case EAST:
-                        if(a.getTransform().getPosition().getX() <= getTransform().getPosition().getX() + range *
-                                Renderer.TILESIZE){
-                            a.damage(damage);
-                        }
-                        break;
+                Vector[] collider = a.getCollider().getCorners(a.getTransform().getPosition());
+                if (getTransform().getDirection().equals(Vector.NORTH)) {
+                    if (collider[2].getY() <= getTransform().getPosition().getY() + 30 + range * Renderer.TILESIZE) {
+                        a.damage(damage);
+                    }
+                    break;
+                } else if (getTransform().getDirection().equals(Vector.SOUTH)) {
+                    if (collider[0].getY() >= getTransform().getPosition().getY() - range *
+                            Renderer.TILESIZE) {
+                        a.damage(damage);
+                    }
+                    break;
+                } else if (getTransform().getDirection().equals(Vector.WEST)) {
+                    if (collider[1].getX() >= getTransform().getPosition().getX() - range *
+                            Renderer.TILESIZE) {
+                        a.damage(damage);
+                    }
+                    break;
+                } else if (getTransform().getDirection().equals(Vector.EAST)) {
+                    if (collider[0].getX() <= getTransform().getPosition().getX() + 30 + range *
+                            Renderer.TILESIZE) {
+                        a.damage(damage);
+                    }
+                    break;
                 }
             }
         }

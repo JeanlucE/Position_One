@@ -21,22 +21,32 @@ package WIP;
  * | -y
  * \/
  */
-public class Position{
+public class Vector {
+
+    public final static
+    Vector NORTH, SOUTH, EAST, WEST;
+
+    static {
+        NORTH = new Vector(0, 1);
+        SOUTH = new Vector(0, -1);
+        EAST = new Vector(-1, 0);
+        WEST = new Vector(1, 0);
+    }
 
     private int x, y;
 
-    public Position() {
+    public Vector() {
         x = 0;
         y = 0;
     }
 
-    public Position(int x, int y) {
+    public Vector(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
-    public Position clone(){
-        return new Position(x, y);
+    public Vector clone(){
+        return new Vector(x, y);
     }
 
     public int getX() {
@@ -60,22 +70,22 @@ public class Position{
         this.y += y;
     }
 
-    public Position shiftedPosition(int x, int y) {
-        return new Position(this.x + x, this.getY() + y);
+    public Vector shiftedPosition(int x, int y) {
+        return new Vector(this.x + x, this.getY() + y);
     }
 
-    public void set(Position newPosition) {
-        this.x = newPosition.getX();
-        this.y = newPosition.getY();
+    public void set(Vector newVector) {
+        this.x = newVector.getX();
+        this.y = newVector.getY();
     }
 
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Position)) return false;
+        if (!(o instanceof Vector)) return false;
 
-        Position position = (Position) o;
+        Vector position = (Vector) o;
 
         return x == position.x && y == position.y;
 

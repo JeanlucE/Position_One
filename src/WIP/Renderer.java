@@ -6,7 +6,6 @@ import Items.Item;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.Map;
 
 /**
@@ -49,7 +48,7 @@ public class Renderer extends JPanel {
         g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        Map<Position, WorldSpace> toRender = Camera.getInstance().worldToRender();
+        Map<Vector, WorldSpace> toRender = Camera.getInstance().worldToRender();
 
         drawWorld(toRender);
         drawItems(toRender);
@@ -75,7 +74,7 @@ public class Renderer extends JPanel {
         GameWindow.getInstance().setTitle("Frames:" + String.valueOf(Game.getInstance().getFrameRate()));
     }
 
-    private void drawImage(GameObject go, Position position) {
+    private void drawImage(GameObject go, Vector position) {
         //TODO implement once ive got some sprites for walls and floors
     }
 
@@ -91,23 +90,24 @@ public class Renderer extends JPanel {
         g2d.fillRect(x, screenHeight - (TILESIZE + y), TILESIZE, TILESIZE);
     }
 
-    private void drawWorld(Map<Position, WorldSpace> toRender) {
+    private void drawWorld(Map<Vector, WorldSpace> toRender) {
         for (Map.Entry e : toRender.entrySet()) {
             WorldSpace w = (WorldSpace) e.getValue();
-            drawSpace(w, ((Position) e.getKey()).getX(), ((Position) e.getKey()).getY());
+            drawSpace(w, ((Vector) e.getKey()).getX(), ((Vector) e.getKey()).getY());
         }
     }
 
-    private void drawItems(Map<Position, WorldSpace> toRender) {
+    private void drawItems(Map<Vector, WorldSpace> toRender) {
         for (Map.Entry e : toRender.entrySet()) {
             if (e.getValue() instanceof Floor && ((Floor) e.getValue()).hasDroppedItems()) {
                 g2d.setColor(Color.BLACK);
                 Item[] items = ((Floor) e.getValue()).getDroppedItems();
-                g2d.drawString(items[0].getName(), ((Position) e.getKey()).getX(),
-                        screenHeight - ((Position) e.getKey()).getY
+                g2d.drawString(items[0].getName(), ((Vector) e.getKey()).getX(),
+                        screenHeight - ((Vector) e.getKey()).getY
                                 ());
             }
         }
+
     }
 
     //DEBUGGING draws player position and collider
@@ -115,21 +115,21 @@ public class Renderer extends JPanel {
         Game game = Game.getInstance();
         //Collider
         g2d.setColor(Color.RED);
-        Position playerDrawPos = Camera.getInstance().getParentPosition();
+        Vector playerDrawPos = Camera.getInstance().getParentPosition();
         PhysicsComponent collider = game.getPlayer().getCollider();
         g2d.drawRect(playerDrawPos.getX(), playerDrawPos.getY() - collider.getHeight(),
                 collider.getWidth(), collider.getHeight());
 
         //Position
         g2d.setColor(Color.RED);
-        Position playerPos = game.getPlayer().getTransform().getPosition();
+        Vector playerPos = game.getPlayer().getTransform().getPosition();
         g2d.drawString(playerPos.toString(), playerDrawPos.getX() - 5, playerDrawPos.getY() + 10);
     }
 
     private void drawActors(){
-        Map <Actor, Position> actorPositionMap = Camera.getInstance().actorsToRender();
+        Map <Actor, Vector> actorPositionMap = Camera.getInstance().actorsToRender();
         for (Actor a: actorPositionMap.keySet()){
-            Position drawPosition = actorPositionMap.get(a);
+            Vector drawPosition = actorPositionMap.get(a);
             PhysicsComponent phys = a.getCollider();
             g2d.drawImage(a.getGraphic().getImage(), drawPosition.getX(), 400 - (phys.getHeight() + drawPosition.getY()),
                     phys.getWidth(), phys.getHeight(), this);

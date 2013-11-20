@@ -1,6 +1,5 @@
 package WIP;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -15,11 +14,9 @@ public class Test {
 
 
     public static void main(String[] args) {
-        File file = new File("images/player.png");
-        System.out.println(file.exists());
     }
 
-    static Position testPosition = new Position(0, 0);
+    static Vector testVector = new Vector(0, 0);
 
     public Test() {
         input = new Scanner(System.in);

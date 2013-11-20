@@ -7,32 +7,33 @@ package WIP;
  * Time: 21:34
  */
 public class Transform {
-    //transform should point to the position in the middle of the renderable
-    private Position position;
-    private Direction direction;
+    //TODO transform should point to the position in the middle of the Gameobject
+    //vectors?
+    private Vector position;
+    private Vector direction;
 
     public Transform() {
-        this(new Position());
+        this(new Vector());
     }
 
-    public Transform(Position position) {
+    public Transform(Vector position) {
         this.position = position;
-        direction = Direction.SOUTH;
+        direction = Vector.SOUTH;
     }
 
-    public Position getPosition() {
+    public Vector getPosition() {
         return position;
     }
 
-    public void setPosition(Position position) {
+    public void setPosition(Vector position) {
         this.position = position;
     }
 
-    public Direction getDirection() {
+    public Vector getDirection() {
         return direction;
     }
 
-    public void setDirection(Direction direction) {
+    public void setDirection(Vector direction) {
         this.direction = direction;
     }
 }

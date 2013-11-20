@@ -1,9 +1,8 @@
 package Items;
 
-import Components.GraphicsComponent;
 import Components.ItemGraphicsComponent;
 import WIP.DebugLog;
-import WIP.Position;
+import WIP.Vector;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,7 +16,7 @@ public abstract class Equipment extends Item {
     private final EquipmentClass equipmentClass;
 
     protected Equipment(String name, int level, int skillRequirement, EquipmentClass type, ItemGraphicsComponent g) {
-        super(name, new Position(), g);
+        super(name, new Vector(), g);
         this.level = level;
         this.skillRequirement = skillRequirement;
         this.equipmentClass = type;
