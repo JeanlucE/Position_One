@@ -1,9 +1,9 @@
-Log created at: 20:22:58 21.11.2013
+Log created at: 20:45:32 21.11.2013
 
-[20:22:59.095] New Melee Weapon created: Caster Blaster
-[20:22:59.235] New Character created: Ned Stark
-[20:22:59.236] Player Ned Stark has equipped: Caster Blaster
-[20:22:59.266] New World created with size: 400
-[20:22:59.272] New Magic Weapon created: Matador
-[20:22:59.273] New Game started
-[20:22:59.284] Renderer started
+[20:45:33.289] New Melee Weapon created: Caster Blaster
+[20:45:33.419] New Character created: Ned Stark
+[20:45:33.420] Player Ned Stark has equipped: Caster Blaster
+[20:45:33.434] New World created with size: 400
+[20:45:33.438] New Magic Weapon created: Matador
+[20:45:33.439] New Game started
+[20:45:33.449] Renderer started
