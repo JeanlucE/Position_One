@@ -8,13 +8,9 @@ import java.awt.image.BufferedImage;
  * Date: 18.11.13
  * Time: 09:29
  */
-public class StaticGraphicsComponent extends GraphicsComponent{
+public class StaticGraphicsComponent extends GraphicsComponent {
 
-    public StaticGraphicsComponent(){
-
-    }
-
-    public StaticGraphicsComponent(Resource resource){
+    public StaticGraphicsComponent(Resource resource) {
         image = new BufferedImage[1];
         image[0] = resource.getImage();
     }

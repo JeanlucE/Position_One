@@ -2,9 +2,12 @@ package WIP;
 
 import Components.GraphicsComponent;
 import Components.PhysicsComponent;
+import Components.Resource;
 import Components.StaticGraphicsComponent;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,7 +24,8 @@ public class World {
         int tilesize = 40;
         int roomsize = 20;
         //Creates a square room of with walk space 19x19
-        GraphicsComponent g = new StaticGraphicsComponent();
+        GraphicsComponent g = new StaticGraphicsComponent(Resource.wall01);
+        GraphicsComponent floor = new StaticGraphicsComponent(Resource.floor01);
         PhysicsComponent boxCollider = new PhysicsComponent(tilesize, tilesize);
         for (int i = 0; i < roomsize * tilesize; i += tilesize) {
             set(i, 0, new Wall(new Transform(new Vector(i, 0)), g, boxCollider));
@@ -34,7 +38,7 @@ public class World {
                     boxCollider));
             for (int j = 40; j < (roomsize - 1) * tilesize; j += tilesize) {
                 //Floor
-                set(i, j, new Floor(new Transform(new Vector(i, j)), g));
+                set(i, j, new Floor(new Transform(new Vector(i, j)), floor));
             }
         }
 

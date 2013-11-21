@@ -19,15 +19,14 @@ public enum Resource {
     player_DOWN("player_DOWN.png"),
     player_LEFT("player_LEFT.png"),
     player_RIGHT("player_RIGHT.png"),
-    enemy_DOWN("enemy.png");
-    //wall01("wall01"),
-    //floor01("floor01");
-
+    enemy_DOWN("enemy.png"),
+    wall01("wall_stone01.png"),
+    floor01("floor_stone01.png");
 
     private String imagePath = "./images/";
     private BufferedImage image;
 
-    private Resource(String fileName){
+    private Resource(String fileName) {
         try {
             image = ImageIO.read(new File(imagePath + fileName));
         } catch (IOException e) {
@@ -36,7 +35,7 @@ public enum Resource {
         }
     }
 
-    public BufferedImage getImage(){
+    public BufferedImage getImage() {
         return image;
     }
 }

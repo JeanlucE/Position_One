@@ -6,6 +6,7 @@ import Items.Item;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.Map;
 
 /**
@@ -75,7 +76,13 @@ public class Renderer extends JPanel {
     }
 
     private void drawImage(GameObject go, Vector position) {
-        //TODO implement once ive got some sprites for walls and floors
+        if (go instanceof Wall || go instanceof Floor) {
+            BufferedImage bf = go.getGraphic().getImage();
+            g2d.drawImage(bf, position.getX(), screenHeight - (bf.getHeight() + position.getY()), this);
+        } else {
+            g2d.setColor(Color.RED);
+            g2d.fillRect(position.getX(), screenHeight - (TILESIZE + position.getY()), TILESIZE, TILESIZE);
+        }
     }
 
     //DEBUGGING draws walls and floors as white and black rectangles until i have some sprites
@@ -93,7 +100,7 @@ public class Renderer extends JPanel {
     private void drawWorld(Map<Vector, WorldSpace> toRender) {
         for (Map.Entry e : toRender.entrySet()) {
             WorldSpace w = (WorldSpace) e.getValue();
-            drawSpace(w, ((Vector) e.getKey()).getX(), ((Vector) e.getKey()).getY());
+            drawImage(w, ((Vector) e.getKey()));
         }
     }
 
@@ -126,9 +133,9 @@ public class Renderer extends JPanel {
         g2d.drawString(playerPos.toString(), playerDrawPos.getX() - 5, playerDrawPos.getY() + 10);
     }
 
-    private void drawActors(){
-        Map <Actor, Vector> actorPositionMap = Camera.getInstance().actorsToRender();
-        for (Actor a: actorPositionMap.keySet()){
+    private void drawActors() {
+        Map<Actor, Vector> actorPositionMap = Camera.getInstance().actorsToRender();
+        for (Actor a : actorPositionMap.keySet()) {
             Vector drawPosition = actorPositionMap.get(a);
             PhysicsComponent phys = a.getCollider();
             g2d.drawImage(a.getGraphic().getImage(), drawPosition.getX(), 400 - (phys.getHeight() + drawPosition.getY()),
