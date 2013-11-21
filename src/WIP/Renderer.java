@@ -76,7 +76,7 @@ public class Renderer extends JPanel {
     }
 
     private void drawImage(GameObject go, Vector position) {
-        if (go instanceof Wall || go instanceof Floor) {
+        if (go instanceof Wall || go instanceof Floor || go instanceof Item) {
             BufferedImage bf = go.getGraphic().getImage();
             g2d.drawImage(bf, position.getX(), screenHeight - (bf.getHeight() + position.getY()), this);
         } else {
@@ -107,11 +107,8 @@ public class Renderer extends JPanel {
     private void drawItems(Map<Vector, WorldSpace> toRender) {
         for (Map.Entry e : toRender.entrySet()) {
             if (e.getValue() instanceof Floor && ((Floor) e.getValue()).hasDroppedItems()) {
-                g2d.setColor(Color.BLACK);
                 Item[] items = ((Floor) e.getValue()).getDroppedItems();
-                g2d.drawString(items[0].getName(), ((Vector) e.getKey()).getX(),
-                        screenHeight - ((Vector) e.getKey()).getY
-                                ());
+                drawImage(items[0], (Vector) e.getKey());
             }
         }
 

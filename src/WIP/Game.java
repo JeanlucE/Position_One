@@ -2,7 +2,6 @@ package WIP;
 
 import Components.*;
 import Items.Weapon;
-import Items.Weapon_Magic;
 import Items.Weapon_Melee;
 
 import javax.swing.*;
@@ -38,8 +37,7 @@ public class Game {
     }
 
     private Game() {
-        Weapon weapon = new Weapon_Melee("Caster Blaster", 0, 0, 1, 1.0f,
-                new ItemGraphicsComponent());
+        Weapon weapon = new Weapon_Melee("Sword", 0, 0, 1, 1.0f, new ItemGraphicsComponent());
         player = new Character(this, "Ned Stark");
         player.getTransform().getPosition().setX(200);
         player.getTransform().getPosition().setY(200);
@@ -50,10 +48,9 @@ public class Game {
                 new PhysicsComponent(40, 40));
 
 
-
         currentWorld = new World();
-        ((Floor) currentWorld.getReal(6, 7)).dropItem(new Weapon_Magic("Matador",0, 0, 1, 10, 1.0f,
-                Weapon_Magic.Element.FIRE, new ItemGraphicsComponent()));
+        ((Floor) currentWorld.getReal(6, 7)).dropItem(new Weapon_Melee("Swordish", 0, 0, 1, 1.0f,
+                new ItemGraphicsComponent(Resource.weapon_melee_01_FLOOR)));
         addActor(player);
         addActor(enemy);
         DebugLog.write("New Game started");
@@ -68,11 +65,11 @@ public class Game {
         refresh.start();
     }
 
-    public List<Actor> getActors(){
+    public List<Actor> getActors() {
         return actors;
     }
 
-    public void addActor(Actor actor){
+    public void addActor(Actor actor) {
         actors.add(actor);
     }
 
@@ -94,7 +91,7 @@ public class Game {
     }
 
     //DEBUGGING PURPOSES
-    public Enemy getEnemy(){
+    public Enemy getEnemy() {
         return enemy;
     }
 
@@ -106,7 +103,7 @@ public class Game {
         long milliseconds = System.currentTimeMillis();
 
         public void actionPerformed(ActionEvent e) {
-            for (Actor a: actors){
+            for (Actor a : actors) {
                 a.update();
             }
             getRenderer().repaint();
