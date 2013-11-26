@@ -148,39 +148,83 @@ public class Character extends Actor {
 
     private void attack() {
         //TODO attacking with colliders
-        float range = 0.5f;
+        float range = 1f;
         int damage = ((Weapon) getMainHand()).getBaseDamage();
         List<Actor> actors = Game.getInstance().getActors();
         for (Actor a : actors) {
             if (!a.equals(this)) {
-                Vector[] collider = a.getCollider().getCorners(a.getTransform().getPosition());
-                if (getTransform().getDirection().equals(Vector.NORTH)) {
-                    if (collider[2].getY() <= getTransform().getPosition().getY() + 30 + range * Renderer.TILESIZE) {
-                        a.damage(damage);
-                    }
-                    break;
-                } else if (getTransform().getDirection().equals(Vector.SOUTH)) {
-                    if (collider[0].getY() >= getTransform().getPosition().getY() - range *
-                            Renderer.TILESIZE) {
-                        a.damage(damage);
-                    }
-                    break;
-                } else if (getTransform().getDirection().equals(Vector.WEST)) {
-                    if (collider[1].getX() >= getTransform().getPosition().getX() - range *
-                            Renderer.TILESIZE) {
-                        a.damage(damage);
-                    }
-                    break;
-                } else if (getTransform().getDirection().equals(Vector.EAST)) {
-                    if (collider[0].getX() <= getTransform().getPosition().getX() + 30 + range *
-                            Renderer.TILESIZE) {
-                        a.damage(damage);
-                    }
-                    break;
-                }
+                if (enemyWithinRange(a, range))
+                    a.damage(damage);
             }
         }
+    }
 
+    /*
+    This method checks if a certain actor is within the attack range of this actor.
+    It returns the Direction the player can attack that particular actor in.
+    It returns null if the enemy in not in attack range.
+     */
+
+    private boolean enemyWithinRange(Actor other, float range) {
+        Vector direction = getTransform().getDirection();
+        Vector[] otherCollider = other.getCollider().getCorners();
+        Vector[] thisCollider = getCollider().getCorners();
+        if (direction.equals(Vector.EAST)) {
+            if (onY(other) && leftOf(other))
+                return inLinearRange(otherCollider[0].getX(), thisCollider[1].getX(), range);
+        } else if (direction.equals(Vector.WEST)) {
+            if (onY(other) && rightOf(other))
+                return inLinearRange(thisCollider[0].getX(), otherCollider[1].getX(), range);
+        } else if (direction.equals(Vector.NORTH)) {
+            if (onX(other) && below(other))
+                return inLinearRange(otherCollider[2].getY(), thisCollider[0].getY(), range);
+        } else {
+            if (onX(other) && above(other))
+                return inLinearRange(thisCollider[2].getY(), otherCollider[0].getY(), range);
+        }
+        return false;
+    }
+
+    private boolean inLinearRange(int num1, int num2, float range) {
+        return num1 - num2 < range * Renderer.TILESIZE;
+    }
+
+    private boolean leftOf(Actor toCompare) {
+        Vector[] thisCollider = getCollider().getCorners();
+        Vector[] otherCollider = toCompare.getCollider().getCorners();
+        return thisCollider[1].getX() < otherCollider[0].getX();
+    }
+
+    private boolean rightOf(Actor toCompare) {
+        Vector[] thisCollider = getCollider().getCorners();
+        Vector[] otherCollider = toCompare.getCollider().getCorners();
+        return thisCollider[0].getX() > otherCollider[1].getX();
+    }
+
+    private boolean below(Actor toCompare) {
+        Vector[] thisCollider = getCollider().getCorners();
+        Vector[] otherCollider = toCompare.getCollider().getCorners();
+        return thisCollider[0].getY() < otherCollider[2].getY();
+    }
+
+    private boolean above(Actor toCompare) {
+        Vector[] thisCollider = getCollider().getCorners();
+        Vector[] otherCollider = toCompare.getCollider().getCorners();
+        return thisCollider[2].getY() > otherCollider[0].getY();
+    }
+
+    private boolean onX(Actor toCompare) {
+        Vector[] thisCollider = getCollider().getCorners();
+        Vector[] otherCollider = toCompare.getCollider().getCorners();
+        return thisCollider[0].getX() > otherCollider[0].getX() - Renderer.TILESIZE * 0.5
+                && thisCollider[1].getX() < otherCollider[1].getY() + Renderer.TILESIZE * 0.5;
+    }
+
+    private boolean onY(Actor toCompare) {
+        Vector[] thisCollider = getCollider().getCorners();
+        Vector[] otherCollider = toCompare.getCollider().getCorners();
+        return thisCollider[0].getY() < otherCollider[0].getY() + Renderer.TILESIZE * 0.5
+                && thisCollider[2].getY() > otherCollider[2].getY() - Renderer.TILESIZE * 0.5;
     }
 
     //region Health, Mana, Stamina

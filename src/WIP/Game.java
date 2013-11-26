@@ -39,6 +39,7 @@ public class Game {
     private Game() {
         Weapon weapon = new Weapon_Melee("Sword", 0, 0, 1, 1.0f, new ItemGraphicsComponent());
         player = new Character(this, "Ned Stark");
+        player.getCollider().setParent(player.getTransform());
         player.getTransform().getPosition().setX(200);
         player.getTransform().getPosition().setY(200);
         player.equip(weapon);
@@ -46,7 +47,7 @@ public class Game {
         enemy = new Enemy("Chu Chu", 100, new Transform(new Vector(400, 400)),
                 new StaticGraphicsComponent(Resource.enemy_DOWN),
                 new PhysicsComponent(40, 40));
-
+        enemy.getCollider().setParent(enemy.getTransform());
 
         currentWorld = new World();
         ((Floor) currentWorld.getReal(6, 7)).dropItem(new Weapon_Melee("Swordish", 0, 0, 1, 1.0f,
