@@ -22,11 +22,12 @@ import java.util.List;
 public class Game {
     private static Game instance = null;
     private final Character player;
-    private final Enemy enemy;
+    //private final Enemy enemy;
     private World currentWorld;
     private final Renderer renderer;
     private final GameLoop gameLoop;
     private List<Actor> actors = new ArrayList<>();
+    private List<Actor> deadActors = new ArrayList<>();
 
     //Singleton Design Pattern
     public static Game getInstance() {
@@ -37,23 +38,30 @@ public class Game {
     }
 
     private Game() {
-        Weapon weapon = new Weapon_Melee("Sword", 0, 0, 1, 1.0f, new ItemGraphicsComponent());
+        Weapon weapon = new Weapon_Melee("Sword", 0, 0, 100, 1.0f, new ItemGraphicsComponent());
         player = new Character(this, "Ned Stark");
         player.getCollider().setParent(player.getTransform());
         player.getTransform().getPosition().setX(200);
         player.getTransform().getPosition().setY(200);
         player.equip(weapon);
 
-        enemy = new Enemy("Chu Chu", 100, new Transform(new Vector(400, 400)),
+        Enemy enemy = new Enemy("Chu Chu", 100, new Transform(new Vector(400, 400)),
                 new StaticGraphicsComponent(Resource.enemy_DOWN),
                 new PhysicsComponent(40, 40));
         enemy.getCollider().setParent(enemy.getTransform());
+
+        Enemy enemy2 = new Enemy("Chu Chu", 100, new Transform(new Vector(420, 420)),
+                new StaticGraphicsComponent(Resource.enemy_DOWN),
+                new PhysicsComponent(40, 40));
+        enemy2.getCollider().setParent(enemy2.getTransform());
 
         currentWorld = new World();
         ((Floor) currentWorld.getReal(6, 7)).dropItem(new Weapon_Melee("Swordish", 0, 0, 1, 1.0f,
                 new ItemGraphicsComponent(Resource.weapon_melee_01_FLOOR)));
         addActor(player);
         addActor(enemy);
+        addActor(enemy2);
+
         DebugLog.write("New Game started");
 
         renderer = Renderer.getInstance();
@@ -74,6 +82,17 @@ public class Game {
         actors.add(actor);
     }
 
+    public void removeActor(Actor actor) {
+        deadActors.add(actor);
+    }
+
+    private void removeDeadActors() {
+        for (Actor a : deadActors) {
+            actors.remove(a);
+        }
+        deadActors.clear();
+    }
+
     public int getFrameRate() {
         return gameLoop.getFrameRate();
     }
@@ -91,11 +110,6 @@ public class Game {
         return renderer;
     }
 
-    //DEBUGGING PURPOSES
-    public Enemy getEnemy() {
-        return enemy;
-    }
-
     private class GameLoop implements ActionListener {
 
         int frames = 0;
@@ -103,12 +117,17 @@ public class Game {
         long timeBetween;
         long milliseconds = System.currentTimeMillis();
 
+
         public void actionPerformed(ActionEvent e) {
             for (Actor a : actors) {
                 a.update();
             }
+
+            removeDeadActors();
+
             getRenderer().repaint();
 
+            //TODO remove dead actors
             //Functionality to count frames and show frame rate circa every second
             frames++;
             timeBetween = System.currentTimeMillis();

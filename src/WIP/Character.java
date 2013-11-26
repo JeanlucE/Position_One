@@ -21,7 +21,6 @@ public class Character extends Actor {
     private int level;
     private int experience;
     private int skillPoints;
-    private int maxHealth, currenthealth;
     private int maxStamina, currentStamina;
     private int maxMana, currentMana;
     //endregion
@@ -73,7 +72,7 @@ public class Character extends Actor {
         this.skillPoints = skillPoints;
 
         maxHealth = 100;
-        currenthealth = maxHealth;
+        currentHealth = maxHealth;
 
         maxMana = 20;
         currentMana = maxMana;
@@ -95,8 +94,7 @@ public class Character extends Actor {
             move();
         }
 
-        boolean use = InputComponent.getInstance().getSpacePressed();
-        if (use) {
+        if (InputComponent.getInstance().getSpacePressed()) {
             attack();
             InputComponent.getInstance().resetSpacePressed();
         }
@@ -147,7 +145,6 @@ public class Character extends Actor {
     }
 
     private void attack() {
-        //TODO attacking with colliders
         float range = 1f;
         int damage = ((Weapon) getMainHand()).getBaseDamage();
         List<Actor> actors = Game.getInstance().getActors();
@@ -157,79 +154,6 @@ public class Character extends Actor {
                     a.damage(damage);
             }
         }
-    }
-
-    /*
-    This method checks if a certain actor is within the attack range of this actor.
-    It returns the Direction the player can attack that particular actor in.
-    It returns null if the enemy in not in attack range.
-     */
-
-    private boolean enemyWithinRange(Actor other, float range) {
-        Vector direction = getTransform().getDirection();
-        Vector[] otherCollider = other.getCollider().getCorners();
-        Vector[] thisCollider = getCollider().getCorners();
-        if (direction.equals(Vector.EAST)) {
-            if (onY(other) && leftOf(other))
-                return inLinearRange(otherCollider[0].getX(), thisCollider[1].getX(), range);
-        } else if (direction.equals(Vector.WEST)) {
-            if (onY(other) && rightOf(other))
-                return inLinearRange(thisCollider[0].getX(), otherCollider[1].getX(), range);
-        } else if (direction.equals(Vector.NORTH)) {
-            if (onX(other) && below(other))
-                return inLinearRange(otherCollider[2].getY(), thisCollider[0].getY(), range);
-        } else {
-            if (onX(other) && above(other))
-                return inLinearRange(thisCollider[2].getY(), otherCollider[0].getY(), range);
-        }
-        return false;
-    }
-
-    private boolean inLinearRange(int num1, int num2, float range) {
-        return num1 - num2 < range * Renderer.TILESIZE;
-    }
-
-    private boolean leftOf(Actor toCompare) {
-        Vector[] thisCollider = getCollider().getCorners();
-        Vector[] otherCollider = toCompare.getCollider().getCorners();
-        return thisCollider[1].getX() < otherCollider[0].getX();
-    }
-
-    private boolean rightOf(Actor toCompare) {
-        Vector[] thisCollider = getCollider().getCorners();
-        Vector[] otherCollider = toCompare.getCollider().getCorners();
-        return thisCollider[0].getX() > otherCollider[1].getX();
-    }
-
-    private boolean below(Actor toCompare) {
-        Vector[] thisCollider = getCollider().getCorners();
-        Vector[] otherCollider = toCompare.getCollider().getCorners();
-        return thisCollider[0].getY() < otherCollider[2].getY();
-    }
-
-    private boolean above(Actor toCompare) {
-        Vector[] thisCollider = getCollider().getCorners();
-        Vector[] otherCollider = toCompare.getCollider().getCorners();
-        return thisCollider[2].getY() > otherCollider[0].getY();
-    }
-
-    private boolean onX(Actor toCompare) {
-        Vector[] thisCollider = getCollider().getCorners();
-        Vector[] otherCollider = toCompare.getCollider().getCorners();
-        return thisCollider[0].getX() > otherCollider[0].getX() - Renderer.TILESIZE * 0.5
-                && thisCollider[1].getX() < otherCollider[1].getY() + Renderer.TILESIZE * 0.5;
-    }
-
-    private boolean onY(Actor toCompare) {
-        Vector[] thisCollider = getCollider().getCorners();
-        Vector[] otherCollider = toCompare.getCollider().getCorners();
-        return thisCollider[0].getY() < otherCollider[0].getY() + Renderer.TILESIZE * 0.5
-                && thisCollider[2].getY() > otherCollider[2].getY() - Renderer.TILESIZE * 0.5;
-    }
-
-    //region Health, Mana, Stamina
-    public int getMaxHealth() {
-        return maxHealth;
     }
 
     public int getMaxStamina() {
@@ -254,14 +178,6 @@ public class Character extends Actor {
 
     public void setCurrentStamina(int currentStamina) {
         this.currentStamina = currentStamina;
-    }
-
-    public int getCurrenthealth() {
-        return currenthealth;
-    }
-
-    public void setCurrenthealth(int currenthealth) {
-        this.currenthealth = currenthealth;
     }
     //endregion
 

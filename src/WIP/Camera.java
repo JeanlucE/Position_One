@@ -75,9 +75,9 @@ public class Camera {
         return new Vector(screenWidth / 2, screenHeight / 2);
     }
 
-    public Map<Actor, Vector> actorsToRender(){
+    public Map<Actor, Vector> actorsToRender() {
         Map<Actor, Vector> actorPositionMap = new HashMap<>();
-        for (Actor a: Game.getInstance().getActors()){
+        for (Actor a : Game.getInstance().getActors()) {
             Vector drawPosition = a.getTransform().getPosition().clone();
             drawPosition.setX(screenWidth / 2 + (drawPosition.getX() - parent.getX()));
             drawPosition.setY(screenHeight / 2 + (drawPosition.getY() - parent.getY()));

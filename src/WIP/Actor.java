@@ -15,8 +15,7 @@ public abstract class Actor extends GameObject {
 
     private PhysicsComponent physicsComponent;
     private String name;
-    private int maxHealth;
-    private int currentHealth;
+    protected int maxHealth, currentHealth;
     private int currentXVelocity, currentYVelocity;
 
     protected Actor(String name, Transform transform, GraphicsComponent graphic, PhysicsComponent collider) {
@@ -93,19 +92,89 @@ public abstract class Actor extends GameObject {
         return currentHealth;
     }
 
-    public void setCurrentHealth(int currentHealth) {
-        this.currentHealth = currentHealth;
+    public void setCurrentHealth(int health) {
+        currentHealth = health;
     }
 
     public void damage(int damage) {
         currentHealth -= damage;
-        DebugLog.write("Damaged enemy "  + name + " for " + damage + " damage.");
+        DebugLog.write("Damaged enemy " + name + " for " + damage + " damage.");
         if (currentHealth <= 0)
             death();
 
     }
 
     private void death() {
+        Game.getInstance().removeActor(this);
         DebugLog.write("Enemy " + name + " is dead.");
     }
+
+    /*
+    This method checks if a certain actor is within the attack range of this actor.
+    It returns true if the enemy can be attacked
+    It returns false if the enemy is out of range or the player is looking in the wrong direction.
+     */
+    protected boolean enemyWithinRange(Actor other, float range) {
+        Vector direction = getTransform().getDirection();
+        Vector[] otherCollider = other.getCollider().getCorners();
+        Vector[] thisCollider = getCollider().getCorners();
+        if (direction.equals(Vector.EAST)) {
+            if (onY(other) && leftOf(other))
+                return inLinearRange(otherCollider[0].getX(), thisCollider[1].getX(), range);
+        } else if (direction.equals(Vector.WEST)) {
+            if (onY(other) && rightOf(other))
+                return inLinearRange(thisCollider[0].getX(), otherCollider[1].getX(), range);
+        } else if (direction.equals(Vector.NORTH)) {
+            if (onX(other) && below(other))
+                return inLinearRange(otherCollider[2].getY(), thisCollider[0].getY(), range);
+        } else {
+            if (onX(other) && above(other))
+                return inLinearRange(thisCollider[2].getY(), otherCollider[0].getY(), range);
+        }
+        return false;
+    }
+
+    protected boolean inLinearRange(int num1, int num2, float range) {
+        return num1 - num2 < range * Renderer.TILESIZE;
+    }
+
+    //region Position Comparison methods
+    protected boolean leftOf(Actor toCompare) {
+        Vector[] thisCollider = getCollider().getCorners();
+        Vector[] otherCollider = toCompare.getCollider().getCorners();
+        return thisCollider[1].getX() < otherCollider[0].getX();
+    }
+
+    protected boolean rightOf(Actor toCompare) {
+        Vector[] thisCollider = getCollider().getCorners();
+        Vector[] otherCollider = toCompare.getCollider().getCorners();
+        return thisCollider[0].getX() > otherCollider[1].getX();
+    }
+
+    protected boolean below(Actor toCompare) {
+        Vector[] thisCollider = getCollider().getCorners();
+        Vector[] otherCollider = toCompare.getCollider().getCorners();
+        return thisCollider[0].getY() < otherCollider[2].getY();
+    }
+
+    protected boolean above(Actor toCompare) {
+        Vector[] thisCollider = getCollider().getCorners();
+        Vector[] otherCollider = toCompare.getCollider().getCorners();
+        return thisCollider[2].getY() > otherCollider[0].getY();
+    }
+
+    protected boolean onX(Actor toCompare) {
+        Vector[] thisCollider = getCollider().getCorners();
+        Vector[] otherCollider = toCompare.getCollider().getCorners();
+        return thisCollider[0].getX() > otherCollider[0].getX() - Renderer.TILESIZE * 0.5
+                && thisCollider[1].getX() < otherCollider[1].getY() + Renderer.TILESIZE * 0.5;
+    }
+
+    protected boolean onY(Actor toCompare) {
+        Vector[] thisCollider = getCollider().getCorners();
+        Vector[] otherCollider = toCompare.getCollider().getCorners();
+        return thisCollider[0].getY() < otherCollider[0].getY() + Renderer.TILESIZE * 0.5
+                && thisCollider[2].getY() > otherCollider[2].getY() - Renderer.TILESIZE * 0.5;
+    }
+    //endregion
 }
