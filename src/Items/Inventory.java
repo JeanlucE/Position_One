@@ -1,5 +1,7 @@
 package Items;
 
+import WIP.DebugLog;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Jean-Luc
@@ -22,6 +24,13 @@ public class Inventory {
             for (int j = 0; j < inventorySlots[0].length; j++) {
                 inventorySlots[i][j] = new InventorySlot();
             }
+        }
+    }
+
+    public void add(Item item) {
+        if (item != null && !isFull()) {
+            getFirstEmpty().setItem(item);
+            DebugLog.write(this);
         }
     }
 
@@ -57,6 +66,17 @@ public class Inventory {
             }
         }
         return bool;
+    }
+
+    private InventorySlot getFirstEmpty() {
+        for (int i = 0; i < INVENTORYSIZE; i++) {
+            for (int j = 0; j < INVENTORYSIZE; j++) {
+                if (!getSlot(i, j).isOccupied())
+                    return getSlot(i, j);
+            }
+        }
+        DebugLog.write("No empty inventory slot found!");
+        return null;
     }
 
     public String toString() {

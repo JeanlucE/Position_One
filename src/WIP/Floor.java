@@ -14,6 +14,7 @@ import java.util.List;
  */
 public class Floor extends WorldSpace {
 
+    //TODO make this a stack
     private List<Item> droppedItems;
 
     public Floor(Transform transform, GraphicsComponent g) {
@@ -26,6 +27,15 @@ public class Floor extends WorldSpace {
 
     public Item[] getDroppedItems() {
         return droppedItems.toArray(new Item[droppedItems.size()]);
+    }
+
+    public Item getTopItem() {
+        if (hasDroppedItems()) {
+            Item item = droppedItems.get(droppedItems.size() - 1);
+            droppedItems.remove(item);
+            return item;
+        }
+        return null;
     }
 
     public void dropItem(Item item) {

@@ -18,7 +18,7 @@ import java.util.Map;
 public class Renderer extends JPanel {
     private static Renderer instance = null;
     public final static int TILESIZE = 40;
-    private final static int screenWidth = 400, screenHeight = 400;
+    private final static int screenWidth = 500, screenHeight = 500;
 
     //Singleton Design Pattern
     public static Renderer getInstance() {
@@ -135,7 +135,8 @@ public class Renderer extends JPanel {
         for (Actor a : actorPositionMap.keySet()) {
             Vector drawPosition = actorPositionMap.get(a);
             PhysicsComponent phys = a.getCollider();
-            g2d.drawImage(a.getGraphic().getImage(), drawPosition.getX(), 400 - (phys.getHeight() + drawPosition.getY()),
+            g2d.drawImage(a.getGraphic().getImage(), drawPosition.getX(), screenHeight - (phys.getHeight() + drawPosition.getY
+                    ()),
                     phys.getWidth(), phys.getHeight(), this);
         }
     }

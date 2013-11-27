@@ -55,6 +55,11 @@ public abstract class Actor extends GameObject {
         getTransform().getPosition().shift(x, y);
     }
 
+    protected Vector getNextWorldPosition() {
+        Vector currentPos = getTransform().getPosition();
+        return new Vector(currentPos.getX() - currentPos.getX() % 40, currentPos.getY() - currentPos.getY() % 40);
+    }
+
     public void setXVel(int xVel) {
         this.currentXVelocity = xVel;
     }

@@ -22,7 +22,8 @@ public enum Resource {
     enemy_DOWN("enemy.png"),
     wall01("wall_stone01.png"),
     floor01("floor_stone01.png"),
-    weapon_melee_01_FLOOR("weapon_melee_01_FLOOR.png");
+    weapon_melee_01_FLOOR("weapon_melee_01_FLOOR.png"),
+    projectile_arrow_01_wooden_FLOOR("projectile_arrow_01_wooden_FLOOR.png");
 
     private String imagePath = "./images/";
     private BufferedImage image;

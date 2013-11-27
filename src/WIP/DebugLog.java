@@ -28,6 +28,10 @@ public class DebugLog {
         logWriter.write("Log created at: " + dateFormat.format(new Date()) + "\n\n");
     }
 
+    public static void write(Object obj) {
+        write(obj.toString());
+    }
+
     public static void write(String content) {
         DateFormat timeFormat;
         timeFormat = new SimpleDateFormat("[HH:mm:ss.SSS]");

@@ -1,7 +1,8 @@
 package Components;
 
-import WIP.Vector;
+import WIP.DebugLog;
 import WIP.Game;
+import WIP.Vector;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -23,8 +24,10 @@ public class InputComponent extends InputMap {
 
     private final Action stopX, stopY;
 
-    private final Action spaceDown, spaceUp;
+    private final Action spaceDown;
+    private final Action ctrlDown;
     private boolean spacePressed;
+    private boolean ctrlPressed;
 
     public static InputComponent getInstance() {
         if (instance == null) {
@@ -61,7 +64,7 @@ public class InputComponent extends InputMap {
 
         //Space uses the equipped weapon
         put(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0, false), "space_pressed");
-        put(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0, true), "space_released");
+        put(KeyStroke.getKeyStroke(KeyEvent.VK_Q, 0, false), "ctrl_pressed");
 
         actionMap = new ActionMap();
 
@@ -114,17 +117,18 @@ public class InputComponent extends InputMap {
             @Override
             public void actionPerformed(ActionEvent e) {
                 spacePressed = true;
-                System.out.println("Space down");
+                DebugLog.write("SPACE down");
             }
         };
 
-        spaceUp = new AbstractAction() {
+        ctrlDown = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                spacePressed = false;
-                System.out.println("Space up");
+                ctrlPressed = true;
+                DebugLog.write("Q down");
             }
         };
+
 
         //Map all keys defined above to the approriate actions
         actionMap.put("w_pressed", translateUp);
@@ -136,11 +140,15 @@ public class InputComponent extends InputMap {
         actionMap.put("d_pressed", translateRight);
         actionMap.put("d_released", stopX);
         actionMap.put("space_pressed", spaceDown);
-        //actionMap.put("space_released", spaceUp);
+        actionMap.put("ctrl_pressed", ctrlDown);
     }
 
-    public void resetSpacePressed(){
+    public void resetSpacePressed() {
         spacePressed = false;
+    }
+
+    public void resetCtrlPressed() {
+        ctrlPressed = false;
     }
 
     public ActionMap getActionMap() {
@@ -159,7 +167,11 @@ public class InputComponent extends InputMap {
         return YAxis;
     }
 
-    public boolean getSpacePressed(){
+    public boolean isSpacePressed() {
         return spacePressed;
+    }
+
+    public boolean isCtrlPressed() {
+        return ctrlPressed;
     }
 }

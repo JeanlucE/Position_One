@@ -1,13 +1,41 @@
-Log created at: 17:10:28 26.11.2013
+Log created at: 14:15:48 27.11.2013
 
-[17:10:28.858] New Melee Weapon created: Sword
-[17:10:29.178] New Character created: Ned Stark
-[17:10:29.179] Player Ned Stark has equipped: Sword
-[17:10:29.212] New World created with size: 400
-[17:10:29.213] New Melee Weapon created: Swordish
-[17:10:29.218] New Game started
-[17:10:29.237] Renderer started
-[17:10:35.925] Damaged enemy Chu Chu for 100 damage.
-[17:10:35.926] Enemy Chu Chu is dead.
-[17:10:35.927] Damaged enemy Chu Chu for 100 damage.
-[17:10:35.927] Enemy Chu Chu is dead.
+[14:15:48.891] New Melee Weapon created: Sword
+[14:15:49.066] New Character created: Ned Stark
+[14:15:49.067] Player Ned Stark has equipped: Sword
+[14:15:49.089] New World created with size: 400
+[14:15:49.090] New Melee Weapon created: Swordish
+[14:15:49.091] New Game started
+[14:15:49.106] Renderer started
+[14:15:51.219] Q down
+[14:15:51.224] Item at 0|0: Swordish
+Item at 0|1: 
+Item at 0|2: 
+Item at 0|3: 
+Item at 0|4: 
+Item at 1|0: 
+Item at 1|1: 
+Item at 1|2: 
+Item at 1|3: 
+Item at 1|4: 
+Item at 2|0: 
+Item at 2|1: 
+Item at 2|2: 
+Item at 2|3: 
+Item at 2|4: 
+Item at 3|0: 
+Item at 3|1: 
+Item at 3|2: 
+Item at 3|3: 
+Item at 3|4: 
+Item at 4|0: 
+Item at 4|1: 
+Item at 4|2: 
+Item at 4|3: 
+Item at 4|4: 
+
+[14:15:53.474] SPACE down
+[14:15:53.483] Damaged enemy Chu Chu for 100 damage.
+[14:15:53.484] Enemy Chu Chu is dead.
+[14:15:53.484] Damaged enemy Chu Chu for 100 damage.
+[14:15:53.484] Enemy Chu Chu is dead.

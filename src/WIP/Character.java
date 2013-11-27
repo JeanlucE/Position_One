@@ -94,9 +94,18 @@ public class Character extends Actor {
             move();
         }
 
-        if (InputComponent.getInstance().getSpacePressed()) {
+        if (InputComponent.getInstance().isSpacePressed()) {
             attack();
             InputComponent.getInstance().resetSpacePressed();
+        }
+
+        if (InputComponent.getInstance().isCtrlPressed()) {
+            WorldSpace nextAbsPos = Game.getInstance().getCurrentWorld().get(getNextWorldPosition());
+            if (nextAbsPos instanceof Floor) {
+                Floor floor = (Floor) nextAbsPos;
+                inventory.add(floor.hasDroppedItems() ? (floor.getTopItem()) : (null));
+            }
+            InputComponent.getInstance().resetCtrlPressed();
         }
     }
     //endregion
