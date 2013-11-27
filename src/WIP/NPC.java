@@ -9,7 +9,7 @@ import Components.PhysicsComponent;
  * Date: 14.11.13
  * Time: 14:26
  */
-public class NPC extends Actor {
+public abstract class NPC extends Actor {
 
     public NPC(String name, Transform transform, GraphicsComponent graphicsComponent,
                PhysicsComponent physicsComponent) {
@@ -23,9 +23,5 @@ public class NPC extends Actor {
     @Override
     public boolean isCollidable() {
         return false;
-    }
-
-    public enum Faction {
-        PLAYER, FRIENDLY, ENEMY;
     }
 }

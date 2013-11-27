@@ -7,19 +7,19 @@ package WIP;
  * Time: 15:55
  * <p/>
  * Coordinate System:
- * /\
- * | y
- * |
- * |
- * |
- * |
- * <---------------0--------------->
- * -x             |              +x
- * |
- * |
- * |
- * | -y
- * \/
+ * *                /\ +y
+ * *                |
+ * *                |
+ * *                |
+ * *                |
+ * *                |
+ * * <--------------0--------------->
+ * * -x             |              +x
+ * *                |
+ * *                |
+ * *                |
+ * *                |
+ * *                \/ -y
  */
 public class Vector {
 
@@ -45,7 +45,7 @@ public class Vector {
         this.y = y;
     }
 
-    public Vector clone(){
+    public Vector clone() {
         return new Vector(x, y);
     }
 

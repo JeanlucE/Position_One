@@ -19,11 +19,16 @@ public class Enemy extends NPC {
         setCurrentHealth(maxHealth);
     }
 
-    public void update(){
+    public void update() {
         //randomVel();
         if (getXVel() != 0 || getYVel() != 0) {
             move();
         }
+    }
+
+    @Override
+    protected Faction getFaction() {
+        return Faction.ENEMY;
     }
 
     //DEBUGGING
@@ -33,13 +38,12 @@ public class Enemy extends NPC {
     private int yMaxSpeed = 2;
     private int direction = -1;
     private Random random = new Random();
-    private void randomVel(){
-        if(getTransform().getPosition().equals(new Vector(40, 40))
+
+    private void randomVel() {
+        if (getTransform().getPosition().equals(new Vector(40, 40))
                 || (getTransform().getPosition().getX() >= 700 && getTransform().getPosition().getY() >= 700))
             direction = direction * -1;
         setXVel((random.nextInt(xMaxSpeed) + 1 + xMinSpeed) * direction);
         setYVel((random.nextInt(yMaxSpeed) + 1 + yMinSpeed) * direction);
-
-
     }
 }

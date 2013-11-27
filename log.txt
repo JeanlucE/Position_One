@@ -1,14 +1,53 @@
-Log created at: 14:15:48 27.11.2013
+Log created at: 22:55:51 27.11.2013
 
-[14:15:48.891] New Melee Weapon created: Sword
-[14:15:49.066] New Character created: Ned Stark
-[14:15:49.067] Player Ned Stark has equipped: Sword
-[14:15:49.089] New World created with size: 400
-[14:15:49.090] New Melee Weapon created: Swordish
-[14:15:49.091] New Game started
-[14:15:49.106] Renderer started
-[14:15:51.219] Q down
-[14:15:51.224] Item at 0|0: Swordish
+[22:55:51.911] New Melee Weapon created: Sword
+[22:55:52.043] New Character created: Ned Stark
+[22:55:52.044] Player Ned Stark has equipped: Sword
+[22:55:52.059] New World created with size: 400
+[22:55:52.059] New Melee Weapon created: Swordish
+[22:55:52.060] New Game started
+[22:55:52.070] Renderer started
+[22:55:54.350] SPACE down
+[22:55:54.356] Damaged enemy Chu Chu for 10 damage.
+[22:55:54.357] Damaged enemy Chu Chu for 10 damage.
+[22:55:54.906] SPACE down
+[22:55:54.923] Damaged enemy Chu Chu for 10 damage.
+[22:55:54.924] Damaged enemy Chu Chu for 10 damage.
+[22:55:55.104] SPACE down
+[22:55:55.105] Damaged enemy Chu Chu for 10 damage.
+[22:55:55.105] Damaged enemy Chu Chu for 10 damage.
+[22:55:55.339] SPACE down
+[22:55:55.340] Damaged enemy Chu Chu for 10 damage.
+[22:55:55.341] Damaged enemy Chu Chu for 10 damage.
+[22:55:56.421] SPACE down
+[22:55:57.306] SPACE down
+[22:55:57.320] Damaged enemy Chu Chu for 10 damage.
+[22:55:58.269] SPACE down
+[22:55:58.278] Damaged enemy Chu Chu for 10 damage.
+[22:55:58.708] SPACE down
+[22:55:58.715] Damaged enemy Chu Chu for 10 damage.
+[22:55:59.101] SPACE down
+[22:55:59.112] Damaged enemy Chu Chu for 10 damage.
+[22:55:59.624] SPACE down
+[22:55:59.630] Damaged enemy Chu Chu for 10 damage.
+[22:56:00.185] SPACE down
+[22:56:00.188] Damaged enemy Chu Chu for 10 damage.
+[22:56:00.189] Actor Chu Chu is dead.
+[22:56:01.833] SPACE down
+[22:56:01.835] Damaged enemy Chu Chu for 10 damage.
+[22:56:02.499] SPACE down
+[22:56:02.503] Damaged enemy Chu Chu for 10 damage.
+[22:56:03.081] SPACE down
+[22:56:03.087] Damaged enemy Chu Chu for 10 damage.
+[22:56:03.469] SPACE down
+[22:56:03.478] Damaged enemy Chu Chu for 10 damage.
+[22:56:03.844] SPACE down
+[22:56:03.858] Damaged enemy Chu Chu for 10 damage.
+[22:56:04.597] SPACE down
+[22:56:04.607] Damaged enemy Chu Chu for 10 damage.
+[22:56:04.608] Actor Chu Chu is dead.
+[22:56:28.147] Q down
+[22:56:28.159] Item at 0|0: Swordish
 Item at 0|1: 
 Item at 0|2: 
 Item at 0|3: 
@@ -34,8 +73,3 @@ Item at 4|2:
 Item at 4|3: 
 Item at 4|4: 
 
-[14:15:53.474] SPACE down
-[14:15:53.483] Damaged enemy Chu Chu for 100 damage.
-[14:15:53.484] Enemy Chu Chu is dead.
-[14:15:53.484] Damaged enemy Chu Chu for 100 damage.
-[14:15:53.484] Enemy Chu Chu is dead.

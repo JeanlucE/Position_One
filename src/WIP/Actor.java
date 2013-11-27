@@ -18,7 +18,8 @@ public abstract class Actor extends GameObject {
     protected int maxHealth, currentHealth;
     private int currentXVelocity, currentYVelocity;
 
-    protected Actor(String name, Transform transform, GraphicsComponent graphic, PhysicsComponent collider) {
+    protected Actor(String name, Transform transform, GraphicsComponent graphic,
+                    PhysicsComponent collider) {
         super(transform, graphic);
         physicsComponent = collider;
         this.name = name;
@@ -37,6 +38,8 @@ public abstract class Actor extends GameObject {
     public void move() {
         Vector currentPosition = getTransform().getPosition();
         World world = Game.getInstance().getCurrentWorld();
+
+        //TODO slow down character movement for diagonal movement
 
         //If player can move to inputted position, move there
         if (world.resolveCollision(this, currentPosition.shiftedPosition(currentXVelocity, currentYVelocity))) {
@@ -97,6 +100,10 @@ public abstract class Actor extends GameObject {
         return currentHealth;
     }
 
+    public float getHealthPercentage() {
+        return currentHealth / (float) maxHealth;
+    }
+
     public void setCurrentHealth(int health) {
         currentHealth = health;
     }
@@ -111,7 +118,7 @@ public abstract class Actor extends GameObject {
 
     private void death() {
         Game.getInstance().removeActor(this);
-        DebugLog.write("Enemy " + name + " is dead.");
+        DebugLog.write("Actor " + name + " is dead.");
     }
 
     /*
@@ -182,4 +189,10 @@ public abstract class Actor extends GameObject {
                 && thisCollider[2].getY() > otherCollider[2].getY() - Renderer.TILESIZE * 0.5;
     }
     //endregion
+
+    protected abstract Faction getFaction();
+
+    public enum Faction {
+        PLAYER, FRIENDLY, ENEMY;
+    }
 }

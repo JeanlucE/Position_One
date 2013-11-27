@@ -14,11 +14,36 @@ import java.util.Map;
  * User: Jean-Luc
  * Date: 07.08.13
  * Time: 20:40
+ * <p/>
+ * This class handles anything that has to be drawn on the JPanel in the window.
+ * The paintComponent method is overridden and then draws all enemies, dropped items, the player and the worldspaces.
+ * It is also a Singleton which means there should only ever be one instance of this object.
+ * Important Note:
+ * JPanels in java use different coordinate systems than the world class.
+ * Coordinate System:
+ * *                /\ -y
+ * *                |
+ * *                |
+ * *                |
+ * *                |
+ * *                |
+ * * <--------------0--------------->
+ * * -x             |              +x
+ * *                |
+ * *                |
+ * *                |
+ * *                |
+ * *                \/ +y
  */
 public class Renderer extends JPanel {
     private static Renderer instance = null;
+    //This variable is very important as it determines the relative size of the world
+    //TILESIZE determines how walls and floors are spaced, how far weapon ranges are and how big colliders are
     public final static int TILESIZE = 40;
+    //This variable determines how wide and high the game screen is. This is important information for the camera to
+    // know the clipping edges but is also important to calculate draw positions from world position.
     private final static int screenWidth = 500, screenHeight = 500;
+    private Graphics2D g2d;
 
     //Singleton Design Pattern
     public static Renderer getInstance() {
@@ -41,8 +66,6 @@ public class Renderer extends JPanel {
         addMouseListener(MouseInputComponent.getInstance());
         addMouseMotionListener(MouseInputComponent.getInstance());
     }
-
-    private Graphics2D g2d;
 
     public void paintComponent(Graphics g) {
 
@@ -71,10 +94,13 @@ public class Renderer extends JPanel {
             g2d.fillRect(30, 10, 10, 10);
         }
 
-
         GameWindow.getInstance().setTitle("Frames:" + String.valueOf(Game.getInstance().getFrameRate()));
     }
 
+    /*
+    Draws the sprite of the given gameobject at a given position.
+    This position must be a draw coordinate.
+     */
     private void drawImage(GameObject go, Vector position) {
         if (go instanceof Wall || go instanceof Floor || go instanceof Item) {
             BufferedImage bf = go.getGraphic().getImage();
@@ -85,7 +111,7 @@ public class Renderer extends JPanel {
         }
     }
 
-    //DEBUGGING draws walls and floors as white and black rectangles until i have some sprites
+    //DEBUGGING draws walls and floors as white and black rectangles and empty worldspaces as red blocks
     private void drawSpace(WorldSpace worldSpace, int x, int y) {
         if (worldSpace instanceof Wall) {
             g2d.setColor(Color.BLACK);
@@ -97,6 +123,9 @@ public class Renderer extends JPanel {
         g2d.fillRect(x, screenHeight - (TILESIZE + y), TILESIZE, TILESIZE);
     }
 
+    /*
+    Gets all worldspaces that are visible to the camera and renders these
+     */
     private void drawWorld(Map<Vector, WorldSpace> toRender) {
         for (Map.Entry e : toRender.entrySet()) {
             WorldSpace w = (WorldSpace) e.getValue();
@@ -104,6 +133,9 @@ public class Renderer extends JPanel {
         }
     }
 
+    /*
+    Draws all items that are lying on the floor.
+     */
     private void drawItems(Map<Vector, WorldSpace> toRender) {
         for (Map.Entry e : toRender.entrySet()) {
             if (e.getValue() instanceof Floor && ((Floor) e.getValue()).hasDroppedItems()) {
@@ -130,15 +162,38 @@ public class Renderer extends JPanel {
         g2d.drawString(playerPos.toString(), playerDrawPos.getX() - 5, playerDrawPos.getY() + 10);
     }
 
+    /*
+    TODO Draws all actors even if they are not visible to the player!
+    Also draws all healthbars.
+     */
     private void drawActors() {
         Map<Actor, Vector> actorPositionMap = Camera.getInstance().actorsToRender();
         for (Actor a : actorPositionMap.keySet()) {
             Vector drawPosition = actorPositionMap.get(a);
             PhysicsComponent phys = a.getCollider();
-            g2d.drawImage(a.getGraphic().getImage(), drawPosition.getX(), screenHeight - (phys.getHeight() + drawPosition.getY
-                    ()),
+            g2d.drawImage(a.getGraphic().getImage(),
+                    drawPosition.getX(), screenHeight - (phys.getHeight() + drawPosition.getY()),
                     phys.getWidth(), phys.getHeight(), this);
+
         }
+        for (Actor a : actorPositionMap.keySet()) {
+            Vector drawPosition = actorPositionMap.get(a);
+            drawHealthBar(a, drawPosition);
+        }
+    }
+
+    //Draws the health bar of a single actor
+    private void drawHealthBar(Actor actor, Vector drawPosition) {
+        int xOffset = -14;
+        int yOffset = 7;
+        g2d.setColor(Color.RED);
+        g2d.fillRect(actor.getCollider().getWidth() / 2 + drawPosition.getX() + xOffset,
+                screenHeight - (actor.getCollider().getHeight() + drawPosition.getY() + yOffset),
+                30, 5);
+        g2d.setColor(Color.GREEN);
+        g2d.fillRect(actor.getCollider().getWidth() / 2 + drawPosition.getX() + xOffset,
+                screenHeight - (actor.getCollider().getHeight() + drawPosition.getY() + yOffset),
+                (int) (30 * actor.getHealthPercentage()), 5);
     }
 
     private void drawGUI() {

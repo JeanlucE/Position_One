@@ -38,7 +38,7 @@ public class Game {
     }
 
     private Game() {
-        Weapon weapon = new Weapon_Melee("Sword", 0, 0, 100, 1.0f, new ItemGraphicsComponent());
+        Weapon weapon = new Weapon_Melee("Sword", 0, 0, 10, 1.0f, new ItemGraphicsComponent());
         player = new Character(this, "Ned Stark");
         player.getCollider().setParent(player.getTransform());
         player.getTransform().getPosition().setX(200);

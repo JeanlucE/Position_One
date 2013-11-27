@@ -16,6 +16,21 @@ import java.util.Map;
  * Time: 15:00
  * <p/>
  * Saves the position of all walls, floors and later: other gameobjects(chests, doors)
+ * Important note:
+ * Coordinate System:
+ * *                /\ +y
+ * *                |
+ * *                |
+ * *                |
+ * *                |
+ * *                |
+ * * <--------------0--------------->
+ * * -x             |              +x
+ * *                |
+ * *                |
+ * *                |
+ * *                |
+ * *                \/ -y
  */
 public class World {
     private Map<Vector, WorldSpace> worldSpaceMap = new HashMap<>();
@@ -113,35 +128,20 @@ public class World {
         boolean canMove = true;
         List<Actor> actors = Game.getInstance().getActors();
         for (int i = 0; i < actors.size() && canMove; i++) {
-            if (actor != actors.get(i)) {
+            Actor otherActor = actors.get(i);
+            if (actor.getFaction().equals(otherActor.getFaction()))
+                canMove = true;
+            else if (actor != otherActor) {
                 Vector[] thisCorners = actor.getCollider().getCorners(nextPosition);
-                Vector[] otherCorners = actors.get(i).getCollider().getCorners(actors.get(i)
-                        .getTransform().getPosition());
+                Vector[] otherCorners = otherActor.getCollider().getCorners();
 
                 boolean actorAbove = thisCorners[2].getY() > otherCorners[0].getY();
                 boolean actorBelow = thisCorners[0].getY() < otherCorners[2].getY();
                 boolean actorLeftOf = thisCorners[1].getX() < otherCorners[0].getX();
                 boolean actorRightOf = thisCorners[0].getX() > otherCorners[1].getX();
 
-                canMove = actorAbove || actorBelow || actorLeftOf || actorRightOf;
-                //If player is above enemy
-                /*if (thisCorners[2].getY() > otherCorners[0].getY()) {
-                    canMove = true;
-                    //If player is below enemy
-                } else if (thisCorners[0].getY() < otherCorners[2].getY()) {
-                    canMove = true;
-                    //If player is at the same height as the enemy
-                } else {
-                    //If player is left of the enemy
-                    if (thisCorners[1].getX() < otherCorners[0].getX())
-                        canMove = true;
-                        //if player is right of the enemy
-                    else if (thisCorners[0].getX() > otherCorners[1].getX())
-                        canMove = true;
-                    else
-                        canMove = false;
-
-                }*/
+                canMove = actorAbove || actorBelow || actorLeftOf
+                        || actorRightOf;
             }
         }
         return canMove;

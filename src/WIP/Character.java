@@ -361,6 +361,12 @@ public class Character extends Actor {
     }
     //endregion
 
+
+    @Override
+    protected Faction getFaction() {
+        return Faction.PLAYER;
+    }
+
     //For Debugging purposes
     public String toString() {
         return "Character: " + getName() + ", " + this.level + ", " + this.experience;
