@@ -83,8 +83,10 @@ public class Inventory {
         String str = "";
         for (int i = 0; i < INVENTORYSIZE; i++) {
             for (int j = 0; j < INVENTORYSIZE; j++) {
-                String itemName = (getSlot(i, j).isOccupied()) ? (getSlot(i, j).getItem().getName()) : ("");
-                str += ("Item at " + i + "|" + j + ": " + itemName + "\n");
+                if (getSlot(i, j).isOccupied()) {
+                    String itemName = getSlot(i, j).getItem().getName();
+                    str += ("Item at " + i + "|" + j + ": " + itemName + "\n");
+                }
             }
         }
         return str;

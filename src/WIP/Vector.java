@@ -29,8 +29,8 @@ public class Vector {
     static {
         NORTH = new Vector(0, 1);
         SOUTH = new Vector(0, -1);
-        EAST = new Vector(-1, 0);
-        WEST = new Vector(1, 0);
+        EAST = new Vector(1, 0);
+        WEST = new Vector(-1, 0);
     }
 
     private int x, y;

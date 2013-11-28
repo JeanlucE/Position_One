@@ -1,9 +1,13 @@
 package WIP;
 
-import Components.*;
+import Components.ActorGraphicsComponent;
+import Components.InputComponent;
+import Components.PhysicsComponent;
+import Components.Resource;
 import Items.*;
 
 import java.lang.reflect.Field;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -46,12 +50,12 @@ public class Character extends Actor {
     private int moveSpeed = 3;
 
     //Constructor for final build
-    public Character(Game game, String name) {
-        this(game, name, 0, 0, 0);
+    public Character(String name) {
+        this(name, 0, 0, 0);
     }
 
     //Debug Purposes
-    public Character(Game game, String name, int level, int experience, int skillPoints) {
+    public Character(String name, int level, int experience, int skillPoints) {
         super(name,
                 new Transform(),
                 new ActorGraphicsComponent(new Resource[]{
@@ -152,17 +156,18 @@ public class Character extends Actor {
     private void attack() {
         float range = 1f;
         int damage = ((Weapon) getMainHand()).getBaseDamage();
-        Weapon_Ranged weapon = ((Weapon_Ranged) getMainHand());
+        /*Weapon_Ranged weapon = ((Weapon_Ranged) getMainHand());
         Arrow arrow = new Arrow("Arrow", 0, new ItemGraphicsComponent(Resource.projectile_arrow_01_wooden_FLOOR));
         weapon.use(this, arrow);
-        /*List<Actor> actors = Game.getInstance().getActors();
+        */
+        List<Actor> actors = Game.getInstance().getActors();
         for (Actor a : actors) {
             if (!a.equals(this)) {
                 if (enemyWithinRange(a, range))
                     a.damage(damage);
             }
         }
-        */
+
     }
 
     public int getMaxStamina() {

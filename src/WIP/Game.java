@@ -25,6 +25,7 @@ public class Game {
     private World currentWorld;
     private final Renderer renderer;
     private final GameLoop gameLoop;
+    //TODO relocate to static field in Actor
     private List<Actor> actors = new ArrayList<>();
     private List<Actor> deadActors = new ArrayList<>();
 
@@ -39,11 +40,11 @@ public class Game {
     private Game() {
         Weapon weapon = new Weapon_Melee("Sword", 0, 0, 10, 1.0f, new ItemGraphicsComponent());
         Weapon bow = new Weapon_Ranged("The OP Bow", 0, 0, 5, 10, 0.2f, new ItemGraphicsComponent());
-        player = new Character(this, "Ned Stark");
+        player = new Character("Ned Stark");
         player.getCollider().setParent(player.getTransform());
         player.getTransform().getPosition().setX(200);
         player.getTransform().getPosition().setY(200);
-        player.equip(bow);
+        player.equip(weapon);
 
         Enemy enemy = new Enemy("Chu Chu", 100, new Transform(new Vector(400, 400)),
                 new StaticGraphicsComponent(Resource.enemy_DOWN),
@@ -93,6 +94,10 @@ public class Game {
             actors.remove(a);
         }
         deadActors.clear();
+    }
+
+    private void removeDestroyedGameObjects() {
+        //TODO remove all references to gameobjects
     }
 
     public int getFrameRate() {

@@ -11,11 +11,12 @@ import Components.GraphicsComponent;
 public abstract class GameObject {
     private final Transform transform;
     private final GraphicsComponent graphic;
-
+    private boolean destroyed;
 
     protected GameObject(Transform transform, GraphicsComponent graphic) {
         this.transform = transform;
         this.graphic = graphic;
+        destroyed = false;
     }
 
     public abstract void update();
@@ -28,5 +29,13 @@ public abstract class GameObject {
 
     public GraphicsComponent getGraphic() {
         return graphic;
+    }
+
+    public void destroy() {
+        destroyed = true;
+    }
+
+    public boolean isDestroyed() {
+        return destroyed;
     }
 }
