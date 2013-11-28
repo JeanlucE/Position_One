@@ -88,7 +88,7 @@ public class InputComponent extends InputMap {
             @Override
             public void actionPerformed(ActionEvent e) {
                 XAxis = -1;
-                getGame().getPlayer().getTransform().setDirection(Vector.WEST);
+                getGame().getPlayer().getTransform().setDirection(Vector.EAST);
             }
         };
 
@@ -96,7 +96,7 @@ public class InputComponent extends InputMap {
             @Override
             public void actionPerformed(ActionEvent e) {
                 XAxis = +1;
-                getGame().getPlayer().getTransform().setDirection(Vector.EAST);
+                getGame().getPlayer().getTransform().setDirection(Vector.WEST);
             }
         };
 

@@ -3,6 +3,7 @@ package WIP;
 import Components.MouseInputComponent;
 import Components.PhysicsComponent;
 import Items.Item;
+import Items.Projectile;
 
 import javax.swing.*;
 import java.awt.*;
@@ -81,6 +82,7 @@ public class Renderer extends JPanel {
         drawPlayer();
 
         drawActors();
+        drawProjectiles();
         drawGUI();
 
         MouseInputComponent mouseListener = MouseInputComponent.getInstance();
@@ -97,12 +99,18 @@ public class Renderer extends JPanel {
         GameWindow.getInstance().setTitle("Frames:" + String.valueOf(Game.getInstance().getFrameRate()));
     }
 
+    private void drawProjectiles() {
+        Map<Projectile, Vector> projectiles = Camera.getInstance().projectilesToRender();
+        for (Projectile p : projectiles.keySet())
+            drawImage(p, projectiles.get(p));
+    }
+
     /*
     Draws the sprite of the given gameobject at a given position.
     This position must be a draw coordinate.
      */
     private void drawImage(GameObject go, Vector position) {
-        if (go instanceof Wall || go instanceof Floor || go instanceof Item) {
+        if (go instanceof GameObject) {
             BufferedImage bf = go.getGraphic().getImage();
             g2d.drawImage(bf, position.getX(), screenHeight - (bf.getHeight() + position.getY()), this);
         } else {

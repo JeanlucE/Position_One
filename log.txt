@@ -1,75 +1,28 @@
-Log created at: 22:55:51 27.11.2013
+Log created at: 11:33:14 28.11.2013
 
-[22:55:51.911] New Melee Weapon created: Sword
-[22:55:52.043] New Character created: Ned Stark
-[22:55:52.044] Player Ned Stark has equipped: Sword
-[22:55:52.059] New World created with size: 400
-[22:55:52.059] New Melee Weapon created: Swordish
-[22:55:52.060] New Game started
-[22:55:52.070] Renderer started
-[22:55:54.350] SPACE down
-[22:55:54.356] Damaged enemy Chu Chu for 10 damage.
-[22:55:54.357] Damaged enemy Chu Chu for 10 damage.
-[22:55:54.906] SPACE down
-[22:55:54.923] Damaged enemy Chu Chu for 10 damage.
-[22:55:54.924] Damaged enemy Chu Chu for 10 damage.
-[22:55:55.104] SPACE down
-[22:55:55.105] Damaged enemy Chu Chu for 10 damage.
-[22:55:55.105] Damaged enemy Chu Chu for 10 damage.
-[22:55:55.339] SPACE down
-[22:55:55.340] Damaged enemy Chu Chu for 10 damage.
-[22:55:55.341] Damaged enemy Chu Chu for 10 damage.
-[22:55:56.421] SPACE down
-[22:55:57.306] SPACE down
-[22:55:57.320] Damaged enemy Chu Chu for 10 damage.
-[22:55:58.269] SPACE down
-[22:55:58.278] Damaged enemy Chu Chu for 10 damage.
-[22:55:58.708] SPACE down
-[22:55:58.715] Damaged enemy Chu Chu for 10 damage.
-[22:55:59.101] SPACE down
-[22:55:59.112] Damaged enemy Chu Chu for 10 damage.
-[22:55:59.624] SPACE down
-[22:55:59.630] Damaged enemy Chu Chu for 10 damage.
-[22:56:00.185] SPACE down
-[22:56:00.188] Damaged enemy Chu Chu for 10 damage.
-[22:56:00.189] Actor Chu Chu is dead.
-[22:56:01.833] SPACE down
-[22:56:01.835] Damaged enemy Chu Chu for 10 damage.
-[22:56:02.499] SPACE down
-[22:56:02.503] Damaged enemy Chu Chu for 10 damage.
-[22:56:03.081] SPACE down
-[22:56:03.087] Damaged enemy Chu Chu for 10 damage.
-[22:56:03.469] SPACE down
-[22:56:03.478] Damaged enemy Chu Chu for 10 damage.
-[22:56:03.844] SPACE down
-[22:56:03.858] Damaged enemy Chu Chu for 10 damage.
-[22:56:04.597] SPACE down
-[22:56:04.607] Damaged enemy Chu Chu for 10 damage.
-[22:56:04.608] Actor Chu Chu is dead.
-[22:56:28.147] Q down
-[22:56:28.159] Item at 0|0: Swordish
-Item at 0|1: 
-Item at 0|2: 
-Item at 0|3: 
-Item at 0|4: 
-Item at 1|0: 
-Item at 1|1: 
-Item at 1|2: 
-Item at 1|3: 
-Item at 1|4: 
-Item at 2|0: 
-Item at 2|1: 
-Item at 2|2: 
-Item at 2|3: 
-Item at 2|4: 
-Item at 3|0: 
-Item at 3|1: 
-Item at 3|2: 
-Item at 3|3: 
-Item at 3|4: 
-Item at 4|0: 
-Item at 4|1: 
-Item at 4|2: 
-Item at 4|3: 
-Item at 4|4: 
-
+[11:33:15.253] New Melee Weapon created: Sword
+[11:33:15.255] New Ranged Weapon created: The OP Bow
+[11:33:15.367] New Character created: Ned Stark
+[11:33:15.368] Player Ned Stark has equipped: The OP Bow
+[11:33:15.380] New World created with size: 400
+[11:33:15.381] New Melee Weapon created: Swordish
+[11:33:15.382] New Game started
+[11:33:15.393] Renderer started
+[11:33:16.292] SPACE down
+[11:33:16.297] New Projectile at: 200|248
+[11:33:16.979] SPACE down
+[11:33:16.981] New Projectile at: 236|323
+[11:33:17.592] SPACE down
+[11:33:17.603] New Projectile at: 281|323
+[11:33:18.306] SPACE down
+[11:33:18.317] New Projectile at: 281|293
+[11:33:19.891] SPACE down
+[11:33:19.893] New Projectile at: 266|296
+[11:33:21.058] SPACE down
+[11:33:21.059] New Projectile at: 185|359
+[11:33:21.826] SPACE down
+[11:33:21.836] New Projectile at: 272|359
+[11:33:22.522] SPACE down
+[11:33:22.532] New Projectile at: 275|338
+[11:33:23.047] SPACE down
+[11:33:23.049] New Projectile at: 248|338

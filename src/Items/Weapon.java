@@ -1,6 +1,5 @@
 package Items;
 
-import Components.GraphicsComponent;
 import Components.ItemGraphicsComponent;
 import WIP.DebugLog;
 
@@ -71,6 +70,11 @@ public abstract class Weapon extends Equipment {
     public void setUseTime(float useTime) {
         this.useTime = useTime;
         DebugLog.write("Set Weapon " + this.getName() + " useTime to: " + useTime);
+    }
+
+    @Override
+    public boolean isStackable() {
+        return false;
     }
 
     public String toString() {

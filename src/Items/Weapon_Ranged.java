@@ -1,7 +1,7 @@
 package Items;
 
-import Components.GraphicsComponent;
 import Components.ItemGraphicsComponent;
+import WIP.Actor;
 import WIP.DebugLog;
 
 /**
@@ -27,6 +27,11 @@ public class Weapon_Ranged extends Weapon {
 
     public void use() {
         //TODO implement this
+    }
+
+    public void use(Actor origin, Arrow arrow) {
+        DebugLog.write("New Projectile at: " + origin.getTransform().getPosition());
+        new Projectile(origin.getTransform(), arrow.getGraphic(), 5);
     }
 
     //TODO RangedType

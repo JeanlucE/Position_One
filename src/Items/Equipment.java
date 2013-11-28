@@ -11,9 +11,9 @@ import WIP.Vector;
  * Time: 19:46
  */
 public abstract class Equipment extends Item {
-    private int level;
-    private int skillRequirement;
-    private final EquipmentClass equipmentClass;
+    protected int level;
+    protected int skillRequirement;
+    protected final EquipmentClass equipmentClass;
 
     protected Equipment(String name, int level, int skillRequirement, EquipmentClass type, ItemGraphicsComponent g) {
         super(name, new Vector(), g);

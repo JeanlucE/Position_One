@@ -6,7 +6,7 @@ package WIP;
  * Date: 09.11.13
  * Time: 21:34
  */
-public class Transform {
+public class Transform implements Cloneable {
     //TODO transform should point to the position in the middle of the Gameobject
     //vectors?
     private Vector position;
@@ -19,6 +19,11 @@ public class Transform {
     public Transform(Vector position) {
         this.position = position;
         direction = Vector.SOUTH;
+    }
+
+    public Transform(Vector position, Vector direction) {
+        this.position = position;
+        this.direction = direction;
     }
 
     public Vector getPosition() {
@@ -35,5 +40,10 @@ public class Transform {
 
     public void setDirection(Vector direction) {
         this.direction = direction;
+    }
+
+    public Transform clone() {
+        return new Transform(new Vector(position.getX(), position.getY()), new Vector(direction.getX(),
+                direction.getY()));
     }
 }

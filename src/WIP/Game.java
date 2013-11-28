@@ -1,8 +1,7 @@
 package WIP;
 
 import Components.*;
-import Items.Weapon;
-import Items.Weapon_Melee;
+import Items.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -39,11 +38,12 @@ public class Game {
 
     private Game() {
         Weapon weapon = new Weapon_Melee("Sword", 0, 0, 10, 1.0f, new ItemGraphicsComponent());
+        Weapon bow = new Weapon_Ranged("The OP Bow", 0, 0, 5, 10, 0.2f, new ItemGraphicsComponent());
         player = new Character(this, "Ned Stark");
         player.getCollider().setParent(player.getTransform());
         player.getTransform().getPosition().setX(200);
         player.getTransform().getPosition().setY(200);
-        player.equip(weapon);
+        player.equip(bow);
 
         Enemy enemy = new Enemy("Chu Chu", 100, new Transform(new Vector(400, 400)),
                 new StaticGraphicsComponent(Resource.enemy_DOWN),
@@ -58,6 +58,8 @@ public class Game {
         currentWorld = new World();
         ((Floor) currentWorld.getReal(6, 7)).dropItem(new Weapon_Melee("Swordish", 0, 0, 1, 1.0f,
                 new ItemGraphicsComponent(Resource.weapon_melee_01_FLOOR)));
+        ((Floor) currentWorld.getReal(7, 7)).dropItem(new Arrow("Arrow", 0,
+                new ItemGraphicsComponent(Resource.projectile_arrow_01_wooden_FLOOR)));
         addActor(player);
         addActor(enemy);
         addActor(enemy2);
@@ -121,6 +123,10 @@ public class Game {
         public void actionPerformed(ActionEvent e) {
             for (Actor a : actors) {
                 a.update();
+            }
+
+            for (Projectile p : Projectile.getProjectiles()) {
+                p.update();
             }
 
             removeDeadActors();

@@ -1,6 +1,5 @@
 package Items;
 
-import Components.GraphicsComponent;
 import Components.ItemGraphicsComponent;
 import WIP.DebugLog;
 
@@ -39,6 +38,11 @@ public class Armour extends Equipment {
 
     @Override
     public boolean isCollidable() {
+        return false;
+    }
+
+    @Override
+    public boolean isStackable() {
         return false;
     }
 

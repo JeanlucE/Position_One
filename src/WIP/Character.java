@@ -1,13 +1,9 @@
 package WIP;
 
-import Components.ActorGraphicsComponent;
-import Components.InputComponent;
-import Components.PhysicsComponent;
-import Components.Resource;
+import Components.*;
 import Items.*;
 
 import java.lang.reflect.Field;
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -156,13 +152,17 @@ public class Character extends Actor {
     private void attack() {
         float range = 1f;
         int damage = ((Weapon) getMainHand()).getBaseDamage();
-        List<Actor> actors = Game.getInstance().getActors();
+        Weapon_Ranged weapon = ((Weapon_Ranged) getMainHand());
+        Arrow arrow = new Arrow("Arrow", 0, new ItemGraphicsComponent(Resource.projectile_arrow_01_wooden_FLOOR));
+        weapon.use(this, arrow);
+        /*List<Actor> actors = Game.getInstance().getActors();
         for (Actor a : actors) {
             if (!a.equals(this)) {
                 if (enemyWithinRange(a, range))
                     a.damage(damage);
             }
         }
+        */
     }
 
     public int getMaxStamina() {
@@ -302,7 +302,7 @@ public class Character extends Actor {
     //takes an equipmentslot that should be unequipped and when in the inventory the item should be put
     public void unequip(EquipmentSlot equipmentSlot, Inventory.InventorySlot inventorySlot) {
         if (!inventorySlot.isOccupied() && equipmentSlot.isOccupied()) {
-            inventorySlot.setItem(equipmentSlot.getEquipment());
+            inventorySlot.addItem(equipmentSlot.getEquipment());
             equipmentSlot.setEquipment(null);
         } else {
             System.out.println("Debug: Method Character.unequip called for an occupied inventory slot or an " +

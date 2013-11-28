@@ -13,7 +13,7 @@ import WIP.Vector;
  * Time: 16:09
  */
 public abstract class Item extends GameObject {
-    private String name;
+    protected String name;
 
     protected Item(String name, Vector position, ItemGraphicsComponent g) {
         super(new Transform(position), g);
@@ -21,6 +21,7 @@ public abstract class Item extends GameObject {
     }
 
     public void update() {
+        //Leave empty
     }
 
     public String getName() {
@@ -40,4 +41,6 @@ public abstract class Item extends GameObject {
     public boolean isCollidable() {
         return false;
     }
+
+    public abstract boolean isStackable();
 }

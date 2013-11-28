@@ -29,7 +29,7 @@ public class Inventory {
 
     public void add(Item item) {
         if (item != null && !isFull()) {
-            getFirstEmpty().setItem(item);
+            getFirstEmpty().addItem(item);
             DebugLog.write(this);
         }
     }
@@ -49,11 +49,11 @@ public class Inventory {
         if (getSlot(toX, toY).isOccupied()) {
 
             Item item = getSlot(toX, toY).getItem();
-            getSlot(toX, toY).setItem(getSlot(fromX, fromY).getItem());
-            getSlot(fromX, fromY).setItem(item);
+            getSlot(toX, toY).addItem(getSlot(fromX, fromY).getItem());
+            getSlot(fromX, fromY).addItem(item);
 
         } else {
-            getSlot(toX, toY).setItem(getSlot(fromX, fromY).getItem());
+            getSlot(toX, toY).addItem(getSlot(fromX, fromY).getItem());
             getSlot(fromX, fromY).empty();
         }
     }
@@ -95,11 +95,19 @@ public class Inventory {
 
         //Should only be called when isOccupied returns true
         public Item getItem() {
-            return item;
+            if (isOccupied()) {
+                return item;
+            }
+            return null;
         }
 
-        public void setItem(Item item) {
-            this.item = item;
+        public void addItem(Item item) {
+            if (!isOccupied()) {
+                this.item = item;
+            } else {
+                if (item instanceof Arrow && this.item instanceof Arrow && ((Arrow) item).equals((Arrow) this.item))
+                    ((Arrow) this.item).addToStack(((Arrow) item).getStack());
+            }
         }
 
         public boolean isOccupied() {
@@ -107,7 +115,7 @@ public class Inventory {
         }
 
         public void empty() {
-            setItem(null);
+            addItem(null);
         }
     }
 }

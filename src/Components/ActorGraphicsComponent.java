@@ -28,9 +28,9 @@ public class ActorGraphicsComponent extends GraphicsComponent {
             return image[0];
         else if (parent.getTransform().getDirection().equals(Vector.SOUTH))
             return image[1];
-        else if (parent.getTransform().getDirection().equals(Vector.WEST))
-            return image[2];
         else if (parent.getTransform().getDirection().equals(Vector.EAST))
+            return image[2];
+        else if (parent.getTransform().getDirection().equals(Vector.WEST))
             return image[3];
         else
             return image[0];
