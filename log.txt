@@ -1,44 +1,25 @@
-Log created at: 14:46:05 28.11.2013
+Log created at: 00:09:42 29.11.2013
 
-[14:46:05.586] New Melee Weapon created: Sword
-[14:46:05.591] New Ranged Weapon created: The OP Bow
-[14:46:05.708] New Character created: Ned Stark
-[14:46:05.709] Player Ned Stark has equipped: Sword
-[14:46:05.720] New World created with size: 400
-[14:46:05.721] New Melee Weapon created: Swordish
-[14:46:05.722] New Game started
-[14:46:05.733] Renderer started
-[14:46:06.552] SPACE down
-[14:46:08.039] SPACE down
-[14:46:08.928] SPACE down
-[14:46:08.938] Damaged enemy Chu Chu for 10 damage.
-[14:46:08.939] Damaged enemy Chu Chu for 10 damage.
-[14:46:09.447] SPACE down
-[14:46:09.456] Damaged enemy Chu Chu for 10 damage.
-[14:46:09.457] Damaged enemy Chu Chu for 10 damage.
-[14:46:09.614] SPACE down
-[14:46:09.617] Damaged enemy Chu Chu for 10 damage.
-[14:46:09.617] Damaged enemy Chu Chu for 10 damage.
-[14:46:09.772] SPACE down
-[14:46:09.777] Damaged enemy Chu Chu for 10 damage.
-[14:46:09.778] Damaged enemy Chu Chu for 10 damage.
-[14:46:09.935] SPACE down
-[14:46:09.940] Damaged enemy Chu Chu for 10 damage.
-[14:46:09.941] Damaged enemy Chu Chu for 10 damage.
-[14:46:10.084] SPACE down
-[14:46:10.093] Damaged enemy Chu Chu for 10 damage.
-[14:46:10.093] Damaged enemy Chu Chu for 10 damage.
-[14:46:10.217] SPACE down
-[14:46:10.224] Damaged enemy Chu Chu for 10 damage.
-[14:46:10.224] Damaged enemy Chu Chu for 10 damage.
-[14:46:10.379] SPACE down
-[14:46:10.380] Damaged enemy Chu Chu for 10 damage.
-[14:46:10.381] Damaged enemy Chu Chu for 10 damage.
-[14:46:10.774] SPACE down
-[14:46:10.779] Damaged enemy Chu Chu for 10 damage.
-[14:46:10.779] Damaged enemy Chu Chu for 10 damage.
-[14:46:11.085] SPACE down
-[14:46:11.096] Damaged enemy Chu Chu for 10 damage.
-[14:46:11.097] Actor Chu Chu is dead.
-[14:46:11.097] Damaged enemy Chu Chu for 10 damage.
-[14:46:11.097] Actor Chu Chu is dead.
+[00:09:42.587] New Melee Weapon created: Sword
+[00:09:42.593] New Ranged Weapon created: The OP Bow
+[00:09:42.730] New Character created: Ned Stark
+[00:09:42.731] Player Ned Stark has equipped: Sword
+[00:09:42.750] New World created with size: 400
+[00:09:42.751] New Melee Weapon created: Swordish
+[00:09:42.752] New Game started
+[00:09:42.764] Renderer started
+[00:09:46.079] SPACE down
+[00:09:46.082] Damaged enemy Chu Chu for 10 damage.
+[00:09:46.083] Damaged enemy Chu Chu for 10 damage.
+[00:09:46.537] SPACE down
+[00:09:46.538] Damaged enemy Chu Chu for 10 damage.
+[00:09:46.538] Damaged enemy Chu Chu for 10 damage.
+[00:09:46.736] SPACE down
+[00:09:46.743] Damaged enemy Chu Chu for 10 damage.
+[00:09:46.744] Damaged enemy Chu Chu for 10 damage.
+[00:09:46.869] SPACE down
+[00:09:46.871] Damaged enemy Chu Chu for 10 damage.
+[00:09:46.871] Damaged enemy Chu Chu for 10 damage.
+[00:09:47.016] SPACE down
+[00:09:47.019] Damaged enemy Chu Chu for 10 damage.
+[00:09:47.020] Damaged enemy Chu Chu for 10 damage.

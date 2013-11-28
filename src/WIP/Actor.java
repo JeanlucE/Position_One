@@ -3,6 +3,9 @@ package WIP;
 import Components.GraphicsComponent;
 import Components.PhysicsComponent;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Jean-Luc
@@ -13,6 +16,7 @@ import Components.PhysicsComponent;
  */
 public abstract class Actor extends GameObject {
 
+    private static List<Actor> actors = new ArrayList<>(10);
     private PhysicsComponent physicsComponent;
     private String name;
     protected int maxHealth, currentHealth;
@@ -23,6 +27,19 @@ public abstract class Actor extends GameObject {
         super(transform, graphic);
         physicsComponent = collider;
         this.name = name;
+        actors.add(this);
+    }
+
+
+    public static Actor[] getActors() {
+        return actors.toArray(new Actor[actors.size()]);
+    }
+
+    public static void removeDeadActors() {
+        for (int i = 0; i < actors.size(); i++) {
+            if (actors.get(i).isDestroyed())
+                actors.remove(i);
+        }
     }
 
     public abstract void update();
@@ -117,7 +134,8 @@ public abstract class Actor extends GameObject {
     }
 
     private void death() {
-        Game.getInstance().removeActor(this);
+        //Game.getInstance().removeActor(this);
+        this.destroy();
         DebugLog.write("Actor " + name + " is dead.");
     }
 

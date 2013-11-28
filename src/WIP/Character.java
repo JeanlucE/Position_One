@@ -7,7 +7,6 @@ import Components.Resource;
 import Items.*;
 
 import java.lang.reflect.Field;
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -160,7 +159,7 @@ public class Character extends Actor {
         Arrow arrow = new Arrow("Arrow", 0, new ItemGraphicsComponent(Resource.projectile_arrow_01_wooden_FLOOR));
         weapon.use(this, arrow);
         */
-        List<Actor> actors = Game.getInstance().getActors();
+        Actor[] actors = Game.getInstance().getActors();
         for (Actor a : actors) {
             if (!a.equals(this)) {
                 if (enemyWithinRange(a, range))

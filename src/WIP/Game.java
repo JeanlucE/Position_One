@@ -6,8 +6,6 @@ import Items.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,13 +19,9 @@ import java.util.List;
 public class Game {
     private static Game instance = null;
     private final Character player;
-    //private final Enemy enemy;
     private World currentWorld;
     private final Renderer renderer;
     private final GameLoop gameLoop;
-    //TODO relocate to static field in Actor
-    private List<Actor> actors = new ArrayList<>();
-    private List<Actor> deadActors = new ArrayList<>();
 
     //Singleton Design Pattern
     public static Game getInstance() {
@@ -61,9 +55,6 @@ public class Game {
                 new ItemGraphicsComponent(Resource.weapon_melee_01_FLOOR)));
         ((Floor) currentWorld.getReal(7, 7)).dropItem(new Arrow("Arrow", 0,
                 new ItemGraphicsComponent(Resource.projectile_arrow_01_wooden_FLOOR)));
-        addActor(player);
-        addActor(enemy);
-        addActor(enemy2);
 
         DebugLog.write("New Game started");
 
@@ -77,27 +68,13 @@ public class Game {
         refresh.start();
     }
 
-    public List<Actor> getActors() {
-        return actors;
-    }
-
-    public void addActor(Actor actor) {
-        actors.add(actor);
-    }
-
-    public void removeActor(Actor actor) {
-        deadActors.add(actor);
-    }
-
-    private void removeDeadActors() {
-        for (Actor a : deadActors) {
-            actors.remove(a);
-        }
-        deadActors.clear();
+    public Actor[] getActors() {
+        return Actor.getActors();
     }
 
     private void removeDestroyedGameObjects() {
-        //TODO remove all references to gameobjects
+        Projectile.removeDeadProjectiles();
+        Actor.removeDeadActors();
     }
 
     public int getFrameRate() {
@@ -126,7 +103,7 @@ public class Game {
 
 
         public void actionPerformed(ActionEvent e) {
-            for (Actor a : actors) {
+            for (Actor a : Actor.getActors()) {
                 a.update();
             }
 
@@ -134,11 +111,10 @@ public class Game {
                 p.update();
             }
 
-            removeDeadActors();
+            removeDestroyedGameObjects();
 
             getRenderer().repaint();
 
-            //TODO remove dead actors
             //Functionality to count frames and show frame rate circa every second
             frames++;
             timeBetween = System.currentTimeMillis();

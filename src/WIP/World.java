@@ -6,7 +6,6 @@ import Components.Resource;
 import Components.StaticGraphicsComponent;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -126,9 +125,9 @@ public class World {
      */
     boolean canMoveTo(Actor actor, Vector nextPosition) {
         boolean canMove = true;
-        List<Actor> actors = Game.getInstance().getActors();
-        for (int i = 0; i < actors.size() && canMove; i++) {
-            Actor otherActor = actors.get(i);
+        Actor[] actors = Actor.getActors();
+        for (int i = 0; i < actors.length && canMove; i++) {
+            Actor otherActor = actors[i];
             if (actor.getFaction().equals(otherActor.getFaction()))
                 canMove = true;
             else if (actor != otherActor) {

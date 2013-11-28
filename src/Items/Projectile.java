@@ -21,7 +21,6 @@ public class Projectile extends GameObject {
     private Vector origin;
     private int range;
 
-    //TODO debug direction of arrow movement
     public Projectile(Transform origin, GraphicsComponent graphic, int speed, int range) {
         super(origin.clone(), graphic);
         this.origin = origin.clone().getPosition();
@@ -36,7 +35,7 @@ public class Projectile extends GameObject {
         return projectiles.toArray(new Projectile[projectiles.size()]);
     }
 
-    public void removeDeadProjectiles() {
+    public static void removeDeadProjectiles() {
         for (int i = 0; i < projectiles.size(); i++)
             if (projectiles.get(i).isDestroyed()) {
                 projectiles.remove(i);
@@ -51,7 +50,6 @@ public class Projectile extends GameObject {
             this.destroy();
             DebugLog.write("Projectile destroyed");
         }
-        removeDeadProjectiles();
     }
 
     @Override
