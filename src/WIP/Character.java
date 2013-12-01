@@ -1,9 +1,6 @@
 package WIP;
 
-import Components.ActorGraphicsComponent;
-import Components.InputComponent;
-import Components.PhysicsComponent;
-import Components.Resource;
+import Components.*;
 import Items.*;
 
 import java.lang.reflect.Field;
@@ -39,11 +36,7 @@ public class Character extends Actor {
 
     //region Player Items
     private final Inventory inventory;
-    private EquipmentSlot helmetSlot;
-    private EquipmentSlot bodySlot;
-    private EquipmentSlot legsSlot;
-    private EquipmentSlot mainHandSlot;
-    private EquipmentSlot offHandSlot;
+    private EquipmentManager equipment;
     //endregion
 
     private int moveSpeed = 3;
@@ -109,7 +102,7 @@ public class Character extends Actor {
     }
     //endregion
 
-    static int getXPOfLevel(int level) {
+    public static int getXPOfLevel(int level) {
         return 20 * level * level;
     }
 
@@ -145,30 +138,34 @@ public class Character extends Actor {
     Problems could arise here with Two-Handed and off-hand weapons
      */
     private void instantiateEquipmentSlots() {
-        helmetSlot = new EquipmentSlot(Armour.class);
-        bodySlot = new EquipmentSlot(Armour.class);
-        legsSlot = new EquipmentSlot(Armour.class);
-        mainHandSlot = new EquipmentSlot(Weapon.class);
-        offHandSlot = new EquipmentSlot(Armour.class);
+        equipment = new EquipmentManager(this);
     }
 
     private void attack() {
+        Weapon weapon = equipment.getMainHand();
         float range = 1f;
-        int damage = ((Weapon) getMainHand()).getBaseDamage();
-        /*Weapon_Ranged weapon = ((Weapon_Ranged) getMainHand());
-        Arrow arrow = new Arrow("Arrow", 0, new ItemGraphicsComponent(Resource.projectile_arrow_01_wooden_FLOOR));
-        weapon.use(this, arrow);
-        */
-        Actor[] actors = Game.getInstance().getActors();
-        for (Actor a : actors) {
-            if (!a.equals(this)) {
-                if (enemyWithinRange(a, range))
-                    a.damage(damage);
+        int damage = weapon.getBaseDamage();
+        if (weapon instanceof Weapon_Ranged) {
+            Weapon_Ranged bow = (Weapon_Ranged) weapon;
+            Arrow arrow = new Arrow("Arrow", 0, new ItemGraphicsComponent(Resource.projectile_arrow_01_wooden_FLOOR));
+            bow.use(this, arrow);
+            return;
+        }
+
+        if (weapon instanceof Weapon_Melee) {
+            Actor[] actors = Game.getInstance().getActors();
+            for (Actor a : actors) {
+                if (!a.equals(this)) {
+                    if (enemyWithinRange(a, range))
+                        a.damage(damage);
+                }
             }
+            return;
         }
 
     }
 
+    //region Player Stats
     public int getMaxStamina() {
         return maxStamina;
     }
@@ -261,110 +258,33 @@ public class Character extends Actor {
     Legs, Shield) and then assigns it to the appropriate equipment slot.
      */
     public void equip(Equipment equipment) {
-        //TODO if isOccupied throw the current previous equipment into the inventory
-        if (canEquip(equipment)) {
-            if (Weapon.class.isAssignableFrom(equipment.getClass())) {
-                if (canEquip(equipment))
-                    mainHandSlot.setEquipment(equipment);
-            } else {
-                if (((Armour) equipment).getArmourType().equals(Armour.ArmourType.SHIELD)) {
-                    offHandSlot.setEquipment(equipment);
-                } else if (((Armour) equipment).getArmourType().equals(Armour.ArmourType.HELMET)) {
-                    helmetSlot.setEquipment(equipment);
-                } else if (((Armour) equipment).getArmourType().equals(Armour.ArmourType.BODY)) {
-                    bodySlot.setEquipment(equipment);
-                } else if (((Armour) equipment).getArmourType().equals(Armour.ArmourType.LEGS)) {
-                    legsSlot.setEquipment(equipment);
-                }
-            }
-            DebugLog.write("Player " + getName() + " has equipped: " + equipment.getName());
-        } else {
-            DebugLog.write("Player " + getName() + " cannot equip: " + equipment.getName());
-        }
-
+        this.equipment.equip(equipment);
     }
 
-    boolean canEquip(Equipment equipment) {
-        //Checks if Player is high enough level
-        boolean metLevelReq = level >= equipment.getLevel();
-
-        //Checks if Player has a high enough skill in either strength, intelligence or dexterity
-        Equipment.EquipmentClass equipmentClass = equipment.getType();
-        boolean metSkillReq;
-        if (equipmentClass.equals(Equipment.EquipmentClass.MELEE)) {
-            metSkillReq = STRENGTH.getLevel() >= equipment.getSkillRequirement();
-        } else if (equipmentClass.equals(Equipment.EquipmentClass.MAGIC)) {
-            metSkillReq = INTELLIGENCE.getLevel() >= equipment.getSkillRequirement();
-        } else {
-            metSkillReq = DEXTERITY.getLevel() >= equipment.getSkillRequirement();
-        }
-
-
-        return metLevelReq && metSkillReq;
+    public Armour getHelmet() {
+        return equipment.getHelmet();
     }
 
-    //takes an equipmentslot that should be unequipped and when in the inventory the item should be put
-    public void unequip(EquipmentSlot equipmentSlot, Inventory.InventorySlot inventorySlot) {
-        if (!inventorySlot.isOccupied() && equipmentSlot.isOccupied()) {
-            inventorySlot.addItem(equipmentSlot.getEquipment());
-            equipmentSlot.setEquipment(null);
-        } else {
-            System.out.println("Debug: Method Character.unequip called for an occupied inventory slot or an " +
-                    "unoccupied equipment slot.");
-        }
+    public Armour getBody() {
+        return equipment.getBody();
     }
 
-    public EquipmentSlot getHelmetSlot() {
-        return helmetSlot;
+    public Armour getLegs() {
+        return equipment.getLegs();
     }
 
-    public EquipmentSlot getOffHandSlot() {
-        return offHandSlot;
+    public Weapon getMainHand() {
+        return equipment.getMainHand();
     }
 
-    public EquipmentSlot getMainHandSlot() {
-        return mainHandSlot;
-    }
-
-    public EquipmentSlot getLegsSlot() {
-        return legsSlot;
-    }
-
-    public EquipmentSlot getBodySlot() {
-        return bodySlot;
-    }
-
-    public Equipment getHelmet() {
-        return helmetSlot.getEquipment();
-    }
-
-    public Equipment getBody() {
-        return bodySlot.getEquipment();
-    }
-
-    public Equipment getLegs() {
-        return legsSlot.getEquipment();
-    }
-
-    public Equipment getMainHand() {
-        return mainHandSlot.getEquipment();
-    }
-
-    public Equipment getOffHand() {
-        return offHandSlot.getEquipment();
+    public Armour getOffHand() {
+        return equipment.getOffHand();
     }
 
     public String printEquipment() {
-        String equipment = "";
-        equipment += "Helmet: " + helmetSlot.toString() + "\n";
-        equipment += "Body: " + bodySlot.toString() + "\n";
-        equipment += "Legs: " + legsSlot.toString() + "\n";
-        equipment += "Main Hand: " + mainHandSlot.toString() + "\n";
-        equipment += "Offhand: " + offHandSlot.toString();
-        return equipment;
+        return equipment.toString();
     }
     //endregion
-
 
     @Override
     protected Faction getFaction() {

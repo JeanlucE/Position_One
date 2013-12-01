@@ -9,20 +9,17 @@ package Items;
  * This class acts an a slot of equipment for the Character. It can hold equipment like a piece of armour or a
  * weapon. Once it is instantiated the type of equipment it can hold cannot be changed.
  */
-public class EquipmentSlot {
-    private Equipment equipment;
-    private final Class equipmentType;
 
-    public EquipmentSlot(Class equipmentType) {
-        this.equipmentType = equipmentType;
-    }
+//TODO make generic
+public class EquipmentSlot<T extends Equipment> {
+    private T equipment;
 
     //Should only be called when isOccupied returns true
-    public Equipment getEquipment() {
+    public T getEquipment() {
         return equipment;
     }
 
-    public void setEquipment(Equipment equipment) {
+    public void equip(T equipment) {
         this.equipment = equipment;
     }
 
