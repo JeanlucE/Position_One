@@ -32,6 +32,7 @@ public class Game {
     }
 
     private Game() {
+        DebugLog.write("New Game started");
         Weapon weapon = new Weapon_Melee("Sword", 0, 0, 10, 1.0f, new ItemGraphicsComponent());
         Weapon bow = new Weapon_Ranged("The OP Bow", 0, 0, 5, 10, 0.2f, new ItemGraphicsComponent());
         player = new Character("Ned Stark");
@@ -56,10 +57,10 @@ public class Game {
         ((Floor) currentWorld.getReal(7, 7)).dropItem(new Arrow("Arrow", 0,
                 new ItemGraphicsComponent(Resource.projectile_arrow_01_wooden_FLOOR)));
 
-        DebugLog.write("New Game started");
+
 
         renderer = Renderer.getInstance();
-        DebugLog.write("Renderer started");
+
         renderer.setInputMap(JComponent.WHEN_FOCUSED, InputComponent.getInstance());
         renderer.setActionMap(InputComponent.getInstance().getActionMap());
 

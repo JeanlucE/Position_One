@@ -63,6 +63,7 @@ public class Renderer extends JPanel {
     }
 
     private Renderer() {
+        DebugLog.write("Renderer started");
         setPreferredSize(new Dimension(screenWidth, screenHeight));
         addMouseListener(MouseInputComponent.getInstance());
         addMouseMotionListener(MouseInputComponent.getInstance());
