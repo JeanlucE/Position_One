@@ -13,6 +13,7 @@ import java.util.Random;
  */
 public class Enemy extends NPC {
 
+    //TODO make this take an ActorGraphicsComponent
     public Enemy(String name, int maxHealth, Transform t, GraphicsComponent g, PhysicsComponent p) {
         super(name, t, g, p);
         setMaxHealth(maxHealth);

@@ -50,12 +50,7 @@ public class Character extends Actor {
     public Character(String name, int level, int experience, int skillPoints) {
         super(name,
                 new Transform(),
-                new ActorGraphicsComponent(new Resource[]{
-                        Resource.player_UP,
-                        Resource.player_DOWN,
-                        Resource.player_LEFT,
-                        Resource.player_RIGHT
-                }),
+                new ActorGraphicsComponent(DynamicResource.PLAYER),
                 new PhysicsComponent(30, 30));
         ((ActorGraphicsComponent) this.getGraphic()).setParent(this);
 
@@ -146,8 +141,14 @@ public class Character extends Actor {
         float range = 1f;
         int damage = weapon.getBaseDamage();
         if (weapon instanceof Weapon_Ranged) {
+
             Weapon_Ranged bow = (Weapon_Ranged) weapon;
-            Arrow arrow = new Arrow("Arrow", 0, new ItemGraphicsComponent(Resource.projectile_arrow_01_wooden_FLOOR));
+
+            Arrow arrow = new Arrow("Arrow", 0,
+                    new ProjectileGraphicsComponent(getTransform().getDirection(),
+                            DynamicResource.WOODENARROW),
+                    new PhysicsComponent(10, 25));
+
             bow.use(this, arrow);
             return;
         }

@@ -14,26 +14,23 @@ import java.awt.image.BufferedImage;
 public class ActorGraphicsComponent extends GraphicsComponent {
 
     private GameObject parent;
+    private DynamicResource images;
 
-    public ActorGraphicsComponent(Resource[] resource) {
-        //resource.length must be 4
-        image = new BufferedImage[resource.length];
-        for (int i = 0; i < resource.length; i++) {
-            image[i] = resource[i].getImage();
-        }
+    public ActorGraphicsComponent(DynamicResource dynamicResource) {
+        images = dynamicResource;
     }
 
     public BufferedImage getImage() {
         if (parent.getTransform().getDirection().equals(Vector.NORTH))
-            return image[0];
+            return images.getNorth();
         else if (parent.getTransform().getDirection().equals(Vector.SOUTH))
-            return image[1];
+            return images.getSouth();
         else if (parent.getTransform().getDirection().equals(Vector.WEST))
-            return image[2];
+            return images.getWest();
         else if (parent.getTransform().getDirection().equals(Vector.EAST))
-            return image[3];
+            return images.getEast();
         else
-            return image[0];
+            return images.getNorth();
     }
 
     //This must be called right after the actors graphic component is created

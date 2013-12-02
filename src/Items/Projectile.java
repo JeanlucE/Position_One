@@ -1,10 +1,8 @@
 package Items;
 
 import Components.GraphicsComponent;
-import WIP.DebugLog;
-import WIP.GameObject;
-import WIP.Transform;
-import WIP.Vector;
+import Components.PhysicsComponent;
+import WIP.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,14 +18,32 @@ public class Projectile extends GameObject {
     private Vector flyVector;
     private Vector origin;
     private int range;
+    private int damage;
+    private PhysicsComponent phys;
 
-    public Projectile(Transform origin, GraphicsComponent graphic, int speed, int range) {
+    public Projectile(Transform origin, GraphicsComponent graphic, PhysicsComponent phys, int speed, int range,
+                      int damage) {
         super(origin.clone(), graphic);
-        this.origin = origin.clone().getPosition();
+
+        //Spawn position
+        this.origin = origin.getPosition();
+
+        //Set Collider
+        this.phys = phys;
+
+        //Set flying direction and speed
         flyVector = getTransform().getDirection();
         flyVector.setX(flyVector.getX() * speed);
         flyVector.setY(flyVector.getY() * speed);
-        this.range = range;
+
+        //Set how far the projectile flies
+        this.range = range * Renderer.TILESIZE;
+
+        //TODO shift origin position to the middle of the player
+
+        //Set damage
+        this.damage = damage;
+
         projectiles.add(this);
     }
 
@@ -55,5 +71,13 @@ public class Projectile extends GameObject {
     @Override
     public boolean isCollidable() {
         return true;
+    }
+
+    public PhysicsComponent getCollider() {
+        return phys;
+    }
+
+    public int getDamage() {
+        return damage;
     }
 }

@@ -16,7 +16,6 @@ public class ItemGraphicsComponent extends GraphicsComponent {
 
     public ItemGraphicsComponent(Resource resource) {
         image = new BufferedImage[2];
-        System.out.println();
         image[0] = resource.getImage();
     }
 
@@ -27,6 +26,6 @@ public class ItemGraphicsComponent extends GraphicsComponent {
 
     //returns image in inventory
     public BufferedImage getInventoryImage() {
-        return null;
+        return image[1];
     }
 }

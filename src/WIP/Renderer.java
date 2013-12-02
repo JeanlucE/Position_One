@@ -79,11 +79,11 @@ public class Renderer extends JPanel {
         drawWorld(toRender);
         drawItems(toRender);
 
+        drawProjectiles();
+
         //DEBUGGING
         drawPlayer();
-
         drawActors();
-        drawProjectiles();
         drawGUI();
 
         MouseInputComponent mouseListener = MouseInputComponent.getInstance();

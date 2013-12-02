@@ -1,6 +1,8 @@
 package Items;
 
-import Components.ItemGraphicsComponent;
+import Components.PhysicsComponent;
+import Components.ProjectileGraphicsComponent;
+import WIP.Transform;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,9 +13,15 @@ import Components.ItemGraphicsComponent;
 public class Arrow extends Equipment {
 
     protected int stack;
+    private PhysicsComponent physicsComponent;
 
-    public Arrow(String name, int level, ItemGraphicsComponent g) {
+    public Arrow(String name, int level, ProjectileGraphicsComponent g, PhysicsComponent phys) {
         super(name, level, 0, EquipmentClass.RANGED, g);
+        physicsComponent = phys;
+    }
+
+    public PhysicsComponent getCollider() {
+        return physicsComponent;
     }
 
     public int getStack() {
@@ -47,4 +55,11 @@ public class Arrow extends Equipment {
 
         return true;
     }
+
+    public Projectile createProjectile(Weapon_Ranged weapon, Transform origin) {
+        stack--;
+        Projectile p = new Projectile(origin, getGraphic(), getCollider(), 5, 6, weapon.getBaseDamage());
+        return p;
+    }
+
 }

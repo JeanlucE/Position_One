@@ -23,7 +23,7 @@ public class Game {
     private final Renderer renderer;
     private final GameLoop gameLoop;
 
-    //Singleton Design Pattern
+    //Singleton
     public static Game getInstance() {
         if (instance == null) {
             instance = new Game();
@@ -39,7 +39,7 @@ public class Game {
         player.getCollider().setParent(player.getTransform());
         player.getTransform().getPosition().setX(200);
         player.getTransform().getPosition().setY(200);
-        player.equip(weapon);
+        player.equip(bow);
 
         Enemy enemy = new Enemy("Chu Chu", 100, new Transform(new Vector(400, 400)),
                 new StaticGraphicsComponent(Resource.enemy_DOWN),
@@ -55,9 +55,8 @@ public class Game {
         ((Floor) currentWorld.getReal(6, 7)).dropItem(new Weapon_Melee("Swordish", 0, 0, 1, 1.0f,
                 new ItemGraphicsComponent(Resource.weapon_melee_01_FLOOR)));
         ((Floor) currentWorld.getReal(7, 7)).dropItem(new Arrow("Arrow", 0,
-                new ItemGraphicsComponent(Resource.projectile_arrow_01_wooden_FLOOR)));
-
-
+                new ProjectileGraphicsComponent(null, DynamicResource.WOODENARROW),
+                new PhysicsComponent(10, 25)));
 
         renderer = Renderer.getInstance();
 

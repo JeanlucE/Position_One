@@ -10,7 +10,6 @@ package Items;
  * weapon. Once it is instantiated the type of equipment it can hold cannot be changed.
  */
 
-//TODO make generic
 public class EquipmentSlot<T extends Equipment> {
     private T equipment;
 

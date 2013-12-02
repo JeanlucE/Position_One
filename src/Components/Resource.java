@@ -23,7 +23,10 @@ public enum Resource {
     wall01("wall_stone01.png"),
     floor01("floor_stone01.png"),
     weapon_melee_01_FLOOR("weapon_melee_01_FLOOR.png"),
-    projectile_arrow_01_wooden_FLOOR("projectile_arrow_01_wooden_FLOOR.png");
+    projectile_arrow_01_wooden_FLOOR_NORTH("projectile_arrow_01_wooden_FLOOR_NORTH.png"),
+    projectile_arrow_01_wooden_FLOOR_SOUTH("projectile_arrow_01_wooden_FLOOR_SOUTH.png"),
+    projectile_arrow_01_wooden_FLOOR_EAST("projectile_arrow_01_wooden_FLOOR_EAST.png"),
+    projectile_arrow_01_wooden_FLOOR_WEST("projectile_arrow_01_wooden_FLOOR_WEST.png");
 
     private String imagePath = "./images/";
     private BufferedImage image;

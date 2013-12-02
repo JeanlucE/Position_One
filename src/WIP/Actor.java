@@ -134,7 +134,6 @@ public abstract class Actor extends GameObject {
     }
 
     private void death() {
-        //Game.getInstance().removeActor(this);
         this.destroy();
         DebugLog.write("Actor " + name + " is dead.");
     }
@@ -164,7 +163,7 @@ public abstract class Actor extends GameObject {
         return false;
     }
 
-    protected boolean inLinearRange(int num1, int num2, float range) {
+    private boolean inLinearRange(int num1, int num2, float range) {
         return num1 - num2 < range * Renderer.TILESIZE;
     }
 

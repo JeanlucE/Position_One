@@ -10,8 +10,8 @@ import WIP.Vector;
  * Time: 16:15
  */
 public class PhysicsComponent {
-    private final int width;
-    private final int height;
+    private int width;
+    private int height;
     private Transform parent;
 
     public PhysicsComponent(int width, int height) {
@@ -58,5 +58,11 @@ public class PhysicsComponent {
 
     public void setParent(Transform t) {
         this.parent = t;
+    }
+
+    public void rotate90() {
+        int save = width;
+        width = height;
+        height = save;
     }
 }
