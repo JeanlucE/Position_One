@@ -12,7 +12,7 @@ import WIP.Transform;
  */
 public class Arrow extends Equipment {
 
-    protected int stack;
+    protected int stack = 10;
     private PhysicsComponent physicsComponent;
 
     public Arrow(String name, int level, ProjectileGraphicsComponent g, PhysicsComponent phys) {
@@ -57,6 +57,10 @@ public class Arrow extends Equipment {
     }
 
     public Projectile createProjectile(Transform origin, Weapon_Ranged weapon) {
+        if (stack <= 0) {
+            this.destroy();
+            return null;
+        }
         stack--;
 
         //Rotate collider when arrow is pointign east or west

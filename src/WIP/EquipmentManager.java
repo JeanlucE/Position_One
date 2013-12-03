@@ -15,6 +15,7 @@ public class EquipmentManager {
     private EquipmentSlot<Armour> legsSlot;
     private EquipmentSlot<Weapon> mainHandSlot;
     private EquipmentSlot<Armour> offHandSlot;
+    private EquipmentSlot<Arrow> ammunitionSlot;
 
     public EquipmentManager(Character parent) {
         this.parent = parent;
@@ -23,6 +24,7 @@ public class EquipmentManager {
         legsSlot = new EquipmentSlot();
         mainHandSlot = new EquipmentSlot();
         offHandSlot = new EquipmentSlot();
+        ammunitionSlot = new EquipmentSlot();
     }
 
     public void equip(Equipment equipment) {
@@ -30,7 +32,7 @@ public class EquipmentManager {
         if (canEquip(equipment)) {
             if (equipment instanceof Weapon) {
                 mainHandSlot.equip((Weapon) equipment);
-            } else {
+            } else if (equipment instanceof Armour) {
                 Armour armour = (Armour) equipment;
                 if (armour.getArmourType().equals(Armour.ArmourType.SHIELD)) {
                     offHandSlot.equip(armour);
@@ -41,6 +43,8 @@ public class EquipmentManager {
                 } else if (armour.getArmourType().equals(Armour.ArmourType.LEGS)) {
                     legsSlot.equip(armour);
                 }
+            } else { //equipment instanceOf Arrow
+                ammunitionSlot.equip((Arrow) equipment);
             }
             DebugLog.write("Player " + parent.getName() + " has equipped: " + equipment.getName());
         } else {
@@ -96,6 +100,10 @@ public class EquipmentManager {
 
     public Armour getOffHand() {
         return offHandSlot.getEquipment();
+    }
+
+    public Arrow getAmmunition() {
+        return ammunitionSlot.getEquipment();
     }
 
     public String toString() {

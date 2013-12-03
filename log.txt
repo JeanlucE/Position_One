@@ -1,65 +1,49 @@
-Log created at: 14:24:00 03.12.2013
+Log created at: 16:06:51 03.12.2013
 
-[14:24:00.311] New Game started
-[14:24:00.315] New Melee Weapon created: Sword
-[14:24:00.315] New Ranged Weapon created: The OP Bow
-[14:24:00.353] New Character created: Ned Stark
-[14:24:00.353] Player Ned Stark has equipped: The OP Bow
-[14:24:00.358] New World created with size: 400
-[14:24:00.358] New Melee Weapon created: Swordish
-[14:24:00.360] Renderer started
-[14:24:01.153] SPACE down
-[14:24:01.171] New Projectile at: 200|257
-[14:24:01.562] Projectile destroyed
-[14:24:03.258] SPACE down
-[14:24:03.261] New Projectile at: 206|419
-[14:24:03.445] SPACE down
-[14:24:03.453] New Projectile at: 206|419
-[14:24:03.566] Damaged enemy Chu Chu for 10 damage.
-[14:24:03.567] Projectile destroyed
-[14:24:03.591] SPACE down
-[14:24:03.598] New Projectile at: 206|419
-[14:24:03.758] Damaged enemy Chu Chu for 10 damage.
-[14:24:03.758] Projectile destroyed
-[14:24:03.883] SPACE down
-[14:24:03.888] New Projectile at: 206|419
-[14:24:03.904] Damaged enemy Chu Chu for 10 damage.
-[14:24:03.904] Projectile destroyed
-[14:24:04.077] SPACE down
-[14:24:04.081] New Projectile at: 206|419
-[14:24:04.193] Damaged enemy Chu Chu for 10 damage.
-[14:24:04.193] Projectile destroyed
-[14:24:04.386] Damaged enemy Chu Chu for 10 damage.
-[14:24:04.386] Projectile destroyed
-[14:24:04.846] SPACE down
-[14:24:04.853] New Projectile at: 206|419
-[14:24:05.055] SPACE down
-[14:24:05.061] New Projectile at: 206|419
-[14:24:05.157] Damaged enemy Chu Chu for 10 damage.
-[14:24:05.157] Projectile destroyed
-[14:24:05.368] Damaged enemy Chu Chu for 10 damage.
-[14:24:05.368] Projectile destroyed
-[14:24:05.899] SPACE down
-[14:24:05.912] New Projectile at: 161|392
-[14:24:06.156] Projectile destroyed
-[14:24:07.445] SPACE down
-[14:24:07.445] New Projectile at: 233|365
-[14:24:07.640] Projectile destroyed
-[14:24:08.299] SPACE down
-[14:24:08.315] New Projectile at: 233|347
-[14:24:08.476] Projectile destroyed
-[14:24:09.179] SPACE down
-[14:24:09.180] New Projectile at: 233|326
-[14:24:09.307] Projectile destroyed
-[14:24:10.206] SPACE down
-[14:24:10.220] New Projectile at: 209|296
-[14:24:10.604] Projectile destroyed
-[14:24:11.168] SPACE down
-[14:24:11.181] New Projectile at: 209|212
-[14:24:11.423] SPACE down
-[14:24:11.437] New Projectile at: 209|164
-[14:24:11.453] Projectile destroyed
-[14:24:11.629] Projectile destroyed
-[14:24:11.657] SPACE down
-[14:24:11.661] New Projectile at: 209|122
-[14:24:11.789] Projectile destroyed
+[16:06:51.772] New Game started
+[16:06:51.784] New Melee Weapon created: Sword
+[16:06:51.785] New Ranged Weapon created: The OP Bow
+[16:06:51.913] New Character created: Ned Stark
+[16:06:51.916] Player Ned Stark has equipped: The OP Bow
+[16:06:51.917] Player Ned Stark has equipped: Arrow
+[16:06:51.935] New World created with size: 400
+[16:06:51.936] New Melee Weapon created: Swordish
+[16:06:51.943] Renderer started
+[16:06:52.797] SPACE down
+[16:06:52.808] New Projectile at: 200|221
+[16:06:53.386] Projectile destroyed
+[16:06:53.790] SPACE down
+[16:06:53.794] New Projectile at: 221|263
+[16:06:54.294] SPACE down
+[16:06:54.300] New Projectile at: 188|263
+[16:06:54.372] Projectile destroyed
+[16:06:54.644] Projectile destroyed
+[16:06:54.862] SPACE down
+[16:06:54.873] New Projectile at: 188|263
+[16:06:55.077] SPACE down
+[16:06:55.093] New Projectile at: 188|263
+[16:06:55.213] Projectile destroyed
+[16:06:55.259] SPACE down
+[16:06:55.261] New Projectile at: 188|263
+[16:06:55.426] SPACE down
+[16:06:55.429] New Projectile at: 188|263
+[16:06:55.430] Projectile destroyed
+[16:06:55.598] Projectile destroyed
+[16:06:55.647] SPACE down
+[16:06:55.648] New Projectile at: 188|263
+[16:06:55.769] Projectile destroyed
+[16:06:55.990] Projectile destroyed
+[16:06:56.055] SPACE down
+[16:06:56.062] New Projectile at: 188|263
+[16:06:56.400] Projectile destroyed
+[16:06:56.440] SPACE down
+[16:06:56.448] New Projectile at: 188|263
+[16:06:56.787] Projectile destroyed
+[16:06:56.807] SPACE down
+[16:06:56.811] New Projectile at: 188|263
+[16:06:57.277] SPACE down
+[16:06:57.294] New Projectile at: 188|263
+[16:06:57.458] SPACE down
+[16:06:57.462] New Projectile at: 188|263
+[16:06:57.686] SPACE down
+[16:06:57.701] New Projectile at: 188|263

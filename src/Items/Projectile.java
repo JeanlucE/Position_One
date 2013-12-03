@@ -25,6 +25,7 @@ public class Projectile extends GameObject {
                       int damage) {
         super(origin, graphic);
         phys.setParent(this.getTransform());
+        DebugLog.write("New Projectile at: " + origin.getPosition());
 
         //Spawn position
         this.origin = origin.getPosition();

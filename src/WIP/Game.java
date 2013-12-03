@@ -1,10 +1,7 @@
 package WIP;
 
 import Components.*;
-import Items.Projectile;
-import Items.Weapon;
-import Items.Weapon_Melee;
-import Items.Weapon_Ranged;
+import Items.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -41,7 +38,12 @@ public class Game {
         player = new Character("Ned Stark");
         player.getTransform().getPosition().setX(200);
         player.getTransform().getPosition().setY(200);
+        Arrow arrow = new Arrow("Arrow", 0,
+                new ProjectileGraphicsComponent(null,
+                        DynamicResource.WOODENARROW),
+                new PhysicsComponent(10, 25));
         player.equip(bow);
+        player.equip(arrow);
 
         Enemy enemy = new Enemy("Chu Chu", 100, new Transform(new Vector(400, 400)),
                 new StaticGraphicsComponent(Resource.enemy_DOWN),

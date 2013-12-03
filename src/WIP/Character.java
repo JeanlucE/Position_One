@@ -1,6 +1,9 @@
 package WIP;
 
-import Components.*;
+import Components.ActorGraphicsComponent;
+import Components.DynamicResource;
+import Components.InputComponent;
+import Components.PhysicsComponent;
 import Items.*;
 
 import java.lang.reflect.Field;
@@ -144,13 +147,7 @@ public class Character extends Actor {
 
             Weapon_Ranged bow = (Weapon_Ranged) weapon;
 
-            Arrow arrow = new Arrow("Arrow", 0,
-                    new ProjectileGraphicsComponent(null,
-                            DynamicResource.WOODENARROW),
-                    new PhysicsComponent(10, 25));
-
-
-            bow.use(this, arrow);
+            bow.use(this, equipment.getAmmunition());
             return;
         }
 
