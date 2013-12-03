@@ -27,9 +27,16 @@ import Components.PhysicsComponent;
  */
 public class World {
     //TODO resolve Collisions between projectiles and actors and projectiles and walls
+    private static World instance;
     private WorldMap currentMap;
 
-    public World() {
+    public static World getInstance() {
+        if (instance == null)
+            instance = new World();
+        return instance;
+    }
+
+    private World() {
         currentMap = new WorldMap();
     }
 

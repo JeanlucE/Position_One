@@ -19,7 +19,7 @@ import java.awt.event.ActionListener;
 public class Game {
     private static Game instance = null;
     private final Character player;
-    private World currentWorld;
+    //private World currentWorld;
     private final Renderer renderer;
     private final GameLoop gameLoop;
 
@@ -51,7 +51,7 @@ public class Game {
                 new PhysicsComponent(40, 40));
         enemy2.getCollider().setParent(enemy2.getTransform());
 
-        currentWorld = new World();
+        World currentWorld = World.getInstance();
         ((Floor) currentWorld.getReal(6, 7)).dropItem(new Weapon_Melee("Swordish", 0, 0, 1, 1.0f,
                 new ItemGraphicsComponent(Resource.weapon_melee_01_FLOOR)));
         ((Floor) currentWorld.getReal(7, 7)).dropItem(new Arrow("Arrow", 0,
@@ -86,7 +86,7 @@ public class Game {
     }
 
     public World getCurrentWorld() {
-        return currentWorld;
+        return World.getInstance();
     }
 
     //TODO make private later
