@@ -56,7 +56,7 @@ public class Arrow extends Equipment {
         return true;
     }
 
-    public Projectile createProjectile(Weapon_Ranged weapon, Transform origin) {
+    public Projectile createProjectile(Transform origin, Weapon_Ranged weapon) {
         stack--;
         Projectile p = new Projectile(origin, getGraphic(), getCollider(), 5, 6, weapon.getBaseDamage());
         return p;

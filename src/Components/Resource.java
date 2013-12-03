@@ -15,10 +15,10 @@ import java.io.IOException;
  */
 public enum Resource {
 
-    player_UP("player_UP.png"),
-    player_DOWN("player_DOWN.png"),
-    player_LEFT("player_LEFT.png"),
-    player_RIGHT("player_RIGHT.png"),
+    player_NORTH("player_NORTH.png"),
+    player_SOUTH("player_SOUTH.png"),
+    player_WEST("player_WEST.png"),
+    player_EAST("player_EAST.png"),
     enemy_DOWN("enemy.png"),
     wall01("wall_stone01.png"),
     floor01("floor_stone01.png"),
@@ -35,6 +35,7 @@ public enum Resource {
         try {
             image = ImageIO.read(new File(imagePath + fileName));
         } catch (IOException e) {
+            //TODO make a filler image for visual debugging
             DebugLog.write("File not found at " + imagePath + fileName);
             System.exit(-1);
         }

@@ -15,10 +15,8 @@ public class ProjectileGraphicsComponent extends ItemGraphicsComponent {
     private DynamicResource projectileImages;
     private Vector direction;
 
-    //TODO make all Bufferedimage[] NORTH, EAST, SOUTH, WEST
     public ProjectileGraphicsComponent(Vector direction, DynamicResource images) {
         this.direction = direction;
-        //NORTH, EAST, SOUTH, WEST
         projectileImages = images;
     }
 

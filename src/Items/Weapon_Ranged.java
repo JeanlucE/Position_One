@@ -31,7 +31,7 @@ public class Weapon_Ranged extends Weapon {
 
     public void use(Actor origin, Arrow arrow) {
         DebugLog.write("New Projectile at: " + origin.getTransform().getPosition());
-        arrow.createProjectile(this, origin.getTransform());
+        arrow.createProjectile(origin.getTransform(), this);
     }
 
     //TODO RangedType

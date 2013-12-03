@@ -145,7 +145,7 @@ public class Character extends Actor {
             Weapon_Ranged bow = (Weapon_Ranged) weapon;
 
             Arrow arrow = new Arrow("Arrow", 0,
-                    new ProjectileGraphicsComponent(getTransform().getDirection(),
+                    new ProjectileGraphicsComponent(null,
                             DynamicResource.WOODENARROW),
                     new PhysicsComponent(10, 25));
 

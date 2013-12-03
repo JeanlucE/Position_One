@@ -9,12 +9,11 @@ import java.awt.image.BufferedImage;
  * Time: 16:55
  */
 public enum DynamicResource {
-    //TODO add player and projectile images here
     PLAYER(new Resource[]{
-            Resource.player_UP,
-            Resource.player_RIGHT,
-            Resource.player_DOWN,
-            Resource.player_LEFT}),
+            Resource.player_NORTH,
+            Resource.player_EAST,
+            Resource.player_SOUTH,
+            Resource.player_WEST}),
     WOODENARROW(new Resource[]{
             Resource.projectile_arrow_01_wooden_FLOOR_NORTH,
             Resource.projectile_arrow_01_wooden_FLOOR_EAST,

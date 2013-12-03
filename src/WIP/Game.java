@@ -33,7 +33,7 @@ public class Game {
 
     private Game() {
         DebugLog.write("New Game started");
-        Weapon weapon = new Weapon_Melee("Sword", 0, 0, 10, 1.0f, new ItemGraphicsComponent());
+        Weapon sword = new Weapon_Melee("Sword", 0, 0, 10, 1.0f, new ItemGraphicsComponent());
         Weapon bow = new Weapon_Ranged("The OP Bow", 0, 0, 5, 10, 0.2f, new ItemGraphicsComponent());
         player = new Character("Ned Stark");
         player.getCollider().setParent(player.getTransform());

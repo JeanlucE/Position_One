@@ -172,7 +172,7 @@ public class Renderer extends JPanel {
     }
 
     /*
-    TODO Draws all actors even if they are not visible to the player!
+    TODO Dont draws actors if they are not visible to the player
     Also draws all healthbars.
      */
     private void drawActors() {
