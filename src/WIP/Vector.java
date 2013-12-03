@@ -79,6 +79,10 @@ public class Vector {
         this.y = newVector.getY();
     }
 
+    public boolean ofAxisWestEast() {
+        return y == 0;
+    }
+
 
     @Override
     public boolean equals(Object o) {

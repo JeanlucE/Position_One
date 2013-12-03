@@ -23,7 +23,8 @@ public class Projectile extends GameObject {
 
     public Projectile(Transform origin, GraphicsComponent graphic, PhysicsComponent phys, int speed, int range,
                       int damage) {
-        super(origin.clone(), graphic);
+        super(origin, graphic);
+        phys.setParent(this.getTransform());
 
         //Spawn position
         this.origin = origin.getPosition();
@@ -60,12 +61,29 @@ public class Projectile extends GameObject {
 
     @Override
     public void update() {
-        getTransform().getPosition().shift(flyVector.getX(), flyVector.getY());
-        if (Math.abs(getTransform().getPosition().getX() - origin.getX()) > range
-                || Math.abs(getTransform().getPosition().getY() - origin.getY()) > range) {
+        Vector p = getTransform().getPosition().shiftedPosition(flyVector.getX(), flyVector.getY());
+
+        //If out of range destroy this
+        if ((Math.abs(p.getX() - origin.getX()) > range || Math.abs(p.getY() - origin.getY()) > range)) {
             this.destroy();
             DebugLog.write("Projectile destroyed");
+            return;
         }
+
+        World.CollisionState collisionState = World.getInstance().resolveCollision(this, p);
+        switch (collisionState) {
+            case ENEMY_HIT:
+                ((Actor) collisionState.getCollisionObject()).damage(damage);
+                collisionState.setCollisionObject(null);
+            case WALL_HIT:
+                this.destroy();
+                DebugLog.write("Projectile destroyed");
+                return;
+            default:
+                break;
+        }
+
+        getTransform().setPosition(p);
     }
 
     @Override

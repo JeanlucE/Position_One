@@ -1,7 +1,10 @@
 package WIP;
 
 import Components.*;
-import Items.*;
+import Items.Projectile;
+import Items.Weapon;
+import Items.Weapon_Melee;
+import Items.Weapon_Ranged;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -34,9 +37,8 @@ public class Game {
     private Game() {
         DebugLog.write("New Game started");
         Weapon sword = new Weapon_Melee("Sword", 0, 0, 10, 1.0f, new ItemGraphicsComponent());
-        Weapon bow = new Weapon_Ranged("The OP Bow", 0, 0, 5, 10, 0.2f, new ItemGraphicsComponent());
+        Weapon bow = new Weapon_Ranged("The OP Bow", 0, 0, 10, 10, 0.2f, new ItemGraphicsComponent());
         player = new Character("Ned Stark");
-        player.getCollider().setParent(player.getTransform());
         player.getTransform().getPosition().setX(200);
         player.getTransform().getPosition().setY(200);
         player.equip(bow);
@@ -44,19 +46,17 @@ public class Game {
         Enemy enemy = new Enemy("Chu Chu", 100, new Transform(new Vector(400, 400)),
                 new StaticGraphicsComponent(Resource.enemy_DOWN),
                 new PhysicsComponent(40, 40));
-        enemy.getCollider().setParent(enemy.getTransform());
 
         Enemy enemy2 = new Enemy("Chu Chu", 100, new Transform(new Vector(420, 420)),
                 new StaticGraphicsComponent(Resource.enemy_DOWN),
                 new PhysicsComponent(40, 40));
-        enemy2.getCollider().setParent(enemy2.getTransform());
 
         World currentWorld = World.getInstance();
         ((Floor) currentWorld.getReal(6, 7)).dropItem(new Weapon_Melee("Swordish", 0, 0, 1, 1.0f,
                 new ItemGraphicsComponent(Resource.weapon_melee_01_FLOOR)));
-        ((Floor) currentWorld.getReal(7, 7)).dropItem(new Arrow("Arrow", 0,
+        /*((Floor) currentWorld.getReal(7, 7)).dropItem(new Arrow("Arrow", 0,
                 new ProjectileGraphicsComponent(null, DynamicResource.WOODENARROW),
-                new PhysicsComponent(10, 25)));
+                new PhysicsComponent(10, 25)));    */
 
         renderer = Renderer.getInstance();
 

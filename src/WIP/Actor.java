@@ -26,6 +26,7 @@ public abstract class Actor extends GameObject {
                     PhysicsComponent collider) {
         super(transform, graphic);
         physicsComponent = collider;
+        collider.setParent(this.getTransform());
         this.name = name;
         actors.add(this);
     }
@@ -169,41 +170,27 @@ public abstract class Actor extends GameObject {
 
     //region Position Comparison methods
     protected boolean leftOf(Actor toCompare) {
-        Vector[] thisCollider = getCollider().getCorners();
-        Vector[] otherCollider = toCompare.getCollider().getCorners();
-        return thisCollider[1].getX() < otherCollider[0].getX();
+        return getCollider().leftOf(toCompare.getCollider());
     }
 
     protected boolean rightOf(Actor toCompare) {
-        Vector[] thisCollider = getCollider().getCorners();
-        Vector[] otherCollider = toCompare.getCollider().getCorners();
-        return thisCollider[0].getX() > otherCollider[1].getX();
+        return getCollider().rightOf(toCompare.getCollider());
     }
 
     protected boolean below(Actor toCompare) {
-        Vector[] thisCollider = getCollider().getCorners();
-        Vector[] otherCollider = toCompare.getCollider().getCorners();
-        return thisCollider[0].getY() < otherCollider[2].getY();
+        return getCollider().below(toCompare.getCollider());
     }
 
     protected boolean above(Actor toCompare) {
-        Vector[] thisCollider = getCollider().getCorners();
-        Vector[] otherCollider = toCompare.getCollider().getCorners();
-        return thisCollider[2].getY() > otherCollider[0].getY();
+        return getCollider().above(toCompare.getCollider());
     }
 
     protected boolean onX(Actor toCompare) {
-        Vector[] thisCollider = getCollider().getCorners();
-        Vector[] otherCollider = toCompare.getCollider().getCorners();
-        return thisCollider[0].getX() > otherCollider[0].getX() - Renderer.TILESIZE * 0.5
-                && thisCollider[1].getX() < otherCollider[1].getY() + Renderer.TILESIZE * 0.5;
+        return getCollider().onX(toCompare.getCollider(), 0.5f);
     }
 
     protected boolean onY(Actor toCompare) {
-        Vector[] thisCollider = getCollider().getCorners();
-        Vector[] otherCollider = toCompare.getCollider().getCorners();
-        return thisCollider[0].getY() < otherCollider[0].getY() + Renderer.TILESIZE * 0.5
-                && thisCollider[2].getY() > otherCollider[2].getY() - Renderer.TILESIZE * 0.5;
+        return getCollider().onY(toCompare.getCollider(), 0.5f);
     }
     //endregion
 

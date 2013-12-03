@@ -1,6 +1,7 @@
 package WIP;
 
 import Components.PhysicsComponent;
+import Items.Projectile;
 
 /**
  * Created with IntelliJ IDEA.
@@ -26,7 +27,8 @@ import Components.PhysicsComponent;
  * *                \/ -y
  */
 public class World {
-    //TODO resolve Collisions between projectiles and actors and projectiles and walls
+    //TODO put melee hit boolean collision here
+    //TODO put arrow hit boolean collision here
     private static World instance;
     private WorldMap currentMap;
 
@@ -53,14 +55,6 @@ public class World {
         return currentMap.getReal(position.getX() / 40, position.getY() / 40);
     }
 
-    void set(int x, int y, WorldSpace worldSpace) {
-        currentMap.setReal(x, y, worldSpace);
-    }
-
-    void setReal(int x, int y, WorldSpace worldSpace) {
-        currentMap.setReal(x, y, worldSpace);
-    }
-
     /*
     This method resolves boolean collision between the gameworld and another gameobject (e.g. a player).
     It does this by getting the position of all 4 corners of the gameobject's colider and then checks if any of those
@@ -78,6 +72,41 @@ public class World {
                 break;
         }
         return canMove && canMoveTo(actor, nextPosition);
+    }
+
+    public CollisionState resolveCollision(Projectile p, Vector nextPosition) {
+        PhysicsComponent collider = p.getCollider();
+        for (Vector v : collider.getCorners(nextPosition)) {
+            if (!canMoveTo(v))
+                //TODO set wall collision object
+                return CollisionState.WALL_HIT;
+        }
+
+        for (Actor a : Actor.getActors()) {
+            if (a != Game.getInstance().getPlayer() && p.getCollider().onY(a.getCollider(), 0.2f)) {
+                if (p.getCollider().onX(a.getCollider(), 0.2f)) {
+                    System.out.println(a.toString() + " hit!");
+                    CollisionState.ENEMY_HIT.setCollisionObject(a);
+                    return CollisionState.ENEMY_HIT;
+                }
+            }
+        }
+
+        return CollisionState.NO_COLLISION;
+    }
+
+    public enum CollisionState {
+        ENEMY_HIT, WALL_HIT, NO_COLLISION;
+
+        private GameObject collisionObject = null;
+
+        public GameObject getCollisionObject() {
+            return collisionObject;
+        }
+
+        public void setCollisionObject(GameObject collisionObject) {
+            this.collisionObject = collisionObject;
+        }
     }
 
     //Returns if the position that is passed has any collidable gameobject

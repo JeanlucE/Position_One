@@ -149,6 +149,7 @@ public class Character extends Actor {
                             DynamicResource.WOODENARROW),
                     new PhysicsComponent(10, 25));
 
+
             bow.use(this, arrow);
             return;
         }

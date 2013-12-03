@@ -22,7 +22,7 @@ public enum DynamicResource {
 
     private Resource[] resources;
 
-    DynamicResource(Resource[] resources) {
+    private DynamicResource(Resource[] resources) {
         this.resources = resources;
     }
 

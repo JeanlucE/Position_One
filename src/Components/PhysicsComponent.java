@@ -1,5 +1,6 @@
 package Components;
 
+import WIP.Renderer;
 import WIP.Transform;
 import WIP.Vector;
 
@@ -60,9 +61,49 @@ public class PhysicsComponent {
         this.parent = t;
     }
 
+    //Rotates the collider by 90 degrees
     public void rotate90() {
         int save = width;
         width = height;
         height = save;
+    }
+
+    //region Position Comparison methods
+    public boolean leftOf(PhysicsComponent toCompare) {
+        Vector[] thisCollider = getCorners();
+        Vector[] otherCollider = toCompare.getCorners();
+        return thisCollider[1].getX() < otherCollider[0].getX();
+    }
+
+    public boolean rightOf(PhysicsComponent toCompare) {
+        Vector[] thisCollider = getCorners();
+        Vector[] otherCollider = toCompare.getCorners();
+        return thisCollider[0].getX() > otherCollider[1].getX();
+    }
+
+    public boolean below(PhysicsComponent toCompare) {
+        Vector[] thisCollider = getCorners();
+        Vector[] otherCollider = toCompare.getCorners();
+        return thisCollider[0].getY() < otherCollider[2].getY();
+    }
+
+    public boolean above(PhysicsComponent toCompare) {
+        Vector[] thisCollider = getCorners();
+        Vector[] otherCollider = toCompare.getCorners();
+        return thisCollider[2].getY() > otherCollider[0].getY();
+    }
+
+    public boolean onX(PhysicsComponent toCompare, float tolerance) {
+        Vector[] thisCollider = getCorners();
+        Vector[] otherCollider = toCompare.getCorners();
+        return thisCollider[0].getX() > otherCollider[0].getX() - Renderer.TILESIZE * tolerance
+                && thisCollider[1].getX() < otherCollider[1].getY() + Renderer.TILESIZE * tolerance;
+    }
+
+    public boolean onY(PhysicsComponent toCompare, float tolerance) {
+        Vector[] thisCollider = getCorners();
+        Vector[] otherCollider = toCompare.getCorners();
+        return thisCollider[0].getY() < otherCollider[0].getY() + Renderer.TILESIZE * tolerance
+                && thisCollider[2].getY() > otherCollider[2].getY() - Renderer.TILESIZE * tolerance;
     }
 }

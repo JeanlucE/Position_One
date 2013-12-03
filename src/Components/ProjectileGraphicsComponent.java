@@ -20,6 +20,10 @@ public class ProjectileGraphicsComponent extends ItemGraphicsComponent {
         projectileImages = images;
     }
 
+    public DynamicResource getResource() {
+        return projectileImages;
+    }
+
     //returns dropped image
     public BufferedImage getImage() {
         if (direction == null)

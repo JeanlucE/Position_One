@@ -58,7 +58,17 @@ public class Arrow extends Equipment {
 
     public Projectile createProjectile(Transform origin, Weapon_Ranged weapon) {
         stack--;
-        Projectile p = new Projectile(origin, getGraphic(), getCollider(), 5, 6, weapon.getBaseDamage());
+
+        //Rotate collider when arrow is pointign east or west
+        PhysicsComponent phys = getCollider();
+        if (origin.getPosition().ofAxisWestEast()) {
+            phys.rotate90();
+        }
+
+        Projectile p = new Projectile(origin.clone(), new ProjectileGraphicsComponent(origin.getDirection().clone(),
+                ((ProjectileGraphicsComponent) getGraphic()).getResource()), phys, 10, 6,
+                weapon.getBaseDamage());
+
         return p;
     }
 
