@@ -1,6 +1,6 @@
 package WIP;
 
-import Components.GraphicsComponent;
+import Components.ActorGraphicsComponent;
 import Components.PhysicsComponent;
 
 import java.util.Random;
@@ -14,10 +14,11 @@ import java.util.Random;
 public class Enemy extends NPC {
 
     //TODO later make this take an ActorGraphicsComponent
-    public Enemy(String name, int maxHealth, Transform t, GraphicsComponent g, PhysicsComponent p) {
+    public Enemy(String name, int maxHealth, Transform t, ActorGraphicsComponent g, PhysicsComponent p) {
         super(name, t, g, p);
         setMaxHealth(maxHealth);
         setCurrentHealth(maxHealth);
+        g.setParent(this);
     }
 
     public void update() {

@@ -141,26 +141,7 @@ public class Character extends Actor {
 
     private void attack() {
         Weapon weapon = equipment.getMainHand();
-        float range = 1f;
-        int damage = weapon.getBaseDamage();
-        if (weapon instanceof Weapon_Ranged) {
-
-            Weapon_Ranged bow = (Weapon_Ranged) weapon;
-
-            bow.use(this, equipment.getAmmunition());
-            return;
-        }
-
-        if (weapon instanceof Weapon_Melee) {
-            Actor[] actors = Game.getInstance().getActors();
-            for (Actor a : actors) {
-                if (!a.equals(this)) {
-                    if (enemyWithinRange(a, range))
-                        a.damage(damage);
-                }
-            }
-            return;
-        }
+        weapon.use();
 
     }
 
@@ -248,17 +229,12 @@ public class Character extends Actor {
         return inventory;
     }
 
-    /*
-    Should only be called when equipment slot is not occupied
-    This method equips the player with a piece of equipment.
-    It first checks if the level and skill requirements of the equipment are met by the player.
-    If the piece of equipment is a weapon it then assigns the weapon to the main hand slot.
-    If the piece of equipment is an armour piece, it then check what armour type it is (Helmet, Body,
-    Legs, Shield) and then assigns it to the appropriate equipment slot.
-     */
+
     public void equip(Equipment equipment) {
         this.equipment.equip(equipment);
     }
+
+    //TODO public void unequip()
 
     public Armour getHelmet() {
         return equipment.getHelmet();
@@ -278,6 +254,10 @@ public class Character extends Actor {
 
     public Armour getOffHand() {
         return equipment.getOffHand();
+    }
+
+    public Arrow getAmmunition() {
+        return equipment.getAmmunition();
     }
 
     public String printEquipment() {

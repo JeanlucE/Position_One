@@ -1,6 +1,6 @@
 package WIP;
 
-import Components.GraphicsComponent;
+import Components.ActorGraphicsComponent;
 import Components.PhysicsComponent;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public abstract class Actor extends GameObject {
     protected int maxHealth, currentHealth;
     private int currentXVelocity, currentYVelocity;
 
-    protected Actor(String name, Transform transform, GraphicsComponent graphic,
+    protected Actor(String name, Transform transform, ActorGraphicsComponent graphic,
                     PhysicsComponent collider) {
         super(transform, graphic);
         physicsComponent = collider;
@@ -144,7 +144,7 @@ public abstract class Actor extends GameObject {
     It returns true if the enemy can be attacked
     It returns false if the enemy is out of range or the player is looking in the wrong direction.
      */
-    protected boolean enemyWithinRange(Actor other, float range) {
+    public boolean enemyWithinRange(Actor other, float range) {
         Vector direction = getTransform().getDirection();
         Vector[] otherCollider = other.getCollider().getCorners();
         Vector[] thisCollider = getCollider().getCorners();

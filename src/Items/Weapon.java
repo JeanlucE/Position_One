@@ -1,6 +1,7 @@
 package Items;
 
 import Components.ItemGraphicsComponent;
+import WIP.Actor;
 import WIP.DebugLog;
 
 /**
@@ -20,6 +21,8 @@ public abstract class Weapon extends Equipment {
     private int baseRange;
     //Hits per second
     private float useTime;
+    //Actor that has the weapon equipped
+    protected Actor equipped;
     //endregion
 
     /*
@@ -39,7 +42,12 @@ public abstract class Weapon extends Equipment {
     }
 
     //Called when a weapon is used
-    abstract void use();
+    public abstract void use();
+
+
+    public void setEquipped(Actor actor) {
+        equipped = actor;
+    }
 
     public int getBaseRange() {
         return baseRange;

@@ -27,28 +27,44 @@ public class EquipmentManager {
         ammunitionSlot = new EquipmentSlot();
     }
 
+    /*
+    Should only be called when equipment slot is not occupied
+    This method equips the player with a piece of equipment.
+    It first checks if the level and skill requirements of the equipment are met by the player.
+    If the piece of equipment is a weapon it then assigns the weapon to the main hand slot.
+    If the piece of equipment is an armour piece, it then check what armour type it is (Helmet, Body,
+    Legs, Shield) and then assigns it to the appropriate equipment slot.
+     */
     public void equip(Equipment equipment) {
-        //TODO if isOccupied throw the current previous equipment into the inventory
+        //TODO if isOccupied throw the current equipment into the inventory and equip the new Equipment
         if (canEquip(equipment)) {
             if (equipment instanceof Weapon) {
-                mainHandSlot.equip((Weapon) equipment);
+                equip((Weapon) equipment);
             } else if (equipment instanceof Armour) {
-                Armour armour = (Armour) equipment;
-                if (armour.getArmourType().equals(Armour.ArmourType.SHIELD)) {
-                    offHandSlot.equip(armour);
-                } else if (armour.getArmourType().equals(Armour.ArmourType.HELMET)) {
-                    helmetSlot.equip(armour);
-                } else if (armour.getArmourType().equals(Armour.ArmourType.BODY)) {
-                    bodySlot.equip(armour);
-                } else if (armour.getArmourType().equals(Armour.ArmourType.LEGS)) {
-                    legsSlot.equip(armour);
-                }
+                equip((Armour) equipment);
             } else { //equipment instanceOf Arrow
                 ammunitionSlot.equip((Arrow) equipment);
             }
             DebugLog.write("Player " + parent.getName() + " has equipped: " + equipment.getName());
         } else {
             DebugLog.write("Player " + parent.getName() + " cannot equip: " + equipment.getName());
+        }
+    }
+
+    private void equip(Weapon weapon) {
+        mainHandSlot.equip(weapon);
+        weapon.setEquipped(parent);
+    }
+
+    private void equip(Armour armour) {
+        if (armour.getArmourType().equals(Armour.ArmourType.SHIELD)) {
+            offHandSlot.equip(armour);
+        } else if (armour.getArmourType().equals(Armour.ArmourType.HELMET)) {
+            helmetSlot.equip(armour);
+        } else if (armour.getArmourType().equals(Armour.ArmourType.BODY)) {
+            bodySlot.equip(armour);
+        } else if (armour.getArmourType().equals(Armour.ArmourType.LEGS)) {
+            legsSlot.equip(armour);
         }
     }
 

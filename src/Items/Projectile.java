@@ -24,19 +24,20 @@ public class Projectile extends GameObject {
     public Projectile(Transform origin, GraphicsComponent graphic, PhysicsComponent phys, int speed, int range,
                       int damage) {
         super(origin, graphic);
-        phys.setParent(this.getTransform());
-        DebugLog.write("New Projectile at: " + origin.getPosition());
 
         //Spawn position
         this.origin = origin.getPosition();
 
         //Set Collider
         this.phys = phys;
+        this.phys.setParent(getTransform());
+
+        DebugLog.write("New Projectile at: " + origin.getPosition());
 
         //Set flying direction and speed
-        flyVector = getTransform().getDirection();
-        flyVector.setX(flyVector.getX() * speed);
-        flyVector.setY(flyVector.getY() * speed);
+        this.flyVector = getTransform().getDirection().clone();
+        this.flyVector.setX(flyVector.getX() * speed);
+        this.flyVector.setY(flyVector.getY() * speed);
 
         //Set how far the projectile flies
         this.range = range * Renderer.TILESIZE;
@@ -71,11 +72,11 @@ public class Projectile extends GameObject {
             return;
         }
 
-        World.CollisionState collisionState = World.getInstance().resolveCollision(this, p);
+        World.CollisionEvent collisionEvent = World.getInstance().resolveCollision(this, p);
+        World.CollisionState collisionState = collisionEvent.getCollisionState();
         switch (collisionState) {
             case ENEMY_HIT:
-                ((Actor) collisionState.getCollisionObject()).damage(damage);
-                collisionState.setCollisionObject(null);
+                ((Actor) collisionEvent.getCollisionObject()).damage(damage);
             case WALL_HIT:
                 this.destroy();
                 DebugLog.write("Projectile destroyed");

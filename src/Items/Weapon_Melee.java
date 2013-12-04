@@ -1,8 +1,9 @@
 package Items;
 
-import Components.GraphicsComponent;
 import Components.ItemGraphicsComponent;
+import WIP.Actor;
 import WIP.DebugLog;
+import WIP.Game;
 
 /**
  * Created with IntelliJ IDEA.
@@ -28,6 +29,12 @@ public class Weapon_Melee extends Weapon {
     }
 
     public void use() {
-        //TODO implement this
+        Actor[] actors = Game.getInstance().getActors();
+        for (Actor a : actors) {
+            if (!a.equals(equipped)) {
+                if (equipped.enemyWithinRange(a, getBaseRange()))
+                    a.damage(getBaseDamage());
+            }
+        }
     }
 }

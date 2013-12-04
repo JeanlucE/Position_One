@@ -46,11 +46,11 @@ public class Game {
         player.equip(arrow);
 
         Enemy enemy = new Enemy("Chu Chu", 100, new Transform(new Vector(400, 400)),
-                new StaticGraphicsComponent(Resource.enemy_DOWN),
+                new ActorGraphicsComponent(DynamicResource.ENEMY_CHUCHU),
                 new PhysicsComponent(40, 40));
 
         Enemy enemy2 = new Enemy("Chu Chu", 100, new Transform(new Vector(420, 420)),
-                new StaticGraphicsComponent(Resource.enemy_DOWN),
+                new ActorGraphicsComponent(DynamicResource.ENEMY_CHUCHU),
                 new PhysicsComponent(40, 40));
 
         World currentWorld = World.getInstance();

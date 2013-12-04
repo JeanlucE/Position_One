@@ -74,39 +74,61 @@ public class World {
         return canMove && canMoveTo(actor, nextPosition);
     }
 
-    public CollisionState resolveCollision(Projectile p, Vector nextPosition) {
+    public CollisionEvent resolveCollision(Projectile p, Vector nextPosition) {
         PhysicsComponent collider = p.getCollider();
         for (Vector v : collider.getCorners(nextPosition)) {
             if (!canMoveTo(v))
                 //TODO set wall collision object
-                return CollisionState.WALL_HIT;
+                return new CollisionEvent(CollisionState.WALL_HIT, null);
         }
 
         for (Actor a : Actor.getActors()) {
             if (a != Game.getInstance().getPlayer() && p.getCollider().onY(a.getCollider(), 0.2f)) {
-                if (p.getCollider().onX(a.getCollider(), 0.2f)) {
+                if (p.getCollider().onX(a.getCollider(), 0.2f) && p.getCollider().onY(a.getCollider(), 0.2f)) {
                     System.out.println(a.toString() + " hit!");
-                    CollisionState.ENEMY_HIT.setCollisionObject(a);
-                    return CollisionState.ENEMY_HIT;
+                    //CollisionState.ENEMY_HIT.setCollisionObject(a);
+                    return new CollisionEvent(CollisionState.ENEMY_HIT, a);
                 }
             }
         }
 
-        return CollisionState.NO_COLLISION;
+        return new CollisionEvent(CollisionState.NO_COLLISION, null);
     }
 
-    public enum CollisionState {
-        ENEMY_HIT, WALL_HIT, NO_COLLISION;
+    public class CollisionEvent {
 
-        private GameObject collisionObject = null;
+        private GameObject collisionObject;
+        private CollisionState collisionState;
+
+        public CollisionEvent(CollisionState collisionState, GameObject collisionObject) {
+            this.collisionState = collisionState;
+            if (collisionState.equals(CollisionState.ENEMY_HIT))
+                this.collisionObject = collisionObject;
+        }
 
         public GameObject getCollisionObject() {
             return collisionObject;
         }
 
-        public void setCollisionObject(GameObject collisionObject) {
-            this.collisionObject = collisionObject;
+        public CollisionState getCollisionState() {
+            return collisionState;
         }
+
+        public boolean isEnemyHit() {
+            return collisionState.equals(CollisionState.ENEMY_HIT);
+        }
+
+        public boolean isWallHit() {
+            return collisionState.equals(CollisionState.WALL_HIT);
+        }
+
+        public boolean isNoCollision() {
+            return collisionState.equals(CollisionState.NO_COLLISION);
+        }
+    }
+
+    public enum CollisionState {
+        ENEMY_HIT, WALL_HIT, NO_COLLISION;
     }
 
     //Returns if the position that is passed has any collidable gameobject

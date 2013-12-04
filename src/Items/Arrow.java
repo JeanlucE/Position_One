@@ -12,7 +12,7 @@ import WIP.Transform;
  */
 public class Arrow extends Equipment {
 
-    protected int stack = 10;
+    private int stack = 1000;
     private PhysicsComponent physicsComponent;
 
     public Arrow(String name, int level, ProjectileGraphicsComponent g, PhysicsComponent phys) {
@@ -57,19 +57,15 @@ public class Arrow extends Equipment {
     }
 
     public Projectile createProjectile(Transform origin, Weapon_Ranged weapon) {
-        if (stack <= 0) {
-            this.destroy();
-            return null;
-        }
         stack--;
 
         //Rotate collider when arrow is pointign east or west
-        PhysicsComponent phys = getCollider();
+        PhysicsComponent phys = getCollider().clone();
         if (origin.getPosition().ofAxisWestEast()) {
             phys.rotate90();
         }
-
-        Projectile p = new Projectile(origin.clone(), new ProjectileGraphicsComponent(origin.getDirection().clone(),
+        origin = origin.clone();
+        Projectile p = new Projectile(origin, new ProjectileGraphicsComponent(origin.getDirection(),
                 ((ProjectileGraphicsComponent) getGraphic()).getResource()), phys, 10, 6,
                 weapon.getBaseDamage());
 

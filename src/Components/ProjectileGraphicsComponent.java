@@ -29,14 +29,14 @@ public class ProjectileGraphicsComponent extends ItemGraphicsComponent {
         if (direction == null)
             return projectileImages.getNorth();
 
-        if (direction.equals(Vector.NORTH)) {
-            return projectileImages.getNorth();
+        if (direction.equals(Vector.WEST)) {
+            return projectileImages.getWest();
         } else if (direction.equals(Vector.EAST)) {
             return projectileImages.getEast();
         } else if (direction.equals(Vector.SOUTH)) {
             return projectileImages.getSouth();
         } else {//direction.equals(Vector.WEST)
-            return projectileImages.getWest();
+            return projectileImages.getNorth();
         }
     }
 }

@@ -106,4 +106,8 @@ public class PhysicsComponent {
         return thisCollider[0].getY() < otherCollider[0].getY() + Renderer.TILESIZE * tolerance
                 && thisCollider[2].getY() > otherCollider[2].getY() - Renderer.TILESIZE * tolerance;
     }
+
+    public PhysicsComponent clone() {
+        return new PhysicsComponent(width, height);
+    }
 }

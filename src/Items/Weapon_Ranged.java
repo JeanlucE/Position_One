@@ -1,7 +1,6 @@
 package Items;
 
 import Components.ItemGraphicsComponent;
-import WIP.Actor;
 import WIP.DebugLog;
 
 /**
@@ -19,6 +18,7 @@ import WIP.DebugLog;
  * - Shooting projectiles like an arrow
  */
 public class Weapon_Ranged extends Weapon {
+
     public Weapon_Ranged(String name, int level, int dexterityRequirement, int baseDamage, int baseRange,
                          float useTime, ItemGraphicsComponent g) {
         super(name, level, dexterityRequirement, baseDamage, baseRange, useTime, EquipmentClass.RANGED, g);
@@ -26,13 +26,13 @@ public class Weapon_Ranged extends Weapon {
     }
 
     public void use() {
-        //TODO implement this
+        Arrow arrow = ((WIP.Character) equipped).getAmmunition();
+        if (arrow == null || arrow.getStack() <= 0) {
+            //arrow.destroy();
+            DebugLog.write("No ammunition left");
+            return;
+        }
+        arrow.createProjectile(equipped.getTransform(), this);
     }
-
-    public void use(Actor origin, Arrow arrow) {
-
-        arrow.createProjectile(origin.getTransform(), this);
-    }
-
     //TODO RangedType
 }

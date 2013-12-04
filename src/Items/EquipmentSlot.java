@@ -15,7 +15,7 @@ public class EquipmentSlot<T extends Equipment> {
 
     //Should only be called when isOccupied returns true
     public T getEquipment() {
-        return equipment;
+        return (equipment != null) ? equipment : null;
     }
 
     public void equip(T equipment) {

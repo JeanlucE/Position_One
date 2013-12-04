@@ -1,6 +1,6 @@
 package WIP;
 
-import Components.GraphicsComponent;
+import Components.ActorGraphicsComponent;
 import Components.PhysicsComponent;
 
 /**
@@ -11,7 +11,7 @@ import Components.PhysicsComponent;
  */
 public abstract class NPC extends Actor {
 
-    public NPC(String name, Transform transform, GraphicsComponent graphicsComponent,
+    public NPC(String name, Transform transform, ActorGraphicsComponent graphicsComponent,
                PhysicsComponent physicsComponent) {
         super(name, transform, graphicsComponent, physicsComponent);
     }

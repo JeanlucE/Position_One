@@ -18,7 +18,13 @@ public enum DynamicResource {
             Resource.projectile_arrow_01_wooden_FLOOR_NORTH,
             Resource.projectile_arrow_01_wooden_FLOOR_EAST,
             Resource.projectile_arrow_01_wooden_FLOOR_SOUTH,
-            Resource.projectile_arrow_01_wooden_FLOOR_WEST});
+            Resource.projectile_arrow_01_wooden_FLOOR_WEST}),
+    ENEMY_CHUCHU(new Resource[]{
+            Resource.enemy_DOWN,
+            Resource.enemy_DOWN,
+            Resource.enemy_DOWN,
+            Resource.enemy_DOWN,
+    });
 
     private Resource[] resources;
 
