@@ -45,11 +45,7 @@ public class Game {
         player.equip(bow);
         player.equip(arrow);
 
-        Enemy enemy = new Enemy("Chu Chu", 100, new Transform(new Vector(400, 400)),
-                new ActorGraphicsComponent(DynamicResource.ENEMY_CHUCHU),
-                new PhysicsComponent(40, 40));
-
-        Enemy enemy2 = new Enemy("Chu Chu", 100, new Transform(new Vector(420, 420)),
+        Enemy enemy = new Enemy("Chu Chu", 1000, new Transform(new Vector(400, 400)),
                 new ActorGraphicsComponent(DynamicResource.ENEMY_CHUCHU),
                 new PhysicsComponent(40, 40));
 

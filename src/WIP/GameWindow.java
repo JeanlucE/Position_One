@@ -17,9 +17,11 @@ class GameWindow extends JFrame {
             instance = new GameWindow();
         }
         return instance;
+
     }
 
     private GameWindow() {
+
         Game game = Game.getInstance();
         add(Renderer.getInstance());
         pack();

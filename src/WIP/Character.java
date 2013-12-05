@@ -16,6 +16,18 @@ import java.lang.reflect.Field;
  */
 public class Character extends Actor {
 
+    //region Player Items
+    private final Inventory inventory;
+    //region Skills
+    public Skill STRENGTH;
+    public Skill ENDURANCE;
+    public Skill INTELLIGENCE;
+    public Skill DEXTERITY;
+    //endregion
+    public Skill CHARISMA;
+    public Skill PERCEPTION;
+    public Skill LUCK;
+    public Skill STEALTH;
     //region Stats
     private int level;
     private int experience;
@@ -23,25 +35,10 @@ public class Character extends Actor {
     private int maxStamina, currentStamina;
     private int maxMana, currentMana;
     //endregion
-
-    //region Skills
-    public Skill STRENGTH;
-    public Skill ENDURANCE;
-    public Skill INTELLIGENCE;
-    public Skill DEXTERITY;
-    public Skill CHARISMA;
-    public Skill PERCEPTION;
-    public Skill LUCK;
-    public Skill STEALTH;
     //Array of all skills
     private Skill[] skills;
-    //endregion
-
-    //region Player Items
-    private final Inventory inventory;
     private EquipmentManager equipment;
     //endregion
-
     private int moveSpeed = 3;
 
     //Constructor for final build
@@ -76,6 +73,11 @@ public class Character extends Actor {
         DebugLog.write("New Character created: " + name);
     }
 
+    public static int getXPOfLevel(int level) {
+        return 20 * level * level;
+    }
+    //endregion
+
     public void update() {
         //TODO update direction player is facing from here
         setXVel(InputComponent.getInstance().getXAxis() * moveSpeed);
@@ -97,11 +99,6 @@ public class Character extends Actor {
             }
             InputComponent.getInstance().resetCtrlPressed();
         }
-    }
-    //endregion
-
-    public static int getXPOfLevel(int level) {
-        return 20 * level * level;
     }
 
     /*
@@ -228,7 +225,6 @@ public class Character extends Actor {
     public Inventory getInventory() {
         return inventory;
     }
-
 
     public void equip(Equipment equipment) {
         this.equipment.equip(equipment);

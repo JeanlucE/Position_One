@@ -37,6 +37,7 @@ import java.util.Map;
  * *                \/ +y
  */
 public class Renderer extends JPanel {
+
     private static Renderer instance = null;
     //This variable is very important as it determines the relative size of the world
     //TILESIZE determines how walls and floors are spaced, how far weapon ranges are and how big colliders are

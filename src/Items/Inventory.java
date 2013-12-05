@@ -30,7 +30,7 @@ public class Inventory {
     public void add(Item item) {
         if (item != null && !isFull()) {
             getFirstEmpty().addItem(item);
-            DebugLog.write(this);
+            DebugLog.write(this.toString());
         }
     }
 
@@ -81,11 +81,11 @@ public class Inventory {
 
     public String toString() {
         String str = "";
+        slotIterator:
         for (int i = 0; i < INVENTORYSIZE; i++) {
             for (int j = 0; j < INVENTORYSIZE; j++) {
                 if (getSlot(i, j).isOccupied()) {
-                    String itemName = getSlot(i, j).getItem().getName();
-                    str += ("Item at " + i + "|" + j + ": " + itemName + "\n");
+                    str += ("Item at " + i + "|" + j + ": " + getSlot(i, j).toString());
                 }
             }
         }
@@ -118,6 +118,10 @@ public class Inventory {
 
         public void empty() {
             addItem(null);
+        }
+
+        public String toString() {
+            return getItem().getName();
         }
     }
 }

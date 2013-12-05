@@ -37,7 +37,6 @@ public class InputComponent extends InputMap {
     }
 
     private InputComponent() {
-
         //W and UP ARROW control upward movement
         put(KeyStroke.getKeyStroke(KeyEvent.VK_W, 0, false), "w_pressed");
         put(KeyStroke.getKeyStroke(KeyEvent.VK_W, 0, true), "w_released");
@@ -172,6 +171,9 @@ public class InputComponent extends InputMap {
     }
 
     public boolean isCtrlPressed() {
+
         return ctrlPressed;
     }
+
+
 }

@@ -83,8 +83,8 @@ public class World {
         }
 
         for (Actor a : Actor.getActors()) {
-            if (a != Game.getInstance().getPlayer() && p.getCollider().onY(a.getCollider(), 0.2f)) {
-                if (p.getCollider().onX(a.getCollider(), 0.2f) && p.getCollider().onY(a.getCollider(), 0.2f)) {
+            if (a != Game.getInstance().getPlayer()) {
+                if (p.getCollider().onX(a.getCollider(), 0.3f) && p.getCollider().onY(a.getCollider(), 0.3f)) {
                     System.out.println(a.toString() + " hit!");
                     //CollisionState.ENEMY_HIT.setCollisionObject(a);
                     return new CollisionEvent(CollisionState.ENEMY_HIT, a);

@@ -16,12 +16,9 @@ import java.util.Map;
  */
 public class Camera {
     private static Camera instance = null;
-    private World world;
     private Vector parent;
     private int clipX, clipY;
     private int screenWidth, screenHeight;
-    private Map<Vector, WorldSpace> floors;
-    private Map<Vector, WorldSpace> walls;
 
     public static Camera getInstance() {
         if (instance == null) {
@@ -38,11 +35,11 @@ public class Camera {
     }
 
     public Map<Vector, WorldSpace> worldToRender() {
-        this.world = Game.getInstance().getCurrentWorld();
+        World world = Game.getInstance().getCurrentWorld();
         this.parent = Game.getInstance().getPlayer().getTransform().getPosition();
         Map<Vector, WorldSpace> visibleSpaces = new HashMap<>(100);
-        floors = new HashMap<>(100);
-        walls = new HashMap<>(100);
+        Map<Vector, WorldSpace> floors = new HashMap<>(100);
+        Map<Vector, WorldSpace> walls = new HashMap<>(100);
 
         //Get the camera clipping lines relative to the player
         int northClip = parent.getY() + clipX;
