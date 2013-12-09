@@ -25,9 +25,11 @@ public class InputComponent extends InputMap {
     private final Action stopX, stopY;
 
     private final Action spaceDown;
-    private final Action ctrlDown;
+    private final Action qDown;
+    private final Action shiftDown;
     private boolean spacePressed;
-    private boolean ctrlPressed;
+    private boolean qPressed;
+    private boolean shiftPressed;
 
     public static InputComponent getInstance() {
         if (instance == null) {
@@ -63,7 +65,12 @@ public class InputComponent extends InputMap {
 
         //Space uses the equipped weapon
         put(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0, false), "space_pressed");
-        put(KeyStroke.getKeyStroke(KeyEvent.VK_Q, 0, false), "ctrl_pressed");
+
+        //Q picks up next item
+        put(KeyStroke.getKeyStroke(KeyEvent.VK_Q, 0, false), "q_pressed");
+
+        //Shift makes the player sprint
+        put(KeyStroke.getKeyStroke(KeyEvent.VK_E, 0, false), "shift_pressed");
 
         actionMap = new ActionMap();
 
@@ -120,11 +127,19 @@ public class InputComponent extends InputMap {
             }
         };
 
-        ctrlDown = new AbstractAction() {
+        qDown = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ctrlPressed = true;
+                qPressed = true;
                 DebugLog.write("Q down");
+            }
+        };
+
+        shiftDown = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                shiftPressed = true;
+                System.out.println("Shift down");
             }
         };
 
@@ -139,15 +154,20 @@ public class InputComponent extends InputMap {
         actionMap.put("d_pressed", translateRight);
         actionMap.put("d_released", stopX);
         actionMap.put("space_pressed", spaceDown);
-        actionMap.put("ctrl_pressed", ctrlDown);
+        actionMap.put("q_pressed", qDown);
+        actionMap.put("shift_pressed", shiftDown);
     }
 
     public void resetSpacePressed() {
         spacePressed = false;
     }
 
-    public void resetCtrlPressed() {
-        ctrlPressed = false;
+    public void resetQPressed() {
+        qPressed = false;
+    }
+
+    public void resetShiftPressed() {
+        shiftPressed = false;
     }
 
     public ActionMap getActionMap() {
@@ -170,10 +190,12 @@ public class InputComponent extends InputMap {
         return spacePressed;
     }
 
-    public boolean isCtrlPressed() {
+    public boolean isQPressed() {
 
-        return ctrlPressed;
+        return qPressed;
     }
 
-
+    public boolean isShiftPressed() {
+        return shiftPressed;
+    }
 }

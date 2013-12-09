@@ -40,6 +40,8 @@ public class Character extends Actor {
     private EquipmentManager equipment;
     //endregion
     private int moveSpeed = 3;
+    private int sprintSpeed = 6;
+    private boolean sprinting = false;
 
     //Constructor for final build
     public Character(String name) {
@@ -80,6 +82,18 @@ public class Character extends Actor {
 
     public void update() {
         //TODO update direction player is facing from here
+
+        if (InputComponent.getInstance().isShiftPressed()) {
+            if (!sprinting) {
+                moveSpeed = sprintSpeed;
+                sprinting = true;
+            }
+            InputComponent.getInstance().resetShiftPressed();
+        } else {
+            moveSpeed = 3;
+            sprinting = false;
+        }
+
         setXVel(InputComponent.getInstance().getXAxis() * moveSpeed);
         setYVel(InputComponent.getInstance().getYAxis() * moveSpeed);
         if (getXVel() != 0 || getYVel() != 0) {
@@ -91,13 +105,13 @@ public class Character extends Actor {
             InputComponent.getInstance().resetSpacePressed();
         }
 
-        if (InputComponent.getInstance().isCtrlPressed()) {
+        if (InputComponent.getInstance().isQPressed()) {
             WorldSpace nextAbsPos = Game.getInstance().getCurrentWorld().get(getNextWorldPosition());
             if (nextAbsPos instanceof Floor) {
                 Floor floor = (Floor) nextAbsPos;
                 inventory.add(floor.hasDroppedItems() ? (floor.getTopItem()) : (null));
             }
-            InputComponent.getInstance().resetCtrlPressed();
+            InputComponent.getInstance().resetQPressed();
         }
     }
 

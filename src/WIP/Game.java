@@ -38,16 +38,12 @@ public class Game {
         player.getTransform().getPosition().setX(200);
         player.getTransform().getPosition().setY(200);
         Arrow arrow = new Arrow("Arrow", 0,
-                new ProjectileGraphicsComponent(null,
-                        DynamicResource.WOODENARROW),
+                new ProjectileGraphicsComponent(null, DynamicResource.WOODENARROW),
                 new PhysicsComponent(10, 25));
-        player.equip(bow);
+        player.equip(sword);
         player.equip(arrow);
 
         Enemy enemy = new Enemy("Chu Chu", 1000, new Transform(new Vector(400, 400)),
-                new ActorGraphicsComponent(DynamicResource.ENEMY_CHUCHU),
-                new PhysicsComponent(40, 40));
-        Enemy enemy2 = new Enemy("Chu Chu", 1000, new Transform(new Vector(420, 420)),
                 new ActorGraphicsComponent(DynamicResource.ENEMY_CHUCHU),
                 new PhysicsComponent(40, 40));
 
