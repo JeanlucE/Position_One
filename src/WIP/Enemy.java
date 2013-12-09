@@ -22,7 +22,7 @@ public class Enemy extends NPC {
     }
 
     public void update() {
-        //randomVel();
+        //drandomVel();
         if (getXVel() != 0 || getYVel() != 0) {
             move();
         }

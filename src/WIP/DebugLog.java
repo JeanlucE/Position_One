@@ -17,12 +17,15 @@ import java.util.Date;
 public class DebugLog {
 
     private static BufferedWriter logWriter;
+    private static DateFormat timeFormat;
+
 
     public static void instantiate() throws IOException {
         File log = new File("log.txt");
         if (!log.exists()) {
             log.createNewFile();
         }
+        timeFormat = new SimpleDateFormat("[HH:mm:ss.SSS]");
         logWriter = new BufferedWriter(new FileWriter(log));
         DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss dd.MM.yyyy");
         logWriter.write("Log created at: " + dateFormat.format(new Date()) + "\n\n");
@@ -33,8 +36,6 @@ public class DebugLog {
     }
 
     public static void write(String content) {
-        DateFormat timeFormat;
-        timeFormat = new SimpleDateFormat("[HH:mm:ss.SSS]");
         try {
             logWriter.write(timeFormat.format(new Date()) + " ");
             logWriter.write(content + "\n");

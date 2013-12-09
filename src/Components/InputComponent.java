@@ -15,7 +15,7 @@ import java.awt.event.KeyEvent;
  * Time: 22:44
  */
 public class InputComponent extends InputMap {
-
+    //TODO add sprint with shift
     private static InputComponent instance;
     private final ActionMap actionMap;
     private int XAxis, YAxis;

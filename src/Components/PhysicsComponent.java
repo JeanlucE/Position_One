@@ -107,7 +107,29 @@ public class PhysicsComponent {
                 && thisCollider[2].getY() > otherCollider[2].getY() - Renderer.TILESIZE * tolerance;
     }
 
+    public boolean collision(PhysicsComponent otherCollider) {
+        boolean actorAbove = above(otherCollider);
+        boolean actorBelow = below(otherCollider);
+        boolean actorLeftOf = leftOf(otherCollider);
+        boolean actorRightOf = rightOf(otherCollider);
+
+        return !actorAbove && !actorBelow && !actorLeftOf
+                && !actorRightOf;
+    }
+
     public PhysicsComponent clone() {
         return new PhysicsComponent(width, height);
+    }
+
+    public PhysicsComponent clone(Transform t) {
+        PhysicsComponent p = new PhysicsComponent(width, height);
+        p.setParent(t);
+        return p;
+    }
+
+    public PhysicsComponent clone(Vector t) {
+        PhysicsComponent p = new PhysicsComponent(width, height);
+        p.setParent(new Transform(t));
+        return p;
     }
 }

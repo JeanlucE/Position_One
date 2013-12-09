@@ -60,13 +60,15 @@ public abstract class Actor extends GameObject {
         //TODO slow down character movement for diagonal movement
 
         //If player can move to inputted position, move there
-        if (world.resolveCollision(this, currentPosition.shiftedPosition(currentXVelocity, currentYVelocity))) {
+        World.CollisionEvent collisionEvent = world.resolveCollision(this, currentPosition.shiftedPosition
+                (currentXVelocity, currentYVelocity));
+        if (collisionEvent.isNoCollision()) {
             translate(currentXVelocity, currentYVelocity);
         } else {
             //If player cannot, but another inputted direction is possible, slide past the wall
-            if (world.resolveCollision(this, currentPosition.shiftedPosition(currentXVelocity, 0))) {
+            if (world.resolveCollision(this, currentPosition.shiftedPosition(currentXVelocity, 0)).isNoCollision()) {
                 translate(currentXVelocity, 0);
-            } else if (world.resolveCollision(this, currentPosition.shiftedPosition(0, currentYVelocity))) {
+            } else if (world.resolveCollision(this, currentPosition.shiftedPosition(0, currentYVelocity)).isNoCollision()) {
                 translate(0, currentYVelocity);
             }
         }
@@ -195,6 +197,10 @@ public abstract class Actor extends GameObject {
     //endregion
 
     protected abstract Faction getFaction();
+
+    public String toString() {
+        return getName() + "(" + currentHealth + "/" + maxHealth + ")";
+    }
 
     public enum Faction {
         PLAYER, FRIENDLY, ENEMY;

@@ -19,7 +19,6 @@ import java.awt.event.ActionListener;
 public class Game {
     private static Game instance = null;
     private final Character player;
-    //private World currentWorld;
     private final Renderer renderer;
     private final GameLoop gameLoop;
 
@@ -48,13 +47,16 @@ public class Game {
         Enemy enemy = new Enemy("Chu Chu", 1000, new Transform(new Vector(400, 400)),
                 new ActorGraphicsComponent(DynamicResource.ENEMY_CHUCHU),
                 new PhysicsComponent(40, 40));
+        Enemy enemy2 = new Enemy("Chu Chu", 1000, new Transform(new Vector(420, 420)),
+                new ActorGraphicsComponent(DynamicResource.ENEMY_CHUCHU),
+                new PhysicsComponent(40, 40));
 
         World currentWorld = World.getInstance();
         ((Floor) currentWorld.getReal(6, 7)).dropItem(new Weapon_Melee("Swordish", 0, 0, 1, 1.0f,
                 new ItemGraphicsComponent(Resource.weapon_melee_01_FLOOR)));
-        /*((Floor) currentWorld.getReal(7, 7)).dropItem(new Arrow("Arrow", 0,
+        ((Floor) currentWorld.getReal(7, 7)).dropItem(new Arrow("Arrow", 0,
                 new ProjectileGraphicsComponent(null, DynamicResource.WOODENARROW),
-                new PhysicsComponent(10, 25)));    */
+                new PhysicsComponent(10, 25)));
 
         renderer = Renderer.getInstance();
 

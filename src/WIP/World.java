@@ -62,36 +62,67 @@ public class World {
     If none of the corners clips a collidable world space (e.g. a wall) the method returns true.
     If any of the corners clips a collidable world space (e.g. a wall) the method returns false.
      */
-    public boolean resolveCollision(Actor actor, Vector nextPosition) {
+    public CollisionEvent resolveCollision(Actor actor, Vector nextPosition) {
         //TODO if player cant move directly to the given position, test if he can still move nearer to that position
         PhysicsComponent collider = actor.getCollider();
-        boolean canMove = false;
         for (Vector p : collider.getCorners(nextPosition)) {
-            canMove = canMoveTo(p);
-            if (!canMove)
-                break;
+            CollisionEvent collisionEvent = resolveWallCollision(p);
+            if (collisionEvent.isWallHit())
+                return collisionEvent;
         }
-        return canMove && canMoveTo(actor, nextPosition);
+        return resolveActorCollision(actor, nextPosition);
     }
 
     public CollisionEvent resolveCollision(Projectile p, Vector nextPosition) {
         PhysicsComponent collider = p.getCollider();
         for (Vector v : collider.getCorners(nextPosition)) {
-            if (!canMoveTo(v))
+            CollisionEvent wallCollision = resolveWallCollision(v);
+            if (wallCollision.isWallHit())
                 //TODO set wall collision object
-                return new CollisionEvent(CollisionState.WALL_HIT, null);
+                return wallCollision;
         }
 
         for (Actor a : Actor.getActors()) {
             if (a != Game.getInstance().getPlayer()) {
                 if (p.getCollider().onX(a.getCollider(), 0.3f) && p.getCollider().onY(a.getCollider(), 0.3f)) {
-                    System.out.println(a.toString() + " hit!");
-                    //CollisionState.ENEMY_HIT.setCollisionObject(a);
+                    DebugLog.write(a + " hit!");
                     return new CollisionEvent(CollisionState.ENEMY_HIT, a);
                 }
             }
         }
 
+        return new CollisionEvent(CollisionState.NO_COLLISION, null);
+    }
+
+    //Returns if the position that is passed has any collidable gameobject
+    private CollisionEvent resolveWallCollision(int x, int y) {
+        if (currentMap.getReal(x / 40, y / 40).isCollidable()) {
+            return new CollisionEvent(CollisionState.WALL_HIT, currentMap.getReal(x / 40, y / 40));
+        } else {
+            return new CollisionEvent(CollisionState.NO_COLLISION, null);
+        }
+
+    }
+
+    private CollisionEvent resolveWallCollision(Vector position) {
+        return resolveWallCollision(position.getX(), position.getY());
+    }
+
+    /*
+    This method resolves collisions between the player and any enemy (for now) and any further actors in the scene.
+    TODO make this between all actors
+     */
+    private CollisionEvent resolveActorCollision(Actor actor, Vector nextPosition) {
+        Actor[] actors = Actor.getActors();
+        for (int i = 0; i < actors.length; i++) {
+            Actor otherActor = actors[i];
+            if (actor != otherActor && !actor.getFaction().equals(otherActor.getFaction())) {
+                PhysicsComponent nextCollider = actor.getCollider().clone(nextPosition);
+                PhysicsComponent otherCollider = otherActor.getCollider();
+                if (nextCollider.collision(otherCollider))
+                    return new CollisionEvent(CollisionState.ENEMY_HIT, otherActor);
+            }
+        }
         return new CollisionEvent(CollisionState.NO_COLLISION, null);
     }
 
@@ -129,41 +160,5 @@ public class World {
 
     public enum CollisionState {
         ENEMY_HIT, WALL_HIT, NO_COLLISION;
-    }
-
-    //Returns if the position that is passed has any collidable gameobject
-    boolean canMoveTo(int x, int y) {
-        return !currentMap.getReal(x / 40, y / 40).isCollidable();
-    }
-
-    boolean canMoveTo(Vector position) {
-        return canMoveTo(position.getX(), position.getY());
-    }
-
-    /*
-    This method resolves collisions between the player and any enemy (for now) and any further actors in the scene.
-    TODO make this between all actors
-     */
-    boolean canMoveTo(Actor actor, Vector nextPosition) {
-        boolean canMove = true;
-        Actor[] actors = Actor.getActors();
-        for (int i = 0; i < actors.length && canMove; i++) {
-            Actor otherActor = actors[i];
-            if (actor.getFaction().equals(otherActor.getFaction()))
-                canMove = true;
-            else if (actor != otherActor) {
-                Vector[] thisCorners = actor.getCollider().getCorners(nextPosition);
-                Vector[] otherCorners = otherActor.getCollider().getCorners();
-
-                boolean actorAbove = thisCorners[2].getY() > otherCorners[0].getY();
-                boolean actorBelow = thisCorners[0].getY() < otherCorners[2].getY();
-                boolean actorLeftOf = thisCorners[1].getX() < otherCorners[0].getX();
-                boolean actorRightOf = thisCorners[0].getX() > otherCorners[1].getX();
-
-                canMove = actorAbove || actorBelow || actorLeftOf
-                        || actorRightOf;
-            }
-        }
-        return canMove;
     }
 }
