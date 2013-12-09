@@ -47,6 +47,10 @@ public class Renderer extends JPanel {
     private final static int screenWidth = 500, screenHeight = 500;
     private Graphics2D g2d;
 
+    //DEBUGGING
+    private boolean drawActorPositions = true;
+    private boolean drawActorColliders = true;
+
     //Singleton Design Pattern
     public static Renderer getInstance() {
         if (instance == null) {
@@ -83,8 +87,19 @@ public class Renderer extends JPanel {
         drawProjectiles();
 
         //DEBUGGING
-        drawPlayer();
-        drawActors();
+        Map<Actor, Vector> actorPositionMap = Camera.getInstance().actorsToRender();
+
+
+        drawActors(actorPositionMap);
+
+        if (drawActorPositions) {
+            drawActorPositions(actorPositionMap);
+        }
+
+        if (drawActorColliders) {
+            drawActorColliders(actorPositionMap);
+        }
+
         drawGUI();
 
         MouseInputComponent mouseListener = MouseInputComponent.getInstance();
@@ -157,27 +172,32 @@ public class Renderer extends JPanel {
     }
 
     //DEBUGGING draws player position and collider
-    private void drawPlayer() {
-        Game game = Game.getInstance();
+    private void drawActorPositions(Map<Actor, Vector> actors) {
+        g2d.setColor(Color.RED);
+        for (Actor a : actors.keySet()) {
+            //Position
+            Vector position = actors.get(a);
+            g2d.drawString(a.getTransform().getPosition().toString(),
+                    position.getX() - 5, screenWidth - position.getY() + 12);
+        }
+    }
+
+    private void drawActorColliders(Map<Actor, Vector> actors) {
         //Collider
         g2d.setColor(Color.RED);
-        Vector playerDrawPos = Camera.getInstance().getParentPosition();
-        PhysicsComponent collider = game.getPlayer().getCollider();
-        g2d.drawRect(playerDrawPos.getX(), playerDrawPos.getY() - collider.getHeight(),
-                collider.getWidth(), collider.getHeight());
-
-        //Position
-        g2d.setColor(Color.RED);
-        Vector playerPos = game.getPlayer().getTransform().getPosition();
-        g2d.drawString(playerPos.toString(), playerDrawPos.getX() - 5, playerDrawPos.getY() + 10);
+        for (Actor a : actors.keySet()) {
+            Vector position = actors.get(a);
+            PhysicsComponent p = a.getCollider();
+            g2d.drawRect(position.getX(), screenWidth - (position.getY() + p.getHeight()),
+                    p.getWidth(), p.getHeight());
+        }
     }
 
     /*
     TODO Dont draws actors if they are not visible to the player
     Also draws all healthbars.
      */
-    private void drawActors() {
-        Map<Actor, Vector> actorPositionMap = Camera.getInstance().actorsToRender();
+    private void drawActors(Map<Actor, Vector> actorPositionMap) {
         for (Actor a : actorPositionMap.keySet()) {
             Vector drawPosition = actorPositionMap.get(a);
             PhysicsComponent phys = a.getCollider();
