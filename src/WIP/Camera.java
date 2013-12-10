@@ -53,15 +53,18 @@ public class Camera {
             for (int y = southClip; y < northClip; y += Renderer.TILESIZE) {
                 WorldSpace worldSpace = world.get(x, y);
                 Vector worldPosition = new Vector(x - x % Renderer.TILESIZE, y - y % Renderer.TILESIZE);
+
+                //Get worldspace position relative to player position
+                worldPosition.setX(screenWidth / 2 + (worldPosition.getX() - parent.getX()));
+                worldPosition.setY(screenHeight / 2 + (worldPosition.getY() - parent.getY()));
+
                 if (worldSpace instanceof Wall) {
                     walls.put(worldPosition, worldSpace);
                 } else {
                     floors.put(worldPosition, worldSpace);
                 }
 
-                //Get worldspace position relative to player position
-                worldPosition.setX(screenWidth / 2 + (worldPosition.getX() - parent.getX()));
-                worldPosition.setY(screenHeight / 2 + (worldPosition.getY() - parent.getY()));
+
             }
         }
         visibleSpaces.putAll(walls);

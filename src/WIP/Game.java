@@ -40,7 +40,7 @@ public class Game {
         Arrow arrow = new Arrow("Arrow", 0,
                 new ProjectileGraphicsComponent(null, DynamicResource.WOODENARROW),
                 new PhysicsComponent(10, 25));
-        player.equip(sword);
+        player.equip(bow);
         player.equip(arrow);
 
         Enemy enemy = new Enemy("Chu Chu", 1000, new Transform(new Vector(400, 400)),

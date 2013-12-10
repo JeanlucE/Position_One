@@ -61,7 +61,7 @@ public class Arrow extends Equipment {
 
         //Rotate collider when arrow is pointign east or west
         PhysicsComponent phys = getCollider().clone();
-        if (origin.getPosition().ofAxisWestEast()) {
+        if (origin.getDirection().ofAxisWestEast()) {
             phys.rotate90();
         }
         origin = origin.clone();

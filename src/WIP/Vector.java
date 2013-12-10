@@ -23,8 +23,7 @@ package WIP;
  */
 public class Vector {
 
-    public final static
-    Vector NORTH, SOUTH, EAST, WEST;
+    public final static Vector NORTH, SOUTH, EAST, WEST;
 
     static {
         NORTH = new Vector(0, 1);

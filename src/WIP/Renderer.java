@@ -195,7 +195,6 @@ public class Renderer extends JPanel {
 
     /*
     TODO Dont draws actors if they are not visible to the player
-    Also draws all healthbars.
      */
     private void drawActors(Map<Actor, Vector> actorPositionMap) {
         for (Actor a : actorPositionMap.keySet()) {
@@ -206,6 +205,8 @@ public class Renderer extends JPanel {
                     phys.getWidth(), phys.getHeight(), this);
 
         }
+
+        //Draws all health bars
         for (Actor a : actorPositionMap.keySet()) {
             Vector drawPosition = actorPositionMap.get(a);
             drawHealthBar(a, drawPosition);
@@ -227,5 +228,11 @@ public class Renderer extends JPanel {
     }
 
     private void drawGUI() {
+    }
+
+    private GUIState guiState;
+
+    private enum GUIState {
+        GAME, MAIN_MENU, INVENTORY, MAP, PAUSE_MENU;
     }
 }

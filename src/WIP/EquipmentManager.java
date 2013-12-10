@@ -17,6 +17,11 @@ public class EquipmentManager {
     private EquipmentSlot<Armour> offHandSlot;
     private EquipmentSlot<Arrow> ammunitionSlot;
 
+    /*
+    Instantiates all equipment slots with what kind of equipment that particular slot can carry
+    Main hand should always be a weapon
+    Problems could arise here with Two-Handed and off-hand weapons
+     */
     public EquipmentManager(Character parent) {
         this.parent = parent;
         helmetSlot = new EquipmentSlot();

@@ -1,7 +1,7 @@
 package WIP;
 
-import Components.GraphicsComponent;
 import Components.PhysicsComponent;
+import Components.StaticGraphicsComponent;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,12 +11,15 @@ import Components.PhysicsComponent;
  */
 public class Wall extends WorldSpace {
 
+    private PhysicsComponent physicsComponent;
+
+    public Wall(Transform transform, StaticGraphicsComponent g, PhysicsComponent p) {
+        super(transform, g);
+        physicsComponent = p;
+    }
+
     @Override
     public boolean isCollidable() {
         return true;
-    }
-
-    public Wall(Transform transform, GraphicsComponent g, PhysicsComponent p) {
-        super(transform, g);
     }
 }

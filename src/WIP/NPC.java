@@ -17,8 +17,7 @@ public abstract class NPC extends Actor {
     }
 
     @Override
-    public void update() {
-    }
+    public abstract void update();
 
     @Override
     public boolean isCollidable() {

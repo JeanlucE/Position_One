@@ -12,6 +12,7 @@ public abstract class GraphicsComponent {
 
     protected BufferedImage[] image;
 
+    //DEBUGGING
     public GraphicsComponent() {
         image = null;
     }

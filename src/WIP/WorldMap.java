@@ -1,6 +1,5 @@
 package WIP;
 
-import Components.GraphicsComponent;
 import Components.PhysicsComponent;
 import Components.Resource;
 import Components.StaticGraphicsComponent;
@@ -24,8 +23,8 @@ public class WorldMap {
         int tilesize = 40;
         int roomsize = 20;
         //Creates a square room of with walk space 19x19
-        GraphicsComponent g = new StaticGraphicsComponent(Resource.wall01);
-        GraphicsComponent floor = new StaticGraphicsComponent(Resource.floor01);
+        StaticGraphicsComponent g = new StaticGraphicsComponent(Resource.wall01);
+        StaticGraphicsComponent floor = new StaticGraphicsComponent(Resource.floor01);
         PhysicsComponent boxCollider = new PhysicsComponent(tilesize, tilesize);
         for (int i = 0; i < roomsize * tilesize; i += tilesize) {
             set(i, 0, new Wall(new Transform(new Vector(i, 0)), g, boxCollider));

@@ -70,8 +70,8 @@ public class Character extends Actor {
         currentStamina = maxStamina;
 
         this.inventory = new Inventory();
+        equipment = new EquipmentManager(this);
         this.instantiateSkills();
-        this.instantiateEquipmentSlots();
         DebugLog.write("New Character created: " + name);
     }
 
@@ -141,19 +141,11 @@ public class Character extends Actor {
         return f.getName().charAt(0) + f.getName().substring(1, f.getName().length()).toLowerCase();
     }
 
-    /*
-    Instantiates all equipment slots with what kind of equipment that particular slot can carry
-    Main hand should always be a weapon
-    Problems could arise here with Two-Handed and off-hand weapons
-     */
-    private void instantiateEquipmentSlots() {
-        equipment = new EquipmentManager(this);
-    }
-
     private void attack() {
         Weapon weapon = equipment.getMainHand();
-        weapon.use();
-
+        if (weapon != null) {
+            weapon.use();
+        }
     }
 
     //region Player Stats
@@ -195,21 +187,19 @@ public class Character extends Actor {
     //TODO: separate method for assigning skill points
     //TODO: every time skill points are newly assigned recalculate maxHealth, maxMana, maxStamina
     private void levelUp() {
-
-        System.out.println("Level up!");
         level++;
         skillPoints++;
 
         DebugLog.write("Player " + getName() + "has leveled up. \nPlayer " + getName() + "is now level" + level);
 
         //Takes text input for which skill should be leveled up
-        String skillToLevelUp = Test.input.nextLine();
+        /*String skillToLevelUp = Test.input.nextLine();
         for (Skill s : skills) {
             if (s.getName().toLowerCase().startsWith(skillToLevelUp)) {
                 s.setLevel(s.getLevel() + 1);
                 skillPoints--;
             }
-        }
+        }*/
     }
 
     public void addExperience(int experience) {

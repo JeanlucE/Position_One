@@ -1,6 +1,6 @@
 package WIP;
 
-import Components.GraphicsComponent;
+import Components.StaticGraphicsComponent;
 import Items.Item;
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ public class Floor extends WorldSpace {
     //TODO make this a stack
     private List<Item> droppedItems;
 
-    public Floor(Transform transform, GraphicsComponent g) {
+    public Floor(Transform transform, StaticGraphicsComponent g) {
         super(transform, g);
     }
 
