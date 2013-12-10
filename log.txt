@@ -1,232 +1,74 @@
-Log created at: 14:39:08 10.12.2013
+Log created at: 14:47:21 10.12.2013
 
-[14:39:09.231] New Game started
-[14:39:09.250] New Melee Weapon created: Sword
-[14:39:09.251] New Ranged Weapon created: The OP Bow
-[14:39:09.405] New Character created: Ned Stark
-[14:39:09.408] Player Ned Stark has equipped: The OP Bow
-[14:39:09.408] Player Ned Stark has equipped: Arrow
-[14:39:09.437] New World created with size: 400
-[14:39:09.437] New Melee Weapon created: Swordish
-[14:39:09.444] Renderer started
-[14:39:13.233] SPACE down
-[14:39:13.250] New Projectile at: 221|428
-[14:39:13.662] Chu Chu(1000/1000) hit!
-[14:39:13.663] Damaged enemy Chu Chu for 10 damage.
-[14:39:13.663] Projectile destroyed
-[14:39:14.832] SPACE down
-[14:39:14.846] New Projectile at: 227|437
-[14:39:15.260] Chu Chu(990/1000) hit!
-[14:39:15.260] Damaged enemy Chu Chu for 10 damage.
-[14:39:15.261] Projectile destroyed
-[14:39:17.204] SPACE down
-[14:39:17.222] New Projectile at: 242|398
-[14:39:17.584] Chu Chu(980/1000) hit!
-[14:39:17.584] Damaged enemy Chu Chu for 10 damage.
-[14:39:17.584] Projectile destroyed
-[14:39:19.361] SPACE down
-[14:39:19.369] New Projectile at: 383|278
-[14:39:19.956] Projectile destroyed
-[14:39:20.609] SPACE down
-[14:39:20.613] New Projectile at: 389|287
-[14:39:20.878] Chu Chu(970/1000) hit!
-[14:39:20.878] Damaged enemy Chu Chu for 10 damage.
-[14:39:20.879] Projectile destroyed
-[14:39:21.986] SPACE down
-[14:39:22.000] New Projectile at: 422|308
-[14:39:22.217] Chu Chu(960/1000) hit!
-[14:39:22.217] Damaged enemy Chu Chu for 10 damage.
-[14:39:22.217] Projectile destroyed
-[14:39:23.178] SPACE down
-[14:39:23.182] New Projectile at: 437|293
-[14:39:23.427] SPACE down
-[14:39:23.428] New Projectile at: 437|293
-[14:39:23.453] Chu Chu(950/1000) hit!
-[14:39:23.454] Damaged enemy Chu Chu for 10 damage.
-[14:39:23.454] Projectile destroyed
-[14:39:23.673] SPACE down
-[14:39:23.674] New Projectile at: 437|293
-[14:39:23.698] Chu Chu(940/1000) hit!
-[14:39:23.698] Damaged enemy Chu Chu for 10 damage.
-[14:39:23.698] Projectile destroyed
-[14:39:23.858] SPACE down
-[14:39:23.867] New Projectile at: 437|293
-[14:39:23.915] Chu Chu(930/1000) hit!
-[14:39:23.916] Damaged enemy Chu Chu for 10 damage.
-[14:39:23.916] Projectile destroyed
-[14:39:24.115] Chu Chu(920/1000) hit!
-[14:39:24.116] Damaged enemy Chu Chu for 10 damage.
-[14:39:24.116] Projectile destroyed
-[14:39:25.753] SPACE down
-[14:39:25.769] New Projectile at: 527|380
-[14:39:26.383] Projectile destroyed
-[14:39:26.667] SPACE down
-[14:39:26.672] New Projectile at: 515|392
-[14:39:26.890] Chu Chu(910/1000) hit!
-[14:39:26.890] Damaged enemy Chu Chu for 10 damage.
-[14:39:26.890] Projectile destroyed
-[14:39:26.929] SPACE down
-[14:39:26.937] New Projectile at: 515|392
-[14:39:27.161] SPACE down
-[14:39:27.172] New Projectile at: 515|392
-[14:39:27.173] Chu Chu(900/1000) hit!
-[14:39:27.173] Damaged enemy Chu Chu for 10 damage.
-[14:39:27.173] Projectile destroyed
-[14:39:27.389] Chu Chu(890/1000) hit!
-[14:39:27.390] Damaged enemy Chu Chu for 10 damage.
-[14:39:27.390] Projectile destroyed
-[14:39:28.235] SPACE down
-[14:39:28.243] New Projectile at: 503|428
-[14:39:28.434] Chu Chu(880/1000) hit!
-[14:39:28.434] Damaged enemy Chu Chu for 10 damage.
-[14:39:28.435] Projectile destroyed
-[14:39:28.566] SPACE down
-[14:39:28.582] New Projectile at: 503|428
-[14:39:28.775] Chu Chu(870/1000) hit!
-[14:39:28.776] Damaged enemy Chu Chu for 10 damage.
-[14:39:28.776] Projectile destroyed
-[14:39:29.524] SPACE down
-[14:39:29.543] New Projectile at: 491|437
-[14:39:29.711] Chu Chu(860/1000) hit!
-[14:39:29.711] Damaged enemy Chu Chu for 10 damage.
-[14:39:29.712] Projectile destroyed
-[14:39:29.977] SPACE down
-[14:39:29.979] New Projectile at: 491|437
-[14:39:30.147] Chu Chu(850/1000) hit!
-[14:39:30.147] Damaged enemy Chu Chu for 10 damage.
-[14:39:30.147] Projectile destroyed
-[14:39:30.196] SPACE down
-[14:39:30.197] New Projectile at: 491|437
-[14:39:30.368] Chu Chu(840/1000) hit!
-[14:39:30.369] Damaged enemy Chu Chu for 10 damage.
-[14:39:30.369] Projectile destroyed
-[14:39:34.793] SPACE down
-[14:39:34.808] New Projectile at: 404|500
-[14:39:34.994] SPACE down
-[14:39:35.005] New Projectile at: 404|500
-[14:39:35.005] Chu Chu(830/1000) hit!
-[14:39:35.005] Damaged enemy Chu Chu for 10 damage.
-[14:39:35.006] Projectile destroyed
-[14:39:35.198] Chu Chu(820/1000) hit!
-[14:39:35.198] Damaged enemy Chu Chu for 10 damage.
-[14:39:35.198] Projectile destroyed
-[14:39:35.838] SPACE down
-[14:39:35.853] New Projectile at: 395|491
-[14:39:36.023] Chu Chu(810/1000) hit!
-[14:39:36.023] Damaged enemy Chu Chu for 10 damage.
-[14:39:36.024] Projectile destroyed
-[14:39:36.048] SPACE down
-[14:39:36.049] New Projectile at: 395|491
-[14:39:36.217] Chu Chu(800/1000) hit!
-[14:39:36.217] Damaged enemy Chu Chu for 10 damage.
-[14:39:36.218] Projectile destroyed
-[14:39:36.231] SPACE down
-[14:39:36.241] New Projectile at: 395|491
-[14:39:36.408] Chu Chu(790/1000) hit!
-[14:39:36.409] Damaged enemy Chu Chu for 10 damage.
-[14:39:36.409] Projectile destroyed
-[14:39:38.047] SPACE down
-[14:39:38.057] New Projectile at: 440|479
-[14:39:38.201] Chu Chu(780/1000) hit!
-[14:39:38.201] Damaged enemy Chu Chu for 10 damage.
-[14:39:38.201] Projectile destroyed
-[14:39:38.652] SPACE down
-[14:39:38.665] New Projectile at: 440|479
-[14:39:38.809] Chu Chu(770/1000) hit!
-[14:39:38.809] Damaged enemy Chu Chu for 10 damage.
-[14:39:38.809] Projectile destroyed
-[14:39:38.845] SPACE down
-[14:39:38.857] New Projectile at: 440|479
-[14:39:39.001] Chu Chu(760/1000) hit!
-[14:39:39.002] Damaged enemy Chu Chu for 10 damage.
-[14:39:39.002] Projectile destroyed
-[14:39:39.018] SPACE down
-[14:39:39.025] New Projectile at: 440|479
-[14:39:39.173] Chu Chu(750/1000) hit!
-[14:39:39.173] Damaged enemy Chu Chu for 10 damage.
-[14:39:39.174] Projectile destroyed
-[14:39:39.566] SPACE down
-[14:39:39.579] New Projectile at: 440|479
-[14:39:39.723] Chu Chu(740/1000) hit!
-[14:39:39.723] Damaged enemy Chu Chu for 10 damage.
-[14:39:39.724] Projectile destroyed
-[14:39:40.367] SPACE down
-[14:39:40.382] New Projectile at: 440|479
-[14:39:40.526] Chu Chu(730/1000) hit!
-[14:39:40.527] Damaged enemy Chu Chu for 10 damage.
-[14:39:40.527] Projectile destroyed
-[14:39:44.185] SPACE down
-[14:39:44.195] New Projectile at: 407|509
-[14:39:44.414] Chu Chu(720/1000) hit!
-[14:39:44.414] Damaged enemy Chu Chu for 10 damage.
-[14:39:44.414] Projectile destroyed
-[14:39:44.752] SPACE down
-[14:39:44.755] New Projectile at: 407|509
-[14:39:44.972] Chu Chu(710/1000) hit!
-[14:39:44.972] Damaged enemy Chu Chu for 10 damage.
-[14:39:44.972] Projectile destroyed
-[14:39:45.777] SPACE down
-[14:39:45.789] New Projectile at: 428|497
-[14:39:45.982] Chu Chu(700/1000) hit!
-[14:39:45.982] Damaged enemy Chu Chu for 10 damage.
-[14:39:45.982] Projectile destroyed
-[14:39:46.426] SPACE down
-[14:39:46.441] New Projectile at: 428|497
-[14:39:46.634] Chu Chu(690/1000) hit!
-[14:39:46.635] Damaged enemy Chu Chu for 10 damage.
-[14:39:46.635] Projectile destroyed
-[14:39:48.157] SPACE down
-[14:39:48.164] New Projectile at: 524|416
-[14:39:48.408] Chu Chu(680/1000) hit!
-[14:39:48.408] Damaged enemy Chu Chu for 10 damage.
-[14:39:48.408] Projectile destroyed
-[14:39:49.137] SPACE down
-[14:39:49.153] New Projectile at: 491|401
-[14:39:49.321] Chu Chu(670/1000) hit!
-[14:39:49.321] Damaged enemy Chu Chu for 10 damage.
-[14:39:49.322] Projectile destroyed
-[14:39:49.502] SPACE down
-[14:39:49.522] New Projectile at: 491|401
-[14:39:49.673] SPACE down
-[14:39:49.690] New Projectile at: 491|401
-[14:39:49.690] Chu Chu(660/1000) hit!
-[14:39:49.690] Damaged enemy Chu Chu for 10 damage.
-[14:39:49.691] Projectile destroyed
-[14:39:49.864] Chu Chu(650/1000) hit!
-[14:39:49.864] Damaged enemy Chu Chu for 10 damage.
-[14:39:49.864] Projectile destroyed
-[14:39:52.058] SPACE down
-[14:39:52.072] New Projectile at: 491|386
-[14:39:52.309] SPACE down
-[14:39:52.313] New Projectile at: 491|386
-[14:39:52.544] SPACE down
-[14:39:52.561] New Projectile at: 491|386
-[14:39:52.657] Projectile destroyed
-[14:39:52.897] Projectile destroyed
-[14:39:53.143] Projectile destroyed
-[14:39:53.489] SPACE down
-[14:39:53.501] New Projectile at: 491|395
-[14:39:54.075] Projectile destroyed
-[14:39:54.201] SPACE down
-[14:39:54.219] New Projectile at: 482|395
-[14:39:54.363] Chu Chu(640/1000) hit!
-[14:39:54.363] Damaged enemy Chu Chu for 10 damage.
-[14:39:54.363] Projectile destroyed
-[14:39:54.399] SPACE down
-[14:39:54.410] New Projectile at: 482|395
-[14:39:54.554] Chu Chu(630/1000) hit!
-[14:39:54.554] Damaged enemy Chu Chu for 10 damage.
-[14:39:54.554] Projectile destroyed
-[14:39:54.601] SPACE down
-[14:39:54.602] New Projectile at: 482|395
-[14:39:54.751] Chu Chu(620/1000) hit!
-[14:39:54.751] Damaged enemy Chu Chu for 10 damage.
-[14:39:54.751] Projectile destroyed
-[14:39:55.046] SPACE down
-[14:39:55.064] New Projectile at: 482|395
-[14:39:55.212] Chu Chu(610/1000) hit!
-[14:39:55.212] Damaged enemy Chu Chu for 10 damage.
-[14:39:55.213] Projectile destroyed
-[14:39:56.423] SPACE down
-[14:39:56.437] New Projectile at: 461|386
-[14:39:57.016] Projectile destroyed
+[14:47:21.611] New Game started
+[14:47:21.629] New Melee Weapon created: Sword
+[14:47:21.630] New Ranged Weapon created: The OP Bow
+[14:47:21.800] New Character created: Ned Stark
+[14:47:21.804] Player Ned Stark has equipped: The OP Bow
+[14:47:21.804] Player Ned Stark has equipped: Arrow
+[14:47:21.831] New World created with size: 400
+[14:47:21.832] New Melee Weapon created: Swordish
+[14:47:21.838] Renderer started
+[14:47:24.500] SPACE down
+[14:47:24.501] New Projectile at: 350|404
+[14:47:24.595] Chu Chu(1000/1000) hit!
+[14:47:24.596] Damaged enemy Chu Chu for 10 damage.
+[14:47:24.596] Projectile destroyed
+[14:47:25.724] SPACE down
+[14:47:25.742] New Projectile at: 236|404
+[14:47:26.201] Projectile destroyed
+[14:47:26.510] SPACE down
+[14:47:26.512] New Projectile at: 212|404
+[14:47:26.753] SPACE down
+[14:47:26.776] New Projectile at: 212|404
+[14:47:26.948] Chu Chu(990/1000) hit!
+[14:47:26.948] Damaged enemy Chu Chu for 10 damage.
+[14:47:26.949] Projectile destroyed
+[14:47:27.216] Chu Chu(980/1000) hit!
+[14:47:27.216] Damaged enemy Chu Chu for 10 damage.
+[14:47:27.216] Projectile destroyed
+[14:47:27.648] SPACE down
+[14:47:27.649] New Projectile at: 230|416
+[14:47:27.868] SPACE down
+[14:47:27.887] New Projectile at: 230|416
+[14:47:28.034] Chu Chu(970/1000) hit!
+[14:47:28.034] Damaged enemy Chu Chu for 10 damage.
+[14:47:28.034] Projectile destroyed
+[14:47:28.277] Chu Chu(960/1000) hit!
+[14:47:28.277] Damaged enemy Chu Chu for 10 damage.
+[14:47:28.277] Projectile destroyed
+[14:47:28.895] SPACE down
+[14:47:28.912] New Projectile at: 230|431
+[14:47:29.086] SPACE down
+[14:47:29.088] New Projectile at: 230|431
+[14:47:29.224] SPACE down
+[14:47:29.231] New Projectile at: 230|431
+[14:47:29.303] Chu Chu(950/1000) hit!
+[14:47:29.303] Damaged enemy Chu Chu for 10 damage.
+[14:47:29.304] Projectile destroyed
+[14:47:29.446] SPACE down
+[14:47:29.447] New Projectile at: 230|431
+[14:47:29.470] Chu Chu(940/1000) hit!
+[14:47:29.470] Damaged enemy Chu Chu for 10 damage.
+[14:47:29.470] Projectile destroyed
+[14:47:29.615] SPACE down
+[14:47:29.618] New Projectile at: 230|431
+[14:47:29.618] Chu Chu(930/1000) hit!
+[14:47:29.618] Damaged enemy Chu Chu for 10 damage.
+[14:47:29.619] Projectile destroyed
+[14:47:29.768] SPACE down
+[14:47:29.785] New Projectile at: 230|431
+[14:47:29.833] Chu Chu(920/1000) hit!
+[14:47:29.833] Damaged enemy Chu Chu for 10 damage.
+[14:47:29.833] Projectile destroyed
+[14:47:29.945] SPACE down
+[14:47:29.953] New Projectile at: 230|431
+[14:47:30.001] Chu Chu(910/1000) hit!
+[14:47:30.001] Damaged enemy Chu Chu for 10 damage.
+[14:47:30.002] Projectile destroyed
+[14:47:30.169] Chu Chu(900/1000) hit!
+[14:47:30.169] Damaged enemy Chu Chu for 10 damage.
+[14:47:30.169] Projectile destroyed
+[14:47:30.336] Chu Chu(890/1000) hit!
+[14:47:30.337] Damaged enemy Chu Chu for 10 damage.
+[14:47:30.337] Projectile destroyed

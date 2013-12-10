@@ -1,5 +1,6 @@
 package WIP;
 
+import Actors.Actor;
 import Components.MouseInputComponent;
 import Components.PhysicsComponent;
 import Items.Item;

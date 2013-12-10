@@ -1,5 +1,6 @@
 package WIP;
 
+import Actors.Actor;
 import Items.Projectile;
 
 import java.util.HashMap;

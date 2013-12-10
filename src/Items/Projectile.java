@@ -1,5 +1,6 @@
 package Items;
 
+import Actors.Actor;
 import Components.GraphicsComponent;
 import Components.PhysicsComponent;
 import WIP.*;

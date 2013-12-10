@@ -1,7 +1,8 @@
-package WIP;
+package Actors;
 
 import Components.ActorGraphicsComponent;
 import Components.PhysicsComponent;
+import WIP.Transform;
 
 /**
  * Created with IntelliJ IDEA.

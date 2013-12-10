@@ -1,7 +1,7 @@
 package Items;
 
+import Actors.Actor;
 import Components.ItemGraphicsComponent;
-import WIP.Actor;
 import WIP.DebugLog;
 
 /**

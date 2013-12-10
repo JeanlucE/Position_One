@@ -1,7 +1,8 @@
-package WIP;
+package Actors;
 
 import Components.ActorGraphicsComponent;
 import Components.PhysicsComponent;
+import WIP.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -196,7 +197,7 @@ public abstract class Actor extends GameObject {
     }
     //endregion
 
-    protected abstract Faction getFaction();
+    public abstract Faction getFaction();
 
     public String toString() {
         return getName() + "(" + currentHealth + "/" + maxHealth + ")";

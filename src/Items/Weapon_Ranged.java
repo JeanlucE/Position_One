@@ -26,7 +26,7 @@ public class Weapon_Ranged extends Weapon {
     }
 
     public void use() {
-        Arrow arrow = ((WIP.Character) equipped).getAmmunition();
+        Arrow arrow = ((Actors.Character) equipped).getAmmunition();
         if (arrow == null || arrow.getStack() <= 0) {
             //arrow.destroy();
             DebugLog.write("No ammunition left");

@@ -1,4 +1,4 @@
-package WIP;
+package Actors;
 
 /**
  * Created with IntelliJ IDEA.

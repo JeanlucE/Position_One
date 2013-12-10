@@ -1,5 +1,6 @@
 package WIP;
 
+import Actors.Actor;
 import Components.PhysicsComponent;
 import Items.Projectile;
 

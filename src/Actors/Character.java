@@ -1,10 +1,11 @@
-package WIP;
+package Actors;
 
 import Components.ActorGraphicsComponent;
 import Components.DynamicResource;
 import Components.InputComponent;
 import Components.PhysicsComponent;
 import Items.*;
+import WIP.*;
 
 import java.lang.reflect.Field;
 
@@ -266,7 +267,7 @@ public class Character extends Actor {
     //endregion
 
     @Override
-    protected Faction getFaction() {
+    public Faction getFaction() {
         return Faction.PLAYER;
     }
 

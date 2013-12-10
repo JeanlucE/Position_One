@@ -1,5 +1,8 @@
 package WIP;
 
+import Actors.Actor;
+import Actors.Character;
+import Actors.Enemy;
 import Components.*;
 import Items.*;
 
@@ -18,7 +21,7 @@ import java.awt.event.ActionListener;
  */
 public class Game {
     private static Game instance = null;
-    private final Character player;
+    private final Actors.Character player;
     private final Renderer renderer;
     private final GameLoop gameLoop;
 

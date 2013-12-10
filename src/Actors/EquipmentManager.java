@@ -1,6 +1,7 @@
-package WIP;
+package Actors;
 
 import Items.*;
+import WIP.DebugLog;
 
 /**
  * Created with IntelliJ IDEA.
@@ -24,12 +25,12 @@ public class EquipmentManager {
      */
     public EquipmentManager(Character parent) {
         this.parent = parent;
-        helmetSlot = new EquipmentSlot();
-        bodySlot = new EquipmentSlot();
-        legsSlot = new EquipmentSlot();
-        mainHandSlot = new EquipmentSlot();
-        offHandSlot = new EquipmentSlot();
-        ammunitionSlot = new EquipmentSlot();
+        helmetSlot = new EquipmentSlot<Armour>();
+        bodySlot = new EquipmentSlot<Armour>();
+        legsSlot = new EquipmentSlot<Armour>();
+        mainHandSlot = new EquipmentSlot<Weapon>();
+        offHandSlot = new EquipmentSlot<Armour>();
+        ammunitionSlot = new EquipmentSlot<Arrow>();
     }
 
     /*

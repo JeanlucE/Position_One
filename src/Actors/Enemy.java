@@ -1,7 +1,9 @@
-package WIP;
+package Actors;
 
 import Components.ActorGraphicsComponent;
 import Components.PhysicsComponent;
+import WIP.Transform;
+import WIP.Vector;
 
 import java.util.Random;
 
@@ -29,7 +31,7 @@ public class Enemy extends NPC {
     }
 
     @Override
-    protected Faction getFaction() {
+    public Faction getFaction() {
         return Faction.ENEMY;
     }
 
