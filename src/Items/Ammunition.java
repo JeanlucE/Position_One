@@ -10,14 +10,30 @@ import WIP.Transform;
  * Date: 27.11.13
  * Time: 23:26
  */
-public class Arrow extends Equipment {
+public class Ammunition extends Equipment {
 
+    //TODO add picked up arrows to stack if same type
     private int stack = 1000;
     private PhysicsComponent physicsComponent;
 
-    public Arrow(String name, int level, ProjectileGraphicsComponent g, PhysicsComponent phys) {
+    public Ammunition(String name, int level, ProjectileGraphicsComponent g, PhysicsComponent phys) {
         super(name, level, 0, EquipmentClass.RANGED, g);
         physicsComponent = phys;
+    }
+
+    @Override
+    public boolean isWeapon() {
+        return false;
+    }
+
+    @Override
+    public boolean isArmour() {
+        return false;
+    }
+
+    @Override
+    public boolean isAmmunition() {
+        return true;
     }
 
     public PhysicsComponent getCollider() {
@@ -45,15 +61,14 @@ public class Arrow extends Equipment {
         return true;
     }
 
-    public boolean equals(Arrow p) {
+    public boolean equals(Ammunition p) {
         if (p == null) return false;
         if (this == p) return true;
         if (!p.getName().equals(this.getName())) return false;
         if (!(p.getLevel() == this.getLevel())) return false;
         if (!(p.getSkillRequirement() == this.getSkillRequirement())) return false;
-        if (!(p.getType().equals(this.getType()))) return false;
+        return p.getType().equals(this.getType());
 
-        return true;
     }
 
     public Projectile createProjectile(Transform origin, Weapon_Ranged weapon) {
@@ -65,11 +80,9 @@ public class Arrow extends Equipment {
             phys.rotate90();
         }
         origin = origin.clone();
-        Projectile p = new Projectile(origin, new ProjectileGraphicsComponent(origin.getDirection(),
+        return new Projectile(origin, new ProjectileGraphicsComponent(origin.getDirection(),
                 ((ProjectileGraphicsComponent) getGraphic()).getResource()), phys, 10, 6,
                 weapon.getBaseDamage());
-
-        return p;
     }
 
 }

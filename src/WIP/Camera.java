@@ -35,6 +35,10 @@ public class Camera {
         clipY = screenHeight / 2 + Renderer.TILESIZE;
     }
 
+    public Vector getParentPosition() {
+        return new Vector(screenWidth / 2, screenHeight / 2);
+    }
+
     public Map<Vector, WorldSpace> worldToRender() {
         World world = Game.getInstance().getCurrentWorld();
         this.parent = Game.getInstance().getPlayer().getTransform().getPosition();
@@ -59,9 +63,11 @@ public class Camera {
                 worldPosition.setX(screenWidth / 2 + (worldPosition.getX() - parent.getX()));
                 worldPosition.setY(screenHeight / 2 + (worldPosition.getY() - parent.getY()));
 
-                if (worldSpace instanceof Wall) {
+                if (worldSpace == null) {
+                    visibleSpaces.put(worldPosition, worldSpace);
+                } else if (worldSpace.isWall()) {
                     walls.put(worldPosition, worldSpace);
-                } else {
+                } else if (worldSpace.isFloor()) {
                     floors.put(worldPosition, worldSpace);
                 }
             }
@@ -72,10 +78,9 @@ public class Camera {
         return visibleSpaces;
     }
 
-    public Vector getParentPosition() {
-        return new Vector(screenWidth / 2, screenHeight / 2);
-    }
-
+    /*
+    TODO Dont draws actors if they are not visible to the player
+     */
     public Map<Actor, Vector> actorsToRender() {
         Map<Actor, Vector> actorPositionMap = new HashMap<>();
         for (Actor a : Game.getInstance().getActors()) {

@@ -22,13 +22,6 @@ public abstract class Actor extends Collidable {
     protected int maxHealth, currentHealth;
     private int currentXVelocity, currentYVelocity;
 
-    protected Actor(String name, Transform transform, ActorGraphicsComponent graphic,
-                    PhysicsComponent physicsComponent) {
-        super(transform, graphic, physicsComponent);
-        this.name = name;
-        actors.add(this);
-    }
-
 
     public static Actor[] getActors() {
         return actors.toArray(new Actor[actors.size()]);
@@ -39,6 +32,13 @@ public abstract class Actor extends Collidable {
             if (actors.get(i).isDestroyed())
                 actors.remove(i);
         }
+    }
+
+    protected Actor(String name, Transform transform, ActorGraphicsComponent graphic,
+                    PhysicsComponent physicsComponent) {
+        super(transform, graphic, physicsComponent);
+        this.name = name;
+        actors.add(this);
     }
 
     public abstract void update();
@@ -115,12 +115,12 @@ public abstract class Actor extends Collidable {
         return currentHealth;
     }
 
-    public float getHealthPercentage() {
-        return currentHealth / (float) maxHealth;
-    }
-
     public void setCurrentHealth(int health) {
         currentHealth = health;
+    }
+
+    public float getHealthPercentage() {
+        return currentHealth / (float) maxHealth;
     }
 
     public void damage(int damage) {
@@ -198,6 +198,6 @@ public abstract class Actor extends Collidable {
     }
 
     public enum Faction {
-        PLAYER, FRIENDLY, ENEMY;
+        PLAYER, FRIENDLY, ENEMY
     }
 }

@@ -81,7 +81,6 @@ public class Inventory {
 
     public String toString() {
         String str = "";
-        slotIterator:
         for (int i = 0; i < INVENTORYSIZE; i++) {
             for (int j = 0; j < INVENTORYSIZE; j++) {
                 if (getSlot(i, j).isOccupied()) {
@@ -107,8 +106,8 @@ public class Inventory {
             if (!isOccupied()) {
                 this.item = item;
             } else {
-                if (item instanceof Arrow && this.item instanceof Arrow && ((Arrow) item).equals((Arrow) this.item))
-                    ((Arrow) this.item).addToStack(((Arrow) item).getStack());
+                if (item instanceof Ammunition && this.item instanceof Ammunition && ((Ammunition) item).equals((Ammunition) this.item))
+                    ((Ammunition) this.item).addToStack(((Ammunition) item).getStack());
             }
         }
 

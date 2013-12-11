@@ -41,9 +41,23 @@ public abstract class Weapon extends Equipment {
         this.useTime = useTime;
     }
 
+    @Override
+    public boolean isWeapon() {
+        return true;
+    }
+
+    @Override
+    public boolean isArmour() {
+        return false;
+    }
+
+    @Override
+    public boolean isAmmunition() {
+        return false;
+    }
+
     //Called when a weapon is used
     public abstract void use();
-
 
     public void setEquipped(Actor actor) {
         equipped = actor;

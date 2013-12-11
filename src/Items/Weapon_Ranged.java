@@ -26,13 +26,13 @@ public class Weapon_Ranged extends Weapon {
     }
 
     public void use() {
-        Arrow arrow = ((Actors.Character) equipped).getAmmunition();
-        if (arrow == null || arrow.getStack() <= 0) {
-            //arrow.destroy();
+        Ammunition ammunition = ((Actors.Character) equipped).getAmmunition();
+        if (ammunition == null || ammunition.getStack() <= 0) {
+            //ammunition.destroy();
             DebugLog.write("No ammunition left");
             return;
         }
-        arrow.createProjectile(equipped.getTransform(), this);
+        ammunition.createProjectile(equipped.getTransform(), this);
     }
     //TODO RangedType
 }

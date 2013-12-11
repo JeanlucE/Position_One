@@ -30,6 +30,12 @@ public abstract class Equipment extends Item {
         return equipmentClass;
     }
 
+    public abstract boolean isWeapon();
+
+    public abstract boolean isArmour();
+
+    public abstract boolean isAmmunition();
+
     public int getLevel() {
         return level;
     }

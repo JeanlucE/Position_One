@@ -23,6 +23,21 @@ public class Armour extends Equipment {
         DebugLog.write("New Armour created: " + name);
     }
 
+    @Override
+    public boolean isWeapon() {
+        return false;
+    }
+
+    @Override
+    public boolean isArmour() {
+        return true;
+    }
+
+    @Override
+    public boolean isAmmunition() {
+        return false;
+    }
+
     public int getDefence() {
         return defence;
     }
@@ -34,6 +49,22 @@ public class Armour extends Equipment {
 
     public ArmourType getArmourType() {
         return armourType;
+    }
+
+    public boolean isHelmet() {
+        return armourType == ArmourType.HELMET;
+    }
+
+    public boolean isBody() {
+        return armourType == ArmourType.BODY;
+    }
+
+    public boolean isLegs() {
+        return armourType == ArmourType.LEGS;
+    }
+
+    public boolean isShield() {
+        return armourType == ArmourType.SHIELD;
     }
 
     @Override

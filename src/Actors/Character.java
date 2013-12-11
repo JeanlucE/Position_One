@@ -16,9 +16,6 @@ import java.lang.reflect.Field;
  * Time: 16:00
  */
 public class Character extends Actor {
-
-    //region Player Items
-    private final Inventory inventory;
     //region Skills
     public Skill STRENGTH;
     public Skill ENDURANCE;
@@ -39,6 +36,9 @@ public class Character extends Actor {
     //Array of all skills
     private Skill[] skills;
     private EquipmentManager equipment;
+
+    //region Player Items
+    private final Inventory inventory;
     //endregion
     private int moveSpeed = 3;
     private int sprintSpeed = 6;
@@ -79,6 +79,32 @@ public class Character extends Actor {
     public static int getXPOfLevel(int level) {
         return 20 * level * level;
     }
+
+    /*
+    Gets all public fields in Character.java and instatntiates each of the skills.
+    Skill names are read the name of the public Field like so:
+    "STRENGTH"'s name would be "Strength"
+    It then adds all skills to an array for later purposes
+     */
+    private void instantiateSkills() {
+        Field[] fields = this.getClass().getFields();
+        skills = new Skill[fields.length];
+        int i = 0;
+        for (Field f : fields) {
+            try {
+                f.set(this, new Skill(getSkillName(f)));
+                skills[i] = (Skill) f.get(this);
+                i++;
+            } catch (IllegalAccessException e) {
+                System.out.println("Player skill creation failed!");
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private String getSkillName(Field f) {
+        return f.getName().charAt(0) + f.getName().substring(1, f.getName().length()).toLowerCase();
+    }
     //endregion
 
     public void update() {
@@ -114,32 +140,6 @@ public class Character extends Actor {
             }
             InputComponent.getInstance().resetQPressed();
         }
-    }
-
-    /*
-    Gets all public fields in Character.java and instatntiates each of the skills.
-    Skill names are read the name of the public Field like so:
-    "STRENGTH"'s name would be "Strength"
-    It then adds all skills to an array for later purposes
-     */
-    private void instantiateSkills() {
-        Field[] fields = this.getClass().getFields();
-        skills = new Skill[fields.length];
-        int i = 0;
-        for (Field f : fields) {
-            try {
-                f.set(this, new Skill(getSkillName(f)));
-                skills[i] = (Skill) f.get(this);
-                i++;
-            } catch (IllegalAccessException e) {
-                System.out.println("Player skill creation failed!");
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private String getSkillName(Field f) {
-        return f.getName().charAt(0) + f.getName().substring(1, f.getName().length()).toLowerCase();
     }
 
     private void attack() {
@@ -185,6 +185,14 @@ public class Character extends Actor {
         DebugLog.write("{DEBUG} Player level set to: " + level);
     }
 
+    public void addExperience(int experience) {
+        this.experience += experience;
+        while (getNextLevelXP() <= 0) {
+            levelUp();
+        }
+        DebugLog.write("Player gained experience: " + experience);
+    }
+
     //TODO: separate method for assigning skill points
     //TODO: every time skill points are newly assigned recalculate maxHealth, maxMana, maxStamina
     private void levelUp() {
@@ -201,14 +209,6 @@ public class Character extends Actor {
                 skillPoints--;
             }
         }*/
-    }
-
-    public void addExperience(int experience) {
-        this.experience += experience;
-        while (getNextLevelXP() <= 0) {
-            levelUp();
-        }
-        DebugLog.write("Player gained experience: " + experience);
     }
 
     int getNextLevelXP() {
@@ -257,7 +257,7 @@ public class Character extends Actor {
         return equipment.getOffHand();
     }
 
-    public Arrow getAmmunition() {
+    public Ammunition getAmmunition() {
         return equipment.getAmmunition();
     }
 

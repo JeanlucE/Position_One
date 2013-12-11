@@ -52,6 +52,8 @@ public class Renderer extends JPanel {
     private boolean drawActorPositions = true;
     private boolean drawActorColliders = true;
 
+    private GUIState guiState;
+
     //Singleton Design Pattern
     public static Renderer getInstance() {
         if (instance == null) {
@@ -60,19 +62,19 @@ public class Renderer extends JPanel {
         return instance;
     }
 
+    private Renderer() {
+        DebugLog.write("Renderer started");
+        setPreferredSize(new Dimension(screenWidth, screenHeight));
+        addMouseListener(MouseInputComponent.getInstance());
+        addMouseMotionListener(MouseInputComponent.getInstance());
+    }
+
     public static int getScreenWidth() {
         return screenWidth;
     }
 
     public static int getScreenHeight() {
         return screenHeight;
-    }
-
-    private Renderer() {
-        DebugLog.write("Renderer started");
-        setPreferredSize(new Dimension(screenWidth, screenHeight));
-        addMouseListener(MouseInputComponent.getInstance());
-        addMouseMotionListener(MouseInputComponent.getInstance());
     }
 
     public void paintComponent(Graphics g) {
@@ -117,22 +119,12 @@ public class Renderer extends JPanel {
         GameWindow.getInstance().setTitle("Frames:" + String.valueOf(Game.getInstance().getFrameRate()));
     }
 
-    private void drawProjectiles() {
-        Map<Projectile, Vector> projectiles = Camera.getInstance().projectilesToRender();
-        for (Projectile p : projectiles.keySet()) {
-            Vector drawPosition = projectiles.get(p);
-            PhysicsComponent phys = p.getCollider();
-            drawImage(p, drawPosition, phys.getWidth(), phys.getHeight());
-        }
-        //drawImage(p, projectiles.get(p));
-    }
-
     /*
     Draws the sprite of the given gameobject at a given position.
     This position must be a draw coordinate.
      */
     private void drawImage(GameObject go, Vector position) {
-        if (go instanceof GameObject) {
+        if (go != null) {
             BufferedImage bf = go.getGraphic().getImage();
             g2d.drawImage(bf, position.getX(), screenHeight - (bf.getHeight() + position.getY()),
                     this);
@@ -143,7 +135,7 @@ public class Renderer extends JPanel {
     }
 
     private void drawImage(GameObject go, Vector position, int width, int height) {
-        if (go instanceof GameObject) {
+        if (go != null) {
             BufferedImage bf = go.getGraphic().getImage();
             PhysicsComponent p = ((Collidable) go).getCollider();
             g2d.drawImage(bf,
@@ -164,43 +156,7 @@ public class Renderer extends JPanel {
         }
     }
 
-    //Draws all items that are lying on the floor.
-    private void drawItems(Map<Vector, WorldSpace> toRender) {
-        for (Map.Entry e : toRender.entrySet()) {
-            if (e.getValue() instanceof Floor && ((Floor) e.getValue()).hasDroppedItems()) {
-                Item[] items = ((Floor) e.getValue()).getDroppedItems();
-                drawImage(items[0], (Vector) e.getKey());
-            }
-        }
 
-    }
-
-    //DEBUGGING draws player position and collider
-    private void drawActorPositions(Map<Actor, Vector> actors) {
-        g2d.setColor(Color.RED);
-        for (Actor a : actors.keySet()) {
-            //Position
-            Vector position = actors.get(a);
-            PhysicsComponent p = a.getCollider();
-            g2d.drawString(a.getTransform().getPosition().toString(),
-                    position.getX() - p.getWidth() / 2 - 5, screenWidth - (position.getY() - 32));
-        }
-    }
-
-    private void drawActorColliders(Map<Actor, Vector> actors) {
-        //Collider
-        g2d.setColor(Color.RED);
-        for (Actor a : actors.keySet()) {
-            Vector position = actors.get(a);
-            PhysicsComponent p = a.getCollider();
-            g2d.drawRect(position.getX() - p.getWidth() / 2, screenWidth - (position.getY() + p.getHeight() / 2),
-                    p.getWidth(), p.getHeight());
-        }
-    }
-
-    /*
-    TODO Dont draws actors if they are not visible to the player
-     */
     private void drawActors(Map<Actor, Vector> actorPositionMap) {
         for (Actor a : actorPositionMap.keySet()) {
             Vector drawPosition = actorPositionMap.get(a);
@@ -231,12 +187,56 @@ public class Renderer extends JPanel {
                 (int) (30 * actor.getHealthPercentage()), 5);
     }
 
+    private void drawProjectiles() {
+        Map<Projectile, Vector> projectiles = Camera.getInstance().projectilesToRender();
+        for (Projectile p : projectiles.keySet()) {
+            Vector drawPosition = projectiles.get(p);
+            PhysicsComponent phys = p.getCollider();
+            drawImage(p, drawPosition, phys.getWidth(), phys.getHeight());
+        }
+        //drawImage(p, projectiles.get(p));
+    }
+
+    //Draws all items that are lying on the floor.
+    private void drawItems(Map<Vector, WorldSpace> toRender) {
+        for (Map.Entry e : toRender.entrySet()) {
+            if (e.getValue() == null) continue;
+
+            if (((WorldSpace) e.getValue()).isFloor() && ((Floor) e.getValue()).hasDroppedItems()) {
+                Item[] items = ((Floor) e.getValue()).getDroppedItems();
+                drawImage(items[0], (Vector) e.getKey());
+            }
+        }
+
+    }
+
     private void drawGUI() {
     }
 
-    private GUIState guiState;
-
     private enum GUIState {
-        GAME, MAIN_MENU, INVENTORY, MAP, PAUSE_MENU;
+        GAME, MAIN_MENU, INVENTORY, MAP, PAUSE_MENU
+    }
+
+    //DEBUGGING draws player position and collider
+    private void drawActorPositions(Map<Actor, Vector> actors) {
+        g2d.setColor(Color.RED);
+        for (Actor a : actors.keySet()) {
+            //Position
+            Vector position = actors.get(a);
+            PhysicsComponent p = a.getCollider();
+            g2d.drawString(a.getTransform().getPosition().toString(),
+                    position.getX() - p.getWidth() / 2 - 5, screenWidth - (position.getY() - 32));
+        }
+    }
+
+    private void drawActorColliders(Map<Actor, Vector> actors) {
+        //Collider
+        g2d.setColor(Color.RED);
+        for (Actor a : actors.keySet()) {
+            Vector position = actors.get(a);
+            PhysicsComponent p = a.getCollider();
+            g2d.drawRect(position.getX() - p.getWidth() / 2, screenWidth - (position.getY() + p.getHeight() / 2),
+                    p.getWidth(), p.getHeight());
+        }
     }
 }

@@ -40,7 +40,7 @@ public class Game {
         player = new Character("Ned Stark");
         player.getTransform().getPosition().setX(300);
         player.getTransform().getPosition().setY(300);
-        Arrow arrow = new Arrow("Arrow", 0,
+        Ammunition arrow = new Ammunition("Ammunition", 0,
                 new ProjectileGraphicsComponent(null, DynamicResource.WOODENARROW),
                 new PhysicsComponent(10, 25));
         player.equip(bow);
@@ -53,7 +53,7 @@ public class Game {
         World currentWorld = World.getInstance();
         ((Floor) currentWorld.getReal(6, 7)).dropItem(new Weapon_Melee("Swordish", 0, 0, 1, 1.0f,
                 new ItemGraphicsComponent(Resource.weapon_melee_01_FLOOR)));
-        ((Floor) currentWorld.getReal(7, 7)).dropItem(new Arrow("Arrow", 0,
+        ((Floor) currentWorld.getReal(7, 7)).dropItem(new Ammunition("Ammunition", 0,
                 new ProjectileGraphicsComponent(null, DynamicResource.WOODENARROW),
                 new PhysicsComponent(10, 25)));
 

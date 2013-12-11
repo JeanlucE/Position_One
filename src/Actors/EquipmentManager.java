@@ -16,7 +16,7 @@ public class EquipmentManager {
     private EquipmentSlot<Armour> legsSlot;
     private EquipmentSlot<Weapon> mainHandSlot;
     private EquipmentSlot<Armour> offHandSlot;
-    private EquipmentSlot<Arrow> ammunitionSlot;
+    private EquipmentSlot<Ammunition> ammunitionSlot;
 
     /*
     Instantiates all equipment slots with what kind of equipment that particular slot can carry
@@ -25,12 +25,12 @@ public class EquipmentManager {
      */
     public EquipmentManager(Character parent) {
         this.parent = parent;
-        helmetSlot = new EquipmentSlot<Armour>();
-        bodySlot = new EquipmentSlot<Armour>();
-        legsSlot = new EquipmentSlot<Armour>();
-        mainHandSlot = new EquipmentSlot<Weapon>();
-        offHandSlot = new EquipmentSlot<Armour>();
-        ammunitionSlot = new EquipmentSlot<Arrow>();
+        helmetSlot = new EquipmentSlot<>();
+        bodySlot = new EquipmentSlot<>();
+        legsSlot = new EquipmentSlot<>();
+        mainHandSlot = new EquipmentSlot<>();
+        offHandSlot = new EquipmentSlot<>();
+        ammunitionSlot = new EquipmentSlot<>();
     }
 
     /*
@@ -44,12 +44,12 @@ public class EquipmentManager {
     public void equip(Equipment equipment) {
         //TODO if isOccupied throw the current equipment into the inventory and equip the new Equipment
         if (canEquip(equipment)) {
-            if (equipment instanceof Weapon) {
+            if (equipment.isWeapon()) {
                 equip((Weapon) equipment);
-            } else if (equipment instanceof Armour) {
+            } else if (equipment.isArmour()) {
                 equip((Armour) equipment);
-            } else { //equipment instanceOf Arrow
-                ammunitionSlot.equip((Arrow) equipment);
+            } else { //equipment.isAmmunition
+                ammunitionSlot.equip((Ammunition) equipment);
             }
             DebugLog.write("Player " + parent.getName() + " has equipped: " + equipment.getName());
         } else {
@@ -63,19 +63,19 @@ public class EquipmentManager {
     }
 
     private void equip(Armour armour) {
-        if (armour.getArmourType().equals(Armour.ArmourType.SHIELD)) {
+        if (armour.isShield()) {
             offHandSlot.equip(armour);
-        } else if (armour.getArmourType().equals(Armour.ArmourType.HELMET)) {
+        } else if (armour.isHelmet()) {
             helmetSlot.equip(armour);
-        } else if (armour.getArmourType().equals(Armour.ArmourType.BODY)) {
+        } else if (armour.isBody()) {
             bodySlot.equip(armour);
-        } else if (armour.getArmourType().equals(Armour.ArmourType.LEGS)) {
+        } else if (armour.isLegs()) {
             legsSlot.equip(armour);
         }
     }
 
     //takes an equipmentslot that should be unequipped and when in the inventory the item should be put
-    public void unequip(EquipmentSlot equipmentSlot, Inventory.InventorySlot inventorySlot) {
+    /*public void unequip(EquipmentSlot equipmentSlot, Inventory.InventorySlot inventorySlot) {
         if (!inventorySlot.isOccupied() && equipmentSlot.isOccupied()) {
             inventorySlot.addItem(equipmentSlot.getEquipment());
             equipmentSlot.equip(null);
@@ -83,7 +83,7 @@ public class EquipmentManager {
             System.out.println("Debug: Method Character.unequip called for an occupied inventory slot or an " +
                     "unoccupied equipment slot.");
         }
-    }
+    }*/
 
     public boolean canEquip(Equipment equipment) {
         //Checks if Player is high enough level
@@ -124,7 +124,7 @@ public class EquipmentManager {
         return offHandSlot.getEquipment();
     }
 
-    public Arrow getAmmunition() {
+    public Ammunition getAmmunition() {
         return ammunitionSlot.getEquipment();
     }
 

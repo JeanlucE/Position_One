@@ -13,12 +13,21 @@ import java.util.Stack;
  */
 public class Floor extends WorldSpace {
 
-    //TODO make this a stack
     private Stack<Item> itemStack;
 
     public Floor(Transform transform, StaticGraphicsComponent g) {
         super(transform, g, null);
-        itemStack = new Stack<Item>();
+        itemStack = new Stack<>();
+    }
+
+    @Override
+    public boolean isWall() {
+        return false;
+    }
+
+    @Override
+    public boolean isFloor() {
+        return true;
     }
 
     public boolean hasDroppedItems() {

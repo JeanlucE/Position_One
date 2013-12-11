@@ -15,6 +15,16 @@ public class Wall extends WorldSpace {
     }
 
     @Override
+    public boolean isWall() {
+        return true;
+    }
+
+    @Override
+    public boolean isFloor() {
+        return false;
+    }
+
+    @Override
     public boolean isCollidable() {
         return true;
     }
