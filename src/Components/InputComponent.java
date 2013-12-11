@@ -30,8 +30,10 @@ public class InputComponent implements KeyListener {
     private int XAxis = 0;
     private int YAxis = 0;
     private boolean spaceTyped = false;
+    private boolean spaceReleased = true;
     private boolean shiftDown = false;
     private boolean qTyped = false;
+    private boolean qReleased = true;
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -42,7 +44,6 @@ public class InputComponent implements KeyListener {
 
         if (e.isShiftDown() && !shiftDown) {
             shiftDown = true;
-            System.out.println("Shift pressed");
         }
 
         Transform playerTransform = Game.getInstance().getPlayer().getTransform();
@@ -53,7 +54,6 @@ public class InputComponent implements KeyListener {
                 if (YAxis != 1) {
                     YAxis = 1;
                     playerTransform.setDirection(Vector.NORTH);
-                    System.out.println("YAxis: " + YAxis);
                 }
                 break;
 
@@ -62,7 +62,6 @@ public class InputComponent implements KeyListener {
                 if (YAxis != -1) {
                     YAxis = -1;
                     playerTransform.setDirection(Vector.SOUTH);
-                    System.out.println("YAxis: " + YAxis);
                 }
                 break;
 
@@ -71,7 +70,6 @@ public class InputComponent implements KeyListener {
                 if (XAxis != -1) {
                     XAxis = -1;
                     playerTransform.setDirection(Vector.WEST);
-                    System.out.println("XAxis: " + XAxis);
                 }
                 break;
 
@@ -80,7 +78,21 @@ public class InputComponent implements KeyListener {
                 if (XAxis != 1) {
                     XAxis = 1;
                     playerTransform.setDirection(Vector.EAST);
-                    System.out.println("XAxis: " + XAxis);
+                }
+                break;
+
+            case KeyEvent.VK_SPACE:
+                if (spaceReleased) {
+                    spaceTyped = true;
+                    spaceReleased = false;
+
+                }
+                break;
+
+            case KeyEvent.VK_Q:
+                if (qReleased) {
+                    qTyped = true;
+                    qReleased = false;
                 }
                 break;
         }
@@ -90,7 +102,6 @@ public class InputComponent implements KeyListener {
     public void keyReleased(KeyEvent e) {
         if (!e.isShiftDown() && shiftDown) {
             shiftDown = false;
-            System.out.println("Shift released");
         }
 
         switch (e.getKeyCode()) {
@@ -98,34 +109,29 @@ public class InputComponent implements KeyListener {
             case KeyEvent.VK_W:
             case KeyEvent.VK_UP:
                 YAxis = 0;
-                System.out.println("YAxis: " + YAxis);
                 break;
 
             case KeyEvent.VK_S:
             case KeyEvent.VK_DOWN:
                 YAxis = 0;
-                System.out.println("YAxis: " + YAxis);
                 break;
 
             case KeyEvent.VK_A:
             case KeyEvent.VK_LEFT:
                 XAxis = 0;
-                System.out.println("XAxis: " + XAxis);
                 break;
 
             case KeyEvent.VK_D:
             case KeyEvent.VK_RIGHT:
                 XAxis = 0;
-                System.out.println("XAxis: " + XAxis);
                 break;
 
             case KeyEvent.VK_SPACE:
-                spaceTyped = true;
-                System.out.println("Space typed");
+                spaceReleased = true;
                 break;
+
             case KeyEvent.VK_Q:
-                qTyped = true;
-                System.out.println("Ctrl typed");
+                qReleased = true;
                 break;
         }
     }
@@ -155,11 +161,4 @@ public class InputComponent implements KeyListener {
         spaceTyped = false;
         qTyped = false;
     }
-
-    /*private class APanel extends JPanel{
-        public void paintComponent(Graphics g){
-            resetTypedKeys();
-            repaint();
-        }
-    }*/
 }
