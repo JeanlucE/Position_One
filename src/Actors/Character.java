@@ -107,8 +107,9 @@ public class Character extends Actor {
     }
     //endregion
 
+    private Vector lastDirection = new Vector(0, 0), newDirection;
+
     public void update() {
-        //TODO update direction player is facing from here
 
         if (InputComponent.getInstance().isShiftDown()) {
             if (!sprinting) {
@@ -120,8 +121,24 @@ public class Character extends Actor {
             sprinting = false;
         }
 
-        setXVel(InputComponent.getInstance().getXAxis() * moveSpeed);
-        setYVel(InputComponent.getInstance().getYAxis() * moveSpeed);
+        int XAxis = InputComponent.getInstance().getXAxis();
+        int YAxis = InputComponent.getInstance().getYAxis();
+        newDirection = new Vector(XAxis, YAxis);
+        if (!newDirection.equals(lastDirection)) {
+
+            if (newDirection.getY() == 1)
+                getTransform().setDirection(Vector.NORTH);
+            else if (newDirection.getY() == -1)
+                getTransform().setDirection(Vector.SOUTH);
+
+            if (newDirection.getX() == 1)
+                getTransform().setDirection(Vector.EAST);
+            else if (newDirection.getX() == -1)
+                getTransform().setDirection(Vector.WEST);
+        }
+
+        setXVel(XAxis * moveSpeed);
+        setYVel(YAxis * moveSpeed);
         if (getXVel() != 0 || getYVel() != 0) {
             move();
         }
@@ -137,6 +154,7 @@ public class Character extends Actor {
                 inventory.add(floor.hasDroppedItems() ? (floor.getTopItem()) : (null));
             }
         }
+        lastDirection = new Vector(XAxis, YAxis);
     }
 
     private void attack() {

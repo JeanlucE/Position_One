@@ -84,7 +84,7 @@ public class Inventory {
         for (int i = 0; i < INVENTORYSIZE; i++) {
             for (int j = 0; j < INVENTORYSIZE; j++) {
                 if (getSlot(i, j).isOccupied()) {
-                    str += ("Item at " + i + "|" + j + ": " + getSlot(i, j).toString() + " ;");
+                    str += ("Item at " + i + "|" + j + ": " + getSlot(i, j).toString() + "; ");
                 }
             }
         }

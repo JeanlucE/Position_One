@@ -1,9 +1,5 @@
 package Components;
 
-import WIP.Game;
-import WIP.Transform;
-import WIP.Vector;
-
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -46,14 +42,12 @@ public class InputComponent implements KeyListener {
             shiftDown = true;
         }
 
-        Transform playerTransform = Game.getInstance().getPlayer().getTransform();
         switch (e.getKeyCode()) {
 
             case KeyEvent.VK_W:
             case KeyEvent.VK_UP:
                 if (YAxis != 1) {
                     YAxis = 1;
-                    playerTransform.setDirection(Vector.NORTH);
                 }
                 break;
 
@@ -61,7 +55,6 @@ public class InputComponent implements KeyListener {
             case KeyEvent.VK_DOWN:
                 if (YAxis != -1) {
                     YAxis = -1;
-                    playerTransform.setDirection(Vector.SOUTH);
                 }
                 break;
 
@@ -69,7 +62,6 @@ public class InputComponent implements KeyListener {
             case KeyEvent.VK_LEFT:
                 if (XAxis != -1) {
                     XAxis = -1;
-                    playerTransform.setDirection(Vector.WEST);
                 }
                 break;
 
@@ -77,7 +69,6 @@ public class InputComponent implements KeyListener {
             case KeyEvent.VK_RIGHT:
                 if (XAxis != 1) {
                     XAxis = 1;
-                    playerTransform.setDirection(Vector.EAST);
                 }
                 break;
 
