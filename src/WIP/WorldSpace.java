@@ -1,6 +1,7 @@
 package WIP;
 
 import Components.GraphicsComponent;
+import Components.PhysicsComponent;
 
 /**
  * Created with IntelliJ IDEA.
@@ -8,9 +9,9 @@ import Components.GraphicsComponent;
  * Date: 07.11.13
  * Time: 15:05
  */
-public abstract class WorldSpace extends GameObject {
-    protected WorldSpace(Transform transform, GraphicsComponent g) {
-        super(transform, g);
+public abstract class WorldSpace extends Collidable {
+    protected WorldSpace(Transform transform, GraphicsComponent g, PhysicsComponent physicsComponent) {
+        super(transform, g, physicsComponent);
     }
 
     public void update() {

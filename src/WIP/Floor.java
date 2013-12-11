@@ -3,8 +3,7 @@ package WIP;
 import Components.StaticGraphicsComponent;
 import Items.Item;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Stack;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,32 +14,30 @@ import java.util.List;
 public class Floor extends WorldSpace {
 
     //TODO make this a stack
-    private List<Item> droppedItems;
+    private Stack<Item> itemStack;
 
     public Floor(Transform transform, StaticGraphicsComponent g) {
-        super(transform, g);
+        super(transform, g, null);
+        itemStack = new Stack<Item>();
     }
 
     public boolean hasDroppedItems() {
-        return droppedItems != null && droppedItems.size() != 0;
+        return !itemStack.empty();
     }
 
     public Item[] getDroppedItems() {
-        return droppedItems.toArray(new Item[droppedItems.size()]);
+        return itemStack.toArray(new Item[itemStack.size()]);
     }
 
     public Item getTopItem() {
-        if (hasDroppedItems()) {
-            Item item = droppedItems.get(droppedItems.size() - 1);
-            droppedItems.remove(item);
-            return item;
-        }
+        if (itemStack.size() > 0)
+            return itemStack.pop();
+
         return null;
     }
 
     public void dropItem(Item item) {
-        droppedItems = (droppedItems == null) ? droppedItems = new ArrayList<>() : droppedItems;
-        droppedItems.add(item);
+        itemStack.push(item);
     }
 
     /*public void setDroppedItems(Item[] droppedItems) {

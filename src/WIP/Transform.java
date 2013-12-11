@@ -7,8 +7,6 @@ package WIP;
  * Time: 21:34
  */
 public class Transform implements Cloneable {
-    //TODO transform should point to the position in the middle of the Gameobject
-    //vectors?
     private Vector position;
     private Vector direction;
 

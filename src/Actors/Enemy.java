@@ -15,7 +15,6 @@ import java.util.Random;
  */
 public class Enemy extends NPC {
 
-    //TODO later make this take an ActorGraphicsComponent
     public Enemy(String name, int maxHealth, Transform t, ActorGraphicsComponent g, PhysicsComponent p) {
         super(name, t, g, p);
         setMaxHealth(maxHealth);
@@ -24,7 +23,7 @@ public class Enemy extends NPC {
     }
 
     public void update() {
-        //drandomVel();
+        //randomVel();
         if (getXVel() != 0 || getYVel() != 0) {
             move();
         }

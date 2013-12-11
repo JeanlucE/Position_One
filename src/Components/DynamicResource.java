@@ -27,9 +27,11 @@ public enum DynamicResource {
     });
 
     private Resource[] resources;
+    private int size;
 
     private DynamicResource(Resource[] resources) {
         this.resources = resources;
+        size = resources.length;
     }
 
     public BufferedImage getNorth() {

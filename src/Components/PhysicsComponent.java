@@ -23,29 +23,19 @@ public class PhysicsComponent {
     //Returns the corner positions of the players collision box
     // the +/- 1 are so that there is some tolerance for the player
     public Vector[] getCorners() {
-        Vector playerPos = parent.getPosition();
-        Vector toReturn[] = new Vector[4];
-        //Top left corner
-        toReturn[0] = new Vector(playerPos.getX(), playerPos.getY() + height);
-        //Top right corner
-        toReturn[1] = new Vector(playerPos.getX() + width, playerPos.getY() + height);
-        //Bottom left corner
-        toReturn[2] = new Vector(playerPos.getX(), playerPos.getY());
-        //Bottom right corner
-        toReturn[3] = new Vector(playerPos.getX() + width, playerPos.getY());
-        return toReturn;
+        return getCorners(parent.getPosition());
     }
 
     public Vector[] getCorners(Vector playerPos) {
         Vector toReturn[] = new Vector[4];
         //Top left corner
-        toReturn[0] = new Vector(playerPos.getX(), playerPos.getY() + height);
+        toReturn[0] = new Vector(playerPos.getX() - width / 2, playerPos.getY() + height / 2);
         //Top right corner
-        toReturn[1] = new Vector(playerPos.getX() + width, playerPos.getY() + height);
+        toReturn[1] = new Vector(playerPos.getX() + width / 2, playerPos.getY() + height / 2);
         //Bottom left corner
-        toReturn[2] = new Vector(playerPos.getX(), playerPos.getY());
+        toReturn[2] = new Vector(playerPos.getX() - width / 2, playerPos.getY() - height / 2);
         //Bottom right corner
-        toReturn[3] = new Vector(playerPos.getX() + width, playerPos.getY());
+        toReturn[3] = new Vector(playerPos.getX() + width / 2, playerPos.getY() - height / 2);
         return toReturn;
     }
 

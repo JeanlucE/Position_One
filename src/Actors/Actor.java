@@ -15,19 +15,16 @@ import java.util.List;
  * <p/>
  * This class is used for any Gameobject that can move by its own
  */
-public abstract class Actor extends GameObject {
+public abstract class Actor extends Collidable {
 
     private static List<Actor> actors = new ArrayList<>(10);
-    private PhysicsComponent physicsComponent;
     private String name;
     protected int maxHealth, currentHealth;
     private int currentXVelocity, currentYVelocity;
 
     protected Actor(String name, Transform transform, ActorGraphicsComponent graphic,
-                    PhysicsComponent collider) {
-        super(transform, graphic);
-        physicsComponent = collider;
-        collider.setParent(this.getTransform());
+                    PhysicsComponent physicsComponent) {
+        super(transform, graphic, physicsComponent);
         this.name = name;
         actors.add(this);
     }
@@ -50,10 +47,6 @@ public abstract class Actor extends GameObject {
         return true;
     }
 
-    public PhysicsComponent getCollider() {
-        return physicsComponent;
-    }
-
     public void move() {
         Vector currentPosition = getTransform().getPosition();
         World world = Game.getInstance().getCurrentWorld();
@@ -73,6 +66,7 @@ public abstract class Actor extends GameObject {
                 translate(0, currentYVelocity);
             }
         }
+        //System.out.println(currentXVelocity + "|" + currentYVelocity);
     }
 
     private void translate(int x, int y) {

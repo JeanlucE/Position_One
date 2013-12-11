@@ -14,24 +14,19 @@ import java.util.List;
  * Date: 28.11.13
  * Time: 10:00
  */
-public class Projectile extends GameObject {
+public class Projectile extends Collidable {
     private static List<Projectile> projectiles = new ArrayList<>();
     private Vector flyVector;
     private Vector origin;
     private int range;
     private int damage;
-    private PhysicsComponent phys;
 
     public Projectile(Transform origin, GraphicsComponent graphic, PhysicsComponent phys, int speed, int range,
                       int damage) {
-        super(origin, graphic);
+        super(origin, graphic, phys);
 
         //Spawn position
         this.origin = origin.getPosition();
-
-        //Set Collider
-        this.phys = phys;
-        this.phys.setParent(getTransform());
 
         DebugLog.write("New Projectile at: " + origin.getPosition());
 
@@ -92,10 +87,6 @@ public class Projectile extends GameObject {
     @Override
     public boolean isCollidable() {
         return true;
-    }
-
-    public PhysicsComponent getCollider() {
-        return phys;
     }
 
     public int getDamage() {

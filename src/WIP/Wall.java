@@ -10,12 +10,8 @@ import Components.StaticGraphicsComponent;
  * Time: 15:19
  */
 public class Wall extends WorldSpace {
-
-    private PhysicsComponent physicsComponent;
-
     public Wall(Transform transform, StaticGraphicsComponent g, PhysicsComponent p) {
-        super(transform, g);
-        physicsComponent = p;
+        super(transform, g, p);
     }
 
     @Override

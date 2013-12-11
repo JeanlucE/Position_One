@@ -38,8 +38,8 @@ public class Game {
         Weapon sword = new Weapon_Melee("Sword", 0, 0, 10, 1.0f, new ItemGraphicsComponent());
         Weapon bow = new Weapon_Ranged("The OP Bow", 0, 0, 10, 10, 0.2f, new ItemGraphicsComponent());
         player = new Character("Ned Stark");
-        player.getTransform().getPosition().setX(200);
-        player.getTransform().getPosition().setY(200);
+        player.getTransform().getPosition().setX(300);
+        player.getTransform().getPosition().setY(300);
         Arrow arrow = new Arrow("Arrow", 0,
                 new ProjectileGraphicsComponent(null, DynamicResource.WOODENARROW),
                 new PhysicsComponent(10, 25));

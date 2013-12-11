@@ -64,8 +64,6 @@ public class Camera {
                 } else {
                     floors.put(worldPosition, worldSpace);
                 }
-
-
             }
         }
         visibleSpaces.putAll(walls);
