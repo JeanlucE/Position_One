@@ -1,11 +1,125 @@
-Log created at: 21:30:35 11.12.2013
+Log created at: 23:39:16 11.12.2013
 
-[21:30:35.243] New Game started
-[21:30:35.247] New Melee Weapon created: Sword
-[21:30:35.247] New Ranged Weapon created: The OP Bow
-[21:30:35.280] New Character created: Ned Stark
-[21:30:35.281] Player Ned Stark has equipped: The OP Bow
-[21:30:35.281] Player Ned Stark has equipped: Arrow
-[21:30:35.285] New World created with size: 400
-[21:30:35.285] New Melee Weapon created: Swordish
-[21:30:35.287] Renderer started
+[23:39:16.895] New Game started
+[23:39:16.899] New Melee Weapon created: Sword
+[23:39:16.899] New Ranged Weapon created: The OP Bow
+[23:39:16.934] New Character created: Ned Stark
+[23:39:16.935] Player Ned Stark has equipped: The OP Bow
+[23:39:16.935] Player Ned Stark has equipped: Ammunition
+[23:39:16.940] New World created with size: 400
+[23:39:16.940] New Melee Weapon created: Swordish
+[23:39:16.941] Renderer started
+[23:39:17.852] Item at 0|0: Ammunition
+[23:39:18.824] Item at 0|0: AmmunitionItem at 0|1: Swordish
+[23:39:20.618] New Projectile at: 249|414
+[23:39:20.828] New Projectile at: 249|414
+[23:39:20.844] Chu Chu(1000/1000) hit!
+[23:39:20.844] Damaged enemy Chu Chu for 10 damage.
+[23:39:20.844] Projectile destroyed
+[23:39:20.988] New Projectile at: 249|414
+[23:39:21.052] Chu Chu(990/1000) hit!
+[23:39:21.052] Damaged enemy Chu Chu for 10 damage.
+[23:39:21.052] Projectile destroyed
+[23:39:21.132] New Projectile at: 249|414
+[23:39:21.213] Chu Chu(980/1000) hit!
+[23:39:21.213] Damaged enemy Chu Chu for 10 damage.
+[23:39:21.213] Projectile destroyed
+[23:39:21.360] Chu Chu(970/1000) hit!
+[23:39:21.360] Damaged enemy Chu Chu for 10 damage.
+[23:39:21.360] Projectile destroyed
+[23:39:21.440] New Projectile at: 249|414
+[23:39:21.583] New Projectile at: 249|414
+[23:39:21.663] Chu Chu(960/1000) hit!
+[23:39:21.663] Damaged enemy Chu Chu for 10 damage.
+[23:39:21.663] Projectile destroyed
+[23:39:21.727] New Projectile at: 249|414
+[23:39:21.807] Chu Chu(950/1000) hit!
+[23:39:21.807] Damaged enemy Chu Chu for 10 damage.
+[23:39:21.807] Projectile destroyed
+[23:39:21.887] New Projectile at: 249|414
+[23:39:21.951] Chu Chu(940/1000) hit!
+[23:39:21.951] Damaged enemy Chu Chu for 10 damage.
+[23:39:21.951] Projectile destroyed
+[23:39:22.050] New Projectile at: 249|414
+[23:39:22.115] Chu Chu(930/1000) hit!
+[23:39:22.115] Damaged enemy Chu Chu for 10 damage.
+[23:39:22.115] Projectile destroyed
+[23:39:22.227] New Projectile at: 249|414
+[23:39:22.275] Chu Chu(920/1000) hit!
+[23:39:22.275] Damaged enemy Chu Chu for 10 damage.
+[23:39:22.275] Projectile destroyed
+[23:39:22.371] New Projectile at: 249|414
+[23:39:22.451] Chu Chu(910/1000) hit!
+[23:39:22.451] Damaged enemy Chu Chu for 10 damage.
+[23:39:22.451] Projectile destroyed
+[23:39:22.533] New Projectile at: 249|414
+[23:39:22.601] Chu Chu(900/1000) hit!
+[23:39:22.601] Damaged enemy Chu Chu for 10 damage.
+[23:39:22.601] Projectile destroyed
+[23:39:22.699] New Projectile at: 249|414
+[23:39:22.763] Chu Chu(890/1000) hit!
+[23:39:22.763] Damaged enemy Chu Chu for 10 damage.
+[23:39:22.763] Projectile destroyed
+[23:39:22.923] Chu Chu(880/1000) hit!
+[23:39:22.923] Damaged enemy Chu Chu for 10 damage.
+[23:39:22.923] Projectile destroyed
+[23:39:23.436] New Projectile at: 249|414
+[23:39:23.661] Chu Chu(870/1000) hit!
+[23:39:23.661] Damaged enemy Chu Chu for 10 damage.
+[23:39:23.661] Projectile destroyed
+[23:39:23.853] New Projectile at: 249|414
+[23:39:24.086] Chu Chu(860/1000) hit!
+[23:39:24.086] Damaged enemy Chu Chu for 10 damage.
+[23:39:24.086] Projectile destroyed
+[23:39:24.299] New Projectile at: 249|414
+[23:39:24.523] Chu Chu(850/1000) hit!
+[23:39:24.523] Damaged enemy Chu Chu for 10 damage.
+[23:39:24.523] Projectile destroyed
+[23:39:24.750] New Projectile at: 249|414
+[23:39:24.958] New Projectile at: 249|414
+[23:39:24.974] Chu Chu(840/1000) hit!
+[23:39:24.974] Damaged enemy Chu Chu for 10 damage.
+[23:39:24.974] Projectile destroyed
+[23:39:25.135] New Projectile at: 249|414
+[23:39:25.183] Chu Chu(830/1000) hit!
+[23:39:25.183] Damaged enemy Chu Chu for 10 damage.
+[23:39:25.183] Projectile destroyed
+[23:39:25.311] New Projectile at: 249|414
+[23:39:25.358] Chu Chu(820/1000) hit!
+[23:39:25.358] Damaged enemy Chu Chu for 10 damage.
+[23:39:25.358] Projectile destroyed
+[23:39:25.506] New Projectile at: 249|414
+[23:39:25.539] Chu Chu(810/1000) hit!
+[23:39:25.539] Damaged enemy Chu Chu for 10 damage.
+[23:39:25.539] Projectile destroyed
+[23:39:25.700] New Projectile at: 249|414
+[23:39:25.732] Chu Chu(800/1000) hit!
+[23:39:25.732] Damaged enemy Chu Chu for 10 damage.
+[23:39:25.732] Projectile destroyed
+[23:39:25.892] New Projectile at: 249|414
+[23:39:25.924] Chu Chu(790/1000) hit!
+[23:39:25.924] Damaged enemy Chu Chu for 10 damage.
+[23:39:25.924] Projectile destroyed
+[23:39:26.124] Chu Chu(780/1000) hit!
+[23:39:26.124] Damaged enemy Chu Chu for 10 damage.
+[23:39:26.124] Projectile destroyed
+[23:39:26.461] New Projectile at: 249|414
+[23:39:26.653] New Projectile at: 249|414
+[23:39:26.685] Chu Chu(770/1000) hit!
+[23:39:26.685] Damaged enemy Chu Chu for 10 damage.
+[23:39:26.685] Projectile destroyed
+[23:39:26.813] New Projectile at: 249|414
+[23:39:26.877] Chu Chu(760/1000) hit!
+[23:39:26.877] Damaged enemy Chu Chu for 10 damage.
+[23:39:26.877] Projectile destroyed
+[23:39:26.976] New Projectile at: 249|414
+[23:39:27.043] Chu Chu(750/1000) hit!
+[23:39:27.043] Damaged enemy Chu Chu for 10 damage.
+[23:39:27.043] Projectile destroyed
+[23:39:27.158] New Projectile at: 249|414
+[23:39:27.206] Chu Chu(740/1000) hit!
+[23:39:27.206] Damaged enemy Chu Chu for 10 damage.
+[23:39:27.206] Projectile destroyed
+[23:39:27.382] Chu Chu(730/1000) hit!
+[23:39:27.382] Damaged enemy Chu Chu for 10 damage.
+[23:39:27.382] Projectile destroyed

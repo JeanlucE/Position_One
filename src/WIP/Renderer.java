@@ -1,6 +1,7 @@
 package WIP;
 
 import Actors.Actor;
+import Components.InputComponent;
 import Components.MouseInputComponent;
 import Components.PhysicsComponent;
 import Items.Item;
@@ -67,6 +68,8 @@ public class Renderer extends JPanel {
         setPreferredSize(new Dimension(screenWidth, screenHeight));
         addMouseListener(MouseInputComponent.getInstance());
         addMouseMotionListener(MouseInputComponent.getInstance());
+        setFocusable(true);
+        addKeyListener(InputComponent.getInstance());
     }
 
     public static int getScreenWidth() {

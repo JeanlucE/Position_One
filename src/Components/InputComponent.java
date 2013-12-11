@@ -1,36 +1,24 @@
 package Components;
 
-import WIP.DebugLog;
 import WIP.Game;
+import WIP.Transform;
 import WIP.Vector;
 
-import javax.swing.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 /**
  * Created with IntelliJ IDEA.
  * User: Jean-Luc
- * Date: 09.11.13
- * Time: 22:44
+ * Date: 11.12.13
+ * Time: 22:33
  */
-public class InputComponent extends InputMap {
-    //TODO add sprint with shift
-    //TODO find a better method to get key events
+public class InputComponent implements KeyListener {
+
+
+    //If any focus problems occur try this on renderer: jPanel.requestFocusInWindow();
+
     private static InputComponent instance;
-    private final ActionMap actionMap;
-    private int XAxis, YAxis;
-
-    private final Action translateUp, translateDown, translateLeft, translateRight;
-
-    private final Action stopX, stopY;
-
-    private final Action spaceDown;
-    private final Action qDown;
-    private final Action shiftDown;
-    private boolean spacePressed;
-    private boolean qPressed;
-    private boolean shiftPressed;
 
     public static InputComponent getInstance() {
         if (instance == null) {
@@ -39,144 +27,111 @@ public class InputComponent extends InputMap {
         return instance;
     }
 
-    private InputComponent() {
-        //W and UP ARROW control upward movement
-        put(KeyStroke.getKeyStroke(KeyEvent.VK_W, 0, false), "w_pressed");
-        put(KeyStroke.getKeyStroke(KeyEvent.VK_W, 0, true), "w_released");
-        put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0, false), "w_pressed");
-        put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0, true), "w_released");
+    private int XAxis = 0;
+    private int YAxis = 0;
+    private boolean spaceTyped = false;
+    private boolean shiftDown = false;
+    private boolean qTyped = false;
 
-        //S and DOWN ARROW control downward movement
-        put(KeyStroke.getKeyStroke(KeyEvent.VK_S, 0, false), "s_pressed");
-        put(KeyStroke.getKeyStroke(KeyEvent.VK_S, 0, true), "s_released");
-        put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0, false), "s_pressed");
-        put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0, true), "s_released");
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
 
-        //A and LEFT ARROW control movement to the left
-        put(KeyStroke.getKeyStroke(KeyEvent.VK_A, 0, false), "a_pressed");
-        put(KeyStroke.getKeyStroke(KeyEvent.VK_A, 0, true), "a_released");
-        put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0, false), "a_pressed");
-        put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0, true), "a_released");
+    @Override
+    public void keyPressed(KeyEvent e) {
 
-        //D and RIGHT ARROW control movement to the right
-        put(KeyStroke.getKeyStroke(KeyEvent.VK_D, 0, false), "d_pressed");
-        put(KeyStroke.getKeyStroke(KeyEvent.VK_D, 0, true), "d_released");
-        put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0, false), "d_pressed");
-        put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0, true), "d_released");
+        if (e.isShiftDown() && !shiftDown) {
+            shiftDown = true;
+            System.out.println("Shift pressed");
+        }
 
-        //Space uses the equipped weapon
-        put(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0, false), "space_pressed");
+        Transform playerTransform = Game.getInstance().getPlayer().getTransform();
+        switch (e.getKeyCode()) {
 
-        //Q picks up next item
-        put(KeyStroke.getKeyStroke(KeyEvent.VK_Q, 0, false), "q_pressed");
+            case KeyEvent.VK_W:
+            case KeyEvent.VK_UP:
+                if (YAxis != 1) {
+                    YAxis = 1;
+                    playerTransform.setDirection(Vector.NORTH);
+                    System.out.println("YAxis: " + YAxis);
+                }
+                break;
 
-        //Shift makes the player sprint
-        put(KeyStroke.getKeyStroke(KeyEvent.VK_E, 0, false), "shift_pressed");
+            case KeyEvent.VK_S:
+            case KeyEvent.VK_DOWN:
+                if (YAxis != -1) {
+                    YAxis = -1;
+                    playerTransform.setDirection(Vector.SOUTH);
+                    System.out.println("YAxis: " + YAxis);
+                }
+                break;
 
-        actionMap = new ActionMap();
+            case KeyEvent.VK_A:
+            case KeyEvent.VK_LEFT:
+                if (XAxis != -1) {
+                    XAxis = -1;
+                    playerTransform.setDirection(Vector.WEST);
+                    System.out.println("XAxis: " + XAxis);
+                }
+                break;
 
-        translateUp = new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                YAxis = +1;
-                getGame().getPlayer().getTransform().setDirection(Vector.NORTH);
-            }
-        };
+            case KeyEvent.VK_D:
+            case KeyEvent.VK_RIGHT:
+                if (XAxis != 1) {
+                    XAxis = 1;
+                    playerTransform.setDirection(Vector.EAST);
+                    System.out.println("XAxis: " + XAxis);
+                }
+                break;
+        }
+    }
 
-        translateDown = new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                YAxis = -1;
-                getGame().getPlayer().getTransform().setDirection(Vector.SOUTH);
-            }
-        };
+    @Override
+    public void keyReleased(KeyEvent e) {
+        if (!e.isShiftDown() && shiftDown) {
+            shiftDown = false;
+            System.out.println("Shift released");
+        }
 
-        translateLeft = new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                XAxis = -1;
-                getGame().getPlayer().getTransform().setDirection(Vector.WEST);
-            }
-        };
+        switch (e.getKeyCode()) {
 
-        translateRight = new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                XAxis = +1;
-                getGame().getPlayer().getTransform().setDirection(Vector.EAST);
-            }
-        };
-
-        stopX = new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                XAxis = 0;
-            }
-        };
-        stopY = new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+            case KeyEvent.VK_W:
+            case KeyEvent.VK_UP:
                 YAxis = 0;
-            }
-        };
+                System.out.println("YAxis: " + YAxis);
+                break;
 
-        spaceDown = new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                spacePressed = true;
-                DebugLog.write("SPACE down");
-            }
-        };
+            case KeyEvent.VK_S:
+            case KeyEvent.VK_DOWN:
+                YAxis = 0;
+                System.out.println("YAxis: " + YAxis);
+                break;
 
-        qDown = new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                qPressed = true;
-                DebugLog.write("Q down");
-            }
-        };
+            case KeyEvent.VK_A:
+            case KeyEvent.VK_LEFT:
+                XAxis = 0;
+                System.out.println("XAxis: " + XAxis);
+                break;
 
-        shiftDown = new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                shiftPressed = true;
-                System.out.println("Shift down");
-            }
-        };
+            case KeyEvent.VK_D:
+            case KeyEvent.VK_RIGHT:
+                XAxis = 0;
+                System.out.println("XAxis: " + XAxis);
+                break;
 
-
-        //Map all keys defined above to the approriate actions
-        actionMap.put("w_pressed", translateUp);
-        actionMap.put("w_released", stopY);
-        actionMap.put("s_pressed", translateDown);
-        actionMap.put("s_released", stopY);
-        actionMap.put("a_released", stopX);
-        actionMap.put("a_pressed", translateLeft);
-        actionMap.put("d_pressed", translateRight);
-        actionMap.put("d_released", stopX);
-        actionMap.put("space_pressed", spaceDown);
-        actionMap.put("q_pressed", qDown);
-        actionMap.put("shift_pressed", shiftDown);
+            case KeyEvent.VK_SPACE:
+                spaceTyped = true;
+                System.out.println("Space typed");
+                break;
+            case KeyEvent.VK_Q:
+                qTyped = true;
+                System.out.println("Ctrl typed");
+                break;
+        }
     }
 
-    public void resetSpacePressed() {
-        spacePressed = false;
-    }
-
-    public void resetQPressed() {
-        qPressed = false;
-    }
-
-    public void resetShiftPressed() {
-        shiftPressed = false;
-    }
-
-    public ActionMap getActionMap() {
-        return actionMap;
-    }
-
-    public Game getGame() {
-        return Game.getInstance();
+    public boolean isShiftDown() {
+        return shiftDown;
     }
 
     public int getXAxis() {
@@ -187,16 +142,24 @@ public class InputComponent extends InputMap {
         return YAxis;
     }
 
-    public boolean isSpacePressed() {
-        return spacePressed;
+    public boolean isSpaceTyped() {
+        return spaceTyped;
     }
 
-    public boolean isQPressed() {
-
-        return qPressed;
+    public boolean isqTyped() {
+        return qTyped;
     }
 
-    public boolean isShiftPressed() {
-        return shiftPressed;
+    //Called every frame to reset typed Keys
+    public void resetTypedKeys() {
+        spaceTyped = false;
+        qTyped = false;
     }
+
+    /*private class APanel extends JPanel{
+        public void paintComponent(Graphics g){
+            resetTypedKeys();
+            repaint();
+        }
+    }*/
 }

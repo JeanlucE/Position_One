@@ -58,10 +58,6 @@ public class Game {
                 new PhysicsComponent(10, 25)));
 
         renderer = Renderer.getInstance();
-
-        renderer.setInputMap(JComponent.WHEN_FOCUSED, InputComponent.getInstance());
-        renderer.setActionMap(InputComponent.getInstance().getActionMap());
-
         gameLoop = new GameLoop();
         Timer refresh = new Timer(15, gameLoop);
         refresh.start();
@@ -111,7 +107,7 @@ public class Game {
             }
 
             removeDestroyedGameObjects();
-
+            InputComponent.getInstance().resetTypedKeys();
             getRenderer().repaint();
 
             //Functionality to count frames and show frame rate circa every second

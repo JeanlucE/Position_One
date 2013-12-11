@@ -110,12 +110,11 @@ public class Character extends Actor {
     public void update() {
         //TODO update direction player is facing from here
 
-        if (InputComponent.getInstance().isShiftPressed()) {
+        if (InputComponent.getInstance().isShiftDown()) {
             if (!sprinting) {
                 moveSpeed = sprintSpeed;
                 sprinting = true;
             }
-            InputComponent.getInstance().resetShiftPressed();
         } else {
             moveSpeed = 3;
             sprinting = false;
@@ -127,18 +126,16 @@ public class Character extends Actor {
             move();
         }
 
-        if (InputComponent.getInstance().isSpacePressed()) {
+        if (InputComponent.getInstance().isSpaceTyped()) {
             attack();
-            InputComponent.getInstance().resetSpacePressed();
         }
 
-        if (InputComponent.getInstance().isQPressed()) {
+        if (InputComponent.getInstance().isqTyped()) {
             WorldSpace nextAbsPos = Game.getInstance().getCurrentWorld().get(getNextWorldPosition());
             if (nextAbsPos instanceof Floor) {
                 Floor floor = (Floor) nextAbsPos;
                 inventory.add(floor.hasDroppedItems() ? (floor.getTopItem()) : (null));
             }
-            InputComponent.getInstance().resetQPressed();
         }
     }
 
