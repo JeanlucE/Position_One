@@ -1,5 +1,7 @@
 package Components;
 
+import Actors.Actor;
+import WIP.DebugLog;
 import WIP.GameObject;
 import WIP.Vector;
 
@@ -13,10 +15,14 @@ import java.awt.image.BufferedImage;
  */
 public class ActorGraphicsComponent extends GraphicsComponent {
 
-    private GameObject parent;
+    private Actor parent;
     private DynamicResource images;
 
     public ActorGraphicsComponent(DynamicResource dynamicResource) {
+        if(dynamicResource.getSize() != 4) {
+            DebugLog.write("Dynamic Resource size for Actor graphics must be of length 4");
+            throw new IllegalArgumentException();
+        }
         images = dynamicResource;
     }
 
@@ -34,7 +40,7 @@ public class ActorGraphicsComponent extends GraphicsComponent {
     }
 
     //This must be called right after the actors graphic component is created
-    public void setParent(GameObject parent) {
+    public void setParent(Actor parent) {
         this.parent = parent;
     }
 }
