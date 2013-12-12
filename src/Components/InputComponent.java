@@ -143,7 +143,7 @@ public class InputComponent implements KeyListener {
         return spaceTyped;
     }
 
-    public boolean isqTyped() {
+    public boolean isQTyped() {
         return qTyped;
     }
 

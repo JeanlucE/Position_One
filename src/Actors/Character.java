@@ -123,7 +123,33 @@ public class Character extends Actor {
 
         int XAxis = InputComponent.getInstance().getXAxis();
         int YAxis = InputComponent.getInstance().getYAxis();
-        newDirection = new Vector(XAxis, YAxis);
+
+        calculateDirection(XAxis, YAxis);
+
+        setXVel(XAxis * moveSpeed);
+        setYVel(YAxis * moveSpeed);
+
+        move();
+
+        if (InputComponent.getInstance().isSpaceTyped()) {
+            attack();
+        }
+
+        if (InputComponent.getInstance().isQTyped()) {
+            pickupNextItem();
+        }
+        lastDirection = new Vector(XAxis, YAxis);
+    }
+
+    private void attack() {
+        Weapon weapon = equipment.getMainHand();
+        if (weapon != null) {
+            weapon.use();
+        }
+    }
+
+    private void calculateDirection(int x, int y) {
+        newDirection = new Vector(x, y);
         if (!newDirection.equals(lastDirection)) {
 
             if (newDirection.getY() == 1)
@@ -136,31 +162,13 @@ public class Character extends Actor {
             else if (newDirection.getX() == -1)
                 getTransform().setDirection(Vector.WEST);
         }
-
-        setXVel(XAxis * moveSpeed);
-        setYVel(YAxis * moveSpeed);
-        if (getXVel() != 0 || getYVel() != 0) {
-            move();
-        }
-
-        if (InputComponent.getInstance().isSpaceTyped()) {
-            attack();
-        }
-
-        if (InputComponent.getInstance().isqTyped()) {
-            WorldSpace nextAbsPos = Game.getInstance().getCurrentWorld().get(getNextWorldPosition());
-            if (nextAbsPos instanceof Floor) {
-                Floor floor = (Floor) nextAbsPos;
-                inventory.add(floor.hasDroppedItems() ? (floor.getTopItem()) : (null));
-            }
-        }
-        lastDirection = new Vector(XAxis, YAxis);
     }
 
-    private void attack() {
-        Weapon weapon = equipment.getMainHand();
-        if (weapon != null) {
-            weapon.use();
+    private void pickupNextItem() {
+        WorldSpace nextAbsPos = Game.getInstance().getCurrentWorld().get(getNextWorldPosition());
+        if (nextAbsPos instanceof Floor) {
+            Floor floor = (Floor) nextAbsPos;
+            inventory.add(floor.hasDroppedItems() ? (floor.getTopItem()) : (null));
         }
     }
 

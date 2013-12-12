@@ -48,6 +48,7 @@ public abstract class Actor extends Collidable {
     }
 
     public void move() {
+        if (currentXVelocity == 0 && currentYVelocity == 0) return;
         Vector currentPosition = getTransform().getPosition();
         World world = Game.getInstance().getCurrentWorld();
 
