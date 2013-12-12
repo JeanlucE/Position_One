@@ -26,6 +26,11 @@ public class Wall extends WorldSpace {
     }
 
     @Override
+    public boolean isInteractable() {
+        return false;
+    }
+
+    @Override
     public boolean isCollidable() {
         return true;
     }

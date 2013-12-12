@@ -22,4 +22,6 @@ public abstract class WorldSpace extends Collidable {
     public abstract boolean isWall();
 
     public abstract boolean isFloor();
+
+    public abstract boolean isInteractable();
 }

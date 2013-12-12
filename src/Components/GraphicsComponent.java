@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
  */
 public abstract class GraphicsComponent {
 
+    //TODO clean Graphicscomponents up
     protected BufferedImage[] image;
 
     //DEBUGGING

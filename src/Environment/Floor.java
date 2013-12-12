@@ -31,6 +31,11 @@ public class Floor extends WorldSpace {
         return true;
     }
 
+    @Override
+    public boolean isInteractable() {
+        return false;
+    }
+
     public boolean hasDroppedItems() {
         return !itemStack.empty();
     }

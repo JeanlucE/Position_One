@@ -11,7 +11,7 @@ import WIP.Transform;
  * Time: 23:26
  */
 public class Ammunition extends Equipment {
-
+    //TODO parent ammo transfrom to player transform when equipped and unparent when unequipped
     //TODO add picked up arrows to stack if same type
     private int stack = 1000;
     private PhysicsComponent physicsComponent;

@@ -49,4 +49,16 @@ public enum DynamicResource {
     public BufferedImage getWest() {
         return resources[3].getImage();
     }
+
+    public BufferedImage getNotActivated(){
+        return resources[0].getImage();
+    }
+
+    public BufferedImage getActivated(){
+        return resources[1].getImage();
+    }
+
+    public int getSize() {
+        return size;
+    }
 }
