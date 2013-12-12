@@ -6,6 +6,8 @@ import Components.MouseInputComponent;
 import Components.PhysicsComponent;
 import Items.Item;
 import Items.Projectile;
+import Environment.Floor;
+import Environment.WorldSpace;
 
 import javax.swing.*;
 import java.awt.*;

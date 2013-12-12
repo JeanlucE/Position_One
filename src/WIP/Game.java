@@ -5,6 +5,7 @@ import Actors.Character;
 import Actors.Enemy;
 import Components.*;
 import Items.*;
+import Environment.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

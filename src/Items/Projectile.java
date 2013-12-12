@@ -4,6 +4,7 @@ import Actors.Actor;
 import Components.GraphicsComponent;
 import Components.PhysicsComponent;
 import WIP.*;
+import Environment.World;
 
 import java.util.ArrayList;
 import java.util.List;

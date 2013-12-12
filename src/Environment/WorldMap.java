@@ -1,8 +1,11 @@
-package WIP;
+package Environment;
 
 import Components.PhysicsComponent;
 import Components.Resource;
 import Components.StaticGraphicsComponent;
+import WIP.DebugLog;
+import WIP.Transform;
+import WIP.Vector;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,7 +1,9 @@
-package WIP;
+package Environment;
 
 import Components.GraphicsComponent;
 import Components.PhysicsComponent;
+import WIP.Collidable;
+import WIP.Transform;
 
 /**
  * Created with IntelliJ IDEA.

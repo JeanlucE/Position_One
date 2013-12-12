@@ -1,13 +1,111 @@
-Log created at: 14:15:52 12.12.2013
+Log created at: 22:19:55 12.12.2013
 
-[14:15:53.034] New Game started
-[14:15:53.037] New Melee Weapon created: Sword
-[14:15:53.037] New Ranged Weapon created: The OP Bow
-[14:15:53.066] New Character created: Ned Stark
-[14:15:53.067] Player Ned Stark has equipped: The OP Bow
-[14:15:53.067] Player Ned Stark has equipped: Ammunition
-[14:15:53.073] New World created with size: 400
-[14:15:53.073] New Melee Weapon created: Swordish
-[14:15:53.075] Renderer started
-[14:15:55.029] New Projectile at: 228|300
-[14:15:55.301] Projectile destroyed
+[22:19:56.122] New Game started
+[22:19:56.126] New Melee Weapon created: Sword
+[22:19:56.126] New Ranged Weapon created: The OP Bow
+[22:19:56.201] New Character created: Ned Stark
+[22:19:56.202] Player Ned Stark has equipped: The OP Bow
+[22:19:56.202] Player Ned Stark has equipped: Ammunition
+[22:19:56.206] New World created with size: 400
+[22:19:56.206] New Melee Weapon created: Swordish
+[22:19:56.208] Renderer started
+[22:20:00.819] New Projectile at: 102|57
+[22:20:00.822] Projectile destroyed
+[22:20:02.339] New Projectile at: 219|249
+[22:20:02.723] Projectile destroyed
+[22:20:02.835] New Projectile at: 219|342
+[22:20:03.011] New Projectile at: 219|375
+[22:20:03.218] Projectile destroyed
+[22:20:03.394] Projectile destroyed
+[22:20:03.841] New Projectile at: 186|396
+[22:20:04.033] New Projectile at: 186|396
+[22:20:04.161] Chu Chu(1000/1000) hit!
+[22:20:04.162] Damaged enemy Chu Chu for 10 damage.
+[22:20:04.162] Projectile destroyed
+[22:20:04.193] New Projectile at: 186|396
+[22:20:04.353] Chu Chu(990/1000) hit!
+[22:20:04.353] Damaged enemy Chu Chu for 10 damage.
+[22:20:04.354] Projectile destroyed
+[22:20:04.385] New Projectile at: 186|396
+[22:20:04.512] Chu Chu(980/1000) hit!
+[22:20:04.512] Damaged enemy Chu Chu for 10 damage.
+[22:20:04.512] Projectile destroyed
+[22:20:04.704] Chu Chu(970/1000) hit!
+[22:20:04.704] Damaged enemy Chu Chu for 10 damage.
+[22:20:04.704] Projectile destroyed
+[22:20:05.168] New Projectile at: 288|453
+[22:20:05.392] New Projectile at: 288|495
+[22:20:05.552] Projectile destroyed
+[22:20:05.633] New Projectile at: 288|540
+[22:20:05.776] Projectile destroyed
+[22:20:05.840] New Projectile at: 288|579
+[22:20:05.952] Projectile destroyed
+[22:20:06.096] Projectile destroyed
+[22:20:06.239] New Projectile at: 339|615
+[22:20:06.447] New Projectile at: 378|615
+[22:20:06.623] Projectile destroyed
+[22:20:06.655] New Projectile at: 417|615
+[22:20:06.831] Projectile destroyed
+[22:20:06.895] New Projectile at: 462|615
+[22:20:07.039] Projectile destroyed
+[22:20:07.279] Projectile destroyed
+[22:20:07.453] New Projectile at: 567|615
+[22:20:07.693] New Projectile at: 612|615
+[22:20:07.741] Projectile destroyed
+[22:20:07.885] New Projectile at: 618|615
+[22:20:07.901] Projectile destroyed
+[22:20:08.077] Projectile destroyed
+[22:20:08.093] New Projectile at: 618|615
+[22:20:08.284] Projectile destroyed
+[22:20:08.300] New Projectile at: 618|615
+[22:20:08.494] Projectile destroyed
+[22:20:08.956] New Projectile at: 534|615
+[22:20:09.180] New Projectile at: 492|615
+[22:20:09.340] Projectile destroyed
+[22:20:09.404] New Projectile at: 450|615
+[22:20:09.564] Projectile destroyed
+[22:20:09.612] New Projectile at: 411|615
+[22:20:09.788] Projectile destroyed
+[22:20:09.820] New Projectile at: 372|615
+[22:20:09.996] Projectile destroyed
+[22:20:10.044] New Projectile at: 330|615
+[22:20:10.205] Projectile destroyed
+[22:20:10.429] Projectile destroyed
+[22:20:10.637] New Projectile at: 225|615
+[22:20:10.829] New Projectile at: 225|615
+[22:20:10.909] Projectile destroyed
+[22:20:11.021] New Projectile at: 225|615
+[22:20:11.101] Projectile destroyed
+[22:20:11.245] New Projectile at: 225|615
+[22:20:11.293] Projectile destroyed
+[22:20:11.469] New Projectile at: 225|615
+[22:20:11.517] Projectile destroyed
+[22:20:11.741] Projectile destroyed
+[22:20:11.869] New Projectile at: 225|636
+[22:20:12.045] New Projectile at: 225|636
+[22:20:12.045] Projectile destroyed
+[22:20:12.221] Projectile destroyed
+[22:20:12.237] New Projectile at: 225|636
+[22:20:12.413] Projectile destroyed
+[22:20:12.429] New Projectile at: 225|636
+[22:20:12.604] Projectile destroyed
+[22:20:12.764] New Projectile at: 201|636
+[22:20:12.940] New Projectile at: 201|636
+[22:20:12.988] Projectile destroyed
+[22:20:13.131] New Projectile at: 201|636
+[22:20:13.163] Projectile destroyed
+[22:20:13.307] New Projectile at: 201|636
+[22:20:13.355] Projectile destroyed
+[22:20:13.531] Projectile destroyed
+[22:20:13.899] New Projectile at: 210|636
+[22:20:14.283] Projectile destroyed
+[22:20:14.427] New Projectile at: 195|636
+[22:20:14.619] New Projectile at: 195|636
+[22:20:14.651] Projectile destroyed
+[22:20:14.810] New Projectile at: 195|636
+[22:20:14.850] Projectile destroyed
+[22:20:15.018] New Projectile at: 195|636
+[22:20:15.034] Projectile destroyed
+[22:20:15.226] New Projectile at: 195|636
+[22:20:15.242] Projectile destroyed
+[22:20:15.450] Projectile destroyed

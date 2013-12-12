@@ -1,8 +1,12 @@
-package WIP;
+package Environment;
 
 import Actors.Actor;
 import Components.PhysicsComponent;
 import Items.Projectile;
+import WIP.DebugLog;
+import WIP.Game;
+import WIP.GameObject;
+import WIP.Vector;
 
 /**
  * Created with IntelliJ IDEA.

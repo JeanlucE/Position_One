@@ -2,6 +2,8 @@ package WIP;
 
 import Actors.Actor;
 import Items.Projectile;
+import Environment.World;
+import Environment.WorldSpace;
 
 import java.util.HashMap;
 import java.util.Map;

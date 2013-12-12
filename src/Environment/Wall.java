@@ -1,7 +1,8 @@
-package WIP;
+package Environment;
 
 import Components.PhysicsComponent;
 import Components.StaticGraphicsComponent;
+import WIP.Transform;
 
 /**
  * Created with IntelliJ IDEA.

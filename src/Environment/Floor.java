@@ -1,7 +1,8 @@
-package WIP;
+package Environment;
 
 import Components.StaticGraphicsComponent;
 import Items.Item;
+import WIP.Transform;
 
 import java.util.Stack;
 

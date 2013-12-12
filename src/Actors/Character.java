@@ -6,6 +6,8 @@ import Components.InputComponent;
 import Components.PhysicsComponent;
 import Items.*;
 import WIP.*;
+import Environment.Floor;
+import Environment.WorldSpace;
 
 import java.lang.reflect.Field;
 
