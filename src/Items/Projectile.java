@@ -38,7 +38,7 @@ public class Projectile extends Collidable {
         //Set how far the projectile flies
         this.range = range * Renderer.TILESIZE;
 
-        //TODO shift origin position to the middle of the player
+        //TODO shift origin position forward of the player
 
         //Set damage
         this.damage = damage;

@@ -78,9 +78,10 @@ public class World {
         PhysicsComponent collider = p.getCollider();
         for (Vector v : collider.getCorners(nextPosition)) {
             CollisionEvent wallCollision = resolveWallCollision(v);
-            if (wallCollision.isWallHit())
-                //TODO set wall collision object
+            if (wallCollision.isWallHit()) {
+                System.out.println(wallCollision.getCollisionObject());
                 return wallCollision;
+            }
         }
 
         for (Actor a : Actor.getActors()) {
@@ -134,7 +135,7 @@ public class World {
 
         public CollisionEvent(CollisionState collisionState, GameObject collisionObject) {
             this.collisionState = collisionState;
-            if (collisionState.equals(CollisionState.ENEMY_HIT))
+            if (!collisionState.equals(CollisionState.NO_COLLISION))
                 this.collisionObject = collisionObject;
         }
 

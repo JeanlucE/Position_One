@@ -28,4 +28,8 @@ public class Wall extends WorldSpace {
     public boolean isCollidable() {
         return true;
     }
+
+    public String toString(){
+        return getTransform().getPosition().toString();
+    }
 }

@@ -53,7 +53,7 @@ public class Renderer extends JPanel {
     private boolean drawActorPositions = true;
     private boolean drawActorColliders = true;
 
-    private GUIState guiState;
+    private GUIState guiState = GUIState.GAME;
 
     //Singleton Design Pattern
     public static Renderer getInstance() {
@@ -143,7 +143,7 @@ public class Renderer extends JPanel {
             PhysicsComponent p = ((Collidable) go).getCollider();
             g2d.drawImage(bf,
                     position.getX() - p.getHeight() / 2,
-                    screenHeight - (p.getHeight() / 2 + position.getY()),
+                    screenHeight - (position.getY() + p.getHeight() / 2),
                     width, height, this);
         } else {
             g2d.setColor(Color.RED);
