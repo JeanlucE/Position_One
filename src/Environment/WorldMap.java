@@ -52,6 +52,10 @@ public class WorldMap {
         DebugLog.write("New World created with size: " + worldSpaceMap.size());
     }
 
+    public WorldMap(Turtle turtle) {
+        Turtle.TurtleMove[] turtlePositions = turtle.getPositions();
+    }
+
     public WorldSpace getReal(int x, int y) {
         return worldSpaceMap.get(new Vector(x, y));
     }

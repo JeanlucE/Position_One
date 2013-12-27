@@ -23,7 +23,7 @@ public class Enemy extends NPC {
     }
 
     public void update() {
-        //randomVel();
+        randomVel();
         if (getXVel() != 0 || getYVel() != 0) {
             move();
         }
@@ -43,7 +43,7 @@ public class Enemy extends NPC {
     private Random random = new Random();
 
     private void randomVel() {
-        if (getTransform().getPosition().equals(new Vector(40, 40))
+        if (getTransform().getPosition().equals(new Vector(60, 60))
                 || (getTransform().getPosition().getX() >= 700 && getTransform().getPosition().getY() >= 700))
             direction = direction * -1;
         setXVel((random.nextInt(xMaxSpeed) + 1 + xMinSpeed) * direction);

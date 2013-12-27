@@ -1,7 +1,8 @@
 package WIP;
 
-import java.io.IOException;
-import java.util.Scanner;
+import Environment.Turtle;
+
+import java.util.Arrays;
 
 /**
  * Created with IntelliJ IDEA.
@@ -10,20 +11,14 @@ import java.util.Scanner;
  * Time: 18:29
  */
 public class Test {
-    public static Scanner input;
 
 
     public static void main(String[] args) {
-        System.out.println(0 / 0);
+        Turtle t = new Turtle();
+        System.out.println(Arrays.toString(t.getPositions()));
     }
 
 
     public Test() {
-        input = new Scanner(System.in);
-        try {
-            DebugLog.instantiate();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }

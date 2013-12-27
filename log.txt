@@ -1,51 +1,11 @@
-Log created at: 23:47:42 12.12.2013
+Log created at: 14:36:26 20.12.2013
 
-[23:47:43.218] New Game started
-[23:47:43.221] New Melee Weapon created: Sword
-[23:47:43.221] New Ranged Weapon created: The OP Bow
-[23:47:43.256] New Character created: Ned Stark
-[23:47:43.257] Player Ned Stark has equipped: The OP Bow
-[23:47:43.257] Player Ned Stark has equipped: Ammunition
-[23:47:43.261] New World created with size: 400
-[23:47:43.262] New Melee Weapon created: Swordish
-[23:47:43.263] Renderer started
-[23:47:45.250] New Projectile at: 228|363
-[23:47:45.522] Projectile destroyed
-[23:47:45.650] New Projectile at: 180|363
-[23:47:45.840] Projectile destroyed
-[23:47:45.856] New Projectile at: 180|363
-[23:47:46.048] New Projectile at: 180|363
-[23:47:46.048] Projectile destroyed
-[23:47:46.240] Projectile destroyed
-[23:47:46.544] New Projectile at: 171|339
-[23:47:46.672] Projectile destroyed
-[23:47:46.736] New Projectile at: 171|339
-[23:47:46.864] Projectile destroyed
-[23:47:53.223] New Projectile at: 426|636
-[23:47:53.575] Chu Chu(1000/1000) hit!
-[23:47:53.575] Damaged enemy Chu Chu for 10 damage.
-[23:47:53.575] Projectile destroyed
-[23:47:54.023] New Projectile at: 399|537
-[23:47:54.215] Chu Chu(990/1000) hit!
-[23:47:54.215] Damaged enemy Chu Chu for 10 damage.
-[23:47:54.215] Projectile destroyed
-[23:47:54.247] New Projectile at: 399|537
-[23:47:54.407] New Projectile at: 399|537
-[23:47:54.439] Chu Chu(980/1000) hit!
-[23:47:54.439] Damaged enemy Chu Chu for 10 damage.
-[23:47:54.439] Projectile destroyed
-[23:47:54.599] New Projectile at: 399|537
-[23:47:54.599] Chu Chu(970/1000) hit!
-[23:47:54.599] Damaged enemy Chu Chu for 10 damage.
-[23:47:54.599] Projectile destroyed
-[23:47:54.775] New Projectile at: 399|537
-[23:47:54.791] Chu Chu(960/1000) hit!
-[23:47:54.791] Damaged enemy Chu Chu for 10 damage.
-[23:47:54.791] Projectile destroyed
-[23:47:54.951] New Projectile at: 399|537
-[23:47:54.967] Chu Chu(950/1000) hit!
-[23:47:54.967] Damaged enemy Chu Chu for 10 damage.
-[23:47:54.968] Projectile destroyed
-[23:47:55.143] Chu Chu(940/1000) hit!
-[23:47:55.143] Damaged enemy Chu Chu for 10 damage.
-[23:47:55.143] Projectile destroyed
+[14:36:26.386] New Game started
+[14:36:26.390] New Melee Weapon created: Sword
+[14:36:26.390] New Ranged Weapon created: The OP Bow
+[14:36:26.428] New Character created: Ned Stark
+[14:36:26.429] Player Ned Stark has equipped: The OP Bow
+[14:36:26.429] Player Ned Stark has equipped: Ammunition
+[14:36:26.435] New World created with size: 400
+[14:36:26.435] New Melee Weapon created: Swordish
+[14:36:26.437] Renderer started
