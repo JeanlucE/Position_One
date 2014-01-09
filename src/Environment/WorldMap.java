@@ -21,8 +21,9 @@ import java.util.Map;
  * <p/>
  * Saves a single Instance of a map. Can be saved and later loaded
  */
-public class WorldMap {
-    //TODO worldmap save function
+public class WorldMap implements Serializable {
+    //TODO worldmap save folder
+    public static String mapsPath = "./maps/";
     private Map<Vector, WorldSpace> worldSpaceMap = new HashMap<>();
 
     public WorldMap() {
@@ -79,11 +80,10 @@ public class WorldMap {
         worldSpaceMap.put(new Vector(x, y), worldSpace);
     }
 
-    public static WorldMap loadFromFile(String filename) {
-
+    public static WorldMap loadFromFile(String filename) throws IOException {
         String[] worldSpaces;
         try {
-            worldSpaces = readFile(filename + ".txt");
+            worldSpaces = readFile(mapsPath + filename + ".txt");
         } catch (FileNotFoundException e) {
             DebugLog.write("[ERROR]: The file " + filename + ".txt was not found!");
             return new WorldMap();
@@ -128,7 +128,7 @@ public class WorldMap {
         Map<Vector, WorldSpace> result = new HashMap<>();
         String[] worldSpaces;
         try {
-            worldSpaces = readFile(filename + ".txt");
+            worldSpaces = readFile(mapsPath + filename + ".txt");
         } catch (FileNotFoundException e) {
             DebugLog.write("[ERROR]: The file " + filename + ".txt was not found!");
             return new WorldMap();
@@ -158,7 +158,7 @@ public class WorldMap {
     }
 
     public void saveToFile(String filename) throws IOException {
-        BufferedWriter bf = new BufferedWriter(new FileWriter(new File(filename + ".txt")));
+        BufferedWriter bf = new BufferedWriter(new FileWriter(new File(mapsPath + filename + ".txt")));
         for (Vector v : worldSpaceMap.keySet()) {
             WorldSpace w = worldSpaceMap.get(v);
             if (w.isWall())
