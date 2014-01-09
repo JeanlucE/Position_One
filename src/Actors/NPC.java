@@ -22,6 +22,6 @@ public abstract class NPC extends Actor {
 
     @Override
     public boolean isCollidable() {
-        return false;
+        return true;
     }
 }

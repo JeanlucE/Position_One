@@ -1,9 +1,10 @@
 package WIP;
 
 import Actors.Actor;
-import Items.Projectile;
+import Components.PhysicsComponent;
 import Environment.World;
 import Environment.WorldSpace;
+import Items.Projectile;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -80,16 +81,15 @@ public class Camera {
         return visibleSpaces;
     }
 
-    /*
-    TODO Dont draws actors if they are not visible to the player
-     */
     public Map<Actor, Vector> actorsToRender() {
         Map<Actor, Vector> actorPositionMap = new HashMap<>();
         for (Actor a : Game.getInstance().getActors()) {
-            Vector drawPosition = a.getTransform().getPosition().clone();
-            drawPosition.setX(screenWidth / 2 + (drawPosition.getX() - parent.getX()));
-            drawPosition.setY(screenHeight / 2 + (drawPosition.getY() - parent.getY()));
-            actorPositionMap.put(a, drawPosition);
+            if (withinScreenBounds(a)) {
+                Vector drawPosition = a.getTransform().getPosition().clone();
+                drawPosition.setX(screenWidth / 2 + (drawPosition.getX() - parent.getX()));
+                drawPosition.setY(screenHeight / 2 + (drawPosition.getY() - parent.getY()));
+                actorPositionMap.put(a, drawPosition);
+            }
         }
         return actorPositionMap;
     }
@@ -103,5 +103,22 @@ public class Camera {
             projectileVectorMap.put(p, pos);
         }
         return projectileVectorMap;
+    }
+
+    private boolean withinScreenBounds(GameObject go) {
+        Vector v = go.getTransform().getPosition();
+        int xDist = Math.abs(v.getX() - parent.getX());
+        int yDist = Math.abs(v.getY() - parent.getY());
+        if (go.isCollidable()) {
+            PhysicsComponent p = ((Collidable) go).getCollider();
+            if (xDist < screenWidth / 2 + p.getWidth() / 2 && yDist < screenHeight / 2 + p.getHeight() / 2) {
+                return true;
+            }
+        } else {
+            if (xDist < screenWidth / 2 && yDist < screenHeight / 2) {
+                return true;
+            }
+        }
+        return false;
     }
 }

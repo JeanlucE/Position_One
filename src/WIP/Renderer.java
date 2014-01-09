@@ -4,10 +4,10 @@ import Actors.Actor;
 import Components.InputComponent;
 import Components.MouseInputComponent;
 import Components.PhysicsComponent;
-import Items.Item;
-import Items.Projectile;
 import Environment.Floor;
 import Environment.WorldSpace;
+import Items.Item;
+import Items.Projectile;
 
 import javax.swing.*;
 import java.awt.*;
@@ -52,8 +52,8 @@ public class Renderer extends JPanel {
     private Graphics2D g2d;
 
     //DEBUGGING
-    private boolean drawActorPositions = true;
-    private boolean drawActorColliders = true;
+    public boolean DEBUG_DRAW_ACTOR_POSITIONS = true;
+    public boolean DEBUG_DRAW_ACTOR_COLLIDERS = true;
 
     private GUIState guiState = GUIState.GAME;
 
@@ -97,14 +97,13 @@ public class Renderer extends JPanel {
         //DEBUGGING
         Map<Actor, Vector> actorPositionMap = Camera.getInstance().actorsToRender();
 
-
         drawActors(actorPositionMap);
 
-        if (drawActorPositions) {
+        if (DEBUG_DRAW_ACTOR_POSITIONS) {
             drawActorPositions(actorPositionMap);
         }
 
-        if (drawActorColliders) {
+        if (DEBUG_DRAW_ACTOR_COLLIDERS) {
             drawActorColliders(actorPositionMap);
         }
 

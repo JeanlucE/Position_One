@@ -55,8 +55,13 @@ public class AdvancedVector implements Cloneable {
         this.y = newVector.getY();
     }
 
+    public float length() {
+        return (float) Math.sqrt(x * x + y * y);
+    }
+
     public void normalize() {
-        //TODO normalize()
+        x = x / length();
+        y = y / length();
     }
 
     @Override

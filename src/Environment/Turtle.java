@@ -37,9 +37,14 @@ public class Turtle {
     }
 
     private AdvancedVector endPos;
+    private boolean init = false;
 
     private void forward(float distance) {
-        AdvancedVector startPos = endPos;
+        AdvancedVector startPos;
+        if (endPos == null)
+            endPos = transform.getPosition().clone();
+
+        startPos = endPos;
         transform.getPosition().shift(
                 transform.getDirection().getX() * distance,
                 transform.getDirection().getY() * distance);
@@ -85,6 +90,10 @@ public class Turtle {
 
         public AdvancedVector getEndPos() {
             return endPos;
+        }
+
+        public String toString() {
+            return "{" + startPos + " - " + endPos + "}";
         }
     }
 }

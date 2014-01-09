@@ -14,6 +14,7 @@ import java.util.Random;
  * Time: 14:32
  */
 public class Enemy extends NPC {
+    public static boolean DEBUG_ALL_ENEMIES_RANDOM_MOVE = true;
 
     public Enemy(String name, int maxHealth, Transform t, ActorGraphicsComponent g, PhysicsComponent p) {
         super(name, t, g, p);
@@ -23,7 +24,9 @@ public class Enemy extends NPC {
     }
 
     public void update() {
-        randomVel();
+        if (DEBUG_ALL_ENEMIES_RANDOM_MOVE) {
+            randomVel();
+        }
         if (getXVel() != 0 || getYVel() != 0) {
             move();
         }

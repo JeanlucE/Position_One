@@ -7,7 +7,10 @@ import WIP.DebugLog;
 import WIP.Transform;
 import WIP.Vector;
 
+import java.io.*;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -54,21 +57,17 @@ public class WorldMap {
 
     public WorldMap(Turtle turtle) {
         Turtle.TurtleMove[] turtlePositions = turtle.getPositions();
+        DebugLog.write("New World created with size: " + worldSpaceMap.size());
+    }
+
+    private WorldMap(Map<Vector, WorldSpace> map) {
+        worldSpaceMap = map;
+        DebugLog.write("New World created with size: " + worldSpaceMap.size());
     }
 
     public WorldSpace getReal(int x, int y) {
         return worldSpaceMap.get(new Vector(x, y));
     }
-
-    /*public WorldSpace get(int x, int y) {
-        int xReal = x / 40;
-        int yReal = y / 40;
-        return getReal(xReal, yReal);
-    }
-
-    public WorldSpace get(Vector position) {
-        return get(position.getX(), position.getY());
-    }*/
 
     private void set(int x, int y, WorldSpace worldSpace) {
         int xReal = x / 40;
@@ -78,5 +77,120 @@ public class WorldMap {
 
     public void setReal(int x, int y, WorldSpace worldSpace) {
         worldSpaceMap.put(new Vector(x, y), worldSpace);
+    }
+
+    public static WorldMap loadFromFile(String filename) {
+
+        String[] worldSpaces;
+        try {
+            worldSpaces = readFile(filename + ".txt");
+        } catch (FileNotFoundException e) {
+            DebugLog.write("[ERROR]: The file " + filename + ".txt was not found!");
+            return new WorldMap();
+        }
+        if (worldSpaces.length == 0) {
+            DebugLog.write("[ERROR]: The file " + filename + ".txt is empty!");
+            return new WorldMap();
+        }
+        Map<Vector, WorldSpace> result = new HashMap<>();
+        int tilesize = 40;
+        //Creates a square room of with walk space 19x19
+        StaticGraphicsComponent wall = new StaticGraphicsComponent(Resource.wall01);
+        StaticGraphicsComponent floor = new StaticGraphicsComponent(Resource.floor01);
+        PhysicsComponent boxCollider = new PhysicsComponent(tilesize, tilesize);
+        for (int i = 0; i < worldSpaces.length; i++) {
+            String worldSpace = worldSpaces[i];
+            if (worldSpace.length() > 0) {
+                int cutIndex1 = 0, cutindex2 = 0;
+                for (int j = 0; j < worldSpace.length(); j++) {
+                    if (worldSpace.charAt(j) == ',') {
+                        if (cutIndex1 == 0)
+                            cutIndex1 = j;
+                        else
+                            cutindex2 = j;
+                    }
+                }
+                String type = worldSpace.substring(0, cutIndex1);
+                int xPos = Integer.parseInt(worldSpace.substring(cutIndex1 + 1, cutindex2));
+                int yPos = Integer.parseInt(worldSpace.substring(cutindex2 + 1));
+                if (type.startsWith("w")) { //if type is wall
+                    result.put(new Vector(xPos, yPos),
+                            new Wall(new Transform(new Vector(xPos * 40, yPos * 40)), wall, boxCollider));
+                } else if (type.startsWith("f")) {
+                    result.put(new Vector(xPos, yPos),
+                            new Floor(new Transform(new Vector(xPos * 40, yPos * 40)), floor));
+                }
+            }
+        }
+        return new WorldMap(result);
+    }
+
+    public static WorldMap instantiateFromFile(String filename) {
+        Map<Vector, WorldSpace> result = new HashMap<>();
+        String[] worldSpaces;
+        try {
+            worldSpaces = readFile(filename + ".txt");
+        } catch (FileNotFoundException e) {
+            DebugLog.write("[ERROR]: The file " + filename + ".txt was not found!");
+            return new WorldMap();
+        }
+        if (worldSpaces.length == 0) {
+            DebugLog.write("[ERROR]: The file " + filename + ".txt is empty!");
+            return new WorldMap();
+        }
+        int tilesize = 40;
+        StaticGraphicsComponent wall = new StaticGraphicsComponent(Resource.wall01);
+        StaticGraphicsComponent floor = new StaticGraphicsComponent(Resource.floor01);
+        PhysicsComponent boxCollider = new PhysicsComponent(tilesize, tilesize);
+
+        for (int i = 0; i < worldSpaces.length; i++) {
+            char[] worldSpace = worldSpaces[worldSpaces.length - i - 1].toCharArray();
+            for (int j = 0; j < worldSpace.length; j++) {
+                char c = worldSpace[j];
+                if (c == 'w')
+                    result.put(new Vector(j, i),
+                            new Wall(new Transform(new Vector(j * 40, i * 40)), wall, boxCollider));
+                else if (c == 'f')
+                    result.put(new Vector(j, i),
+                            new Floor(new Transform(new Vector(j * 40, i * 40)), floor));
+            }
+        }
+        return new WorldMap(result);
+    }
+
+    public void saveToFile(String filename) throws IOException {
+        BufferedWriter bf = new BufferedWriter(new FileWriter(new File(filename + ".txt")));
+        for (Vector v : worldSpaceMap.keySet()) {
+            WorldSpace w = worldSpaceMap.get(v);
+            if (w.isWall())
+                bf.append("wall," + v.getX() + "," + v.getY());
+            else if (w.isFloor()) {
+                bf.append("floor," + v.getX() + "," + v.getY());
+            }
+            bf.newLine();
+        }
+        bf.flush();
+        bf.close();
+    }
+
+    private static String[] readFile(String fileName) throws FileNotFoundException {
+        BufferedReader bufferedReader;
+        bufferedReader = new BufferedReader(new FileReader(fileName));
+
+        List<String> lines = new LinkedList<String>();
+
+        try {
+            String line = bufferedReader.readLine();
+
+            while (line != null) {
+                lines.add(line);
+                line = bufferedReader.readLine();
+            }
+        } catch (IOException e) {
+            return null;
+        }
+
+        return lines.toArray(new String[0]);
+
     }
 }

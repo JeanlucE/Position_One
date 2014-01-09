@@ -8,6 +8,8 @@ import WIP.Game;
 import WIP.GameObject;
 import WIP.Vector;
 
+import java.io.IOException;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Jean-Luc
@@ -44,7 +46,7 @@ public class World {
     }
 
     private World() {
-        currentMap = new WorldMap();
+        currentMap = WorldMap.instantiateFromFile("world");
     }
 
     public WorldSpace get(int x, int y) {
@@ -115,8 +117,8 @@ public class World {
     }
 
     /*
-    This method resolves collisions between the player and any enemy (for now) and any further actors in the scene.
-    TODO make this between all actors
+    This method resolves collisions between an actor and the world.
+    Returns a CollisionEvent with a flag for true or false and if its true, it also returns a CollisionObject
      */
     private CollisionEvent resolveActorCollision(Actor actor, Vector nextPosition) {
         Actor[] actors = Actor.getActors();
@@ -166,5 +168,18 @@ public class World {
 
     public enum CollisionState {
         ENEMY_HIT, WALL_HIT, NO_COLLISION;
+    }
+
+    public void loadMap(String worldName) {
+        WorldMap w = WorldMap.loadFromFile(worldName);
+        currentMap = w;
+    }
+
+    public void saveMap(String worldName) {
+        try {
+            currentMap.saveToFile(worldName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
