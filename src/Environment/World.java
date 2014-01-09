@@ -122,8 +122,7 @@ public class World {
      */
     private CollisionEvent resolveActorCollision(Actor actor, Vector nextPosition) {
         Actor[] actors = Actor.getActors();
-        for (int i = 0; i < actors.length; i++) {
-            Actor otherActor = actors[i];
+        for (Actor otherActor : actors) {
             if (actor != otherActor && !actor.getFaction().equals(otherActor.getFaction())) {
                 PhysicsComponent nextCollider = actor.getCollider().clone(nextPosition);
                 PhysicsComponent otherCollider = otherActor.getCollider();
@@ -167,7 +166,7 @@ public class World {
     }
 
     public enum CollisionState {
-        ENEMY_HIT, WALL_HIT, NO_COLLISION;
+        ENEMY_HIT, WALL_HIT, NO_COLLISION
     }
 
     public void loadMap(String worldName) {

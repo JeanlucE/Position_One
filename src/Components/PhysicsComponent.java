@@ -54,6 +54,7 @@ public class PhysicsComponent {
     //Rotates the collider by 90 degrees
     public void rotate90() {
         int save = width;
+        //works only because there are only rectangle colliders
         width = height;
         height = save;
     }

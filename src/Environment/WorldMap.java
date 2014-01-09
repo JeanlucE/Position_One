@@ -98,8 +98,7 @@ public class WorldMap {
         StaticGraphicsComponent wall = new StaticGraphicsComponent(Resource.wall01);
         StaticGraphicsComponent floor = new StaticGraphicsComponent(Resource.floor01);
         PhysicsComponent boxCollider = new PhysicsComponent(tilesize, tilesize);
-        for (int i = 0; i < worldSpaces.length; i++) {
-            String worldSpace = worldSpaces[i];
+        for (String worldSpace : worldSpaces) {
             if (worldSpace.length() > 0) {
                 int cutIndex1 = 0, cutindex2 = 0;
                 for (int j = 0; j < worldSpace.length(); j++) {
@@ -177,7 +176,7 @@ public class WorldMap {
         BufferedReader bufferedReader;
         bufferedReader = new BufferedReader(new FileReader(fileName));
 
-        List<String> lines = new LinkedList<String>();
+        List<String> lines = new LinkedList<>();
 
         try {
             String line = bufferedReader.readLine();
@@ -190,7 +189,7 @@ public class WorldMap {
             return null;
         }
 
-        return lines.toArray(new String[0]);
+        return lines.toArray(new String[lines.size()]);
 
     }
 }

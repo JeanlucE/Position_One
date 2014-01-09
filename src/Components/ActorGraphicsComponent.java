@@ -2,7 +2,6 @@ package Components;
 
 import Actors.Actor;
 import WIP.DebugLog;
-import WIP.GameObject;
 import WIP.Vector;
 
 import java.awt.image.BufferedImage;
@@ -19,7 +18,7 @@ public class ActorGraphicsComponent extends GraphicsComponent {
     private DynamicResource images;
 
     public ActorGraphicsComponent(DynamicResource dynamicResource) {
-        if(dynamicResource.getSize() != 4) {
+        if (dynamicResource.getSize() != 4) {
             DebugLog.write("Dynamic Resource size for Actor graphics must be of length 4");
             throw new IllegalArgumentException();
         }

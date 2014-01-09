@@ -67,7 +67,7 @@ public class Camera {
                 worldPosition.setY(screenHeight / 2 + (worldPosition.getY() - parent.getY()));
 
                 if (worldSpace == null) {
-                    visibleSpaces.put(worldPosition, worldSpace);
+                    visibleSpaces.put(worldPosition, null);
                 } else if (worldSpace.isWall()) {
                     walls.put(worldPosition, worldSpace);
                 } else if (worldSpace.isFloor()) {

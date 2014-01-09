@@ -1,6 +1,5 @@
 package Items;
 
-import Components.GraphicsComponent;
 import Components.ItemGraphicsComponent;
 import WIP.DebugLog;
 

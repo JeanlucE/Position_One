@@ -59,13 +59,13 @@ public class Inventory {
     }
 
     public boolean isFull() {
-        boolean bool = true;
-        for (int i = 0; i < inventorySlots.length && bool; i++) {
-            for (int j = 0; j < inventorySlots[0].length && bool; j++) {
-                bool = getSlot(i, j).isOccupied();
+        for (int i = 0; i < inventorySlots.length; i++) {
+            for (int j = 0; j < inventorySlots[0].length; j++) {
+                if (!getSlot(i, j).isOccupied())
+                    return false;
             }
         }
-        return bool;
+        return true;
     }
 
     private InventorySlot getFirstEmpty() {
