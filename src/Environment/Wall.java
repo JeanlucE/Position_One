@@ -11,6 +11,7 @@ import WIP.Transform;
  * Time: 15:19
  */
 public class Wall extends WorldSpace {
+
     public Wall(Transform transform, StaticGraphicsComponent g, PhysicsComponent p) {
         super(transform, g, p);
     }
@@ -35,7 +36,7 @@ public class Wall extends WorldSpace {
         return true;
     }
 
-    public String toString(){
-        return getTransform().getPosition().toString();
+    public String toString() {
+        return "Wall:" + getTransform().getPosition().toString();
     }
 }

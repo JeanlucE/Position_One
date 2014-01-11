@@ -21,8 +21,7 @@ import java.util.Map;
  * <p/>
  * Saves a single Instance of a map. Can be saved and later loaded
  */
-public class WorldMap implements Serializable {
-    //TODO worldmap save folder
+public class WorldMap {
     public static String mapsPath = "./maps/";
     private Map<Vector, WorldSpace> worldSpaceMap = new HashMap<>();
 
@@ -57,8 +56,8 @@ public class WorldMap implements Serializable {
     }
 
     public WorldMap(Turtle turtle) {
-        Turtle.TurtleMove[] turtlePositions = turtle.getPositions();
-        DebugLog.write("New World created with size: " + worldSpaceMap.size());
+        this(turtle.getGeneratedMap());
+        //DebugLog.write("New World created with size: " + worldSpaceMap.size());
     }
 
     private WorldMap(Map<Vector, WorldSpace> map) {

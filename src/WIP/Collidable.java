@@ -10,7 +10,6 @@ import Components.PhysicsComponent;
  * Time: 19:18
  */
 public abstract class Collidable extends GameObject {
-
     private PhysicsComponent physicsComponent;
 
     public Collidable(Transform transform, GraphicsComponent graphic, PhysicsComponent phys) {
@@ -26,7 +25,7 @@ public abstract class Collidable extends GameObject {
         return physicsComponent;
     }
 
-    public void setPhysicsComponent(PhysicsComponent physicsComponent) {
+    public void setCollider(PhysicsComponent physicsComponent) {
         this.physicsComponent = physicsComponent;
     }
 

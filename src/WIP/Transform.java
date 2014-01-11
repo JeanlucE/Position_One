@@ -1,12 +1,14 @@
 package WIP;
 
+import java.io.Serializable;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Jean-Luc
  * Date: 09.11.13
  * Time: 21:34
  */
-public class Transform implements Cloneable {
+public class Transform implements Cloneable, Serializable {
     private Vector position;
     private Vector direction;
 

@@ -12,6 +12,7 @@ import WIP.Transform;
  * Time: 15:05
  */
 public abstract class WorldSpace extends Collidable {
+
     protected WorldSpace(Transform transform, GraphicsComponent g, PhysicsComponent physicsComponent) {
         super(transform, g, physicsComponent);
     }

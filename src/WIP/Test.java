@@ -1,8 +1,9 @@
 package WIP;
 
 import Environment.Turtle;
+import Environment.WorldSpace;
 
-import java.util.Arrays;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,7 +16,12 @@ public class Test {
 
     public static void main(String[] args) {
         Turtle t = new Turtle();
-        System.out.println(Arrays.toString(t.getPositions()));
+        Map<Vector, WorldSpace> map = t.getGeneratedMap();
+        for (Vector v : map.keySet()) {
+            System.out.println(v + ", " + map.get(v).toString());
+        }
+        //System.out.println(Arrays.toString(t.getPositions()));
+        //System.out.println(Math.round(1.5f));
     }
 
 

@@ -63,4 +63,8 @@ public class Floor extends WorldSpace {
     public boolean isCollidable() {
         return false;
     }
+
+    public String toString() {
+        return "Floor:" + getTransform().getPosition().toString();
+    }
 }

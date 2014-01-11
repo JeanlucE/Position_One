@@ -32,7 +32,7 @@ public class Weapon_Melee extends Weapon {
         Actor[] actors = Game.getInstance().getActors();
         for (Actor a : actors) {
             if (!a.equals(equipped)) {
-                if (equipped.enemyWithinRange(a, getBaseRange()))
+                if (equipped.withinLinearRangeOf(a, getBaseRange()))
                     a.damage(getBaseDamage());
             }
         }

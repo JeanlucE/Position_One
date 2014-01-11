@@ -46,7 +46,14 @@ public class World {
     }
 
     private World() {
-        currentMap = WorldMap.instantiateFromFile("world");
+        /*initiateMap("world");
+        try {
+            saveMap("coctestinghall");
+            //loadMap("coctestinghall");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+        currentMap = new WorldMap(new Turtle());
     }
 
     public WorldSpace get(int x, int y) {
@@ -169,12 +176,16 @@ public class World {
         ENEMY_HIT, WALL_HIT, NO_COLLISION
     }
 
-    public void loadMap(String worldName) {
-        WorldMap w = WorldMap.loadFromFile(worldName);
-        currentMap = w;
+    public void initiateMap(String worldName) {
+        currentMap = WorldMap.instantiateFromFile(worldName);
     }
 
-    public void saveMap(String worldName) {
+    public void loadMap(String worldName) throws IOException {
+        currentMap = WorldMap.loadFromFile(worldName);
+    }
+
+    public void saveMap(String worldName) throws IOException {
+
         try {
             currentMap.saveToFile(worldName);
         } catch (IOException e) {

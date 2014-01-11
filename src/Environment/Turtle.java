@@ -1,8 +1,11 @@
 package Environment;
 
-import WIP.AdvancedTransform;
-import WIP.AdvancedVector;
+import Components.Resource;
+import Components.StaticGraphicsComponent;
+import WIP.*;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import java.util.Stack;
 //TODO later: make class package-local
@@ -16,20 +19,35 @@ import java.util.Stack;
 public class Turtle {
     private AdvancedTransform transform;
     private Stack<TurtleMove> positions;
+    private Map<Vector, WorldSpace> generatedMap;
 
     public Turtle() {
         transform = new AdvancedTransform();
         positions = new Stack<>();
         positions.push(new TurtleMove(new AdvancedVector(0f, 0f), transform.getPosition().clone()));
         randomMoves();
+        generatedMap = new HashMap<>(400);
     }
 
+    //TODO DEBUG make private later
     public AdvancedTransform getTransform() {
         return transform;
     }
 
     private void randomMoves(Random r) {
-        forward(5);
+        for (int i = 0; i < 20; i++) {
+            int action = r.nextInt(2);
+            switch (action) {
+                case 0:
+                    turnLeft(r.nextInt(180) + 1);
+                    break;
+                case 1:
+                    turnRight(r.nextInt(180) + 1);
+                    break;
+            }
+            forward(r.nextInt(6) + 5);
+        }
+
     }
 
     private void randomMoves() {
@@ -37,7 +55,6 @@ public class Turtle {
     }
 
     private AdvancedVector endPos;
-    private boolean init = false;
 
     private void forward(float distance) {
         AdvancedVector startPos;
@@ -71,8 +88,22 @@ public class Turtle {
         turnLeft(-angle);
     }
 
-    public TurtleMove[] getPositions() {
+    //TODO DEBUG make private later
+    TurtleMove[] getPositions() {
         return positions.toArray(new TurtleMove[positions.size()]);
+    }
+
+    //TODO DEBUG make package-local later
+    public Map<Vector, WorldSpace> getGeneratedMap() {
+        TurtleInterpreter interpreter = new TurtleInterpreter(this, 10);
+
+        return generatedMap;
+    }
+
+    void add(Vector vector, WorldSpace worldSpace) {
+        if (!generatedMap.containsKey(vector)) {
+            generatedMap.put(vector, worldSpace);
+        }
     }
 
     public class TurtleMove {
@@ -94,6 +125,77 @@ public class Turtle {
 
         public String toString() {
             return "{" + startPos + " - " + endPos + "}";
+        }
+    }
+
+    private class TurtleInterpreter {
+
+        private Turtle turtle;
+        private int corridorWidth;
+        public static final int TILESIZE = 40;
+
+        TurtleInterpreter(Turtle t, int corridorWidth) {
+            this.turtle = t;
+            this.corridorWidth = corridorWidth;
+            TurtleMove[] positions = turtle.getPositions();
+            addCorridor(positions[1].getStartPos(), positions[1].getEndPos());
+        }
+
+        void addCorridor(AdvancedVector start, AdvancedVector end) {
+
+            if (start.equals(end))
+                return;
+
+            //Absolute Position of the corridor start
+            Vector vStart = interpolatePosition(start);
+            //Absolute Position of the corridor end
+            Vector vEnd = interpolatePosition(end);
+
+
+            //Always check squares between the start and end from left to right
+            if (vStart.getX() >= vEnd.getX()) {
+                int xTemp = vEnd.getX();
+                int yTemp = vEnd.getY();
+
+                vEnd.setX(vStart.getX());
+                vEnd.setY(vStart.getY());
+
+                vStart.setX(xTemp);
+                vStart.setY(yTemp);
+            }
+            StaticGraphicsComponent floor = new StaticGraphicsComponent(Resource.floor01);
+            if (vStart.getY() < vEnd.getY()) {
+                for (int i = vStart.getX(); i <= vEnd.getX(); i++) {
+                    for (int j = vStart.getY(); j <= vEnd.getY(); j++) {
+                        add(new Vector(i, j), new Floor(new Transform(new Vector(i, j)), floor));
+                    }
+                }
+            } else {
+                for (int i = vStart.getX(); i <= vEnd.getX(); i++) {
+                    for (int j = vStart.getY(); j >= vEnd.getY(); j--) {
+                        add(new Vector(i, j), new Floor(new Transform(new Vector(i, j)), floor));
+                    }
+                }
+            }
+        }
+
+        private Vector interpolatePosition(AdvancedVector v) {
+            //TODO include scale in interpolation
+            return new Vector(round(v.getX()), round(v.getY()));
+        }
+
+        private int round(float f) {
+            if (Float.isInfinite(f) || Float.isNaN(f)) {
+                DebugLog.write("TurtleInterpreter tried to round a infinite float or NaN");
+                return 0;
+            }
+            if (f > 0) {
+                return Math.round(f);
+            } else if (f < 0) {
+                return -Math.round(-f);
+            } else {
+                return 0;
+            }
         }
     }
 }

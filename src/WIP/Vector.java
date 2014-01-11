@@ -1,5 +1,7 @@
 package WIP;
 
+import java.io.Serializable;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Jean-Luc
@@ -21,7 +23,7 @@ package WIP;
  * *                |
  * *                \/ -y
  */
-public class Vector {
+public class Vector implements Serializable {
 
     public final static Vector NORTH, SOUTH, EAST, WEST;
 
@@ -42,6 +44,15 @@ public class Vector {
     public Vector(int x, int y) {
         this.x = x;
         this.y = y;
+    }
+
+    public static Vector subtract(Vector a, Vector b) {
+        return new Vector(a.x - b.x, a.y - b.y);
+    }
+
+    public void signum() {
+        x = Integer.signum(x);
+        y = Integer.signum(y);
     }
 
     public Vector clone() {
@@ -82,6 +93,11 @@ public class Vector {
         return y == 0;
     }
 
+    public double length() {
+        double a = (double) x * x;
+        double b = (double) y * y;
+        return Math.sqrt(a + b);
+    }
 
     @Override
     public boolean equals(Object o) {

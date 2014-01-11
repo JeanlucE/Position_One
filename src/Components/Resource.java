@@ -6,6 +6,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,7 +14,7 @@ import java.io.IOException;
  * Date: 18.11.13
  * Time: 09:41
  */
-public enum Resource {
+public enum Resource implements Serializable {
 
     player_NORTH("player_NORTH.png"),
     player_SOUTH("player_SOUTH.png"),

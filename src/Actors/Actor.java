@@ -2,8 +2,8 @@ package Actors;
 
 import Components.ActorGraphicsComponent;
 import Components.PhysicsComponent;
-import WIP.*;
 import Environment.World;
+import WIP.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -143,7 +143,7 @@ public abstract class Actor extends Collidable {
     It returns true if the enemy can be attacked
     It returns false if the enemy is out of range or the player is looking in the wrong direction.
      */
-    public boolean enemyWithinRange(Actor other, float range) {
+    public boolean withinLinearRangeOf(Actor other, float range) {
         Vector direction = getTransform().getDirection();
         Vector[] otherCollider = other.getCollider().getCorners();
         Vector[] thisCollider = getCollider().getCorners();
@@ -165,6 +165,17 @@ public abstract class Actor extends Collidable {
 
     private boolean inLinearRange(int num1, int num2, float range) {
         return num1 - num2 < range * Renderer.TILESIZE;
+    }
+
+    public boolean withinAgressiveRadiusOf(Actor other, double range) {
+        double distance = Vector.subtract(other.getTransform().getPosition(), getTransform().getPosition()).length();
+        return Double.compare(distance, range) == -1;
+    }
+
+    protected Vector directionTo(Actor other) {
+        Vector vectorDistance = Vector.subtract(other.getTransform().getPosition(), getTransform().getPosition());
+        vectorDistance.signum();
+        return vectorDistance;
     }
 
     //region Position Comparison methods

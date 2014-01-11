@@ -97,10 +97,12 @@ public class Camera {
     public Map<Projectile, Vector> projectilesToRender() {
         Map<Projectile, Vector> projectileVectorMap = new HashMap<>();
         for (Projectile p : Projectile.getProjectiles()) {
-            Vector pos = p.getTransform().getPosition().clone();
-            pos.setX(screenWidth / 2 + (pos.getX() - parent.getX()));
-            pos.setY(screenHeight / 2 + (pos.getY() - parent.getY()));
-            projectileVectorMap.put(p, pos);
+            if (withinScreenBounds(p)) {
+                Vector pos = p.getTransform().getPosition().clone();
+                pos.setX(screenWidth / 2 + (pos.getX() - parent.getX()));
+                pos.setY(screenHeight / 2 + (pos.getY() - parent.getY()));
+                projectileVectorMap.put(p, pos);
+            }
         }
         return projectileVectorMap;
     }
