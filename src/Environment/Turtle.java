@@ -1,5 +1,6 @@
 package Environment;
 
+import Components.PhysicsComponent;
 import Components.Resource;
 import Components.StaticGraphicsComponent;
 import WIP.*;
@@ -95,12 +96,24 @@ public class Turtle {
 
     //TODO DEBUG make package-local later
     public Map<Vector, WorldSpace> getGeneratedMap() {
-        TurtleInterpreter interpreter = new TurtleInterpreter(this, 10);
+        TurtleInterpreter interpreter = new TurtleInterpreter(this, 3);
 
         return generatedMap;
     }
 
-    void add(Vector vector, WorldSpace worldSpace) {
+    private static StaticGraphicsComponent floor = new StaticGraphicsComponent(Resource.floor01);
+    private static StaticGraphicsComponent wall = new StaticGraphicsComponent(Resource.wall01);
+
+    void add(Vector vector, BlockID id) {
+
+        WorldSpace worldSpace;
+        if(id == BlockID.FLOOR){
+            worldSpace = new Floor(new Transform(vector.clone()), floor);
+        } else {
+            PhysicsComponent p = new PhysicsComponent(40, 40);
+            worldSpace = new Wall(new Transform(vector.clone()), wall, p);
+        }
+
         if (!generatedMap.containsKey(vector)) {
             generatedMap.put(vector, worldSpace);
         }
@@ -139,8 +152,10 @@ public class Turtle {
             this.corridorWidth = corridorWidth;
             TurtleMove[] positions = turtle.getPositions();
 
-            //addCorridor(positions[1].getStartPos(), positions[1].getEndPos());
-            addCorridor(new AdvancedVector(0, 0), new AdvancedVector(0, -10));
+
+            for (TurtleMove move: positions) {
+                addCorridor(move.getStartPos(), move.getEndPos());
+            }
 
         }
 
@@ -166,7 +181,26 @@ public class Turtle {
                 vStart.setX(xTemp);
                 vStart.setY(yTemp);
             }
-            StaticGraphicsComponent floor = new StaticGraphicsComponent(Resource.floor01);
+            //bresenhamLineInterpolate(vStart, vEnd);
+            int thisCorridor = corridorWidth;
+            int side = -1;
+            double m = (vEnd.getY() - vStart.getY())/(double)(vEnd.getX() - vStart.getX());
+            if(m <= 1 && m >= -1){
+                for (int i = 0; i < corridorWidth; i++) {
+                    superCoverLineInterpolation(vStart, vEnd, BlockID.FLOOR);
+                    vStart.shift(0, 1);
+                    vEnd.shift(0, 1);
+                }
+            } else {
+                for (int i = 0; i < corridorWidth; i++) {
+                    superCoverLineInterpolation(vStart, vEnd, BlockID.FLOOR);
+                    vStart.shift(1, 0);
+                    vEnd.shift(1, 0);
+                }
+            }
+        }
+
+        private void bresenhamLineInterpolate(Vector vStart, Vector vEnd, BlockID id){
             int deltaX = vEnd.getX() - vStart.getX();
             int deltaY = vEnd.getY() - vStart.getY();
             if (deltaX != 0) {
@@ -174,7 +208,7 @@ public class Turtle {
                 float deltaError = Math.abs(deltaY / (float) deltaX); //Assuming deltaX != 0
                 int y = vStart.getY();
                 for (int x = vStart.getX(); x <= vEnd.getX(); x++) {
-                    add(new Vector(x, y), new Floor(new Transform(new Vector(x, y)), floor));
+                    add(x, y, id);
                     error += deltaError;
                     if (error >= 0.5f) {
                         y++;
@@ -191,10 +225,83 @@ public class Turtle {
                 int yEnd = (yStart == vStart.getY()) ? (vEnd.getY()) : (vStart.getY());
 
                 for (int y = yStart; y <= yEnd; y++) {
-                    add(new Vector(x, y), new Floor(new Transform(new Vector(x, y)), floor));
+                    add(x, y, id);
                 }
 
             }
+        }
+
+        private void superCoverLineInterpolation(Vector vStart, Vector vEnd, BlockID id){
+            int i;               // loop counter
+            int ystep, xstep;    // the step on y and x axis
+            double error;           // the error accumulated during the increment
+            double errorprev;       // *vision the previous value of the error variable
+            int y = vStart.getY();
+            int x = vStart.getX();  // the line points
+            double ddy, ddx;        // compulsory variables: the double values of dy and dx
+            int dx = vEnd.getX() - vStart.getX();
+            int dy = vEnd.getY() - vStart.getY();
+            add(vStart.getX(), vStart.getY(), id);  // first point
+            // NB the last point can't be here, because of its previous point (which has to be verified)
+            if (dy < 0){
+                ystep = -1;
+                dy = -dy;
+            }else
+                ystep = 1;
+            if (dx < 0){
+                xstep = -1;
+                dx = -dx;
+            }else
+                xstep = 1;
+            ddy = 2 * dy;  // work with double values for full precision
+            ddx = 2 * dx;
+            if (ddx >= ddy){  // first octant (0 <= slope <= 1)
+                // compulsory initialization (even for errorprev, needed when dx==dy)
+                errorprev = error = dx;  // start in the middle of the square
+                for (i=0 ; i < dx ; i++){  // do not use the first point (already done)
+                    x += xstep;
+                    error += ddy;
+                    if (error > ddx){  // increment y if AFTER the middle ( > )
+                        y += ystep;
+                        error -= ddx;
+                        // three cases (octant == right->right-top for directions below):
+                        if (error + errorprev < ddx)  // bottom square also
+                            add(x, y - ystep, id);
+                        else if (error + errorprev > ddx)  // left square also
+                            add(x - xstep, y, id);
+                        else{  // corner: bottom and left squares also
+                            add(x, y - ystep, id);
+                            add(x - xstep, y, id);
+                        }
+                    }
+                    add(x, y, id);
+                    errorprev = error;
+                }
+            }else{  // the same as above
+                errorprev = error = dy;
+                for (i=0 ; i < dy ; i++){
+                    y += ystep;
+                    error += ddx;
+                    if (error > ddy){
+                        x += xstep;
+                        error -= ddy;
+                        if (error + errorprev < ddy)
+                            add(x - xstep, y, id);
+                        else if (error + errorprev > ddy)
+                            add(x, y - ystep, id);
+                        else{
+                            add(x - xstep, y, id);
+                            add(x, y - ystep, id);
+                        }
+                    }
+                    add(x, y, id);
+                    errorprev = error;
+                }
+            }
+        }
+
+        private void add(int x, int y, BlockID id){
+            turtle.add(new Vector(x, y), id);
         }
 
         private Vector interpolatePosition(AdvancedVector v) {
@@ -216,4 +323,6 @@ public class Turtle {
             }
         }
     }
+
+
 }

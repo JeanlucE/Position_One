@@ -57,7 +57,7 @@ public class World {
     }
 
     public WorldSpace get(int x, int y) {
-        return currentMap.getReal(x / 40, y / 40);
+        return currentMap.getReal(x/40, y/40);
     }
 
     //DEBUGGING
@@ -66,7 +66,7 @@ public class World {
     }
 
     public WorldSpace get(Vector position) {
-        return currentMap.getReal(position.getX() / 40, position.getY() / 40);
+        return currentMap.getReal(position.getX()/40, position.getY()/40);
     }
 
     /*
@@ -111,8 +111,11 @@ public class World {
 
     //Returns if the position that is passed has any collidable gameobject
     private CollisionEvent resolveWallCollision(int x, int y) {
-        if (currentMap.getReal(x / 40, y / 40).isCollidable()) {
-            return new CollisionEvent(CollisionState.WALL_HIT, currentMap.getReal(x / 40, y / 40));
+        WorldSpace spaceToCheck = currentMap.getReal(x, y);
+        if(spaceToCheck == null){
+            return new CollisionEvent(CollisionState.NO_COLLISION, null);
+        } else if (spaceToCheck.isCollidable()) {
+            return new CollisionEvent(CollisionState.WALL_HIT, spaceToCheck);
         } else {
             return new CollisionEvent(CollisionState.NO_COLLISION, null);
         }

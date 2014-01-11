@@ -15,13 +15,15 @@ public class Test {
 
 
     public static void main(String[] args) {
-        Turtle t = new Turtle();
+        /*Turtle t = new Turtle();
         Map<Vector, WorldSpace> map = t.getGeneratedMap();
         for (Vector v : map.keySet()) {
             System.out.println(v + ", " + map.get(v).toString());
-        }
+        }  */
         //System.out.println(Arrays.toString(t.getPositions()));
         //System.out.println(Math.round(1.5f));
+        int x = -49;
+        System.out.println(x /40);
     }
 
 

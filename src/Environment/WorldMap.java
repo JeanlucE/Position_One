@@ -70,9 +70,7 @@ public class WorldMap {
     }
 
     private void set(int x, int y, WorldSpace worldSpace) {
-        int xReal = x / 40;
-        int yReal = y / 40;
-        setReal(xReal, yReal, worldSpace);
+        setReal(x, y, worldSpace);
     }
 
     public void setReal(int x, int y, WorldSpace worldSpace) {

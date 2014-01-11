@@ -47,9 +47,9 @@ public class Game {
         player.equip(bow);
         player.equip(arrow);
         Enemy.DEBUG_ALL_ENEMIES_MOVE_TOWARD_PLAYER = true;
-        new Enemy("Chu Chu", 1000, new Transform(new Vector(350, 450)),
-                new ActorGraphicsComponent(DynamicResource.ENEMY_CHUCHU),
-                new PhysicsComponent(40, 40));
+        //new Enemy("Chu Chu", 1000, new Transform(new Vector(350, 450)),
+        //        new ActorGraphicsComponent(DynamicResource.ENEMY_CHUCHU),
+        //        new PhysicsComponent(40, 40));
 
         World currentWorld = World.getInstance();
         //((Floor) currentWorld.getReal(6, 7)).dropItem(new Weapon_Melee("Swordish", 0, 0, 1, 1.0f,
