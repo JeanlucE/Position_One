@@ -1,10 +1,10 @@
-Log created at: 03:05:09 11.01.2014
+Log created at: 14:37:37 11.01.2014
 
-[03:05:09.624] New Game started
-[03:05:09.630] New Melee Weapon created: Sword
-[03:05:09.630] New Ranged Weapon created: The OP Bow
-[03:05:09.665] New Character created: Ned Stark
-[03:05:09.666] Player Ned Stark has equipped: The OP Bow
-[03:05:09.666] Player Ned Stark has equipped: Ammunition
-[03:05:09.675] New World created with size: 63
-[03:05:09.678] Renderer started
+[14:37:37.355] New Game started
+[14:37:37.359] New Melee Weapon created: Sword
+[14:37:37.359] New Ranged Weapon created: The OP Bow
+[14:37:37.389] New Character created: Ned Stark
+[14:37:37.389] Player Ned Stark has equipped: The OP Bow
+[14:37:37.389] Player Ned Stark has equipped: Ammunition
+[14:37:37.396] New World created with size: 11
+[14:37:37.398] Renderer started

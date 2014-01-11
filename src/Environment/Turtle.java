@@ -138,7 +138,10 @@ public class Turtle {
             this.turtle = t;
             this.corridorWidth = corridorWidth;
             TurtleMove[] positions = turtle.getPositions();
-            addCorridor(positions[1].getStartPos(), positions[1].getEndPos());
+
+            //addCorridor(positions[1].getStartPos(), positions[1].getEndPos());
+            addCorridor(new AdvancedVector(0, 0), new AdvancedVector(0, -10));
+
         }
 
         void addCorridor(AdvancedVector start, AdvancedVector end) {
@@ -153,7 +156,7 @@ public class Turtle {
 
 
             //Always check squares between the start and end from left to right
-            if (vStart.getX() >= vEnd.getX()) {
+            if (vStart.getX() > vEnd.getX()) {
                 int xTemp = vEnd.getX();
                 int yTemp = vEnd.getY();
 
@@ -164,18 +167,33 @@ public class Turtle {
                 vStart.setY(yTemp);
             }
             StaticGraphicsComponent floor = new StaticGraphicsComponent(Resource.floor01);
-            if (vStart.getY() < vEnd.getY()) {
-                for (int i = vStart.getX(); i <= vEnd.getX(); i++) {
-                    for (int j = vStart.getY(); j <= vEnd.getY(); j++) {
-                        add(new Vector(i, j), new Floor(new Transform(new Vector(i, j)), floor));
+            int deltaX = vEnd.getX() - vStart.getX();
+            int deltaY = vEnd.getY() - vStart.getY();
+            if (deltaX != 0) {
+                float error = 0;
+                float deltaError = Math.abs(deltaY / (float) deltaX); //Assuming deltaX != 0
+                int y = vStart.getY();
+                for (int x = vStart.getX(); x <= vEnd.getX(); x++) {
+                    add(new Vector(x, y), new Floor(new Transform(new Vector(x, y)), floor));
+                    error += deltaError;
+                    if (error >= 0.5f) {
+                        y++;
+                        error = error - 1.0f;
                     }
                 }
             } else {
-                for (int i = vStart.getX(); i <= vEnd.getX(); i++) {
-                    for (int j = vStart.getY(); j >= vEnd.getY(); j--) {
-                        add(new Vector(i, j), new Floor(new Transform(new Vector(i, j)), floor));
-                    }
+
+                if (deltaY == 0)
+                    return;
+
+                int x = vStart.getX();
+                int yStart = Math.min(vStart.getY(), vEnd.getY());
+                int yEnd = (yStart == vStart.getY()) ? (vEnd.getY()) : (vStart.getY());
+
+                for (int y = yStart; y <= yEnd; y++) {
+                    add(new Vector(x, y), new Floor(new Transform(new Vector(x, y)), floor));
                 }
+
             }
         }
 
