@@ -22,8 +22,11 @@ public class Test {
         }  */
         //System.out.println(Arrays.toString(t.getPositions()));
         //System.out.println(Math.round(1.5f));
-        int x = -49;
-        System.out.println(x /40);
+        int x= -39;
+        int y = -39;
+        int xReal = (x >= 0) ? (x - x % Renderer.TILESIZE) : x - x % Renderer.TILESIZE - Renderer.TILESIZE;
+        int yReal = (y >= 0) ? (y - y % Renderer.TILESIZE) : y - y % Renderer.TILESIZE - Renderer.TILESIZE;
+        System.out.println(xReal + ", " + yReal);
     }
 
 

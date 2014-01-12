@@ -69,6 +69,7 @@ public class WorldMap {
         return worldSpaceMap.get(new Vector(x, y));
     }
 
+    //DEBUGGING delete later
     private void set(int x, int y, WorldSpace worldSpace) {
         setReal(x, y, worldSpace);
     }

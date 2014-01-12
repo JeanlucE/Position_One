@@ -21,11 +21,14 @@ public class Turtle {
     private AdvancedTransform transform;
     private Stack<TurtleMove> positions;
     private Map<Vector, WorldSpace> generatedMap;
+    //TODO save this in a tree, which can then include easy implementation of intersections
 
     public Turtle() {
         transform = new AdvancedTransform();
         positions = new Stack<>();
         positions.push(new TurtleMove(new AdvancedVector(0f, 0f), transform.getPosition().clone()));
+        randomMoves();
+        transform.setPosition(new AdvancedVector(0, 0));
         randomMoves();
         generatedMap = new HashMap<>(400);
     }
@@ -36,7 +39,7 @@ public class Turtle {
     }
 
     private void randomMoves(Random r) {
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 15; i++) {
             int action = r.nextInt(2);
             switch (action) {
                 case 0:
@@ -46,7 +49,7 @@ public class Turtle {
                     turnRight(r.nextInt(180) + 1);
                     break;
             }
-            forward(r.nextInt(6) + 5);
+            forward(r.nextInt(11) + 5);
         }
 
     }
@@ -156,7 +159,6 @@ public class Turtle {
             for (TurtleMove move: positions) {
                 addCorridor(move.getStartPos(), move.getEndPos());
             }
-
         }
 
         void addCorridor(AdvancedVector start, AdvancedVector end) {

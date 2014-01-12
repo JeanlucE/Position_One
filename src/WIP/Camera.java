@@ -60,7 +60,9 @@ public class Camera {
             //From top to bottom
             for (int y = southClip; y < northClip; y += Renderer.TILESIZE) {
                 WorldSpace worldSpace = world.get(x, y);
-                Vector worldPosition = new Vector(x - x % Renderer.TILESIZE, y - y % Renderer.TILESIZE);
+                int xReal = (x >= 0) ? (x - x % Renderer.TILESIZE) : x - x % Renderer.TILESIZE - Renderer.TILESIZE;
+                int yReal = (y >= 0) ? (y - y % Renderer.TILESIZE) : y - y % Renderer.TILESIZE - Renderer.TILESIZE;
+                Vector worldPosition = new Vector(xReal, yReal);
 
                 //Get worldspace position relative to player position
                 worldPosition.setX(screenWidth / 2 + (worldPosition.getX() - parent.getX()));

@@ -12,30 +12,38 @@ import java.io.IOException;
 
 /**
  * Created with IntelliJ IDEA.
- * User: Jean-Luc
- * Date: 07.11.13
- * Time: 15:00
- * <p/>
- * Holds Worldmap and resolves all collisions.
- * Important note:
- * Coordinate System:
- * *                /\ +y
- * *                |
- * *                |
- * *                |
- * *                |
- * *                |
- * * <--------------0--------------->
- * * -x             |              +x
- * *                |
- * *                |
- * *                |
- * *                |
- * *                \/ -y
+ *
+ * @author Jean-Luc
+ *         Date: 07.11.13
+ *         Time: 15:00
+ *         <p/>
+ *         World handles all interactions between the Worldmap and other objects. Collision detection,
+ *         saving and loading maps from .txt and giving any GameObject information about certain spaces in the worldmap grid.
+ *         This also includes the Renderer.
+ *         <p/>
+ *         This class is written in a Singleton design pattern as there can only ever be one WorldMap with which the player
+ *         and his surroundings can interact with.
+ *         at once.
+ *         Important note:
+ *         Coordinate System:
+ *         *                /\ +y
+ *         *                |
+ *         *                |
+ *         *                |
+ *         *                |
+ *         *                |
+ *         * <--------------0--------------->
+ *         * -x             |              +x
+ *         *                |
+ *         *                |
+ *         *                |
+ *         *                |
+ *         *                \/ -y
  */
 public class World {
     //TODO put melee hit boolean collision here
     //TODO put arrow hit boolean collision here
+
     private static World instance;
     private WorldMap currentMap;
 
@@ -46,18 +54,29 @@ public class World {
     }
 
     private World() {
-        /*initiateMap("world");
+        currentMap = new WorldMap(new Turtle());
+
+        //initiateMap("world");
         try {
-            saveMap("coctestinghall");
+            saveMap("randomMap");
             //loadMap("coctestinghall");
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
-        currentMap = new WorldMap(new Turtle());
+        }
+
     }
 
+    /**
+     * A method which returns the WorldSpace stored at a coordinate
+     *
+     * @param x X Coordinate of the WorldSpace
+     * @param y Y Coordinate of the WorldSpace
+     * @return Returns the WorldSpace at coordinate x, y. If it doesn't exist it returns null.
+     */
     public WorldSpace get(int x, int y) {
-        return currentMap.getReal(x/40, y/40);
+        int xReal = (x >= 0) ? (x / 40) : (x / 40 - 1);
+        int yReal = (y >= 0) ? (y / 40) : (y / 40 - 1);
+        return currentMap.getReal(xReal, yReal);
     }
 
     //DEBUGGING
@@ -65,16 +84,30 @@ public class World {
         return currentMap.getReal(x, y);
     }
 
+    /**
+     * Overloaded Method for World.get(int, int)
+     *
+     * @param position x and y Coordinates of the WorldSpace
+     * @return Returns the WorldSpace at coordinate x, y. If it doesn't exist it returns null.
+     * @see Environment.World#get(int, int)
+     */
     public WorldSpace get(Vector position) {
-        return currentMap.getReal(position.getX()/40, position.getY()/40);
+        return get(position.getX(), position.getY());
     }
 
-    /*
-    This method resolves boolean collision between the gameworld and another gameobject (e.g. a player).
-    It does this by getting the position of all 4 corners of the gameobject's colider and then checks if any of those
-    corners would clip into a wall when the game object move to the next Position.
-    If none of the corners clips a collidable world space (e.g. a wall) the method returns true.
-    If any of the corners clips a collidable world space (e.g. a wall) the method returns false.
+    /**
+     * This method resolves boolean collision between the gameworld and another actor.
+     * It does this by getting the position of all 4 corners of the actor's collider and then checks if any of those
+     * corners would clip into a wall when the game object moves to the next position.
+     * If none of the corners clips a collidable world space (e.g. a wall) the method returns a CollisionEvent with a
+     * CollisionState of NO_COLLISION attached to it.
+     * If any of the corners clips a collidable world space (e.g. a wall) the method returns a CollisionEvent with a
+     * CollisionState and CollisionObject of type GameObject.
+     *
+     * @param actor        The actor which has to be checked for collisions
+     * @param nextPosition The Vector of the position the actor is moving to.
+     * @return Returns a CollisionEvent which holds the collided GameObject if applicable
+     * @see Components.PhysicsComponent
      */
     public CollisionEvent resolveCollision(Actor actor, Vector nextPosition) {
         //TODO if player cant move directly to the given position, test if he can still move nearer to that position
@@ -87,6 +120,12 @@ public class World {
         return resolveActorCollision(actor, nextPosition);
     }
 
+    /**
+     * @param p            Projectile to check for collsions.
+     * @param nextPosition The Vector of the position the projectile is moving to.
+     * @return Returns a CollisionEvent which holds the CollisionState and the collided GameObject if applicable
+     * @see Environment.World#resolveActorCollision(Actors.Actor, WIP.Vector)
+     */
     public CollisionEvent resolveCollision(Projectile p, Vector nextPosition) {
         PhysicsComponent collider = p.getCollider();
         for (Vector v : collider.getCorners(nextPosition)) {
@@ -109,11 +148,17 @@ public class World {
         return new CollisionEvent(CollisionState.NO_COLLISION, null);
     }
 
-    //Returns if the position that is passed has any collidable gameobject
+    /**
+     * Returns if for a given coordinate there is a collidable WorldSpace
+     *
+     * @param x X Coordinate of the WorldSpace
+     * @param y Y Coordinate of the WorldSpace
+     * @return Returns a CollisionEvent which holds the CollisionState and the collided GameObject if applicable
+     */
     private CollisionEvent resolveWallCollision(int x, int y) {
-        WorldSpace spaceToCheck = currentMap.getReal(x, y);
-        if(spaceToCheck == null){
-            return new CollisionEvent(CollisionState.NO_COLLISION, null);
+        WorldSpace spaceToCheck = get(x, y);
+        if (spaceToCheck == null) {
+            return new CollisionEvent(CollisionState.WALL_HIT, null);
         } else if (spaceToCheck.isCollidable()) {
             return new CollisionEvent(CollisionState.WALL_HIT, spaceToCheck);
         } else {
@@ -122,13 +167,24 @@ public class World {
 
     }
 
+    /**
+     * Overloaded Method for resolveWallCollision(int, int)
+     *
+     * @param position Vector which holds the position of the WorldSpace to be checked
+     * @return Returns a CollisionEvent which holds the CollisionState and the collided GameObject if applicable
+     * @see Environment.World#resolveWallCollision(int, int)
+     */
     private CollisionEvent resolveWallCollision(Vector position) {
         return resolveWallCollision(position.getX(), position.getY());
     }
 
-    /*
-    This method resolves collisions between an actor and the world.
-    Returns a CollisionEvent with a flag for true or false and if its true, it also returns a CollisionObject
+    /**
+     * Resolves collisions between actors only. For a CollisionEvent to have the CollisionState ENEMY_HIT attached to
+     * it the other actor must be from a different faction that his own.
+     *
+     * @param actor        The actor which has to be checked for collisions.
+     * @param nextPosition The Vector of the position the actor is moving to.
+     * @return Returns a CollisionEvent which holds the CollisionState and the collided Actor if applicable
      */
     private CollisionEvent resolveActorCollision(Actor actor, Vector nextPosition) {
         Actor[] actors = Actor.getActors();
