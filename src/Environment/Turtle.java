@@ -110,16 +110,34 @@ public class Turtle {
     void add(Vector vector, BlockID id) {
 
         WorldSpace worldSpace;
-        if(id == BlockID.FLOOR){
-            worldSpace = new Floor(new Transform(new Vector(vector.getX(), vector.getY())), floor);
+        if (id == BlockID.FLOOR) {
+            worldSpace = new Floor(new Transform(vector.clone()), floor);
+            surroundWithWalls(vector);
         } else {
             PhysicsComponent p = new PhysicsComponent(40, 40);
             worldSpace = new Wall(new Transform(vector.clone()), wall, p);
         }
 
-        if (!generatedMap.containsKey(vector)) {
+        WorldSpace w = generatedMap.get(vector);
+        if (w == null || w.isWall()) {
             generatedMap.put(vector, worldSpace);
         }
+    }
+
+    /**
+     * Surrounds a given floor at a vector with walls. This ensures the palyer does not collide with null Worldspaces
+     *
+     * @param floorVector Vector of the floor space that should be surrounded
+     */
+    private void surroundWithWalls(Vector floorVector) {
+        add(floorVector.shiftedPosition(0, 1), BlockID.WALL);
+        add(floorVector.shiftedPosition(1, 1), BlockID.WALL);
+        add(floorVector.shiftedPosition(1, 0), BlockID.WALL);
+        add(floorVector.shiftedPosition(1, -1), BlockID.WALL);
+        add(floorVector.shiftedPosition(0, -1), BlockID.WALL);
+        add(floorVector.shiftedPosition(-1, -1), BlockID.WALL);
+        add(floorVector.shiftedPosition(-1, 0), BlockID.WALL);
+        add(floorVector.shiftedPosition(-1, 1), BlockID.WALL);
     }
 
     public class TurtleMove {
@@ -157,14 +175,16 @@ public class Turtle {
             interpret();
         }
 
-        void interpret(){
+        void interpret() {
             TurtleMove[] positions = turtle.getPositions();
 
             for (TurtleMove move: positions) {
                 addCorridor(move.getStartPos(), move.getEndPos());
             }
+            //addCorridor(new AdvancedVector(0, 0), new AdvancedVector(4, 10));
         }
 
+        //TODO add walls to the corridors
         void addCorridor(AdvancedVector start, AdvancedVector end) {
 
             if (start.equals(end))
@@ -190,34 +210,45 @@ public class Turtle {
             //bresenhamLineInterpolate(vStart, vEnd);
             int thisCorridor = corridorWidth;
             int side = -1;
-            double m = (vEnd.getY() - vStart.getY())/(double)(vEnd.getX() - vStart.getX());
-            if(m <= 1 && m >= -1){
+            double m = (vEnd.getY() - vStart.getY()) / (double) (vEnd.getX() - vStart.getX());
+            if (m <= 1 && m >= -1) {
+
                 for (int i = 0; i < corridorWidth; i++) {
                     superCoverLineInterpolation(vStart, vEnd, BlockID.FLOOR);
                     vStart.shift(0, 1);
                     vEnd.shift(0, 1);
                 }
             } else {
+                /*vStart.shift(-1, 0);
+                vEnd.shift(-1, 0);
+                bresenhamLineInterpolate(vStart, vEnd, BlockID.WALL);
+                vStart.shift(1, 0);
+                vEnd.shift(1, 0);*/
                 for (int i = 0; i < corridorWidth; i++) {
                     superCoverLineInterpolation(vStart, vEnd, BlockID.FLOOR);
                     vStart.shift(1, 0);
                     vEnd.shift(1, 0);
                 }
+                //bresenhamLineInterpolate(vStart, vEnd, BlockID.WALL);
             }
         }
 
-        private void bresenhamLineInterpolate(Vector vStart, Vector vEnd, BlockID id){
+        //TODO FIX BUG: for high deltaY's the interpolation is not correct
+        private void bresenhamLineInterpolate(Vector vStart, Vector vEnd, BlockID id) {
             int deltaX = vEnd.getX() - vStart.getX();
             int deltaY = vEnd.getY() - vStart.getY();
             if (deltaX != 0) {
                 float error = 0;
-                float deltaError = Math.abs(deltaY / (float) deltaX); //Assuming deltaX != 0
+                float m = Math.abs(deltaY / (float) deltaX); //Assuming deltaX != 0
                 int y = vStart.getY();
                 for (int x = vStart.getX(); x <= vEnd.getX(); x++) {
                     add(x, y, id);
-                    error += deltaError;
-                    if (error >= 0.5f) {
+                    error += m;
+                    while (error > 0.5f) {
                         y++;
+                        if (y <= vEnd.getY()) {
+                            add(x, y, id);
+                        }
                         error = error - 1.0f;
                     }
                 }
@@ -237,7 +268,7 @@ public class Turtle {
             }
         }
 
-        private void superCoverLineInterpolation(Vector vStart, Vector vEnd, BlockID id){
+        private void superCoverLineInterpolation(Vector vStart, Vector vEnd, BlockID id) {
             int i;               // loop counter
             int ystep, xstep;    // the step on y and x axis
             double error;           // the error accumulated during the increment
@@ -249,25 +280,25 @@ public class Turtle {
             int dy = vEnd.getY() - vStart.getY();
             add(vStart.getX(), vStart.getY(), id);  // first point
             // NB the last point can't be here, because of its previous point (which has to be verified)
-            if (dy < 0){
+            if (dy < 0) {
                 ystep = -1;
                 dy = -dy;
-            }else
+            } else
                 ystep = 1;
-            if (dx < 0){
+            if (dx < 0) {
                 xstep = -1;
                 dx = -dx;
-            }else
+            } else
                 xstep = 1;
             ddy = 2 * dy;  // work with double values for full precision
             ddx = 2 * dx;
-            if (ddx >= ddy){  // first octant (0 <= slope <= 1)
+            if (ddx >= ddy) {  // first octant (0 <= slope <= 1)
                 // compulsory initialization (even for errorprev, needed when dx==dy)
                 errorprev = error = dx;  // start in the middle of the square
-                for (i=0 ; i < dx ; i++){  // do not use the first point (already done)
+                for (i = 0; i < dx; i++) {  // do not use the first point (already done)
                     x += xstep;
                     error += ddy;
-                    if (error > ddx){  // increment y if AFTER the middle ( > )
+                    if (error > ddx) {  // increment y if AFTER the middle ( > )
                         y += ystep;
                         error -= ddx;
                         // three cases (octant == right->right-top for directions below):
@@ -275,7 +306,7 @@ public class Turtle {
                             add(x, y - ystep, id);
                         else if (error + errorprev > ddx)  // left square also
                             add(x - xstep, y, id);
-                        else{  // corner: bottom and left squares also
+                        else {  // corner: bottom and left squares also
                             add(x, y - ystep, id);
                             add(x - xstep, y, id);
                         }
@@ -283,19 +314,19 @@ public class Turtle {
                     add(x, y, id);
                     errorprev = error;
                 }
-            }else{  // the same as above
+            } else {  // the same as above
                 errorprev = error = dy;
-                for (i=0 ; i < dy ; i++){
+                for (i = 0; i < dy; i++) {
                     y += ystep;
                     error += ddx;
-                    if (error > ddy){
+                    if (error > ddy) {
                         x += xstep;
                         error -= ddy;
                         if (error + errorprev < ddy)
                             add(x - xstep, y, id);
                         else if (error + errorprev > ddy)
                             add(x, y - ystep, id);
-                        else{
+                        else {
                             add(x - xstep, y, id);
                             add(x, y - ystep, id);
                         }
@@ -306,7 +337,7 @@ public class Turtle {
             }
         }
 
-        private void add(int x, int y, BlockID id){
+        private void add(int x, int y, BlockID id) {
             turtle.add(new Vector(x, y), id);
         }
 
