@@ -247,8 +247,10 @@ public class World {
 
         try {
             currentMap.saveToFile(worldName);
+            DebugLog.write("Saved Map: " + worldName);
         } catch (IOException e) {
             e.printStackTrace();
+            DebugLog.write("Map Save failed: " + e.getMessage());
         }
     }
 }

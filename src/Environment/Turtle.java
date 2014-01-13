@@ -33,13 +33,13 @@ public class Turtle {
         generatedMap = new HashMap<>(400);
     }
 
-    //TODO DEBUG make private later
-    public AdvancedTransform getTransform() {
+    private AdvancedTransform getTransform() {
         return transform;
     }
 
-    private void randomMoves(Random r) {
-        for (int i = 0; i < 15; i++) {
+    private void randomMoves(Random r, int minCorridorLength, int maxCorridorLength, int numOfMoves) {
+        int max = maxCorridorLength - minCorridorLength + 1;
+        for (int i = 0; i < numOfMoves; i++) {
             int action = r.nextInt(2);
             switch (action) {
                 case 0:
@@ -49,13 +49,13 @@ public class Turtle {
                     turnRight(r.nextInt(180) + 1);
                     break;
             }
-            forward(r.nextInt(11) + 5);
+            forward(r.nextInt(max) + minCorridorLength);
         }
 
     }
 
     private void randomMoves() {
-        randomMoves(new Random());
+        randomMoves(new Random(), 10, 15, 15);
     }
 
     private AdvancedVector endPos;
@@ -111,7 +111,7 @@ public class Turtle {
 
         WorldSpace worldSpace;
         if(id == BlockID.FLOOR){
-            worldSpace = new Floor(new Transform(vector.clone()), floor);
+            worldSpace = new Floor(new Transform(new Vector(vector.getX(), vector.getY())), floor);
         } else {
             PhysicsComponent p = new PhysicsComponent(40, 40);
             worldSpace = new Wall(new Transform(vector.clone()), wall, p);
@@ -153,8 +153,12 @@ public class Turtle {
         TurtleInterpreter(Turtle t, int corridorWidth) {
             this.turtle = t;
             this.corridorWidth = corridorWidth;
-            TurtleMove[] positions = turtle.getPositions();
 
+            interpret();
+        }
+
+        void interpret(){
+            TurtleMove[] positions = turtle.getPositions();
 
             for (TurtleMove move: positions) {
                 addCorridor(move.getStartPos(), move.getEndPos());

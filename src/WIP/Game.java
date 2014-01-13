@@ -35,6 +35,7 @@ public class Game {
     }
 
     private Game() {
+        new FileStructureHandler();
         DebugLog.write("New Game started");
         Weapon sword = new Weapon_Melee("Sword", 0, 0, 10, 1.0f, new ItemGraphicsComponent());
         Weapon bow = new Weapon_Ranged("The OP Bow", 0, 0, 10, 10, 0.2f, new ItemGraphicsComponent());
