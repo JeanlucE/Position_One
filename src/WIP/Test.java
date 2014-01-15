@@ -1,10 +1,5 @@
 package WIP;
 
-import Environment.Turtle;
-import Environment.WorldSpace;
-
-import java.util.Map;
-
 /**
  * Created with IntelliJ IDEA.
  * User: Jean-Luc
@@ -22,10 +17,10 @@ public class Test {
         }  */
         //System.out.println(Arrays.toString(t.getPositions()));
         //System.out.println(Math.round(1.5f));
-        int x= -39;
-        int y = -39;
-        int xReal = (x >= 0) ? (x - x % Renderer.TILESIZE) : x - x % Renderer.TILESIZE - Renderer.TILESIZE;
-        int yReal = (y >= 0) ? (y - y % Renderer.TILESIZE) : y - y % Renderer.TILESIZE - Renderer.TILESIZE;
+        int x = -40;
+        int y = -40;
+        int xReal = (x >= 0) ? (x / 40) : ((x >= -39 && x <= -1) ? -1 : (x / 40 - 1));
+        int yReal = (y >= 0) ? (y / 40) : (y / 40 - 1);
         System.out.println(xReal + ", " + yReal);
     }
 

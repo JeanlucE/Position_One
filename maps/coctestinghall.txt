@@ -1,10 +1,10 @@
 wall,0,0
 wall,0,1
-wall,0,2
+floor,0,2
 wall,0,3
-wall,0,4
+floor,0,4
 wall,0,5
-wall,0,6
+floor,0,6
 wall,0,7
 wall,0,8
 wall,0,9
@@ -259,6 +259,7 @@ floor,13,12
 floor,13,9
 floor,13,10
 wall,13,0
+wall,13,3
 floor,13,4
 floor,13,1
 floor,13,2
@@ -282,6 +283,7 @@ wall,14,0
 floor,14,1
 floor,14,2
 floor,14,3
+wall,14,4
 floor,14,5
 floor,13,14
 floor,13,13
@@ -298,6 +300,7 @@ floor,15,9
 floor,15,10
 floor,15,7
 floor,15,8
+wall,15,5
 floor,15,6
 floor,15,3
 floor,15,4

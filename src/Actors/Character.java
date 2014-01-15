@@ -4,10 +4,13 @@ import Components.ActorGraphicsComponent;
 import Components.DynamicResource;
 import Components.InputComponent;
 import Components.PhysicsComponent;
-import Items.*;
-import WIP.*;
 import Environment.Floor;
 import Environment.WorldSpace;
+import Items.*;
+import WIP.DebugLog;
+import WIP.Game;
+import WIP.Transform;
+import WIP.Vector;
 
 import java.lang.reflect.Field;
 
@@ -42,7 +45,7 @@ public class Character extends Actor {
     //region Player Items
     private final Inventory inventory;
     //endregion
-    private int moveSpeed = 3;
+    private int walkSpeed = 3;
     private int sprintSpeed = 6;
     private boolean sprinting = false;
 
@@ -69,7 +72,7 @@ public class Character extends Actor {
         maxMana = 20;
         currentMana = maxMana;
 
-        maxStamina = 100;
+        maxStamina = 1000;
         currentStamina = maxStamina;
 
         this.inventory = new Inventory();
@@ -112,26 +115,7 @@ public class Character extends Actor {
     private Vector lastDirection = new Vector(0, 0), newDirection;
 
     public void update() {
-
-        if (InputComponent.getInstance().isShiftDown()) {
-            if (!sprinting) {
-                moveSpeed = sprintSpeed;
-                sprinting = true;
-            }
-        } else {
-            moveSpeed = 3;
-            sprinting = false;
-        }
-
-        int XAxis = InputComponent.getInstance().getXAxis();
-        int YAxis = InputComponent.getInstance().getYAxis();
-
-        calculateDirection(XAxis, YAxis);
-
-        setXVel(XAxis * moveSpeed);
-        setYVel(YAxis * moveSpeed);
-
-        move();
+        applyMovement();
 
         if (InputComponent.getInstance().isSpaceTyped()) {
             attack();
@@ -140,6 +124,38 @@ public class Character extends Actor {
         if (InputComponent.getInstance().isQTyped()) {
             pickupNextItem();
         }
+
+    }
+
+    private void applyMovement() {
+        int moveDistance;
+        if (InputComponent.getInstance().isShiftDown()) {
+            if (currentStamina >= 3) {
+                moveDistance = sprintSpeed;
+                sprinting = true;
+                currentStamina -= 3;
+            } else {
+                moveDistance = walkSpeed;
+                sprinting = false;
+            }
+        } else {
+            moveDistance = walkSpeed;
+            sprinting = false;
+            if (currentStamina < maxStamina) {
+                currentStamina += 1;
+            }
+        }
+
+        int XAxis = InputComponent.getInstance().getXAxis();
+        int YAxis = InputComponent.getInstance().getYAxis();
+
+        calculateDirection(XAxis, YAxis);
+
+        setXVel(XAxis * moveDistance);
+        setYVel(YAxis * moveDistance);
+
+        move();
+
         lastDirection = new Vector(XAxis, YAxis);
     }
 

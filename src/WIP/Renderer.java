@@ -156,7 +156,8 @@ public class Renderer extends JPanel {
     private void drawWorld(Map<Vector, WorldSpace> toRender) {
         for (Map.Entry e : toRender.entrySet()) {
             WorldSpace w = (WorldSpace) e.getValue();
-            drawImage(w, ((Vector) e.getKey()));
+            Vector v = (Vector) e.getKey();
+            drawImage(w, v);
         }
     }
 

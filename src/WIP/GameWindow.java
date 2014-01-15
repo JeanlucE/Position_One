@@ -29,7 +29,7 @@ class GameWindow extends JFrame {
         setBounds(100, 100, getWidth(), getHeight());
         setVisible(true);
 
-        System.out.println(this.getWidth() + "|" + this.getHeight());
-        System.out.println(game.getRenderer().getWidth() + "|" + game.getRenderer().getHeight());
+        //System.out.println(this.getWidth() + "|" + this.getHeight());
+        //System.out.println(game.getRenderer().getWidth() + "|" + game.getRenderer().getHeight());
     }
 }

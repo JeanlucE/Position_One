@@ -28,8 +28,8 @@ public class Turtle {
         positions = new Stack<>();
         positions.push(new TurtleMove(new AdvancedVector(0f, 0f), transform.getPosition().clone()));
         randomMoves();
-        transform.setPosition(new AdvancedVector(0, 0));
-        randomMoves();
+        //positions.push(new TurtleMove(new AdvancedVector(0f, 0f), new AdvancedVector(10, 10)));
+        //randomMoves();
         generatedMap = new HashMap<>(400);
     }
 
@@ -111,17 +111,23 @@ public class Turtle {
 
         WorldSpace worldSpace;
         if (id == BlockID.FLOOR) {
-            worldSpace = new Floor(new Transform(vector.clone()), floor);
+            worldSpace = new Floor(new Transform(transformToWorldSpace(vector.clone())), floor);
             surroundWithWalls(vector);
         } else {
-            PhysicsComponent p = new PhysicsComponent(40, 40);
-            worldSpace = new Wall(new Transform(vector.clone()), wall, p);
+            PhysicsComponent p = new PhysicsComponent(Renderer.TILESIZE, Renderer.TILESIZE);
+            worldSpace = new Wall(new Transform(transformToWorldSpace(vector.clone())), wall, p);
         }
 
         WorldSpace w = generatedMap.get(vector);
         if (w == null || w.isWall()) {
             generatedMap.put(vector, worldSpace);
         }
+    }
+
+    private Vector transformToWorldSpace(Vector v) {
+        v.setX(v.getX() * Renderer.TILESIZE);
+        v.setY(v.getY() * Renderer.TILESIZE);
+        return v;
     }
 
     /**
@@ -166,7 +172,6 @@ public class Turtle {
 
         private Turtle turtle;
         private int corridorWidth;
-        public static final int TILESIZE = 40;
 
         TurtleInterpreter(Turtle t, int corridorWidth) {
             this.turtle = t;
@@ -178,13 +183,11 @@ public class Turtle {
         void interpret() {
             TurtleMove[] positions = turtle.getPositions();
 
-            for (TurtleMove move: positions) {
+            for (TurtleMove move : positions) {
                 addCorridor(move.getStartPos(), move.getEndPos());
             }
-            //addCorridor(new AdvancedVector(0, 0), new AdvancedVector(4, 10));
         }
 
-        //TODO add walls to the corridors
         void addCorridor(AdvancedVector start, AdvancedVector end) {
 
             if (start.equals(end))
@@ -207,29 +210,23 @@ public class Turtle {
                 vStart.setX(xTemp);
                 vStart.setY(yTemp);
             }
-            //bresenhamLineInterpolate(vStart, vEnd);
-            int thisCorridor = corridorWidth;
-            int side = -1;
             double m = (vEnd.getY() - vStart.getY()) / (double) (vEnd.getX() - vStart.getX());
             if (m <= 1 && m >= -1) {
-
+                vStart.shift(0, -(corridorWidth / 2));
+                vEnd.shift(0, -(corridorWidth / 2));
                 for (int i = 0; i < corridorWidth; i++) {
                     superCoverLineInterpolation(vStart, vEnd, BlockID.FLOOR);
                     vStart.shift(0, 1);
                     vEnd.shift(0, 1);
                 }
             } else {
-                /*vStart.shift(-1, 0);
-                vEnd.shift(-1, 0);
-                bresenhamLineInterpolate(vStart, vEnd, BlockID.WALL);
-                vStart.shift(1, 0);
-                vEnd.shift(1, 0);*/
+                vStart.shift(-(corridorWidth / 2), 0);
+                vEnd.shift(-(corridorWidth / 2), 0);
                 for (int i = 0; i < corridorWidth; i++) {
                     superCoverLineInterpolation(vStart, vEnd, BlockID.FLOOR);
                     vStart.shift(1, 0);
                     vEnd.shift(1, 0);
                 }
-                //bresenhamLineInterpolate(vStart, vEnd, BlockID.WALL);
             }
         }
 

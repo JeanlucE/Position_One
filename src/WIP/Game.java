@@ -40,24 +40,26 @@ public class Game {
         Weapon sword = new Weapon_Melee("Sword", 0, 0, 10, 1.0f, new ItemGraphicsComponent());
         Weapon bow = new Weapon_Ranged("The OP Bow", 0, 0, 10, 10, 0.2f, new ItemGraphicsComponent());
         player = new Character("Ned Stark");
-        player.getTransform().getPosition().setX(20);
-        player.getTransform().getPosition().setY(20);
+        player.getTransform().getPosition().setX(50);
+        player.getTransform().getPosition().setY(50);
         Ammunition arrow = new Ammunition("Ammunition", 0,
                 new ProjectileGraphicsComponent(null, DynamicResource.WOODENARROW),
                 new PhysicsComponent(10, 25));
         player.equip(bow);
         player.equip(arrow);
-        Enemy.DEBUG_ALL_ENEMIES_MOVE_TOWARD_PLAYER = true;
-        //new Enemy("Chu Chu", 1000, new Transform(new Vector(350, 450)),
-        //        new ActorGraphicsComponent(DynamicResource.ENEMY_CHUCHU),
-        //        new PhysicsComponent(40, 40));
+        Enemy.DEBUG_ALL_ENEMIES_MOVE_TOWARD_PLAYER = false;
+        new Enemy("Chu Chu", 1000, new Transform(new Vector(450, 450)),
+                new ActorGraphicsComponent(DynamicResource.ENEMY_CHUCHU),
+                new PhysicsComponent(40, 40));
 
         World currentWorld = World.getInstance();
-        //((Floor) currentWorld.getReal(6, 7)).dropItem(new Weapon_Melee("Swordish", 0, 0, 1, 1.0f,
-        //        new ItemGraphicsComponent(Resource.weapon_melee_01_FLOOR)));
-        //((Floor) currentWorld.getReal(7, 7)).dropItem(new Ammunition("Ammunition", 0,
-        //        new ProjectileGraphicsComponent(null, DynamicResource.WOODENARROW),
-        //        new PhysicsComponent(10, 25)));
+        Weapon w = new Weapon_Melee("Swordish", 0, 0, 1, 1.0f,
+                new ItemGraphicsComponent(Resource.weapon_melee_01_FLOOR));
+        Ammunition a = new Ammunition("Ammunition", 0, new ProjectileGraphicsComponent(null,
+                DynamicResource.WOODENARROW), new PhysicsComponent(10, 25));
+
+        currentWorld.dropItem(w, 60, 60);
+        currentWorld.dropItem(a, 100, 100);
 
         renderer = Renderer.getInstance();
         gameLoop = new GameLoop();

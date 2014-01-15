@@ -2,6 +2,7 @@ package Environment;
 
 import Actors.Actor;
 import Components.PhysicsComponent;
+import Items.Item;
 import Items.Projectile;
 import WIP.DebugLog;
 import WIP.Game;
@@ -9,6 +10,8 @@ import WIP.GameObject;
 import WIP.Vector;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -54,16 +57,30 @@ public class World {
     }
 
     private World() {
-        currentMap = new WorldMap(new Turtle());
+        //currentMap = new WorldMap(new Turtle());
 
         //initiateMap("world");
         try {
-            saveMap("randomMap");
-            //loadMap("coctestinghall");
+            //saveMap("randomMap");
+            loadMap("randomMap");
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+    }
+
+    public Map<Vector, WorldSpace> getSubSpace(Vector bottomLeft, Vector topRight) {
+        int x0 = (bottomLeft.getX() >= 0) ? (bottomLeft.getX() / 40) : (bottomLeft.getX() / 40 - 1);
+        int y0 = (bottomLeft.getY() >= 0) ? (bottomLeft.getY() / 40) : (bottomLeft.getY() / 40 - 1);
+        int x1 = (topRight.getX() >= 0) ? (topRight.getX() / 40) : (topRight.getX() / 40 - 1);
+        int y1 = (topRight.getY() >= 0) ? (topRight.getY() / 40) : (topRight.getY() / 40 - 1);
+        Map<Vector, WorldSpace> result = new HashMap<>(Math.abs(x1 - x0) * Math.abs(y1 - y0));
+        for (int x = x0; x < x1; x++) {
+            for (int y = y0; y < y1; y++) {
+                result.put(new Vector(x, y), getReal(x, y));
+            }
+        }
+        return result;
     }
 
     /**
@@ -80,7 +97,7 @@ public class World {
     }
 
     //DEBUGGING
-    public WorldSpace getReal(int x, int y) {
+    private WorldSpace getReal(int x, int y) {
         return currentMap.getReal(x, y);
     }
 
@@ -197,6 +214,14 @@ public class World {
             }
         }
         return new CollisionEvent(CollisionState.NO_COLLISION, null);
+    }
+
+    public void dropItem(Item item, int x, int y) {
+        WorldSpace w = get(x, y);
+        if (w != null && w.isFloor()) {
+            Floor f = (Floor) w;
+            f.dropItem(item);
+        }
     }
 
     public class CollisionEvent {
