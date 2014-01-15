@@ -4,6 +4,7 @@ import Components.PhysicsComponent;
 import Components.Resource;
 import Components.StaticGraphicsComponent;
 import WIP.DebugLog;
+import WIP.Renderer;
 import WIP.Transform;
 import WIP.Vector;
 
@@ -25,8 +26,9 @@ public class WorldMap {
     public static String mapsPath = "./maps/";
     private Map<Vector, WorldSpace> worldSpaceMap = new HashMap<>();
 
+    //DEBUGGING
     public WorldMap() {
-        int tilesize = 40;
+        int tilesize = Renderer.TILESIZE;
         int roomsize = 20;
         //Creates a square room of with walk space 19x19
         StaticGraphicsComponent g = new StaticGraphicsComponent(Resource.wall01);
@@ -91,7 +93,7 @@ public class WorldMap {
             return new WorldMap();
         }
         Map<Vector, WorldSpace> result = new HashMap<>();
-        int tilesize = 40;
+        int tilesize = Renderer.TILESIZE;
         //Creates a square room of with walk space 19x19
         StaticGraphicsComponent wall = new StaticGraphicsComponent(Resource.wall01);
         StaticGraphicsComponent floor = new StaticGraphicsComponent(Resource.floor01);
@@ -112,10 +114,11 @@ public class WorldMap {
                 int yPos = Integer.parseInt(worldSpace.substring(cutindex2 + 1));
                 if (type.startsWith("w")) { //if type is wall
                     result.put(new Vector(xPos, yPos),
-                            new Wall(new Transform(new Vector(xPos * 40, yPos * 40)), wall, boxCollider));
+                            new Wall(new Transform(new Vector(xPos * tilesize, yPos * tilesize)), wall,
+                                    boxCollider));
                 } else if (type.startsWith("f")) {
                     result.put(new Vector(xPos, yPos),
-                            new Floor(new Transform(new Vector(xPos * 40, yPos * 40)), floor));
+                            new Floor(new Transform(new Vector(xPos * tilesize, yPos * tilesize)), floor));
                 }
             }
         }
@@ -135,7 +138,7 @@ public class WorldMap {
             DebugLog.write("[ERROR]: The file " + filename + ".txt is empty!");
             return new WorldMap();
         }
-        int tilesize = 40;
+        int tilesize = Renderer.TILESIZE;
         StaticGraphicsComponent wall = new StaticGraphicsComponent(Resource.wall01);
         StaticGraphicsComponent floor = new StaticGraphicsComponent(Resource.floor01);
         PhysicsComponent boxCollider = new PhysicsComponent(tilesize, tilesize);
@@ -146,10 +149,10 @@ public class WorldMap {
                 char c = worldSpace[j];
                 if (c == 'w')
                     result.put(new Vector(j, i),
-                            new Wall(new Transform(new Vector(j * 40, i * 40)), wall, boxCollider));
+                            new Wall(new Transform(new Vector(j * tilesize, i * tilesize)), wall, boxCollider));
                 else if (c == 'f')
                     result.put(new Vector(j, i),
-                            new Floor(new Transform(new Vector(j * 40, i * 40)), floor));
+                            new Floor(new Transform(new Vector(j * tilesize, i * tilesize)), floor));
             }
         }
         return new WorldMap(result);

@@ -138,7 +138,7 @@ public class World {
     }
 
     /**
-     * @param p            Projectile to check for collsions.
+     * @param p            Projectile to check for collisions.
      * @param nextPosition The Vector of the position the projectile is moving to.
      * @return Returns a CollisionEvent which holds the CollisionState and the collided GameObject if applicable
      * @see Environment.World#resolveActorCollision(Actors.Actor, WIP.Vector)

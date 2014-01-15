@@ -1,11 +1,31 @@
-Log created at: 18:54:02 15.01.2014
+Log created at: 19:41:59 15.01.2014
 
-[18:54:03.343] New Game started
-[18:54:03.361] New Melee Weapon created: Sword
-[18:54:03.362] New Ranged Weapon created: The OP Bow
-[18:54:03.508] New Character created: Ned Stark
-[18:54:03.512] Player Ned Stark has equipped: The OP Bow
-[18:54:03.513] Player Ned Stark has equipped: Ammunition
-[18:54:03.713] New World created with size: 1371
-[18:54:03.713] New Melee Weapon created: Swordish
-[18:54:03.736] Renderer started
+[19:42:00.094] New Game started
+[19:42:00.129] New Melee Weapon created: Sword
+[19:42:00.130] New Ranged Weapon created: The OP Bow
+[19:42:00.286] New Character created: Ned Stark
+[19:42:00.291] Player Ned Stark has equipped: The OP Bow
+[19:42:00.291] Player Ned Stark has equipped: Ammunition
+[19:42:00.419] New World created with size: 1371
+[19:42:00.419] New Melee Weapon created: Swordish
+[19:42:00.433] Renderer started
+[19:42:04.548] New Projectile at: -64|224
+[19:42:04.610] Projectile destroyed
+[19:42:05.867] New Projectile at: -211|356
+[19:42:05.883] Projectile destroyed
+[19:42:08.358] New Projectile at: -370|50
+[19:42:08.539] Projectile destroyed
+[19:42:08.879] New Projectile at: -274|-16
+[19:42:09.166] Projectile destroyed
+[19:42:09.472] New Projectile at: -163|-88
+[19:42:09.782] New Projectile at: -109|-103
+[19:42:09.883] Projectile destroyed
+[19:42:10.177] Projectile destroyed
+[19:42:11.379] New Projectile at: 188|-166
+[19:42:11.491] Projectile destroyed
+[19:42:12.703] New Projectile at: 296|-301
+[19:42:12.782] Projectile destroyed
+[19:42:13.619] New Projectile at: 440|-472
+[19:42:13.851] Projectile destroyed
+[19:42:14.507] New Projectile at: 452|-622
+[19:42:14.773] Projectile destroyed

@@ -50,6 +50,12 @@ public class Vector implements Serializable {
         return new Vector(a.x - b.x, a.y - b.y);
     }
 
+    public static Vector multiply(Vector a, int b) {
+        a.x *= b;
+        a.y *= b;
+        return a;
+    }
+
     public void signum() {
         x = Integer.signum(x);
         y = Integer.signum(y);

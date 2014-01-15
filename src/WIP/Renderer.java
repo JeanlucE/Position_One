@@ -143,7 +143,7 @@ public class Renderer extends JPanel {
             BufferedImage bf = go.getGraphic().getImage();
             PhysicsComponent p = ((Collidable) go).getCollider();
             g2d.drawImage(bf,
-                    position.getX() - p.getHeight() / 2,
+                    position.getX() - p.getWidth() / 2,
                     screenHeight - (position.getY() + p.getHeight() / 2),
                     width, height, this);
         } else {
