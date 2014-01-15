@@ -23,7 +23,6 @@ public class Camera {
     private Vector parent;
     private int clipX, clipY;
     private int screenWidth, screenHeight;
-    private World world;
 
     public static Camera getInstance() {
         if (instance == null) {
@@ -37,8 +36,6 @@ public class Camera {
         screenHeight = Renderer.getScreenHeight();
         clipX = screenWidth / 2 + Renderer.TILESIZE;
         clipY = screenHeight / 2 + Renderer.TILESIZE;
-        world = Game.getInstance().getCurrentWorld();
-        parent = Game.getInstance().getPlayer().getTransform().getPosition();
     }
 
     public Vector getParentPosition() {
@@ -46,7 +43,8 @@ public class Camera {
     }
 
     public Map<Vector, WorldSpace> worldToRender() {
-
+        World world = Game.getInstance().getCurrentWorld();
+        this.parent = Game.getInstance().getPlayer().getTransform().getPosition();
         Map<Vector, WorldSpace> visibleSpaces;
         Map<Vector, WorldSpace> floors = new HashMap<>(200);
         Map<Vector, WorldSpace> walls = new HashMap<>(200);
@@ -58,10 +56,10 @@ public class Camera {
         int eastClip = parent.getX() + clipY;
         visibleSpaces = world.getSubSpace(new Vector(westClip, southClip), new Vector(eastClip, northClip));
         for (Map.Entry e : visibleSpaces.entrySet()) {
-
             WorldSpace w = ((WorldSpace) e.getValue());
-            Vector v = transformToReal((Vector) e.getKey());
-
+            Vector v = ((Vector) e.getKey());
+            v.setX(screenWidth / 2 + (v.getX() * 40 - parent.getX()));
+            v.setY(screenHeight / 2 + (v.getY() * 40 - parent.getY()));
             if (w != null) {
                 if (w.isFloor()) {
                     floors.put(v, w);
@@ -78,7 +76,9 @@ public class Camera {
         for (Actor a : Game.getInstance().getActors()) {
             if (withinScreenBounds(a)) {
                 Vector drawPosition = a.getTransform().getPosition().clone();
-                actorPositionMap.put(a, transformToReal(drawPosition));
+                drawPosition.setX(screenWidth / 2 + (drawPosition.getX() - parent.getX()));
+                drawPosition.setY(screenHeight / 2 + (drawPosition.getY() - parent.getY()));
+                actorPositionMap.put(a, drawPosition);
             }
         }
         return actorPositionMap;
@@ -89,7 +89,9 @@ public class Camera {
         for (Projectile p : Projectile.getProjectiles()) {
             if (withinScreenBounds(p)) {
                 Vector pos = p.getTransform().getPosition().clone();
-                projectileVectorMap.put(p, transformToReal(pos));
+                pos.setX(screenWidth / 2 + (pos.getX() - parent.getX()));
+                pos.setY(screenHeight / 2 + (pos.getY() - parent.getY()));
+                projectileVectorMap.put(p, pos);
             }
         }
         return projectileVectorMap;
@@ -112,9 +114,4 @@ public class Camera {
         return false;
     }
 
-    private Vector transformToReal(Vector v) {
-        v.setX(screenWidth / 2 + (v.getX() - parent.getX()));
-        v.setY(screenHeight / 2 + (v.getY() - parent.getY()));
-        return v;
-    }
 }
