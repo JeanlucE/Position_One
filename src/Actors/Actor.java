@@ -22,16 +22,17 @@ public abstract class Actor extends Collidable {
     private String name;
     protected int maxHealth, currentHealth;
     private int currentXVelocity, currentYVelocity;
-
+    private static int damageTimeout = 750;
+    private int currentDamageTimeout;
 
     public static Actor[] getActors() {
         return actors.toArray(new Actor[actors.size()]);
     }
 
     public static void removeDeadActors() {
-        for (int i = 0; i < actors.size(); i++) {
-            if (actors.get(i).isDestroyed())
-                actors.remove(i);
+        for (Actor a : actors) {
+            if (a.isDestroyed())
+                actors.remove(a);
         }
     }
 
@@ -40,9 +41,18 @@ public abstract class Actor extends Collidable {
         super(transform, graphic, physicsComponent);
         this.name = name;
         actors.add(this);
+        currentDamageTimeout = damageTimeout;
     }
 
-    public abstract void update();
+    //Must be called in all update methods in subclasses
+    public final void update() {
+        if (currentDamageTimeout > 0) {
+            currentDamageTimeout -= Time.deltaTime();
+        }
+        updateThis();
+    }
+
+    protected abstract void updateThis();
 
     public boolean isCollidable() {
         return true;
@@ -126,11 +136,14 @@ public abstract class Actor extends Collidable {
     }
 
     public void damage(int damage) {
-        currentHealth -= damage;
-        DebugLog.write("Damaged enemy " + name + " for " + damage + " damage.");
-        if (currentHealth <= 0)
-            death();
-
+        if (canBeDamaged()) {
+            currentHealth -= damage;
+            DebugLog.write("Damaged actor " + name + " for " + damage + " damage.");
+            if (currentHealth <= 0)
+                death();
+            else
+                currentDamageTimeout = damageTimeout;
+        }
     }
 
     private void death() {
@@ -167,7 +180,7 @@ public abstract class Actor extends Collidable {
         return num1 - num2 < range * Renderer.TILESIZE;
     }
 
-    public boolean withinAgressiveRadiusOf(Actor other, double range) {
+    public boolean withinRangeOf(Actor other, double range) {
         double distance = Vector.subtract(other.getTransform().getPosition(), getTransform().getPosition()).length();
         return Double.compare(distance, range) == -1;
     }
@@ -212,5 +225,9 @@ public abstract class Actor extends Collidable {
 
     public enum Faction {
         PLAYER, FRIENDLY, ENEMY
+    }
+
+    protected boolean canBeDamaged() {
+        return currentDamageTimeout <= 0;
     }
 }

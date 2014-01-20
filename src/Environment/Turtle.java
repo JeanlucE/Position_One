@@ -37,6 +37,7 @@ public class Turtle {
         return transform;
     }
 
+
     private void randomMoves(Random r, int minCorridorLength, int maxCorridorLength, int numOfMoves) {
         int max = maxCorridorLength - minCorridorLength + 1;
         for (int i = 0; i < numOfMoves; i++) {
@@ -182,6 +183,8 @@ public class Turtle {
 
         void interpret() {
             TurtleMove[] positions = turtle.getPositions();
+
+            addCorridor(new AdvancedVector(0, 0), new AdvancedVector(2, 2));
 
             for (TurtleMove move : positions) {
                 addCorridor(move.getStartPos(), move.getEndPos());

@@ -84,5 +84,4 @@ public class Ammunition extends Equipment {
                 ((ProjectileGraphicsComponent) getGraphic()).getResource()), phys, 10, 6,
                 weapon.getBaseDamage());
     }
-
 }

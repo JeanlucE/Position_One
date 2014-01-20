@@ -26,7 +26,7 @@ public class Enemy extends NPC {
         g.setParent(this);
     }
 
-    public void update() {
+    protected void updateThis() {
 
         if (DEBUG_ALL_ENEMIES_RANDOM_MOVE && DEBUG_ALL_ENEMIES_MOVE_TOWARD_PLAYER) {
             DebugLog.write("Enemy debug variables conflict: DEBUG_ALL_ENEMIES_RANDOM_MOVE, " +
@@ -41,6 +41,7 @@ public class Enemy extends NPC {
             randomVel();
         } else if (DEBUG_ALL_ENEMIES_MOVE_TOWARD_PLAYER) {
             aggressiveBehaviour();
+            damageOnTouch();
         }
 
         if (getXVel() != 0 || getYVel() != 0) {
@@ -71,13 +72,20 @@ public class Enemy extends NPC {
 
     private void aggressiveBehaviour() {
         Actor player = Game.getInstance().getPlayer();
-        if (player.withinAgressiveRadiusOf(this, 300)) {
+        if (player.withinRangeOf(this, 300)) {
             Vector directionToPlayer = directionTo(player);
             setXVel(directionToPlayer.getX());
             setYVel(directionToPlayer.getY());
         } else {
             setXVel(0);
             setYVel(0);
+        }
+    }
+
+    private void damageOnTouch() {
+        Actor player = Game.getInstance().getPlayer();
+        if (player.withinRangeOf(this, 75)) {
+            player.damage(5);
         }
     }
 }

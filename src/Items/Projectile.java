@@ -3,8 +3,8 @@ package Items;
 import Actors.Actor;
 import Components.GraphicsComponent;
 import Components.PhysicsComponent;
-import WIP.*;
 import Environment.World;
+import WIP.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,7 +76,7 @@ public class Projectile extends Collidable {
                 ((Actor) collisionEvent.getCollisionObject()).damage(damage);
             case WALL_HIT:
                 this.destroy();
-                DebugLog.write("Projectile destroyed");
+                DebugLog.write("Projectile destroyed at " + getTransform().getPosition());
                 return;
             default:
                 break;

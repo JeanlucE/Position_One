@@ -47,10 +47,8 @@ public class Game {
                 new PhysicsComponent(10, 25));
         player.equip(bow);
         player.equip(arrow);
-        Enemy.DEBUG_ALL_ENEMIES_MOVE_TOWARD_PLAYER = false;
-        new Enemy("Chu Chu", 1000, new Transform(new Vector(450, 450)),
-                new ActorGraphicsComponent(DynamicResource.ENEMY_CHUCHU),
-                new PhysicsComponent(40, 40));
+        Enemy.DEBUG_ALL_ENEMIES_MOVE_TOWARD_PLAYER = true;
+        getCurrentWorld().spawnEnemy(new Vector(200, 200));
 
         World currentWorld = World.getInstance();
         Weapon w = new Weapon_Melee("Swordish", 0, 0, 1, 1.0f,
@@ -102,6 +100,7 @@ public class Game {
 
 
         public void actionPerformed(ActionEvent e) {
+            Time.update();
             for (Actor a : Actor.getActors()) {
                 a.update();
             }

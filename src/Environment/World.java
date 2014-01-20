@@ -1,13 +1,13 @@
 package Environment;
 
 import Actors.Actor;
+import Actors.Enemy;
+import Components.ActorGraphicsComponent;
+import Components.DynamicResource;
 import Components.PhysicsComponent;
 import Items.Item;
 import Items.Projectile;
-import WIP.DebugLog;
-import WIP.Game;
-import WIP.GameObject;
-import WIP.Vector;
+import WIP.*;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -148,7 +148,7 @@ public class World {
         for (Vector v : collider.getCorners(nextPosition)) {
             CollisionEvent wallCollision = resolveWallCollision(v);
             if (wallCollision.isWallHit()) {
-                System.out.println(wallCollision.getCollisionObject());
+                //System.out.println(wallCollision.getCollisionObject());
                 return wallCollision;
             }
         }
@@ -276,6 +276,16 @@ public class World {
         } catch (IOException e) {
             e.printStackTrace();
             DebugLog.write("Map Save failed: " + e.getMessage());
+        }
+    }
+
+    public void spawnEnemy(Vector position) {
+        Enemy e = new Enemy("Chu Chu", 100, new Transform(position.clone()),
+                new ActorGraphicsComponent(DynamicResource.ENEMY_CHUCHU),
+                new PhysicsComponent(40, 40));
+        CollisionEvent collisionEvent = resolveCollision(e, e.getTransform().getPosition());
+        if (collisionEvent.getCollisionState() != CollisionState.NO_COLLISION) {
+            e.destroy();
         }
     }
 }

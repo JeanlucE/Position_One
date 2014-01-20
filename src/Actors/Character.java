@@ -114,7 +114,7 @@ public class Character extends Actor {
 
     private Vector lastDirection = new Vector(0, 0), newDirection;
 
-    public void update() {
+    protected void updateThis() {
         applyMovement();
 
         if (InputComponent.getInstance().isSpaceTyped()) {
