@@ -11,7 +11,7 @@ import WIP.DebugLog;
  * <p/>
  * Not required to be abstract because all armours have the same behaviour
  */
-public class Armour extends Equipment {
+public abstract class Armour extends Equipment {
     private int defence;
     private final ArmourType armourType;
 

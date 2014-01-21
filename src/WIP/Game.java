@@ -52,13 +52,6 @@ public class Game {
         getCurrentWorld().spawnEnemy(new Vector(250, 250));
 
         World currentWorld = World.getInstance();
-        Weapon w = new Weapon_Melee("Swordish", 0, 0, 1, 1.0f,
-                new ItemGraphicsComponent(Resource.weapon_melee_01_FLOOR));
-        Ammunition a = new Ammunition("Ammunition", 0, new ProjectileGraphicsComponent(null,
-                DynamicResource.WOODENARROW), new PhysicsComponent(10, 25));
-
-        currentWorld.dropItem(w, 60, 60);
-        currentWorld.dropItem(a, 100, 100);
 
         renderer = Renderer.getInstance();
         gameLoop = new GameLoop();
