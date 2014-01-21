@@ -1,9 +1,6 @@
 package Environment;
 
 import Actors.Actor;
-import Actors.Enemy;
-import Components.ActorGraphicsComponent;
-import Components.DynamicResource;
 import Components.PhysicsComponent;
 import Items.Item;
 import Items.Projectile;
@@ -49,6 +46,7 @@ public class World {
 
     private static World instance;
     private WorldMap currentMap;
+    private SpawnHandler spawnHandler;
 
     public static World getInstance() {
         if (instance == null)
@@ -62,22 +60,33 @@ public class World {
         //initiateMap("world");
         try {
             //saveMap("randomMap");
-            loadMap("randomMap");
+            loadMap("coctestinghall");
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        spawnHandler = new SpawnHandler(this, 3);
     }
 
+    /**
+     * Gets all WorldSpaces in the area of the rectangle defined by the bottomLeft Vector and the topRight Vector.
+     * Then a Map of Real Vectors to WorldSpaces is returned.
+     *
+     * @param bottomLeft Bottom left corner of the Rectangle to be searched for WorldSpaces
+     * @param topRight   Top right corner of the Rectangle to be searched for WorldSpaces
+     * @return Returns a Map of Real Vectors to WorldSpaces.
+     */
+    //TODO should return WorldPosition in the vectors
     public Map<Vector, WorldSpace> getSubSpace(Vector bottomLeft, Vector topRight) {
         int x0 = (bottomLeft.getX() >= 0) ? (bottomLeft.getX() / 40) : (bottomLeft.getX() / 40 - 1);
         int y0 = (bottomLeft.getY() >= 0) ? (bottomLeft.getY() / 40) : (bottomLeft.getY() / 40 - 1);
         int x1 = (topRight.getX() >= 0) ? (topRight.getX() / 40) : (topRight.getX() / 40 - 1);
         int y1 = (topRight.getY() >= 0) ? (topRight.getY() / 40) : (topRight.getY() / 40 - 1);
-        Map<Vector, WorldSpace> result = new HashMap<>(Math.abs(x1 - x0) * Math.abs(y1 - y0));
+
+        Map<Vector, WorldSpace> result = new HashMap<>(Math.abs(x1 - x0) * Math.abs(y1 - y0)); //Approximate Size
         for (int x = x0; x < x1; x++) {
             for (int y = y0; y < y1; y++) {
-                result.put(new Vector(x, y), getReal(x, y));
+                Vector v = new Vector(x, y);
+                result.put(transformToWorldSpace(v), getReal(x, y));
             }
         }
         return result;
@@ -110,6 +119,10 @@ public class World {
      */
     public WorldSpace get(Vector position) {
         return get(position.getX(), position.getY());
+    }
+
+    private Vector transformToWorldSpace(Vector v) {
+        return Vector.multiply(v, Renderer.TILESIZE);
     }
 
     /**
@@ -254,6 +267,11 @@ public class World {
         public boolean isNoCollision() {
             return collisionState.equals(CollisionState.NO_COLLISION);
         }
+
+        @Override
+        public String toString() {
+            return collisionState.name();
+        }
     }
 
     public enum CollisionState {
@@ -280,12 +298,17 @@ public class World {
     }
 
     public void spawnEnemy(Vector position) {
-        Enemy e = new Enemy("Chu Chu", 100, new Transform(position.clone()),
+        spawnHandler.spawnEnemyAt(position);
+        /*Enemy e = new Enemy("Chu Chu", 100, new Transform(position.clone()),
                 new ActorGraphicsComponent(DynamicResource.ENEMY_CHUCHU),
                 new PhysicsComponent(40, 40));
         CollisionEvent collisionEvent = resolveCollision(e, e.getTransform().getPosition());
         if (collisionEvent.getCollisionState() != CollisionState.NO_COLLISION) {
             e.destroy();
-        }
+        }*/
+    }
+
+    public void spawnEnemyAround(Vector position) {
+        spawnHandler.spawnEnemyAround(position);
     }
 }

@@ -93,4 +93,9 @@ public class Enemy extends NPC {
     protected int getDamageTimeout() {
         return 250;
     }
+
+    @Override
+    protected int actualDamage(int damage) {
+        return damage;
+    }
 }

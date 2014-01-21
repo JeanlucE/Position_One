@@ -11,7 +11,7 @@ import java.awt.event.KeyListener;
  */
 public class InputComponent implements KeyListener {
 
-
+    //TODO isSpaceDown for attacks
     //If any focus problems occur try this on renderer: jPanel.requestFocusInWindow();
 
     private static InputComponent instance;
@@ -38,7 +38,7 @@ public class InputComponent implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
 
-        if (e.isShiftDown() && !shiftDown) {
+        if (e.isShiftDown()) {
             shiftDown = true;
         }
 

@@ -29,6 +29,6 @@ public class Time {
     }
 
     public static long getTimeStamp() {
-        return timeThisFrame;
+        return System.currentTimeMillis();
     }
 }

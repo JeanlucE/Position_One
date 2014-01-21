@@ -55,10 +55,10 @@ public class Camera {
         int westClip = parent.getX() - clipY;
         int eastClip = parent.getX() + clipY;
         visibleSpaces = world.getSubSpace(new Vector(westClip, southClip), new Vector(eastClip, northClip));
-        for (Map.Entry e : visibleSpaces.entrySet()) {
-            WorldSpace w = ((WorldSpace) e.getValue());
-            Vector v = ((Vector) e.getKey());
-            transformToViewSpace(Vector.multiply(v, Renderer.TILESIZE));
+        for (Map.Entry<Vector, WorldSpace> e : visibleSpaces.entrySet()) {
+            WorldSpace w = e.getValue();
+            Vector v = e.getKey();
+            transformToViewSpace(v);
             if (w != null) {
                 if (w.isFloor()) {
                     floors.put(v, w);

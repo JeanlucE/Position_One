@@ -1,124 +1,73 @@
-Log created at: 19:36:48 20.01.2014
+Log created at: 13:49:36 21.01.2014
 
-[19:36:48.710] New Game started
-[19:36:48.734] New Melee Weapon created: Sword
-[19:36:48.735] New Ranged Weapon created: The OP Bow
-[19:36:48.921] New Character created: Ned Stark
-[19:36:48.926] Player Ned Stark has equipped: The OP Bow
-[19:36:48.926] Player Ned Stark has equipped: Ammunition
-[19:36:49.055] New World created with size: 765
-[19:36:49.065] New Melee Weapon created: Swordish
-[19:36:49.074] Renderer started
-[19:36:52.383] Damaged actor Ned Stark for 5 damage.
-[19:36:53.167] Damaged actor Ned Stark for 5 damage.
-[19:36:57.100] New Projectile at: -475|290
-[19:36:57.482] New Projectile at: -475|290
-[19:36:57.508] Projectile destroyed
-[19:36:57.782] New Projectile at: -475|290
-[19:36:57.862] Projectile destroyed
-[19:36:58.172] Projectile destroyed
-[19:37:01.019] New Projectile at: -475|290
-[19:37:01.366] New Projectile at: -475|290
-[19:37:01.430] Projectile destroyed
-[19:37:01.596] New Projectile at: -475|290
-[19:37:01.759] Projectile destroyed
-[19:37:01.809] New Projectile at: -475|290
-[19:37:01.992] Projectile destroyed
-[19:37:02.010] New Projectile at: -475|290
-[19:37:02.256] Projectile destroyed
-[19:37:02.345] New Projectile at: -505|290
-[19:37:02.459] Projectile destroyed
-[19:37:02.638] New Projectile at: -559|314
-[19:37:02.734] Projectile destroyed
-[19:37:02.831] New Projectile at: -595|314
-[19:37:03.027] New Projectile at: -631|314
-[19:37:03.179] New Projectile at: -658|314
-[19:37:03.330] New Projectile at: -679|314
-[19:37:03.466] New Projectile at: -703|314
-[19:37:03.627] New Projectile at: -733|314
-[19:37:03.771] New Projectile at: -760|314
-[19:37:03.905] New Projectile at: -784|314
-[19:37:04.203] New Projectile at: -784|314
-[19:37:04.380] New Projectile at: -784|314
-[19:37:05.213] New Projectile at: -871|350
-[19:37:05.358] New Projectile at: -871|350
-[19:37:05.504] New Projectile at: -871|350
-[19:37:05.601] Projectile destroyed
-[19:37:05.633] New Projectile at: -871|350
-[19:37:05.751] Projectile destroyed
-[19:37:05.768] New Projectile at: -871|350
-[19:37:05.884] New Projectile at: -871|350
-[19:37:05.900] Projectile destroyed
-[19:37:06.007] New Projectile at: -871|350
-[19:37:06.040] Projectile destroyed
-[19:37:06.160] New Projectile at: -871|350
-[19:37:06.177] Projectile destroyed
-[19:37:06.270] New Projectile at: -871|350
-[19:37:06.302] Projectile destroyed
-[19:37:06.416] New Projectile at: -871|350
-[19:37:06.417] Projectile destroyed
-[19:37:06.545] New Projectile at: -871|350
-[19:37:06.561] Projectile destroyed
-[19:37:06.662] New Projectile at: -871|350
-[19:37:06.663] Projectile destroyed
-[19:37:06.790] New Projectile at: -871|350
-[19:37:06.808] Projectile destroyed
-[19:37:06.920] New Projectile at: -871|350
-[19:37:06.936] Projectile destroyed
-[19:37:07.048] New Projectile at: -871|350
-[19:37:07.049] Projectile destroyed
-[19:37:07.176] New Projectile at: -871|350
-[19:37:07.176] Projectile destroyed
-[19:37:07.305] New Projectile at: -871|350
-[19:37:07.306] Projectile destroyed
-[19:37:07.438] Projectile destroyed
-[19:37:07.454] New Projectile at: -871|350
-[19:37:07.572] Projectile destroyed
-[19:37:07.589] New Projectile at: -871|350
-[19:37:07.704] Projectile destroyed
-[19:37:07.739] New Projectile at: -871|350
-[19:37:07.864] New Projectile at: -871|350
-[19:37:07.865] Projectile destroyed
-[19:37:07.993] New Projectile at: -871|350
-[19:37:07.993] Projectile destroyed
-[19:37:08.149] New Projectile at: -871|350
-[19:37:08.149] Projectile destroyed
-[19:37:08.262] Projectile destroyed
-[19:37:08.294] New Projectile at: -871|350
-[19:37:08.399] Projectile destroyed
-[19:37:08.447] New Projectile at: -871|350
-[19:37:08.543] Projectile destroyed
-[19:37:08.594] New Projectile at: -871|350
-[19:37:08.692] Projectile destroyed
-[19:37:08.743] New Projectile at: -871|350
-[19:37:08.841] Projectile destroyed
-[19:37:08.889] New Projectile at: -871|350
-[19:37:08.985] Projectile destroyed
-[19:37:09.049] New Projectile at: -871|350
-[19:37:09.129] Projectile destroyed
-[19:37:09.193] New Projectile at: -871|350
-[19:37:09.274] Projectile destroyed
-[19:37:09.342] New Projectile at: -871|350
-[19:37:09.443] Projectile destroyed
-[19:37:09.493] New Projectile at: -871|350
-[19:37:09.592] Projectile destroyed
-[19:37:09.641] New Projectile at: -871|350
-[19:37:09.745] Projectile destroyed
-[19:37:09.793] New Projectile at: -871|350
-[19:37:09.892] Projectile destroyed
-[19:37:09.942] New Projectile at: -871|350
-[19:37:10.044] Projectile destroyed
-[19:37:10.097] New Projectile at: -871|350
-[19:37:10.199] Projectile destroyed
-[19:37:10.231] New Projectile at: -871|350
-[19:37:10.356] Projectile destroyed
-[19:37:10.395] New Projectile at: -871|350
-[19:37:10.521] Projectile destroyed
-[19:37:10.552] New Projectile at: -871|350
-[19:37:10.652] Projectile destroyed
-[19:37:10.700] New Projectile at: -871|350
-[19:37:10.796] Projectile destroyed
-[19:37:10.844] New Projectile at: -871|350
-[19:37:10.940] Projectile destroyed
-[19:37:11.084] Projectile destroyed
-[19:37:11.229] Projectile destroyed
+[13:49:38.170] New Game started
+[13:49:38.213] New Melee Weapon created: Sword
+[13:49:38.217] New Ranged Weapon created: The OP Bow
+[13:49:38.477] New Character created: Ned Stark
+[13:49:38.497] New Armour created: Helmet
+[13:49:38.498] New Armour created: Body
+[13:49:38.498] New Armour created: Legs
+[13:49:38.499] Player Ned Stark has equipped: Helmet
+[13:49:38.499] Player Ned Stark has equipped: Body
+[13:49:38.499] Player Ned Stark has equipped: Legs
+[13:49:38.499] Player Ned Stark has equipped: Sword
+[13:49:38.500] Player Ned Stark has equipped: Ammunition
+[13:49:38.562] New World created with size: 436
+[13:49:38.585] SpawnHandler: tried spawning enemy at 180|260
+[13:49:38.607] SpawnHandler: tried spawning enemy at 180|220
+[13:49:38.609] SpawnHandler: tried spawning enemy at 100|180
+[13:49:38.620] Renderer started
+[13:49:39.891] Damaged actor Ned Stark for 2 damage.
+[13:49:40.670] Damaged actor Ned Stark for 2 damage.
+[13:49:41.512] Damaged actor Ned Stark for 2 damage.
+[13:49:44.700] Damaged actor Ned Stark for 2 damage.
+[13:49:45.758] Damaged actor Ned Stark for 2 damage.
+[13:49:46.543] Damaged actor Ned Stark for 2 damage.
+[13:49:46.850] Damaged actor Chu Chu for 10 damage.
+[13:49:47.324] Damaged actor Ned Stark for 2 damage.
+[13:49:47.984] Damaged actor Chu Chu for 10 damage.
+[13:49:47.985] Damaged actor Chu Chu for 10 damage.
+[13:49:47.985] Damaged actor Chu Chu for 10 damage.
+[13:49:48.097] Damaged actor Ned Stark for 2 damage.
+[13:49:48.883] Damaged actor Ned Stark for 2 damage.
+[13:49:49.154] Damaged actor Chu Chu for 10 damage.
+[13:49:49.155] Damaged actor Chu Chu for 10 damage.
+[13:49:49.155] Damaged actor Chu Chu for 10 damage.
+[13:49:49.655] Damaged actor Ned Stark for 2 damage.
+[13:49:50.239] Damaged actor Chu Chu for 10 damage.
+[13:49:50.239] Damaged actor Chu Chu for 10 damage.
+[13:49:50.240] Damaged actor Chu Chu for 10 damage.
+[13:49:50.435] Damaged actor Ned Stark for 2 damage.
+[13:49:51.224] Damaged actor Ned Stark for 2 damage.
+[13:49:51.272] Damaged actor Chu Chu for 10 damage.
+[13:49:51.272] Damaged actor Chu Chu for 10 damage.
+[13:49:51.273] Damaged actor Chu Chu for 10 damage.
+[13:49:52.000] Damaged actor Ned Stark for 2 damage.
+[13:49:52.438] Damaged actor Chu Chu for 10 damage.
+[13:49:52.438] Damaged actor Chu Chu for 10 damage.
+[13:49:52.439] Damaged actor Chu Chu for 10 damage.
+[13:49:52.775] Damaged actor Ned Stark for 2 damage.
+[13:49:53.446] Damaged actor Chu Chu for 10 damage.
+[13:49:53.446] Damaged actor Chu Chu for 10 damage.
+[13:49:53.446] Damaged actor Chu Chu for 10 damage.
+[13:49:53.558] Damaged actor Ned Stark for 2 damage.
+[13:49:54.336] Damaged actor Ned Stark for 2 damage.
+[13:49:54.529] Damaged actor Chu Chu for 10 damage.
+[13:49:54.529] Damaged actor Chu Chu for 10 damage.
+[13:49:54.530] Damaged actor Chu Chu for 10 damage.
+[13:49:55.115] Damaged actor Ned Stark for 2 damage.
+[13:49:55.589] Damaged actor Chu Chu for 10 damage.
+[13:49:55.589] Damaged actor Chu Chu for 10 damage.
+[13:49:55.590] Damaged actor Chu Chu for 10 damage.
+[13:49:55.902] Damaged actor Ned Stark for 2 damage.
+[13:49:56.621] Damaged actor Chu Chu for 10 damage.
+[13:49:56.621] Damaged actor Chu Chu for 10 damage.
+[13:49:56.622] Damaged actor Chu Chu for 10 damage.
+[13:49:56.622] Actor Chu Chu is dead.
+[13:49:56.685] Damaged actor Ned Stark for 2 damage.
+[13:49:57.462] Damaged actor Ned Stark for 2 damage.
+[13:49:58.247] Damaged actor Ned Stark for 2 damage.
+[13:49:58.390] Damaged actor Chu Chu for 10 damage.
+[13:49:58.390] Actor Chu Chu is dead.
+[13:49:58.390] Damaged actor Chu Chu for 10 damage.
+[13:49:58.391] Actor Chu Chu is dead.

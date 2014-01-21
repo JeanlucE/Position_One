@@ -81,9 +81,10 @@ public class Vector implements Serializable {
         this.y = y;
     }
 
-    public void shift(int x, int y) {
+    public Vector shift(int x, int y) {
         this.x += x;
         this.y += y;
+        return this;
     }
 
     public Vector shiftedPosition(int x, int y) {

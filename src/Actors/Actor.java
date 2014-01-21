@@ -29,9 +29,9 @@ public abstract class Actor extends Collidable {
     }
 
     public static void removeDeadActors() {
-        Actor[] currentActors = getActors();
-        for (int i = 0; i < currentActors.length; i++) {
-            if (currentActors[i].isDestroyed())
+        for (int i = actors.size() - 1; i >= 0; i--) {
+            Actor a = actors.get(i);
+            if (a.isDestroyed())
                 actors.remove(i);
         }
 
@@ -79,7 +79,6 @@ public abstract class Actor extends Collidable {
                 translate(0, currentYVelocity);
             }
         }
-        //System.out.println(currentXVelocity + "|" + currentYVelocity);
     }
 
     private void translate(int x, int y) {
@@ -136,10 +135,11 @@ public abstract class Actor extends Collidable {
         return currentHealth / (float) maxHealth;
     }
 
-    public void damage(int damage) {
+    public final void damage(int damage) {
         if (canBeDamaged()) {
-            currentHealth -= damage;
-            DebugLog.write("Damaged actor " + name + " for " + damage + " damage.");
+            int actualDamage = actualDamage(damage);
+            currentHealth -= actualDamage;
+            DebugLog.write("Damaged actor " + name + " for " + actualDamage + " damage.");
             if (currentHealth <= 0)
                 death();
             else

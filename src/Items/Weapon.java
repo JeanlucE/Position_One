@@ -59,14 +59,19 @@ public abstract class Weapon extends Equipment {
     }
 
     //Called when a weapon is used
-    public void use() {
-        //FIXME
-        long thisTimeUsed = Time.getTimeStamp();
-        if (Time.getTimeStamp() - lastTimeUsed >= (int) (useTime * 1000000)) {
+    public final void use() {
+        if (canBeUsed()) {
             useThis();
         }
-        System.out.println(Time.getTimeStamp() - lastTimeUsed);
-        lastTimeUsed = thisTimeUsed;
+    }
+
+    private boolean canBeUsed() {
+        long thisTimeUsed = Time.getTimeStamp();
+        boolean canBeUsed = thisTimeUsed - lastTimeUsed >= (int) (useTime * 1000);
+        if (canBeUsed) {
+            lastTimeUsed = thisTimeUsed;
+        }
+        return canBeUsed;
     }
 
     protected abstract void useThis();
