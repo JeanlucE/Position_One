@@ -5,6 +5,7 @@ import WIP.DebugLog;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 
@@ -35,9 +36,11 @@ public enum Resource implements Serializable {
     private Resource(String fileName) {
         try {
             image = ImageIO.read(new File(imagePath + fileName));
-        } catch (IOException e) {
+        } catch (FileNotFoundException e) {
             //TODO make a filler image for visual debugging
             DebugLog.write("File not found at " + imagePath + fileName);
+        } catch (IOException e) {
+            DebugLog.write("IOException at: " + imagePath + fileName);
             System.exit(-1);
         }
     }

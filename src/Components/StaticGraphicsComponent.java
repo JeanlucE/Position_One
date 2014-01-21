@@ -10,13 +10,14 @@ import java.awt.image.BufferedImage;
  */
 public class StaticGraphicsComponent extends GraphicsComponent {
 
+    private BufferedImage image;
+
     public StaticGraphicsComponent(Resource resource) {
-        image = new BufferedImage[1];
-        image[0] = resource.getImage();
+        image = resource.getImage();
     }
 
     @Override
     public BufferedImage getImage() {
-        return image[0];
+        return image;
     }
 }

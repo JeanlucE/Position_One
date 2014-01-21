@@ -328,4 +328,18 @@ public class Character extends Actor {
     protected int getDamageTimeout() {
         return 750;
     }
+
+    private int getTotalDefense() {
+        int result = 0;
+        result += (equipment.hasHelmetEquipped()) ? (getHelmet().getDefence()) : 0;
+        result += (equipment.hasBodyEquipped()) ? (getBody().getDefence()) : 0;
+        result += (equipment.hasLegsEquipped()) ? (getLegs().getDefence()) : 0;
+        return result;
+    }
+
+    @Override
+    protected int actualDamage(int damage) {
+        int actualDamage = damage - getTotalDefense();
+        return (actualDamage > 1) ? (actualDamage) : 1;
+    }
 }

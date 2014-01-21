@@ -7,7 +7,7 @@ package Environment;
  * Time: 5:25 PM
  */
 
-//TODO Enhance this class to include IDs of all items in game
+//TODO Enhance this class to include IDs of all non-generated items in game
 //TODO Rewrite other classes to take BlocksID
 public enum BlockID {
     WALL, FLOOR

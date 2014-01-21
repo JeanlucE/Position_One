@@ -104,6 +104,7 @@ public class EquipmentManager {
         return metLevelReq && metSkillReq;
     }
 
+    //region Equipment Slot getters
     public Armour getHelmet() {
         return helmetSlot.getEquipment();
     }
@@ -127,6 +128,7 @@ public class EquipmentManager {
     public Ammunition getAmmunition() {
         return ammunitionSlot.getEquipment();
     }
+    //endregion
 
     public String toString() {
         String equipment = "";
@@ -137,4 +139,31 @@ public class EquipmentManager {
         equipment += "Offhand: " + offHandSlot.toString();
         return equipment;
     }
+
+    //region Boolean Methods if character has something equipped
+    boolean hasHelmetEquipped() {
+        return helmetSlot.isOccupied();
+    }
+
+    boolean hasBodyEquipped() {
+        return bodySlot.isOccupied();
+    }
+
+    boolean hasLegsEquipped() {
+        return bodySlot.isOccupied();
+    }
+
+    boolean hasMainHandEquipped() {
+        return mainHandSlot.isOccupied();
+    }
+
+    boolean hasOffHandEquipped() {
+        return offHandSlot.isOccupied();
+    }
+
+    boolean hasAmmunitionEquipped() {
+        return ammunitionSlot.isOccupied();
+    }
+    //endregion
+
 }

@@ -10,22 +10,25 @@ import java.awt.image.BufferedImage;
  */
 public class ItemGraphicsComponent extends GraphicsComponent {
 
+    private BufferedImage[] images;
+
     public ItemGraphicsComponent() {
 
     }
 
+    //TODO later Take Dynamic Resource as parameter
     public ItemGraphicsComponent(Resource resource) {
-        image = new BufferedImage[2];
-        image[0] = resource.getImage();
+        images = new BufferedImage[2];
+        images[0] = resource.getImage();
     }
 
     //returns dropped image
     public BufferedImage getImage() {
-        return image[0];
+        return images[0];
     }
 
     //returns image in inventory
     public BufferedImage getInventoryImage() {
-        return image[1];
+        return images[1];
     }
 }

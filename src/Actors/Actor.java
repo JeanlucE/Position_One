@@ -147,6 +147,15 @@ public abstract class Actor extends Collidable {
         }
     }
 
+    /**
+     * Is called when Actor is damaged. Then actor can negate or multiply the damage depending on what armor is
+     * equipped or if any buffs are active.
+     *
+     * @param damage Raw damage taken without any modifications
+     * @return Returns damage taken with modifications made by the individual Actor.
+     */
+    protected abstract int actualDamage(int damage);
+
     protected void death() {
         this.destroy();
         DebugLog.write("Actor " + name + " is dead.");
