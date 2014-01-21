@@ -73,10 +73,10 @@ public class Projectile extends Collidable {
         World.CollisionState collisionState = collisionEvent.getCollisionState();
         switch (collisionState) {
             case ENEMY_HIT:
+                DebugLog.write("Projectile destroyed at " + getTransform().getPosition());
                 ((Actor) collisionEvent.getCollisionObject()).damage(damage);
             case WALL_HIT:
                 this.destroy();
-                DebugLog.write("Projectile destroyed at " + getTransform().getPosition());
                 return;
             default:
                 break;

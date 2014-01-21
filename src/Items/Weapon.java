@@ -3,6 +3,7 @@ package Items;
 import Actors.Actor;
 import Components.ItemGraphicsComponent;
 import WIP.DebugLog;
+import WIP.Time;
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,6 +22,7 @@ public abstract class Weapon extends Equipment {
     private int baseRange;
     //Hits per second
     private float useTime;
+    private long lastTimeUsed = Time.getTimeStamp();
     //Actor that has the weapon equipped
     protected Actor equipped;
     //endregion
@@ -57,7 +59,17 @@ public abstract class Weapon extends Equipment {
     }
 
     //Called when a weapon is used
-    public abstract void use();
+    public void use() {
+        //FIXME
+        long thisTimeUsed = Time.getTimeStamp();
+        if (Time.getTimeStamp() - lastTimeUsed >= (int) (useTime * 1000000)) {
+            useThis();
+        }
+        System.out.println(Time.getTimeStamp() - lastTimeUsed);
+        lastTimeUsed = thisTimeUsed;
+    }
+
+    protected abstract void useThis();
 
     public void setEquipped(Actor actor) {
         equipped = actor;

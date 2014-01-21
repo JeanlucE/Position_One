@@ -29,7 +29,7 @@ public class Weapon_Magic extends Weapon {
         DebugLog.write("New Magic Weapon created: " + name);
     }
 
-    public void use() {
+    protected void useThis() {
         //TODO implement this
     }
 

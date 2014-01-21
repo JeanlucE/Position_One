@@ -27,4 +27,8 @@ public class Time {
     public static int deltaTime() {
         return roundToInt(timeBetweenFrames);
     }
+
+    public static long getTimeStamp() {
+        return timeThisFrame;
+    }
 }

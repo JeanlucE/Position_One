@@ -28,7 +28,7 @@ public class Weapon_Melee extends Weapon {
 
     }
 
-    public void use() {
+    protected void useThis() {
         Actor[] actors = Game.getInstance().getActors();
         for (Actor a : actors) {
             if (!a.equals(equipped)) {

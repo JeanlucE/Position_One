@@ -44,6 +44,12 @@ public class DebugLog {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    public static void write(Exception e) {
+        StackTraceElement[] stackTraceElements = e.getStackTrace();
+        for (StackTraceElement s : stackTraceElements) {
+            write(s.toString());
+        }
     }
 }

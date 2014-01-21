@@ -316,4 +316,16 @@ public class Character extends Actor {
     public String toString() {
         return "Character: " + getName() + ", " + this.level + ", " + this.experience;
     }
+
+    @Override
+    protected void death() {
+        DebugLog.write("Player " + getName() + " is dead.");
+        this.getTransform().getPosition().set(new Vector(50, 50));
+        this.currentHealth = maxHealth;
+    }
+
+    @Override
+    protected int getDamageTimeout() {
+        return 750;
+    }
 }

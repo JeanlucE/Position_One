@@ -10,6 +10,7 @@ import Items.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ConcurrentModificationException;
 
 /**
  * Created with IntelliJ IDEA.
@@ -38,7 +39,7 @@ public class Game {
         new FileStructureHandler();
         DebugLog.write("New Game started");
         Weapon sword = new Weapon_Melee("Sword", 0, 0, 10, 1.0f, new ItemGraphicsComponent());
-        Weapon bow = new Weapon_Ranged("The OP Bow", 0, 0, 10, 10, 0.2f, new ItemGraphicsComponent());
+        Weapon bow = new Weapon_Ranged("The OP Bow", 0, 0, 10, 10, 1f, new ItemGraphicsComponent());
         player = new Character("Ned Stark");
         player.getTransform().getPosition().setX(50);
         player.getTransform().getPosition().setY(50);
@@ -48,7 +49,7 @@ public class Game {
         player.equip(bow);
         player.equip(arrow);
         Enemy.DEBUG_ALL_ENEMIES_MOVE_TOWARD_PLAYER = true;
-        getCurrentWorld().spawnEnemy(new Vector(200, 200));
+        getCurrentWorld().spawnEnemy(new Vector(250, 250));
 
         World currentWorld = World.getInstance();
         Weapon w = new Weapon_Melee("Swordish", 0, 0, 1, 1.0f,
@@ -71,7 +72,11 @@ public class Game {
 
     private void removeDestroyedGameObjects() {
         Projectile.removeDeadProjectiles();
-        Actor.removeDeadActors();
+        try {
+            Actor.removeDeadActors();
+        } catch (ConcurrentModificationException e) {
+            DebugLog.write(e);
+        }
     }
 
     public int getFrameRate() {
@@ -101,6 +106,7 @@ public class Game {
 
         public void actionPerformed(ActionEvent e) {
             Time.update();
+
             for (Actor a : Actor.getActors()) {
                 a.update();
             }

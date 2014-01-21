@@ -25,7 +25,7 @@ public class Weapon_Ranged extends Weapon {
         DebugLog.write("New Ranged Weapon created: " + name);
     }
 
-    public void use() {
+    protected void useThis() {
         Ammunition ammunition = ((Actors.Character) equipped).getAmmunition();
         if (ammunition == null || ammunition.getStack() <= 0) {
             //ammunition.destroy();

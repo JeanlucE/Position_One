@@ -22,7 +22,6 @@ public abstract class Actor extends Collidable {
     private String name;
     protected int maxHealth, currentHealth;
     private int currentXVelocity, currentYVelocity;
-    private static int damageTimeout = 750;
     private int currentDamageTimeout;
 
     public static Actor[] getActors() {
@@ -30,10 +29,12 @@ public abstract class Actor extends Collidable {
     }
 
     public static void removeDeadActors() {
-        for (Actor a : actors) {
-            if (a.isDestroyed())
-                actors.remove(a);
+        Actor[] currentActors = getActors();
+        for (int i = 0; i < currentActors.length; i++) {
+            if (currentActors[i].isDestroyed())
+                actors.remove(i);
         }
+
     }
 
     protected Actor(String name, Transform transform, ActorGraphicsComponent graphic,
@@ -41,7 +42,7 @@ public abstract class Actor extends Collidable {
         super(transform, graphic, physicsComponent);
         this.name = name;
         actors.add(this);
-        currentDamageTimeout = damageTimeout;
+        currentDamageTimeout = getDamageTimeout();
     }
 
     //Must be called in all update methods in subclasses
@@ -142,11 +143,11 @@ public abstract class Actor extends Collidable {
             if (currentHealth <= 0)
                 death();
             else
-                currentDamageTimeout = damageTimeout;
+                currentDamageTimeout = getDamageTimeout();
         }
     }
 
-    private void death() {
+    protected void death() {
         this.destroy();
         DebugLog.write("Actor " + name + " is dead.");
     }
@@ -230,4 +231,6 @@ public abstract class Actor extends Collidable {
     protected boolean canBeDamaged() {
         return currentDamageTimeout <= 0;
     }
+
+    protected abstract int getDamageTimeout();
 }

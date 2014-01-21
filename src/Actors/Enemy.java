@@ -88,4 +88,9 @@ public class Enemy extends NPC {
             player.damage(5);
         }
     }
+
+    @Override
+    protected int getDamageTimeout() {
+        return 250;
+    }
 }

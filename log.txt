@@ -1,18 +1,124 @@
-Log created at: 16:48:42 20.01.2014
+Log created at: 19:36:48 20.01.2014
 
-[16:48:42.916] New Game started
-[16:48:42.941] New Melee Weapon created: Sword
-[16:48:42.942] New Ranged Weapon created: The OP Bow
-[16:48:43.118] New Character created: Ned Stark
-[16:48:43.123] Player Ned Stark has equipped: The OP Bow
-[16:48:43.124] Player Ned Stark has equipped: Ammunition
-[16:48:43.221] New World created with size: 765
-[16:48:43.232] New Melee Weapon created: Swordish
-[16:48:43.241] Renderer started
-[16:48:44.424] Damaged actor Ned Stark for 5 damage.
-[16:48:45.197] Damaged actor Ned Stark for 5 damage.
-[16:48:45.976] Damaged actor Ned Stark for 5 damage.
-[16:48:46.755] Damaged actor Ned Stark for 5 damage.
-[16:48:47.701] Damaged actor Ned Stark for 5 damage.
-[16:48:48.487] Damaged actor Ned Stark for 5 damage.
-[16:48:49.270] Damaged actor Ned Stark for 5 damage.
+[19:36:48.710] New Game started
+[19:36:48.734] New Melee Weapon created: Sword
+[19:36:48.735] New Ranged Weapon created: The OP Bow
+[19:36:48.921] New Character created: Ned Stark
+[19:36:48.926] Player Ned Stark has equipped: The OP Bow
+[19:36:48.926] Player Ned Stark has equipped: Ammunition
+[19:36:49.055] New World created with size: 765
+[19:36:49.065] New Melee Weapon created: Swordish
+[19:36:49.074] Renderer started
+[19:36:52.383] Damaged actor Ned Stark for 5 damage.
+[19:36:53.167] Damaged actor Ned Stark for 5 damage.
+[19:36:57.100] New Projectile at: -475|290
+[19:36:57.482] New Projectile at: -475|290
+[19:36:57.508] Projectile destroyed
+[19:36:57.782] New Projectile at: -475|290
+[19:36:57.862] Projectile destroyed
+[19:36:58.172] Projectile destroyed
+[19:37:01.019] New Projectile at: -475|290
+[19:37:01.366] New Projectile at: -475|290
+[19:37:01.430] Projectile destroyed
+[19:37:01.596] New Projectile at: -475|290
+[19:37:01.759] Projectile destroyed
+[19:37:01.809] New Projectile at: -475|290
+[19:37:01.992] Projectile destroyed
+[19:37:02.010] New Projectile at: -475|290
+[19:37:02.256] Projectile destroyed
+[19:37:02.345] New Projectile at: -505|290
+[19:37:02.459] Projectile destroyed
+[19:37:02.638] New Projectile at: -559|314
+[19:37:02.734] Projectile destroyed
+[19:37:02.831] New Projectile at: -595|314
+[19:37:03.027] New Projectile at: -631|314
+[19:37:03.179] New Projectile at: -658|314
+[19:37:03.330] New Projectile at: -679|314
+[19:37:03.466] New Projectile at: -703|314
+[19:37:03.627] New Projectile at: -733|314
+[19:37:03.771] New Projectile at: -760|314
+[19:37:03.905] New Projectile at: -784|314
+[19:37:04.203] New Projectile at: -784|314
+[19:37:04.380] New Projectile at: -784|314
+[19:37:05.213] New Projectile at: -871|350
+[19:37:05.358] New Projectile at: -871|350
+[19:37:05.504] New Projectile at: -871|350
+[19:37:05.601] Projectile destroyed
+[19:37:05.633] New Projectile at: -871|350
+[19:37:05.751] Projectile destroyed
+[19:37:05.768] New Projectile at: -871|350
+[19:37:05.884] New Projectile at: -871|350
+[19:37:05.900] Projectile destroyed
+[19:37:06.007] New Projectile at: -871|350
+[19:37:06.040] Projectile destroyed
+[19:37:06.160] New Projectile at: -871|350
+[19:37:06.177] Projectile destroyed
+[19:37:06.270] New Projectile at: -871|350
+[19:37:06.302] Projectile destroyed
+[19:37:06.416] New Projectile at: -871|350
+[19:37:06.417] Projectile destroyed
+[19:37:06.545] New Projectile at: -871|350
+[19:37:06.561] Projectile destroyed
+[19:37:06.662] New Projectile at: -871|350
+[19:37:06.663] Projectile destroyed
+[19:37:06.790] New Projectile at: -871|350
+[19:37:06.808] Projectile destroyed
+[19:37:06.920] New Projectile at: -871|350
+[19:37:06.936] Projectile destroyed
+[19:37:07.048] New Projectile at: -871|350
+[19:37:07.049] Projectile destroyed
+[19:37:07.176] New Projectile at: -871|350
+[19:37:07.176] Projectile destroyed
+[19:37:07.305] New Projectile at: -871|350
+[19:37:07.306] Projectile destroyed
+[19:37:07.438] Projectile destroyed
+[19:37:07.454] New Projectile at: -871|350
+[19:37:07.572] Projectile destroyed
+[19:37:07.589] New Projectile at: -871|350
+[19:37:07.704] Projectile destroyed
+[19:37:07.739] New Projectile at: -871|350
+[19:37:07.864] New Projectile at: -871|350
+[19:37:07.865] Projectile destroyed
+[19:37:07.993] New Projectile at: -871|350
+[19:37:07.993] Projectile destroyed
+[19:37:08.149] New Projectile at: -871|350
+[19:37:08.149] Projectile destroyed
+[19:37:08.262] Projectile destroyed
+[19:37:08.294] New Projectile at: -871|350
+[19:37:08.399] Projectile destroyed
+[19:37:08.447] New Projectile at: -871|350
+[19:37:08.543] Projectile destroyed
+[19:37:08.594] New Projectile at: -871|350
+[19:37:08.692] Projectile destroyed
+[19:37:08.743] New Projectile at: -871|350
+[19:37:08.841] Projectile destroyed
+[19:37:08.889] New Projectile at: -871|350
+[19:37:08.985] Projectile destroyed
+[19:37:09.049] New Projectile at: -871|350
+[19:37:09.129] Projectile destroyed
+[19:37:09.193] New Projectile at: -871|350
+[19:37:09.274] Projectile destroyed
+[19:37:09.342] New Projectile at: -871|350
+[19:37:09.443] Projectile destroyed
+[19:37:09.493] New Projectile at: -871|350
+[19:37:09.592] Projectile destroyed
+[19:37:09.641] New Projectile at: -871|350
+[19:37:09.745] Projectile destroyed
+[19:37:09.793] New Projectile at: -871|350
+[19:37:09.892] Projectile destroyed
+[19:37:09.942] New Projectile at: -871|350
+[19:37:10.044] Projectile destroyed
+[19:37:10.097] New Projectile at: -871|350
+[19:37:10.199] Projectile destroyed
+[19:37:10.231] New Projectile at: -871|350
+[19:37:10.356] Projectile destroyed
+[19:37:10.395] New Projectile at: -871|350
+[19:37:10.521] Projectile destroyed
+[19:37:10.552] New Projectile at: -871|350
+[19:37:10.652] Projectile destroyed
+[19:37:10.700] New Projectile at: -871|350
+[19:37:10.796] Projectile destroyed
+[19:37:10.844] New Projectile at: -871|350
+[19:37:10.940] Projectile destroyed
+[19:37:11.084] Projectile destroyed
+[19:37:11.229] Projectile destroyed
