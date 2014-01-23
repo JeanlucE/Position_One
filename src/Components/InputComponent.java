@@ -31,6 +31,7 @@ public class InputComponent implements KeyListener {
     private boolean qTyped = false;
     private boolean qReleased = true;
 
+
     @Override
     public void keyTyped(KeyEvent e) {
     }
@@ -141,6 +142,10 @@ public class InputComponent implements KeyListener {
 
     public boolean isSpaceTyped() {
         return spaceTyped;
+    }
+
+    public boolean isSpaceDown() {
+        return !spaceReleased;
     }
 
     public boolean isQTyped() {

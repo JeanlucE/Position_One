@@ -90,7 +90,7 @@ public class PhysicsComponent implements Serializable {
         Vector[] thisCollider = getCorners();
         Vector[] otherCollider = toCompare.getCorners();
         return thisCollider[0].getX() > otherCollider[0].getX() - Renderer.TILESIZE * tolerance
-                && thisCollider[1].getX() < otherCollider[1].getY() + Renderer.TILESIZE * tolerance;
+                && thisCollider[1].getX() < otherCollider[1].getX() + Renderer.TILESIZE * tolerance;
     }
 
     public boolean onY(PhysicsComponent toCompare, float tolerance) {

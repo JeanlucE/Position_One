@@ -31,6 +31,14 @@ public class DebugLog {
         logWriter.write("Log created at: " + dateFormat.format(new Date()) + "\n\n");
     }
 
+    public static void write(Object obj, boolean debugNotifier) {
+        if (debugNotifier) {
+            write("[DEBUG] " + obj);
+        } else {
+            write(obj);
+        }
+    }
+
     public static void write(Object obj) {
         write(obj.toString());
     }

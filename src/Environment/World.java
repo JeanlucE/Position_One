@@ -12,33 +12,32 @@ import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
- *
- * @author Jean-Luc
- *         Date: 07.11.13
- *         Time: 15:00
- *         <p/>
- *         World handles all interactions between the Worldmap and other objects. Collision detection,
- *         saving and loading maps from .txt and giving any GameObject information about certain spaces in the worldmap grid.
- *         This also includes the Renderer.
- *         <p/>
- *         This class is written in a Singleton design pattern as there can only ever be one WorldMap with which the player
- *         and his surroundings can interact with.
- *         at once.
- *         Important note:
- *         Coordinate System:
- *         *                /\ +y
- *         *                |
- *         *                |
- *         *                |
- *         *                |
- *         *                |
- *         * <--------------0--------------->
- *         * -x             |              +x
- *         *                |
- *         *                |
- *         *                |
- *         *                |
- *         *                \/ -y
+ * <p/>
+ * Date: 07.11.13
+ * Time: 15:00
+ * <p/>
+ * World handles all interactions between the Worldmap and other objects. Collision detection,
+ * saving and loading maps from .txt and giving any GameObject information about certain spaces in the worldmap grid.
+ * This also includes the Renderer.
+ * <p/>
+ * This class is written in a Singleton design pattern as there can only ever be one WorldMap with which the player
+ * and his surroundings can interact with.
+ * at once.
+ * Important note:
+ * Coordinate System:
+ * *                /\ +y
+ * *                |
+ * *                |
+ * *                |
+ * *                |
+ * *                |
+ * * <--------------0--------------->
+ * * -x             |              +x
+ * *                |
+ * *                |
+ * *                |
+ * *                |
+ * *                \/ -y
  */
 public class World {
     //TODO put melee hit boolean collision here
@@ -55,12 +54,12 @@ public class World {
     }
 
     private World() {
-        //currentMap = new WorldMap(new Turtle());
+        currentMap = new WorldMap(new Turtle());
 
         //initiateMap("world");
         try {
-            //saveMap("randomMap");
-            loadMap("coctestinghall");
+            saveMap("randomMap");
+            //loadMap("coctestinghall");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -77,10 +76,11 @@ public class World {
      */
     //TODO should return WorldPosition in the vectors
     public Map<Vector, WorldSpace> getSubSpace(Vector bottomLeft, Vector topRight) {
-        int x0 = (bottomLeft.getX() >= 0) ? (bottomLeft.getX() / 40) : (bottomLeft.getX() / 40 - 1);
-        int y0 = (bottomLeft.getY() >= 0) ? (bottomLeft.getY() / 40) : (bottomLeft.getY() / 40 - 1);
-        int x1 = (topRight.getX() >= 0) ? (topRight.getX() / 40) : (topRight.getX() / 40 - 1);
-        int y1 = (topRight.getY() >= 0) ? (topRight.getY() / 40) : (topRight.getY() / 40 - 1);
+        int tileSize = Renderer.TILESIZE;
+        int x0 = (bottomLeft.getX() >= 0) ? (bottomLeft.getX() / tileSize) : (bottomLeft.getX() / tileSize - 1);
+        int y0 = (bottomLeft.getY() >= 0) ? (bottomLeft.getY() / tileSize) : (bottomLeft.getY() / tileSize - 1);
+        int x1 = (topRight.getX() >= 0) ? (topRight.getX() / tileSize) : (topRight.getX() / tileSize - 1);
+        int y1 = (topRight.getY() >= 0) ? (topRight.getY() / tileSize) : (topRight.getY() / tileSize - 1);
 
         Map<Vector, WorldSpace> result = new HashMap<>(Math.abs(x1 - x0) * Math.abs(y1 - y0)); //Approximate Size
         for (int x = x0; x < x1; x++) {
@@ -100,8 +100,9 @@ public class World {
      * @return Returns the WorldSpace at coordinate x, y. If it doesn't exist it returns null.
      */
     public WorldSpace get(int x, int y) {
-        int xReal = (x >= 0) ? (x / 40) : (x / 40 - 1);
-        int yReal = (y >= 0) ? (y / 40) : (y / 40 - 1);
+        int tilesize = Renderer.TILESIZE;
+        int xReal = (x >= 0) ? (x / tilesize) : (x / tilesize - 1);
+        int yReal = (y >= 0) ? (y / tilesize) : (y / tilesize - 1);
         return currentMap.getReal(xReal, yReal);
     }
 
@@ -219,7 +220,7 @@ public class World {
     private CollisionEvent resolveActorCollision(Actor actor, Vector nextPosition) {
         Actor[] actors = Actor.getActors();
         for (Actor otherActor : actors) {
-            if (actor != otherActor && !actor.getFaction().equals(otherActor.getFaction())) {
+            if (actor != otherActor /*&& !actor.getFaction().equals(otherActor.getFaction())*/) {
                 PhysicsComponent nextCollider = actor.getCollider().clone(nextPosition);
                 PhysicsComponent otherCollider = otherActor.getCollider();
                 if (nextCollider.collision(otherCollider))
@@ -299,16 +300,9 @@ public class World {
 
     public void spawnEnemy(Vector position) {
         spawnHandler.spawnEnemyAt(position);
-        /*Enemy e = new Enemy("Chu Chu", 100, new Transform(position.clone()),
-                new ActorGraphicsComponent(DynamicResource.ENEMY_CHUCHU),
-                new PhysicsComponent(40, 40));
-        CollisionEvent collisionEvent = resolveCollision(e, e.getTransform().getPosition());
-        if (collisionEvent.getCollisionState() != CollisionState.NO_COLLISION) {
-            e.destroy();
-        }*/
     }
 
-    public void spawnEnemyAround(Vector position) {
-        spawnHandler.spawnEnemyAround(position);
+    public void spawnEnemyAround(Vector position, int radius) {
+        spawnHandler.spawnEnemyAround(position, radius);
     }
 }

@@ -42,4 +42,8 @@ public class ActorGraphicsComponent extends GraphicsComponent {
     public void setParent(Actor parent) {
         this.parent = parent;
     }
+
+    public ActorGraphicsComponent clone() {
+        return new ActorGraphicsComponent(images);
+    }
 }

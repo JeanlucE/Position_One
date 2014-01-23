@@ -38,7 +38,7 @@ import java.util.Map;
  * *                |
  * *                |
  * *                |
- * *                \/ +y
+ * *               \/ +y
  */
 public class Renderer extends JPanel {
 
@@ -87,27 +87,7 @@ public class Renderer extends JPanel {
         g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        Map<Vector, WorldSpace> toRender = Camera.getInstance().worldToRender();
-
-        drawWorld(toRender);
-        drawItems(toRender);
-
-        drawProjectiles();
-
-        //DEBUGGING
-        Map<Actor, Vector> actorPositionMap = Camera.getInstance().actorsToRender();
-
-        drawActors(actorPositionMap);
-
-        if (DEBUG_DRAW_ACTOR_POSITIONS) {
-            drawActorPositions(actorPositionMap);
-        }
-
-        if (DEBUG_DRAW_ACTOR_COLLIDERS) {
-            drawActorColliders(actorPositionMap);
-        }
-
-        drawGUI();
+        drawGame();
 
         MouseInputComponent mouseListener = MouseInputComponent.getInstance();
         if (mouseListener.isMouseInScreen()) {
@@ -121,6 +101,28 @@ public class Renderer extends JPanel {
         }
 
         GameWindow.getInstance().setTitle("Frames:" + String.valueOf(Game.getInstance().getFrameRate()));
+    }
+
+    private void drawGame() {
+        Map<Vector, WorldSpace> toRender = Camera.getInstance().worldToRender();
+
+        drawWorld(toRender);
+        drawItems(toRender);
+
+        drawProjectiles();
+
+        Map<Actor, Vector> actorPositionMap = Camera.getInstance().actorsToRender();
+        drawActors(actorPositionMap);
+
+        if (DEBUG_DRAW_ACTOR_POSITIONS) {
+            drawActorPositions(actorPositionMap);
+        }
+
+        if (DEBUG_DRAW_ACTOR_COLLIDERS) {
+            drawActorColliders(actorPositionMap);
+        }
+
+        drawGUI();
     }
 
     /*

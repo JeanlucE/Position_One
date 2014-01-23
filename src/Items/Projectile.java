@@ -52,10 +52,11 @@ public class Projectile extends Collidable {
     }
 
     public static void removeDeadProjectiles() {
-        for (int i = 0; i < projectiles.size(); i++)
+        for (int i = projectiles.size() - 1; i >= 0; i--)
             if (projectiles.get(i).isDestroyed()) {
                 projectiles.remove(i);
             }
+
     }
 
     @Override

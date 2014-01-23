@@ -10,6 +10,10 @@ import WIP.Transform;
  * Date: 14.11.13
  * Time: 14:26
  */
+
+/**
+ * Abstract for all actors that are not controlled by the player
+ */
 public abstract class NPC extends Actor {
 
     public NPC(String name, Transform transform, ActorGraphicsComponent graphicsComponent,

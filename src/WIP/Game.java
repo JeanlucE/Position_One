@@ -38,7 +38,7 @@ public class Game {
     private Game() {
         new FileStructureHandler();
         DebugLog.write("New Game started");
-        Weapon sword = new Weapon_Melee("Sword", 0, 0, 10, 1.0f, new ItemGraphicsComponent());
+        Weapon sword = new Weapon_Melee("Sword", 0, 0, 10, 0.65f, new ItemGraphicsComponent());
         Weapon bow = new Weapon_Ranged("The OP Bow", 0, 0, 10, 10, 0.5f, new ItemGraphicsComponent());
         player = new Character("Ned Stark");
         player.getTransform().getPosition().setX(60);
@@ -52,14 +52,11 @@ public class Game {
         player.equip(helmet);
         player.equip(body);
         player.equip(legs);
-        player.equip(sword);
+        player.equip(bow);
         player.equip(arrow);
         Enemy.DEBUG_ALL_ENEMIES_MOVE_TOWARD_PLAYER = true;
 
         World currentWorld = World.getInstance();
-        getCurrentWorld().spawnEnemyAround(getPlayer().getTransform().getPosition());
-        getCurrentWorld().spawnEnemyAround(getPlayer().getTransform().getPosition());
-        getCurrentWorld().spawnEnemyAround(getPlayer().getTransform().getPosition());
 
         renderer = Renderer.getInstance();
         gameLoop = new GameLoop();

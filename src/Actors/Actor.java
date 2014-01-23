@@ -18,16 +18,31 @@ import java.util.List;
  */
 public abstract class Actor extends Collidable {
 
+    //Static list of all actors to iterate over when updating or rendering
     private static List<Actor> actors = new ArrayList<>(10);
+
+    //Name of the Actor
     private String name;
+    //Maximum and current health of the Actor
     protected int maxHealth, currentHealth;
+    //The velocity of the Actor in the current frame, component-wise x and y
     private int currentXVelocity, currentYVelocity;
+    //time how long the actor is invincible in ms
     private int currentDamageTimeout;
 
+    /**
+     * Returns an array of all instantiated Actors on the level.
+     *
+     * @return an array of all instantiated Actors
+     */
     public static Actor[] getActors() {
         return actors.toArray(new Actor[actors.size()]);
     }
 
+    /**
+     * Removes all actors that died in this frame. This method should be called after the update loop of each actor
+     * is called.
+     */
     public static void removeDeadActors() {
         for (int i = actors.size() - 1; i >= 0; i--) {
             Actor a = actors.get(i);
@@ -37,6 +52,14 @@ public abstract class Actor extends Collidable {
 
     }
 
+    /**
+     * Creates an Actor.
+     *
+     * @param name             Name of the actor
+     * @param transform        Position and direction the actor should be instantiated with
+     * @param graphic          GraphicCompomonent for the Renderer
+     * @param physicsComponent the collider of the actor
+     */
     protected Actor(String name, Transform transform, ActorGraphicsComponent graphic,
                     PhysicsComponent physicsComponent) {
         super(transform, graphic, physicsComponent);
@@ -45,7 +68,9 @@ public abstract class Actor extends Collidable {
         currentDamageTimeout = getDamageTimeout();
     }
 
-    //Must be called in all update methods in subclasses
+    /**
+     * Update loop of the actor
+     */
     public final void update() {
         if (currentDamageTimeout > 0) {
             currentDamageTimeout -= Time.deltaTime();
@@ -59,7 +84,11 @@ public abstract class Actor extends Collidable {
         return true;
     }
 
-    public void move() {
+    /**
+     * Moves the actor according to the values set at currentXVelocity and currentYVelocity. These fields should be
+     * changed before move is called.
+     */
+    protected final void move() {
         if (currentXVelocity == 0 && currentYVelocity == 0) return;
         Vector currentPosition = getTransform().getPosition();
         World world = Game.getInstance().getCurrentWorld();
@@ -81,20 +110,35 @@ public abstract class Actor extends Collidable {
         }
     }
 
+    /**
+     * Shifts the actors transform
+     *
+     * @param x x translation distance
+     * @param y y translation distance
+     */
     private void translate(int x, int y) {
         getTransform().getPosition().shift(x, y);
     }
 
-    protected Vector getNextWorldPosition() {
+    /**
+     * Returns the nearest worldSpace
+     *
+     * @return
+     */
+    protected final Vector getNextWorldPosition() {
         Vector currentPos = getTransform().getPosition();
-        return new Vector(currentPos.getX() - currentPos.getX() % 40, currentPos.getY() - currentPos.getY() % 40);
+        int x = (currentPos.getX() >= 0) ? (currentPos.getX() - currentPos.getX() % Renderer.TILESIZE)
+                : (currentPos.getX() + currentPos.getX() % Renderer.TILESIZE - Renderer.TILESIZE);
+        int y = (currentPos.getY() >= 0) ? (currentPos.getY() - currentPos.getY() % Renderer.TILESIZE)
+                : (currentPos.getY() + currentPos.getY() % Renderer.TILESIZE - Renderer.TILESIZE);
+        return new Vector(x, y);
     }
 
-    public void setXVel(int xVel) {
+    protected final void setXVel(int xVel) {
         this.currentXVelocity = xVel;
     }
 
-    public void setYVel(int yVel) {
+    protected final void setYVel(int yVel) {
         this.currentYVelocity = yVel;
     }
 
@@ -110,31 +154,68 @@ public abstract class Actor extends Collidable {
         return name;
     }
 
+    /**
+     * Sets the name of the actor. ONLY FOR DEBUGGING PURPOSES
+     *
+     * @param name name to set
+     */
     public void setName(String name) {
         this.name = name;
-        DebugLog.write("{DEBUG}" + name + "'s name set to: " + name);
+        DebugLog.write(name + "'s name set to: " + name, true);
     }
 
+    /**
+     * Returns the maximum health of the actor
+     *
+     * @return Returns the maximum health of the actor
+     */
     public int getMaxHealth() {
         return maxHealth;
     }
 
+    /**
+     * Sets the maximum health of the actor
+     *
+     * @param maxHealth maximum health to set
+     */
     public void setMaxHealth(int maxHealth) {
         this.maxHealth = maxHealth;
     }
 
+    /**
+     * Returns the currentHealth of the Actor
+     *
+     * @return Returns the currentHealth of the Actor
+     */
     public int getCurrentHealth() {
         return currentHealth;
     }
 
+    /**
+     * Sets the current health of the actor
+     *
+     * @param health current health to set
+     */
     public void setCurrentHealth(int health) {
         currentHealth = health;
     }
 
+    /**
+     * Returns the health percentage in a float with 0.0 being 0% and 1.0 being 100%
+     *
+     * @return Returns the health percentageof the actor
+     */
     public float getHealthPercentage() {
         return currentHealth / (float) maxHealth;
     }
 
+    /**
+     * Damages the actor, if the actor can be damaged.
+     *
+     * @param damage
+     * @see Actor#actualDamage(int)
+     * @see Actors.Actor#canBeDamaged()
+     */
     public final void damage(int damage) {
         if (canBeDamaged()) {
             int actualDamage = actualDamage(damage);
@@ -156,15 +237,22 @@ public abstract class Actor extends Collidable {
      */
     protected abstract int actualDamage(int damage);
 
+    /**
+     * Sets the actor to a dead state and will be removed from the actors after this frame
+     */
     protected void death() {
         this.destroy();
         DebugLog.write("Actor " + name + " is dead.");
     }
 
-    /*
-    This method checks if a certain actor is within the attack range of this actor.
-    It returns true if the enemy can be attacked
-    It returns false if the enemy is out of range or the player is looking in the wrong direction.
+    /**
+     * This method checks if a certain actor is within the attack range of this actor.
+     * It returns true if the enemy is in range and is in the direction this actor is facing
+     * It returns false if the enemy is out of range or this actor is not facing the other actor
+     *
+     * @param other Actor to compare range to
+     * @param range range where the other actor should be
+     * @return Returns if the other actor is within range of this actor, in direction of where this actor is facing
      */
     public boolean withinLinearRangeOf(Actor other, float range) {
         Vector direction = getTransform().getDirection();
@@ -190,6 +278,14 @@ public abstract class Actor extends Collidable {
         return num1 - num2 < range * Renderer.TILESIZE;
     }
 
+    /**
+     * Returns if the other actor is generally in a certain range of this actor, regardless of where this actor or the
+     * other actor is facing.
+     *
+     * @param other Actor to compare range to
+     * @param range range where the other actor should be
+     * @return Returns if the other actor is generally in a certain range of this actor.
+     */
     public boolean withinRangeOf(Actor other, double range) {
         double distance = Vector.subtract(other.getTransform().getPosition(), getTransform().getPosition()).length();
         return Double.compare(distance, range) == -1;
@@ -241,5 +337,11 @@ public abstract class Actor extends Collidable {
         return currentDamageTimeout <= 0;
     }
 
+    /**
+     * Returns the time of invincibility after which this actor can be damaged again
+     *
+     * @return Returns the time of invincibility after which this actor can be damaged again
+     * @see Actors.Actor#canBeDamaged()
+     */
     protected abstract int getDamageTimeout();
 }

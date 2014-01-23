@@ -239,7 +239,7 @@ floor,12,11
 floor,12,10
 floor,12,5
 floor,12,4
-floor,12,7
+wall,12,7
 floor,12,6
 floor,11,15
 floor,11,16
@@ -250,7 +250,7 @@ wall,11,12
 wall,11,13
 wall,11,14
 wall,11,19
-floor,13,7
+wall,13,7
 floor,13,8
 floor,13,5
 floor,13,6
@@ -272,7 +272,7 @@ floor,12,18
 floor,12,17
 floor,12,16
 floor,14,6
-floor,14,7
+wall,14,7
 floor,14,8
 floor,14,9
 floor,14,10

@@ -23,7 +23,7 @@ public class EquipmentManager {
     Main hand should always be a weapon
     Problems could arise here with Two-Handed and off-hand weapons
      */
-    public EquipmentManager(Character parent) {
+    EquipmentManager(Character parent) {
         this.parent = parent;
         helmetSlot = new EquipmentSlot<>();
         bodySlot = new EquipmentSlot<>();
@@ -33,15 +33,17 @@ public class EquipmentManager {
         ammunitionSlot = new EquipmentSlot<>();
     }
 
-    /*
-    Should only be called when equipment slot is not occupied
-    This method equips the player with a piece of equipment.
-    It first checks if the level and skill requirements of the equipment are met by the player.
-    If the piece of equipment is a weapon it then assigns the weapon to the main hand slot.
-    If the piece of equipment is an armour piece, it then check what armour type it is (Helmet, Body,
-    Legs, Shield) and then assigns it to the appropriate equipment slot.
+    /**
+     * Should only be called when equipment slot is not occupied
+     * This method equips the player with a piece of equipment.
+     * It first checks if the level and skill requirements of the equipment are met by the player.
+     * If the piece of equipment is a weapon it then assigns the weapon to the main hand slot.
+     * If the piece of equipment is an armour piece, it then check what armour type it is (Helmet, Body,
+     * Legs, Shield) and then assigns it to the appropriate equipment slot.
+     *
+     * @param equipment Equipment to equip
      */
-    public void equip(Equipment equipment) {
+    void equip(Equipment equipment) {
         //TODO if isOccupied throw the current equipment into the inventory and equip the new Equipment
         if (canEquip(equipment)) {
             if (equipment.isWeapon()) {
@@ -85,7 +87,13 @@ public class EquipmentManager {
         }
     }*/
 
-    public boolean canEquip(Equipment equipment) {
+    /**
+     * Returns if the parent actor has met the skill and level requirement of the equipment
+     *
+     * @param equipment Equipment to equip
+     * @return Returns if the parent actor has met the skill and level requirement of the equipment
+     */
+    private boolean canEquip(Equipment equipment) {
         //Checks if Player is high enough level
         boolean metLevelReq = parent.getLevel() >= equipment.getLevel();
 

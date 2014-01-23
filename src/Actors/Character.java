@@ -26,11 +26,12 @@ public class Character extends Actor {
     public Skill ENDURANCE;
     public Skill INTELLIGENCE;
     public Skill DEXTERITY;
-    //endregion
     public Skill CHARISMA;
     public Skill PERCEPTION;
     public Skill LUCK;
     public Skill STEALTH;
+    //endregion
+
     //region Stats
     private int level;
     private int experience;
@@ -38,15 +39,21 @@ public class Character extends Actor {
     private int maxStamina, currentStamina;
     private int maxMana, currentMana;
     //endregion
+
     //Array of all skills
     private Skill[] skills;
+
+    //Manages all the equipment of the player
     private EquipmentManager equipment;
 
-    //region Player Items
+    //Manages the inventory of the player
     private final Inventory inventory;
-    //endregion
+
+    //The speed at which the player walks per frame
     private int walkSpeed = 3;
+    //The speed at which the player sprints per frame
     private int sprintSpeed = 6;
+    //true == player is sprinting, false == player is not sprinting
     private boolean sprinting = false;
 
     //Constructor for final build
@@ -117,7 +124,7 @@ public class Character extends Actor {
     protected void updateThis() {
         applyMovement();
 
-        if (InputComponent.getInstance().isSpaceTyped()) {
+        if (InputComponent.getInstance().isSpaceDown()) {
             attack();
         }
 
@@ -166,6 +173,12 @@ public class Character extends Actor {
         }
     }
 
+    /**
+     * Given the input of x and y from the InputComponent this method determines where the player is facing
+     *
+     * @param x x Direction
+     * @param y y Direction
+     */
     private void calculateDirection(int x, int y) {
         newDirection = new Vector(x, y);
         if (!newDirection.equals(lastDirection)) {
@@ -182,9 +195,12 @@ public class Character extends Actor {
         }
     }
 
+    /**
+     * Picks up an item nearest to the player
+     */
     private void pickupNextItem() {
         WorldSpace nextAbsPos = Game.getInstance().getCurrentWorld().get(getNextWorldPosition());
-        if (nextAbsPos instanceof Floor) {
+        if (nextAbsPos != null && nextAbsPos.isFloor()) {
             Floor floor = (Floor) nextAbsPos;
             inventory.add(floor.hasDroppedItems() ? (floor.getTopItem()) : (null));
         }
@@ -223,7 +239,7 @@ public class Character extends Actor {
 
     public void setLevel(int level) {
         this.level = level;
-        DebugLog.write("{DEBUG} Player level set to: " + level);
+        DebugLog.write("Player level set to: " + level, true);
     }
 
     public void addExperience(int experience) {
@@ -241,28 +257,29 @@ public class Character extends Actor {
         skillPoints++;
 
         DebugLog.write("Player " + getName() + "has leveled up. \nPlayer " + getName() + "is now level" + level);
-
-        //Takes text input for which skill should be leveled up
-        /*String skillToLevelUp = Test.input.nextLine();
-        for (Skill s : skills) {
-            if (s.getName().toLowerCase().startsWith(skillToLevelUp)) {
-                s.setLevel(s.getLevel() + 1);
-                skillPoints--;
-            }
-        }*/
     }
 
-    int getNextLevelXP() {
+    /**
+     * Returns how much xp is needed for this character to level up
+     *
+     * @return Returns how much xp is needed for this character to level up
+     */
+    public int getNextLevelXP() {
         return Character.getXPOfLevel(level + 1) - this.experience;
     }
 
+    /**
+     * Returns how many skillpoint the character currently has
+     *
+     * @return Returns how many skillpoint the character currently has
+     */
     public int getSkillPoints() {
         return skillPoints;
     }
 
     public void setSkillPoints(int skillPoints) {
         this.skillPoints = skillPoints;
-        DebugLog.write("{DEBUG} Player skill points set to: " + skillPoints);
+        DebugLog.write("Player skill points set to: " + skillPoints, true);
     }
 
     //endregion
@@ -320,7 +337,7 @@ public class Character extends Actor {
     @Override
     protected void death() {
         DebugLog.write("Player " + getName() + " is dead.");
-        this.getTransform().getPosition().set(new Vector(50, 50));
+        this.getTransform().getPosition().set(new Vector(60, 60));
         this.currentHealth = maxHealth;
     }
 

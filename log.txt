@@ -1,73 +1,17 @@
-Log created at: 13:49:36 21.01.2014
+Log created at: 16:44:25 23.01.2014
 
-[13:49:38.170] New Game started
-[13:49:38.213] New Melee Weapon created: Sword
-[13:49:38.217] New Ranged Weapon created: The OP Bow
-[13:49:38.477] New Character created: Ned Stark
-[13:49:38.497] New Armour created: Helmet
-[13:49:38.498] New Armour created: Body
-[13:49:38.498] New Armour created: Legs
-[13:49:38.499] Player Ned Stark has equipped: Helmet
-[13:49:38.499] Player Ned Stark has equipped: Body
-[13:49:38.499] Player Ned Stark has equipped: Legs
-[13:49:38.499] Player Ned Stark has equipped: Sword
-[13:49:38.500] Player Ned Stark has equipped: Ammunition
-[13:49:38.562] New World created with size: 436
-[13:49:38.585] SpawnHandler: tried spawning enemy at 180|260
-[13:49:38.607] SpawnHandler: tried spawning enemy at 180|220
-[13:49:38.609] SpawnHandler: tried spawning enemy at 100|180
-[13:49:38.620] Renderer started
-[13:49:39.891] Damaged actor Ned Stark for 2 damage.
-[13:49:40.670] Damaged actor Ned Stark for 2 damage.
-[13:49:41.512] Damaged actor Ned Stark for 2 damage.
-[13:49:44.700] Damaged actor Ned Stark for 2 damage.
-[13:49:45.758] Damaged actor Ned Stark for 2 damage.
-[13:49:46.543] Damaged actor Ned Stark for 2 damage.
-[13:49:46.850] Damaged actor Chu Chu for 10 damage.
-[13:49:47.324] Damaged actor Ned Stark for 2 damage.
-[13:49:47.984] Damaged actor Chu Chu for 10 damage.
-[13:49:47.985] Damaged actor Chu Chu for 10 damage.
-[13:49:47.985] Damaged actor Chu Chu for 10 damage.
-[13:49:48.097] Damaged actor Ned Stark for 2 damage.
-[13:49:48.883] Damaged actor Ned Stark for 2 damage.
-[13:49:49.154] Damaged actor Chu Chu for 10 damage.
-[13:49:49.155] Damaged actor Chu Chu for 10 damage.
-[13:49:49.155] Damaged actor Chu Chu for 10 damage.
-[13:49:49.655] Damaged actor Ned Stark for 2 damage.
-[13:49:50.239] Damaged actor Chu Chu for 10 damage.
-[13:49:50.239] Damaged actor Chu Chu for 10 damage.
-[13:49:50.240] Damaged actor Chu Chu for 10 damage.
-[13:49:50.435] Damaged actor Ned Stark for 2 damage.
-[13:49:51.224] Damaged actor Ned Stark for 2 damage.
-[13:49:51.272] Damaged actor Chu Chu for 10 damage.
-[13:49:51.272] Damaged actor Chu Chu for 10 damage.
-[13:49:51.273] Damaged actor Chu Chu for 10 damage.
-[13:49:52.000] Damaged actor Ned Stark for 2 damage.
-[13:49:52.438] Damaged actor Chu Chu for 10 damage.
-[13:49:52.438] Damaged actor Chu Chu for 10 damage.
-[13:49:52.439] Damaged actor Chu Chu for 10 damage.
-[13:49:52.775] Damaged actor Ned Stark for 2 damage.
-[13:49:53.446] Damaged actor Chu Chu for 10 damage.
-[13:49:53.446] Damaged actor Chu Chu for 10 damage.
-[13:49:53.446] Damaged actor Chu Chu for 10 damage.
-[13:49:53.558] Damaged actor Ned Stark for 2 damage.
-[13:49:54.336] Damaged actor Ned Stark for 2 damage.
-[13:49:54.529] Damaged actor Chu Chu for 10 damage.
-[13:49:54.529] Damaged actor Chu Chu for 10 damage.
-[13:49:54.530] Damaged actor Chu Chu for 10 damage.
-[13:49:55.115] Damaged actor Ned Stark for 2 damage.
-[13:49:55.589] Damaged actor Chu Chu for 10 damage.
-[13:49:55.589] Damaged actor Chu Chu for 10 damage.
-[13:49:55.590] Damaged actor Chu Chu for 10 damage.
-[13:49:55.902] Damaged actor Ned Stark for 2 damage.
-[13:49:56.621] Damaged actor Chu Chu for 10 damage.
-[13:49:56.621] Damaged actor Chu Chu for 10 damage.
-[13:49:56.622] Damaged actor Chu Chu for 10 damage.
-[13:49:56.622] Actor Chu Chu is dead.
-[13:49:56.685] Damaged actor Ned Stark for 2 damage.
-[13:49:57.462] Damaged actor Ned Stark for 2 damage.
-[13:49:58.247] Damaged actor Ned Stark for 2 damage.
-[13:49:58.390] Damaged actor Chu Chu for 10 damage.
-[13:49:58.390] Actor Chu Chu is dead.
-[13:49:58.390] Damaged actor Chu Chu for 10 damage.
-[13:49:58.391] Actor Chu Chu is dead.
+[16:44:25.973] New Game started
+[16:44:25.989] New Melee Weapon created: Sword
+[16:44:25.990] New Ranged Weapon created: The OP Bow
+[16:44:26.114] New Character created: Ned Stark
+[16:44:26.119] New Armour created: Helmet
+[16:44:26.119] New Armour created: Body
+[16:44:26.119] New Armour created: Legs
+[16:44:26.120] Player Ned Stark has equipped: Helmet
+[16:44:26.120] Player Ned Stark has equipped: Body
+[16:44:26.121] Player Ned Stark has equipped: Legs
+[16:44:26.121] Player Ned Stark has equipped: The OP Bow
+[16:44:26.121] Player Ned Stark has equipped: Ammunition
+[16:44:26.370] New World created with size: 3097
+[16:44:26.515] Saved Map: randomMap
+[16:44:26.527] Renderer started

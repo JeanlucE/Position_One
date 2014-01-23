@@ -29,9 +29,11 @@ public class SpawnHandler {
     }
 
     void spawnEnemyAt(Vector position) {
-        Enemy e = new Enemy("Chu Chu", 100, new Transform(position),
+        Enemy e = new Enemy("Chu Chu", 100, new Transform(),
                 new ActorGraphicsComponent(DynamicResource.ENEMY_CHUCHU),
                 new PhysicsComponent(39, 39));
+        e.getTransform().setPosition(position);
+
         DebugLog.write("SpawnHandler: tried spawning enemy at " + position.toString());
         World.CollisionEvent collisionEvent = world.resolveCollision(e, e.getTransform().getPosition());
         if (collisionEvent.getCollisionState() != World.CollisionState.NO_COLLISION) {
@@ -41,9 +43,11 @@ public class SpawnHandler {
         }
     }
 
-    void spawnEnemyAround(Vector position) {
-        Vector bottomLeft = position.shiftedPosition(-250, -250);
-        Vector topRight = position.shiftedPosition(250, 250);
+    void spawnEnemyAround(Vector position, int radius) {
+        if (radius <= 0) return;
+
+        Vector bottomLeft = position.shiftedPosition(-radius, -radius);
+        Vector topRight = position.shiftedPosition(radius, radius);
         Map<Vector, WorldSpace> possibleSpaces = world.getSubSpace(bottomLeft, topRight);
         List<Vector> floors = new ArrayList<>(40);
         for (Map.Entry<Vector, WorldSpace> e : possibleSpaces.entrySet()) {
@@ -51,6 +55,7 @@ public class SpawnHandler {
             if (w != null && w.isFloor())
                 floors.add(e.getKey());
         }
+
         Random r = new Random();
         Vector spawnPoint = floors.get(r.nextInt(floors.size())).shift(20, 20);
         spawnEnemyAt(spawnPoint);

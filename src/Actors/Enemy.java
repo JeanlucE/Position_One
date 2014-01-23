@@ -98,4 +98,9 @@ public class Enemy extends NPC {
     protected int actualDamage(int damage) {
         return damage;
     }
+
+    public Enemy clone() {
+        return new Enemy(getName(), getMaxHealth(), getTransform().clone(),
+                ((ActorGraphicsComponent) getGraphic()).clone(), getCollider().clone());
+    }
 }
