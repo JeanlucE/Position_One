@@ -1,17 +1,62 @@
-Log created at: 16:44:25 23.01.2014
+Log created at: 21:34:05 23.01.2014
 
-[16:44:25.973] New Game started
-[16:44:25.989] New Melee Weapon created: Sword
-[16:44:25.990] New Ranged Weapon created: The OP Bow
-[16:44:26.114] New Character created: Ned Stark
-[16:44:26.119] New Armour created: Helmet
-[16:44:26.119] New Armour created: Body
-[16:44:26.119] New Armour created: Legs
-[16:44:26.120] Player Ned Stark has equipped: Helmet
-[16:44:26.120] Player Ned Stark has equipped: Body
-[16:44:26.121] Player Ned Stark has equipped: Legs
-[16:44:26.121] Player Ned Stark has equipped: The OP Bow
-[16:44:26.121] Player Ned Stark has equipped: Ammunition
-[16:44:26.370] New World created with size: 3097
-[16:44:26.515] Saved Map: randomMap
-[16:44:26.527] Renderer started
+[21:34:06.049] New Game started
+[21:34:06.066] New Melee Weapon created: Sword
+[21:34:06.066] New Ranged Weapon created: The OP Bow
+[21:34:06.199] New Character created: Ned Stark
+[21:34:06.204] New Armour created: Helmet
+[21:34:06.204] New Armour created: Body
+[21:34:06.205] New Armour created: Legs
+[21:34:06.205] Player Ned Stark has equipped: Helmet
+[21:34:06.206] Player Ned Stark has equipped: Body
+[21:34:06.206] Player Ned Stark has equipped: Legs
+[21:34:06.207] Player Ned Stark has equipped: The OP Bow
+[21:34:06.207] Player Ned Stark has equipped: Ammunition
+[21:34:06.246] New World created with size: 436
+[21:34:06.251] SpawnHandler: tried spawning enemy at 140|180
+[21:34:06.261] Renderer started
+[21:34:07.618] New Projectile at: 60|138
+[21:34:08.001] Projectile destroyed
+[21:34:08.129] New Projectile at: 60|138
+[21:34:08.514] Projectile destroyed
+[21:34:10.616] New Projectile at: 138|390
+[21:34:10.908] Chu Chu(100/100) hit!
+[21:34:10.908] Projectile destroyed at 138|195
+[21:34:10.909] Damaged actor Chu Chu for 10 damage.
+[21:34:11.116] New Projectile at: 138|390
+[21:34:11.409] Chu Chu(90/100) hit!
+[21:34:11.409] Projectile destroyed at 138|195
+[21:34:11.410] Damaged actor Chu Chu for 10 damage.
+[21:34:11.627] New Projectile at: 138|390
+[21:34:11.930] Chu Chu(80/100) hit!
+[21:34:11.930] Projectile destroyed at 138|195
+[21:34:11.931] Damaged actor Chu Chu for 10 damage.
+[21:34:12.146] New Projectile at: 138|390
+[21:34:12.444] Chu Chu(70/100) hit!
+[21:34:12.445] Projectile destroyed at 138|195
+[21:34:12.445] Damaged actor Chu Chu for 10 damage.
+[21:34:12.646] New Projectile at: 138|390
+[21:34:12.947] Chu Chu(60/100) hit!
+[21:34:12.947] Projectile destroyed at 138|195
+[21:34:12.948] Damaged actor Chu Chu for 10 damage.
+[21:34:13.147] New Projectile at: 138|390
+[21:34:13.446] Chu Chu(50/100) hit!
+[21:34:13.446] Projectile destroyed at 138|195
+[21:34:13.447] Damaged actor Chu Chu for 10 damage.
+[21:34:13.665] New Projectile at: 138|390
+[21:34:13.968] Chu Chu(40/100) hit!
+[21:34:13.968] Projectile destroyed at 138|195
+[21:34:13.969] Damaged actor Chu Chu for 10 damage.
+[21:34:14.165] New Projectile at: 138|390
+[21:34:14.452] Chu Chu(30/100) hit!
+[21:34:14.452] Projectile destroyed at 138|195
+[21:34:14.453] Damaged actor Chu Chu for 10 damage.
+[21:34:14.667] New Projectile at: 138|390
+[21:34:14.972] Chu Chu(20/100) hit!
+[21:34:14.972] Projectile destroyed at 138|195
+[21:34:14.973] Damaged actor Chu Chu for 10 damage.
+[21:34:15.185] New Projectile at: 138|390
+[21:34:15.487] Chu Chu(10/100) hit!
+[21:34:15.487] Projectile destroyed at 138|195
+[21:34:15.488] Damaged actor Chu Chu for 10 damage.
+[21:34:15.488] Actor Chu Chu is dead.

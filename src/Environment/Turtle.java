@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.Stack;
-//TODO later: make class package-local
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,7 +16,7 @@ import java.util.Stack;
  * Date: 16.12.13
  * Time: 17:25
  */
-public class Turtle {
+class Turtle {
     private AdvancedTransform transform;
     //TODO save this in a tree, which can then include easy implementation of intersections
     private Stack<TurtleMove> positions;
@@ -95,13 +94,11 @@ public class Turtle {
         turnLeft(-angle);
     }
 
-    //TODO DEBUG make private later
     TurtleMove[] getPositions() {
         return positions.toArray(new TurtleMove[positions.size()]);
     }
 
-    //TODO DEBUG make package-local later
-    public Map<Vector, WorldSpace> getGeneratedMap() {
+    Map<Vector, WorldSpace> getGeneratedMap() {
         TurtleInterpreter interpreter = new TurtleInterpreter(this, 3);
 
         return generatedMap;

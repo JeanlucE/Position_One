@@ -34,5 +34,8 @@ public class Weapon_Ranged extends Weapon {
         }
         ammunition.createProjectile(equipped.getTransform(), this);
     }
-    //TODO RangedType
+
+    public enum RangedType {
+        ARROW, BOLT
+    }
 }

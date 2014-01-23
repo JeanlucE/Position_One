@@ -46,6 +46,10 @@ public class Vector implements Serializable {
         this.y = y;
     }
 
+    public static Vector add(Vector a, Vector b) {
+        return new Vector(a.x + b.x, a.y + b.y);
+    }
+
     public static Vector subtract(Vector a, Vector b) {
         return new Vector(a.x - b.x, a.y - b.y);
     }
@@ -56,7 +60,7 @@ public class Vector implements Serializable {
         return a;
     }
 
-    public void signum() {
+    public void normalize() {
         x = Integer.signum(x);
         y = Integer.signum(y);
     }
@@ -104,6 +108,10 @@ public class Vector implements Serializable {
         double a = (double) x * x;
         double b = (double) y * y;
         return Math.sqrt(a + b);
+    }
+
+    public Vector normalizedVector() {
+        return new Vector(Integer.signum(x), Integer.signum(y));
     }
 
     @Override

@@ -10,7 +10,6 @@ import Items.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ConcurrentModificationException;
 
 /**
  * Created with IntelliJ IDEA.
@@ -54,9 +53,10 @@ public class Game {
         player.equip(legs);
         player.equip(bow);
         player.equip(arrow);
-        Enemy.DEBUG_ALL_ENEMIES_MOVE_TOWARD_PLAYER = true;
+        Enemy.DEBUG_ALL_ENEMIES_MOVE_TOWARD_PLAYER = false;
 
         World currentWorld = World.getInstance();
+        currentWorld.spawnEnemyAround(getPlayer().getTransform().getPosition(), 250);
 
         renderer = Renderer.getInstance();
         gameLoop = new GameLoop();
@@ -70,11 +70,7 @@ public class Game {
 
     private void removeDestroyedGameObjects() {
         Projectile.removeDeadProjectiles();
-        try {
-            Actor.removeDeadActors();
-        } catch (ConcurrentModificationException e) {
-            DebugLog.write(e);
-        }
+        Actor.removeDeadActors();
     }
 
     public int getFrameRate() {
@@ -89,8 +85,7 @@ public class Game {
         return World.getInstance();
     }
 
-    //TODO make private later
-    public Renderer getRenderer() {
+    private Renderer getRenderer() {
         return renderer;
     }
 
@@ -117,7 +112,14 @@ public class Game {
             InputComponent.getInstance().resetTypedKeys();
             getRenderer().repaint();
 
-            //Functionality to count frames and show frame rate circa every second
+
+            calcFrameRate();
+        }
+
+        /**
+         * Counts frame rate about every second
+         */
+        private void calcFrameRate() {
             frames++;
             timeBetween = System.currentTimeMillis();
             //if one second has passed
@@ -128,7 +130,7 @@ public class Game {
             }
         }
 
-        public int getFrameRate() {
+        private int getFrameRate() {
             return frameRate;
         }
     }

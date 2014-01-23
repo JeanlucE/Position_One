@@ -86,7 +86,10 @@ public abstract class Actor extends Collidable {
 
     /**
      * Moves the actor according to the values set at currentXVelocity and currentYVelocity. These fields should be
-     * changed before move is called.
+     * changed before move is called. If the movement is hindered by a collision the method tries to reduce the
+     * velocity of the actor in this frame only to move as close as possible to the collision object. If that still
+     * results in a collision the method tried to slide past if any of the orthagonal axes relative to the collision
+     * are not 0.
      */
     protected final void move() {
         if (currentXVelocity == 0 && currentYVelocity == 0) return;
@@ -94,9 +97,27 @@ public abstract class Actor extends Collidable {
         World world = Game.getInstance().getCurrentWorld();
 
         //TODO slow down character movement for diagonal movement
+        int xMove = currentXVelocity;
+        int yMove = currentYVelocity;
+        while (xMove != 0 || yMove != 0) {
+            boolean hasMoved = move(xMove, yMove);
+            if (hasMoved)
+                return;
+            else {
+                if (xMove != 0) {
+                    xMove = (xMove > 0) ? (xMove - 1) : (xMove + 1);
+                }
+                if (yMove != 0) {
+                    yMove = (yMove > 0) ? (yMove - 1) : (yMove + 1);
+                }
+            }
+        }
+
+        slide(currentXVelocity, currentYVelocity);
+
 
         //If player can move to inputted position, move there
-        World.CollisionEvent collisionEvent = world.resolveCollision(this, currentPosition.shiftedPosition
+        /*World.CollisionEvent collisionEvent = world.resolveCollision(this, currentPosition.shiftedPosition
                 (currentXVelocity, currentYVelocity));
         if (collisionEvent.isNoCollision()) {
             translate(currentXVelocity, currentYVelocity);
@@ -107,6 +128,24 @@ public abstract class Actor extends Collidable {
             } else if (world.resolveCollision(this, currentPosition.shiftedPosition(0, currentYVelocity)).isNoCollision()) {
                 translate(0, currentYVelocity);
             }
+        }*/
+    }
+
+    private boolean move(int x, int y) {
+        Vector currentPosition = getTransform().getPosition();
+        World world = Game.getInstance().getCurrentWorld();
+
+        World.CollisionEvent w = world.resolveCollision(this, currentPosition.shiftedPosition(x, y));
+        if (w.isNoCollision()) {
+            translate(x, y);
+            return true;
+        }
+        return false;
+    }
+
+    private void slide(int xMove, int yMove) {
+        if (!move(xMove, 0)) {
+            move(0, yMove);
         }
     }
 
@@ -293,7 +332,7 @@ public abstract class Actor extends Collidable {
 
     protected Vector directionTo(Actor other) {
         Vector vectorDistance = Vector.subtract(other.getTransform().getPosition(), getTransform().getPosition());
-        vectorDistance.signum();
+        vectorDistance.normalize();
         return vectorDistance;
     }
 

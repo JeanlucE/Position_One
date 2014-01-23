@@ -36,10 +36,12 @@ public class Projectile extends Collidable {
         this.flyVector.setX(flyVector.getX() * speed);
         this.flyVector.setY(flyVector.getY() * speed);
 
+        //Shifts origin of projectile forward of player
+        Vector toShift = Vector.multiply(flyVector.normalizedVector(), 15);
+        this.origin.shift(toShift.getX(), toShift.getY());
+
         //Set how far the projectile flies
         this.range = range * Renderer.TILESIZE;
-
-        //TODO shift origin position forward of the player
 
         //Set damage
         this.damage = damage;

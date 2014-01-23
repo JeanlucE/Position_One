@@ -16,7 +16,7 @@ public class ItemGraphicsComponent extends GraphicsComponent {
 
     }
 
-    //TODO later Take Dynamic Resource as parameter
+    //TODO later Take Dynamic Resource as parameter as soon as i have the sprites
     public ItemGraphicsComponent(Resource resource) {
         images = new BufferedImage[2];
         images[0] = resource.getImage();

@@ -54,12 +54,12 @@ public class World {
     }
 
     private World() {
-        currentMap = new WorldMap(new Turtle());
+        //currentMap = new WorldMap(new Turtle());
 
         //initiateMap("world");
         try {
-            saveMap("randomMap");
-            //loadMap("coctestinghall");
+            //saveMap("randomMap");
+            loadMap("coctestinghall");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -86,7 +86,8 @@ public class World {
         for (int x = x0; x < x1; x++) {
             for (int y = y0; y < y1; y++) {
                 Vector v = new Vector(x, y);
-                result.put(transformToWorldSpace(v), getReal(x, y));
+                WorldSpace w = getReal(x, y);
+                result.put(transformToWorldSpace(v), w);
             }
         }
         return result;
@@ -141,7 +142,6 @@ public class World {
      * @see Components.PhysicsComponent
      */
     public CollisionEvent resolveCollision(Actor actor, Vector nextPosition) {
-        //TODO if player cant move directly to the given position, test if he can still move nearer to that position
         PhysicsComponent collider = actor.getCollider();
         for (Vector p : collider.getCorners(nextPosition)) {
             CollisionEvent collisionEvent = resolveWallCollision(p);
@@ -162,7 +162,6 @@ public class World {
         for (Vector v : collider.getCorners(nextPosition)) {
             CollisionEvent wallCollision = resolveWallCollision(v);
             if (wallCollision.isWallHit()) {
-                //System.out.println(wallCollision.getCollisionObject());
                 return wallCollision;
             }
         }
