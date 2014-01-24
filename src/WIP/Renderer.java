@@ -1,6 +1,6 @@
 package WIP;
 
-import Actors.Actor;
+import Actors.*;
 import Components.InputComponent;
 import Components.MouseInputComponent;
 import Components.PhysicsComponent;
@@ -123,6 +123,8 @@ public class Renderer extends JPanel {
         Map<Actor, Vector> actorPositionMap = Camera.getInstance().actorsToRender();
         drawActors(actorPositionMap);
 
+        drawPlayerManaAndStamina();
+
         if (DEBUG_DRAW_ACTOR_POSITIONS) {
             drawActorPositions(actorPositionMap);
         }
@@ -132,6 +134,32 @@ public class Renderer extends JPanel {
         }
 
         drawGUI();
+    }
+
+    private void drawPlayerManaAndStamina() {
+        int xOffset = -14;
+
+        Actors.Character player =Game.getInstance().getPlayer();
+        PhysicsComponent phys = player.getCollider();
+        Vector drawPosition = player.getTransform().getPosition();
+
+        g2d.setColor(Color.RED);
+        g2d.fillRect(250 + xOffset,
+                screenHeight - (phys.getHeight() / 2 + 250 + 14),
+                30, 5);
+        g2d.setColor(Color.BLUE);
+        g2d.fillRect(250 + xOffset,
+                screenHeight - (phys.getHeight() / 2 + 250 + 14),
+                (int) (30 * player.getManaPercentage()), 5);
+
+        g2d.setColor(Color.RED);
+        g2d.fillRect(250 + xOffset,
+                screenHeight - (phys.getHeight() / 2 + 250 + 21),
+                30, 5);
+        g2d.setColor(Color.YELLOW);
+        g2d.fillRect(250 + xOffset,
+                screenHeight - (phys.getHeight() / 2 + 250 + 21),
+                (int) (30 * player.getStaminaPercentage()), 5);
     }
 
     /*

@@ -39,7 +39,7 @@ public class Character extends Actor {
     //Regen per second
     private float healthRegenRate = 0f;
     private float staminaRegenRate = 60f;
-    private float manaRegenRate = 4f;
+    private float manaRegenRate = 3.5f;
     //endregion
 
     //Array of all skills
@@ -408,5 +408,13 @@ public class Character extends Actor {
     protected int actualDamage(int damage) {
         int actualDamage = damage - getTotalDefense();
         return (actualDamage > 1) ? (actualDamage) : 1;
+    }
+
+    public float getStaminaPercentage() {
+        return currentStamina / (float) maxStamina;
+    }
+
+    public float getManaPercentage() {
+        return currentMana / (float) maxMana;
     }
 }
