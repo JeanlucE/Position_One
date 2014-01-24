@@ -14,7 +14,7 @@ public enum DynamicResource {
             Resource.player_EAST,
             Resource.player_SOUTH,
             Resource.player_WEST}),
-    WOODENARROW(new Resource[]{
+    WOODEN_ARROW(new Resource[]{
             Resource.projectile_arrow_01_wooden_FLOOR_NORTH,
             Resource.projectile_arrow_01_wooden_FLOOR_EAST,
             Resource.projectile_arrow_01_wooden_FLOOR_SOUTH,
@@ -24,6 +24,12 @@ public enum DynamicResource {
             Resource.enemy_DOWN,
             Resource.enemy_DOWN,
             Resource.enemy_DOWN,
+    }),
+    FIRE_PROJECTILE(new Resource[]{
+        Resource.projectile_fire_01_FLOOR_NORTH,
+        Resource.projectile_fire_01_FLOOR_EAST,
+        Resource.projectile_fire_01_FLOOR_SOUTH,
+        Resource.projectile_fire_01_FLOOR_WEST,
     });
 
     private Resource[] resources;

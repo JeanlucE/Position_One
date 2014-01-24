@@ -40,11 +40,13 @@ public class Game {
         DebugLog.write("New Game started");
         Weapon sword = new Weapon_Melee("Sword", 0, 0, 10, 0.65f, new ItemGraphicsComponent());
         Weapon bow = new Weapon_Ranged("The OP Bow", 0, 0, 10, 12, 0.3f, new ItemGraphicsComponent());
+        Weapon staff = new Weapon_Magic("Fire Staff", 0, 0, 10, 6, 0.75f, Weapon_Magic.Element.FIRE,
+                new ItemGraphicsComponent());
         player = new Character("Ned Stark");
         player.getTransform().getPosition().setX(60);
         player.getTransform().getPosition().setY(60);
         Ammunition arrow = new Ammunition("Wooden Arrow", 0,
-                new ProjectileGraphicsComponent(null, DynamicResource.WOODENARROW),
+                new ProjectileGraphicsComponent(null, DynamicResource.WOODEN_ARROW),
                 new PhysicsComponent(10, 25));
         Armour helmet = new Helmet("Helmet", 0, 0, Equipment.EquipmentClass.MELEE, 1, new ItemGraphicsComponent());
         Armour body = new Body("Body", 0, 0, Equipment.EquipmentClass.MELEE, 1, new ItemGraphicsComponent());
@@ -52,11 +54,11 @@ public class Game {
         player.equip(helmet);
         player.equip(body);
         player.equip(legs);
-        player.equip(bow);
+        player.equip(staff);
         player.equip(arrow);
         Enemy.DEBUG_ALL_ENEMIES_MOVE_TOWARD_PLAYER = true;
         Ammunition dropArrow = new Ammunition("Wooden Arrow", 0,
-                new ProjectileGraphicsComponent(null, DynamicResource.WOODENARROW),
+                new ProjectileGraphicsComponent(null, DynamicResource.WOODEN_ARROW),
                 new PhysicsComponent(10, 25));
         getCurrentWorld().dropItem(dropArrow, 100, 100);
 
@@ -114,27 +116,23 @@ public class Game {
 
 
         public void actionPerformed(ActionEvent e) {
-            Time.update();
+            try {
+                Time.update();
 
-            if (InputComponent.getInstance().isEscapeTyped()) {
-                setPaused(!isPaused());
-            }
-
-            if (!isPaused()) {
-
-                for (GameObject g : GameObject.getGameObjects()) {
-                    g.update();
+                if (InputComponent.getInstance().isEscapeTyped()) {
+                    setPaused(!isPaused());
                 }
 
-                /*for (Actor a : Actor.getActors()) {
-                    a.update();
+                if (!isPaused()) {
+
+                    for (GameObject g : GameObject.getGameObjects()) {
+                        g.update();
+                    }
+
+                    removeDestroyedGameObjects();
                 }
-
-                for (Projectile p : Projectile.getProjectiles()) {
-                    p.update();
-                }*/
-
-                removeDestroyedGameObjects();
+            } catch (Exception e1) {
+                DebugLog.write(e1);
             }
 
             InputComponent.getInstance().resetTypedKeys();

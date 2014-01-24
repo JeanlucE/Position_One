@@ -1,7 +1,12 @@
 package Items;
 
+import Components.DynamicResource;
 import Components.ItemGraphicsComponent;
+import Components.PhysicsComponent;
+import Components.ProjectileGraphicsComponent;
 import WIP.DebugLog;
+import WIP.Transform;
+import WIP.Vector;
 
 /**
  * Created with IntelliJ IDEA.
@@ -30,7 +35,20 @@ public class Weapon_Magic extends Weapon {
     }
 
     protected void useThis() {
-        //TODO implement this
+        if(element.equals(Element.FIRE)){
+
+            //TODO Spell class
+
+            Transform origin = equipped.getTransform().clone();
+
+            //Rotate collider when arrow is pointing east or west
+            PhysicsComponent phys = new PhysicsComponent(30, 48);
+            if (origin.getDirection().ofAxisWestEast()) {
+                phys.rotate90();
+            }
+            new Projectile(origin, new ProjectileGraphicsComponent(origin.getDirection(),
+                    DynamicResource.FIRE_PROJECTILE), phys, 5, getBaseRange(), getBaseDamage());
+        }
     }
 
     public Element getElement() {

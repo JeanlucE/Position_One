@@ -207,6 +207,7 @@ public class Character extends Actor {
     }
 
     private void addItem(Item item) {
+        if(item == null) return;
         if (item.isStackable()) {
             if (equipment.hasAmmunitionEquipped() && item instanceof Ammunition && equip((Equipment) item)) {
                 DebugLog.write("Ammunition stacked");
