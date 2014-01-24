@@ -1,5 +1,7 @@
 package Items;
 
+import Actors.*;
+import Actors.Character;
 import Components.DynamicResource;
 import Components.ItemGraphicsComponent;
 import Components.PhysicsComponent;
@@ -38,6 +40,8 @@ public class Weapon_Magic extends Weapon {
         if(element.equals(Element.FIRE)){
 
             //TODO Spell class
+
+            if(equipped instanceof Actors.Character && !((Character)equipped).useMana(5)) return;
 
             Transform origin = equipped.getTransform().clone();
 

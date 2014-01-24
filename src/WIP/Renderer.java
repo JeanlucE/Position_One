@@ -102,7 +102,7 @@ public class Renderer extends JPanel {
         }
 
         if (Game.getInstance().isPaused()) {
-            g2d.setColor(Color.RED);
+            g2d.setColor(Color.WHITE);
             Font thisFont = getFont();
             g2d.setFont(boldFont);
             g2d.drawString("PAUSED", getWidth() - 65, 20);

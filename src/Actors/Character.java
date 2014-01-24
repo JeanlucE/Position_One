@@ -7,10 +7,7 @@ import Components.PhysicsComponent;
 import Environment.Floor;
 import Environment.WorldSpace;
 import Items.*;
-import WIP.DebugLog;
-import WIP.Game;
-import WIP.Transform;
-import WIP.Vector;
+import WIP.*;
 
 import java.lang.reflect.Field;
 
@@ -38,6 +35,11 @@ public class Character extends Actor {
     private int skillPoints;
     private int maxStamina, currentStamina;
     private int maxMana, currentMana;
+
+    //Regen per second
+    private float healthRegenRate = 0f;
+    private float staminaRegenRate = 60f;
+    private float manaRegenRate = 4f;
     //endregion
 
     //Array of all skills
@@ -81,6 +83,9 @@ public class Character extends Actor {
 
         maxStamina = 1000;
         currentStamina = maxStamina;
+
+        staminaTimer = Math.round(1000 / staminaRegenRate);
+        manaTimer = Math.round(1000 / manaRegenRate);
 
         this.inventory = new Inventory();
         equipment = new EquipmentManager(this);
@@ -132,6 +137,7 @@ public class Character extends Actor {
             pickupNextItem();
         }
 
+        regenerate();
     }
 
     private void applyMovement() {
@@ -148,9 +154,6 @@ public class Character extends Actor {
         } else {
             moveDistance = walkSpeed;
             sprinting = false;
-            if (currentStamina < maxStamina) {
-                currentStamina += 1;
-            }
         }
 
         int XAxis = InputComponent.getInstance().getXAxis();
@@ -207,13 +210,37 @@ public class Character extends Actor {
     }
 
     private void addItem(Item item) {
-        if(item == null) return;
+        if (item == null) return;
         if (item.isStackable()) {
             if (equipment.hasAmmunitionEquipped() && item instanceof Ammunition && equip((Equipment) item)) {
                 DebugLog.write("Ammunition stacked");
             }
         } else {
             inventory.add(item);
+        }
+    }
+
+    private int staminaRegen, manaRegen;
+    private int staminaTimer, manaTimer;
+
+    private void regenerate() {
+
+        //Regens stamina
+        if (currentStamina < maxStamina && !sprinting) {
+            staminaRegen += Time.deltaTime();
+            if (staminaRegen >= staminaTimer) {
+                currentStamina++;
+                staminaRegen -= staminaTimer;
+            }
+        }
+
+        //Regens Mana
+        if (currentMana < maxMana) {
+            manaRegen += Time.deltaTime();
+            if (manaRegen >= manaTimer) {
+                currentMana++;
+                manaRegen -= manaTimer;
+            }
         }
     }
 
@@ -232,6 +259,16 @@ public class Character extends Actor {
 
     public void setCurrentMana(int currentMana) {
         this.currentMana = currentMana;
+    }
+
+    public boolean useMana(int mana) {
+        if (currentMana - mana >= 0) {
+            currentMana -= mana;
+            return true;
+        } else {
+            DebugLog.write("Not enough Mana!");
+            return false;
+        }
     }
 
     public int getCurrentStamina() {
