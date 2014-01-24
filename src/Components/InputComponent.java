@@ -29,6 +29,7 @@ public class InputComponent implements KeyListener {
     private boolean shiftDown = false;
     private boolean qTyped = false;
     private boolean qReleased = true;
+    private boolean escapeTyped = false;
 
 
     @Override
@@ -86,6 +87,9 @@ public class InputComponent implements KeyListener {
                     qReleased = false;
                 }
                 break;
+
+            case KeyEvent.VK_ESCAPE:
+                escapeTyped = true;
         }
     }
 
@@ -151,9 +155,14 @@ public class InputComponent implements KeyListener {
         return qTyped;
     }
 
+    public boolean isEscapeTyped() {
+        return escapeTyped;
+    }
+
     //Called every frame to reset typed Keys
     public void resetTypedKeys() {
         spaceTyped = false;
         qTyped = false;
+        escapeTyped = false;
     }
 }

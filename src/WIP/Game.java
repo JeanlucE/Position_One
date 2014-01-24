@@ -36,13 +36,14 @@ public class Game {
 
     private Game() {
         new FileStructureHandler();
+
         DebugLog.write("New Game started");
         Weapon sword = new Weapon_Melee("Sword", 0, 0, 10, 0.65f, new ItemGraphicsComponent());
-        Weapon bow = new Weapon_Ranged("The OP Bow", 0, 0, 10, 10, 0.5f, new ItemGraphicsComponent());
+        Weapon bow = new Weapon_Ranged("The OP Bow", 0, 0, 10, 12, 0.3f, new ItemGraphicsComponent());
         player = new Character("Ned Stark");
         player.getTransform().getPosition().setX(60);
         player.getTransform().getPosition().setY(60);
-        Ammunition arrow = new Ammunition("Ammunition", 0,
+        Ammunition arrow = new Ammunition("Wooden Arrow", 0,
                 new ProjectileGraphicsComponent(null, DynamicResource.WOODENARROW),
                 new PhysicsComponent(10, 25));
         Armour helmet = new Helmet("Helmet", 0, 0, Equipment.EquipmentClass.MELEE, 1, new ItemGraphicsComponent());
@@ -53,7 +54,11 @@ public class Game {
         player.equip(legs);
         player.equip(bow);
         player.equip(arrow);
-        Enemy.DEBUG_ALL_ENEMIES_MOVE_TOWARD_PLAYER = false;
+        Enemy.DEBUG_ALL_ENEMIES_MOVE_TOWARD_PLAYER = true;
+        Ammunition dropArrow = new Ammunition("Wooden Arrow", 0,
+                new ProjectileGraphicsComponent(null, DynamicResource.WOODENARROW),
+                new PhysicsComponent(10, 25));
+        getCurrentWorld().dropItem(dropArrow, 100, 100);
 
         World currentWorld = World.getInstance();
         currentWorld.spawnEnemyAround(getPlayer().getTransform().getPosition(), 250);
@@ -69,8 +74,9 @@ public class Game {
     }
 
     private void removeDestroyedGameObjects() {
-        Projectile.removeDeadProjectiles();
-        Actor.removeDeadActors();
+        //Projectile.removeDeadProjectiles();
+        //Actor.removeDeadActors();
+        GameObject.removeDestroyedGameObjects();
     }
 
     public int getFrameRate() {
@@ -83,6 +89,16 @@ public class Game {
 
     public World getCurrentWorld() {
         return World.getInstance();
+    }
+
+    private boolean paused = false;
+
+    public boolean isPaused() {
+        return paused;
+    }
+
+    public void setPaused(boolean flag) {
+        paused = flag;
     }
 
     private Renderer getRenderer() {
@@ -100,15 +116,27 @@ public class Game {
         public void actionPerformed(ActionEvent e) {
             Time.update();
 
-            for (Actor a : Actor.getActors()) {
-                a.update();
+            if (InputComponent.getInstance().isEscapeTyped()) {
+                setPaused(!isPaused());
             }
 
-            for (Projectile p : Projectile.getProjectiles()) {
-                p.update();
+            if (!isPaused()) {
+
+                for (GameObject g : GameObject.getGameObjects()) {
+                    g.update();
+                }
+
+                /*for (Actor a : Actor.getActors()) {
+                    a.update();
+                }
+
+                for (Projectile p : Projectile.getProjectiles()) {
+                    p.update();
+                }*/
+
+                removeDestroyedGameObjects();
             }
 
-            removeDestroyedGameObjects();
             InputComponent.getInstance().resetTypedKeys();
             getRenderer().repaint();
 

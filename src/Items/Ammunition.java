@@ -12,8 +12,7 @@ import WIP.Transform;
  */
 public class Ammunition extends Equipment {
     //TODO parent ammo transfrom to player transform when equipped and unparent when unequipped
-    //TODO add picked up arrows to stack if same type
-    private int stack = 1000;
+    private int stack = 5;
     private PhysicsComponent physicsComponent;
 
     public Ammunition(String name, int level, ProjectileGraphicsComponent g, PhysicsComponent phys) {
@@ -61,13 +60,10 @@ public class Ammunition extends Equipment {
         return true;
     }
 
-    public boolean equals(Ammunition p) {
-        if (p == null) return false;
-        if (this == p) return true;
-        if (!p.getName().equals(this.getName())) return false;
-        if (!(p.getLevel() == this.getLevel())) return false;
-        if (!(p.getSkillRequirement() == this.getSkillRequirement())) return false;
-        return p.getType().equals(this.getType());
+    public boolean equals(Ammunition a) {
+        if (a == null) return false;
+        if (this == a) return true;
+        return (a.getName().equals(this.getName()));
 
     }
 

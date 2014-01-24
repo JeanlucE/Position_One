@@ -18,6 +18,7 @@ import java.util.Random;
 public class Enemy extends NPC {
     public static boolean DEBUG_ALL_ENEMIES_RANDOM_MOVE = false;
     public static boolean DEBUG_ALL_ENEMIES_MOVE_TOWARD_PLAYER = false;
+    private int experience = 100;
 
     public Enemy(String name, int maxHealth, Transform t, ActorGraphicsComponent g, PhysicsComponent p) {
         super(name, t, g, p);
@@ -102,5 +103,11 @@ public class Enemy extends NPC {
     public Enemy clone() {
         return new Enemy(getName(), getMaxHealth(), getTransform().clone(),
                 ((ActorGraphicsComponent) getGraphic()).clone(), getCollider().clone());
+    }
+
+    @Override
+    protected void death() {
+        Game.getInstance().getPlayer().addExperience(experience);
+        super.death();
     }
 }

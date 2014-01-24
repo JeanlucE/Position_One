@@ -114,21 +114,6 @@ public abstract class Actor extends Collidable {
         }
 
         slide(currentXVelocity, currentYVelocity);
-
-
-        //If player can move to inputted position, move there
-        /*World.CollisionEvent collisionEvent = world.resolveCollision(this, currentPosition.shiftedPosition
-                (currentXVelocity, currentYVelocity));
-        if (collisionEvent.isNoCollision()) {
-            translate(currentXVelocity, currentYVelocity);
-        } else {
-            //If player cannot, but another inputted direction is possible, slide past the wall
-            if (world.resolveCollision(this, currentPosition.shiftedPosition(currentXVelocity, 0)).isNoCollision()) {
-                translate(currentXVelocity, 0);
-            } else if (world.resolveCollision(this, currentPosition.shiftedPosition(0, currentYVelocity)).isNoCollision()) {
-                translate(0, currentYVelocity);
-            }
-        }*/
     }
 
     private boolean move(int x, int y) {
@@ -150,7 +135,7 @@ public abstract class Actor extends Collidable {
     }
 
     /**
-     * Shifts the actors transform
+     * Translates the actors transform
      *
      * @param x x translation distance
      * @param y y translation distance

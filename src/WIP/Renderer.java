@@ -50,6 +50,7 @@ public class Renderer extends JPanel {
     // know the clipping edges but is also important to calculate draw positions from world position.
     private final static int screenWidth = 500, screenHeight = 500;
     private Graphics2D g2d;
+    private static Font boldFont = new Font("Times New Roman", Font.BOLD, 15);
 
     //DEBUGGING
     public boolean DEBUG_DRAW_ACTOR_POSITIONS = true;
@@ -98,6 +99,14 @@ public class Renderer extends JPanel {
         if (mouseListener.isMousePressed()) {
             g2d.setColor(Color.GREEN);
             g2d.fillRect(30, 10, 10, 10);
+        }
+
+        if (Game.getInstance().isPaused()) {
+            g2d.setColor(Color.RED);
+            Font thisFont = getFont();
+            g2d.setFont(boldFont);
+            g2d.drawString("PAUSED", getWidth() - 65, 20);
+            g2d.setFont(thisFont);
         }
 
         GameWindow.getInstance().setTitle("Frames:" + String.valueOf(Game.getInstance().getFrameRate()));

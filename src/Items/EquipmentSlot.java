@@ -18,8 +18,12 @@ public class EquipmentSlot<T extends Equipment> {
         return (equipment != null) ? equipment : null;
     }
 
-    public void equip(T equipment) {
-        this.equipment = equipment;
+    public boolean equip(T equipment) {
+        if (!isOccupied()) {
+            this.equipment = equipment;
+            return true;
+        }
+        return false;
     }
 
     public boolean isOccupied() {

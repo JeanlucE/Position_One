@@ -43,37 +43,64 @@ public class EquipmentManager {
      *
      * @param equipment Equipment to equip
      */
-    void equip(Equipment equipment) {
+    boolean equip(Equipment equipment) {
         //TODO if isOccupied throw the current equipment into the inventory and equip the new Equipment
+        boolean success = false;
+
         if (canEquip(equipment)) {
             if (equipment.isWeapon()) {
-                equip((Weapon) equipment);
+                success = equip((Weapon) equipment);
             } else if (equipment.isArmour()) {
-                equip((Armour) equipment);
+                success = equip((Armour) equipment);
             } else { //equipment.isAmmunition
-                ammunitionSlot.equip((Ammunition) equipment);
+                Ammunition toEquip = (Ammunition) equipment;
+                if (!ammunitionSlot.isOccupied()) {
+                    ammunitionSlot.equip(toEquip);
+                    success = true;
+                } else {
+                    Ammunition a = ammunitionSlot.getEquipment();
+                    if (a.equals(toEquip)) {
+                        a.addToStack(toEquip.getStack());
+                        success = true;
+                    } else {
+                        success = false;
+                    }
+                }
             }
+
+        } else {
+            success = false;
+        }
+
+        if (success) {
             DebugLog.write("Player " + parent.getName() + " has equipped: " + equipment.getName());
+            return true;
         } else {
             DebugLog.write("Player " + parent.getName() + " cannot equip: " + equipment.getName());
+            return false;
         }
     }
 
-    private void equip(Weapon weapon) {
-        mainHandSlot.equip(weapon);
-        weapon.setEquipped(parent);
+    private boolean equip(Weapon weapon) {
+        if (!mainHandSlot.isOccupied()) {
+            mainHandSlot.equip(weapon);
+            weapon.setEquipped(parent);
+            return true;
+        }
+        return false;
     }
 
-    private void equip(Armour armour) {
+    private boolean equip(Armour armour) {
         if (armour.isShield()) {
-            offHandSlot.equip(armour);
+            return offHandSlot.equip(armour);
         } else if (armour.isHelmet()) {
-            helmetSlot.equip(armour);
+            return helmetSlot.equip(armour);
         } else if (armour.isBody()) {
-            bodySlot.equip(armour);
+            return bodySlot.equip(armour);
         } else if (armour.isLegs()) {
-            legsSlot.equip(armour);
+            return legsSlot.equip(armour);
         }
+        return false;
     }
 
     //takes an equipmentslot that should be unequipped and when in the inventory the item should be put

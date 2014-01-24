@@ -58,7 +58,7 @@ public class Character extends Actor {
 
     //Constructor for final build
     public Character(String name) {
-        this(name, 0, 0, 0);
+        this(name, 1, 0, 0);
     }
 
     //Debug Purposes
@@ -202,7 +202,17 @@ public class Character extends Actor {
         WorldSpace nextAbsPos = Game.getInstance().getCurrentWorld().get(getNextWorldPosition());
         if (nextAbsPos != null && nextAbsPos.isFloor()) {
             Floor floor = (Floor) nextAbsPos;
-            inventory.add(floor.hasDroppedItems() ? (floor.getTopItem()) : (null));
+            addItem(floor.hasDroppedItems() ? (floor.getTopItem()) : (null));
+        }
+    }
+
+    private void addItem(Item item) {
+        if (item.isStackable()) {
+            if (equipment.hasAmmunitionEquipped() && item instanceof Ammunition && equip((Equipment) item)) {
+                DebugLog.write("Ammunition stacked");
+            }
+        } else {
+            inventory.add(item);
         }
     }
 
@@ -244,10 +254,11 @@ public class Character extends Actor {
 
     public void addExperience(int experience) {
         this.experience += experience;
+        DebugLog.write("Player gained experience: " + experience);
         while (getNextLevelXP() <= 0) {
             levelUp();
         }
-        DebugLog.write("Player gained experience: " + experience);
+
     }
 
     //TODO: separate method for assigning skill points
@@ -256,7 +267,8 @@ public class Character extends Actor {
         level++;
         skillPoints++;
 
-        DebugLog.write("Player " + getName() + "has leveled up. \nPlayer " + getName() + "is now level" + level);
+        DebugLog.write("Player " + getName() + " has leveled up.");
+        DebugLog.write("Player " + getName() + " is now level " + level + ".");
     }
 
     /**
@@ -289,8 +301,8 @@ public class Character extends Actor {
         return inventory;
     }
 
-    public void equip(Equipment equipment) {
-        this.equipment.equip(equipment);
+    public boolean equip(Equipment equipment) {
+        return this.equipment.equip(equipment);
     }
 
     //TODO public void unequip()

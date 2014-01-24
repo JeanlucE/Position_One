@@ -1,6 +1,11 @@
 package WIP;
 
+import Actors.Actor;
 import Components.GraphicsComponent;
+import Items.Projectile;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,11 +17,30 @@ public abstract class GameObject {
     private final Transform transform;
     private final GraphicsComponent graphic;
     private boolean destroyed;
+    private static List<GameObject> gameObjects = new LinkedList<>();
 
     protected GameObject(Transform transform, GraphicsComponent graphic) {
         this.transform = transform;
         this.graphic = graphic;
         destroyed = false;
+        gameObjects.add(this);
+    }
+
+    public static GameObject[] getGameObjects() {
+        return gameObjects.toArray(new GameObject[gameObjects.size()]);
+    }
+
+    //TODO Make renderer iterate over all gameobject and draw them accordingly, possibly change camera too
+    public static void removeDestroyedGameObjects() {
+        GameObject[] g = getGameObjects();
+        for (int i = g.length - 1; i >= 0; i--) {
+            if (g[i].isDestroyed()) {
+                gameObjects.remove(i);
+            }
+        }
+        Actor.removeDeadActors();
+        Projectile.removeDeadProjectiles();
+
     }
 
     public abstract void update();
