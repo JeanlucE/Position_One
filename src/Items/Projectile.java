@@ -58,7 +58,6 @@ public class Projectile extends Collidable {
             if (projectiles.get(i).isDestroyed()) {
                 projectiles.remove(i);
             }
-
     }
 
     @Override

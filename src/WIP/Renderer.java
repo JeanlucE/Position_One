@@ -1,6 +1,6 @@
 package WIP;
 
-import Actors.*;
+import Actors.Actor;
 import Components.InputComponent;
 import Components.MouseInputComponent;
 import Components.PhysicsComponent;
@@ -139,9 +139,8 @@ public class Renderer extends JPanel {
     private void drawPlayerManaAndStamina() {
         int xOffset = -14;
 
-        Actors.Character player =Game.getInstance().getPlayer();
+        Actors.Character player = Game.getInstance().getPlayer();
         PhysicsComponent phys = player.getCollider();
-        Vector drawPosition = player.getTransform().getPosition();
 
         g2d.setColor(Color.RED);
         g2d.fillRect(250 + xOffset,
@@ -156,7 +155,7 @@ public class Renderer extends JPanel {
         g2d.fillRect(250 + xOffset,
                 screenHeight - (phys.getHeight() / 2 + 250 + 21),
                 30, 5);
-        g2d.setColor(Color.YELLOW);
+        g2d.setColor(new Color(0xFFE41C));
         g2d.fillRect(250 + xOffset,
                 screenHeight - (phys.getHeight() / 2 + 250 + 21),
                 (int) (30 * player.getStaminaPercentage()), 5);
