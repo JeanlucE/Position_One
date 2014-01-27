@@ -26,6 +26,13 @@ public class WorldMap {
     public static String mapsPath = "./maps/";
     private Map<Vector, WorldSpace> worldSpaceMap = new HashMap<>();
 
+    public static WorldMap getRandomMap() {
+        Turtle t = new Turtle();
+        TurtleInterpreter turtleInterpreter = new TurtleInterpreter(3);
+        turtleInterpreter.addTurtle(t);
+        return new WorldMap(turtleInterpreter.getGeneratedMap());
+    }
+
     //DEBUGGING
     public WorldMap() {
         int tilesize = Renderer.TILESIZE;
@@ -55,11 +62,6 @@ public class WorldMap {
         set(160, 200, new Wall(new Transform(new Vector(160, 200)), g, boxCollider));
         set(240, 200, new Wall(new Transform(new Vector(240, 200)), g, boxCollider));
         DebugLog.write("New World created with size: " + worldSpaceMap.size());
-    }
-
-    public WorldMap(Turtle turtle) {
-        this(turtle.getGeneratedMap());
-        //DebugLog.write("New World created with size: " + worldSpaceMap.size());
     }
 
     private WorldMap(Map<Vector, WorldSpace> map) {

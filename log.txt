@@ -1,74 +1,22 @@
-Log created at: 14:56:24 25.01.2014
+Log created at: 18:37:05 27.01.2014
 
-[14:56:24.512] New Game started
-[14:56:24.573] New Melee Weapon created: Sword
-[14:56:24.574] New Ranged Weapon created: The OP Bow
-[14:56:24.591] New Magic Weapon created: Fire Staff
-[14:56:24.783] New Character created: Ned Stark
-[14:56:24.813] New Armour created: Helmet
-[14:56:24.813] New Armour created: Body
-[14:56:24.813] New Armour created: Legs
-[14:56:24.814] Player Ned Stark has equipped: Helmet
-[14:56:24.814] Player Ned Stark has equipped: Body
-[14:56:24.814] Player Ned Stark has equipped: Legs
-[14:56:24.815] Player Ned Stark has equipped: Fire Staff
-[14:56:24.815] Player Ned Stark has equipped: Wooden Arrow
-[14:56:24.932] New World created with size: 436
-[14:56:24.937] SpawnHandler: tried spawning enemy at 100|260
-[14:56:24.967] Renderer started
-[14:56:27.140] Damaged actor Ned Stark for 2 damage.
-[14:56:27.923] Damaged actor Ned Stark for 2 damage.
-[14:56:28.707] Damaged actor Ned Stark for 2 damage.
-[14:56:29.490] Damaged actor Ned Stark for 2 damage.
-[14:56:30.274] Damaged actor Ned Stark for 2 damage.
-[14:56:31.059] Damaged actor Ned Stark for 2 damage.
-[14:56:31.843] Damaged actor Ned Stark for 2 damage.
-[14:56:32.625] Damaged actor Ned Stark for 2 damage.
-[14:56:33.408] Damaged actor Ned Stark for 2 damage.
-[14:56:34.191] Damaged actor Ned Stark for 2 damage.
-[14:56:35.884] New Projectile at: 426|60
-[14:56:36.605] Chu Chu(100/100) hit!
-[14:56:36.606] Projectile destroyed at 191|60
-[14:56:36.606] Damaged actor Chu Chu for 10 damage.
-[14:56:36.829] New Projectile at: 378|60
-[14:56:37.260] Chu Chu(90/100) hit!
-[14:56:37.261] Projectile destroyed at 233|60
-[14:56:37.261] Damaged actor Chu Chu for 10 damage.
-[14:56:37.580] New Projectile at: 378|60
-[14:56:37.884] Chu Chu(80/100) hit!
-[14:56:37.885] Projectile destroyed at 273|60
-[14:56:37.885] Damaged actor Chu Chu for 10 damage.
-[14:56:39.467] New Projectile at: 561|60
-[14:56:39.947] Chu Chu(70/100) hit!
-[14:56:39.947] Projectile destroyed at 401|60
-[14:56:39.948] Damaged actor Chu Chu for 10 damage.
-[14:56:40.219] New Projectile at: 561|60
-[14:56:40.571] Chu Chu(60/100) hit!
-[14:56:40.571] Projectile destroyed at 441|60
-[14:56:40.572] Damaged actor Chu Chu for 10 damage.
-[14:56:41.035] New Projectile at: 561|60
-[14:56:41.259] Chu Chu(50/100) hit!
-[14:56:41.260] Projectile destroyed at 481|60
-[14:56:41.260] Damaged actor Chu Chu for 10 damage.
-[14:56:41.419] Damaged actor Ned Stark for 2 damage.
-[14:56:44.089] New Projectile at: 672|360
-[14:56:44.537] Chu Chu(40/100) hit!
-[14:56:44.537] Projectile destroyed at 672|210
-[14:56:44.538] Damaged actor Chu Chu for 10 damage.
-[14:56:44.841] New Projectile at: 672|360
-[14:56:45.161] Chu Chu(30/100) hit!
-[14:56:45.161] Projectile destroyed at 672|250
-[14:56:45.162] Damaged actor Chu Chu for 10 damage.
-[14:56:45.593] New Projectile at: 672|360
-[14:56:45.801] Chu Chu(20/100) hit!
-[14:56:45.801] Projectile destroyed at 672|285
-[14:56:45.802] Damaged actor Chu Chu for 10 damage.
-[14:56:45.849] Damaged actor Ned Stark for 2 damage.
-[14:56:46.345] New Projectile at: 672|360
-[14:56:46.425] Chu Chu(10/100) hit!
-[14:56:46.425] Projectile destroyed at 672|325
-[14:56:46.426] Damaged actor Chu Chu for 10 damage.
-[14:56:46.426] Player gained experience: 100
-[14:56:46.426] Player Ned Stark has leveled up.
-[14:56:46.426] Player Ned Stark is now level 2.
-[14:56:46.427] Actor Chu Chu is dead.
+[18:37:05.772] New Game started
+[18:37:05.777] New Melee Weapon created: Sword
+[18:37:05.778] New Ranged Weapon created: The OP Bow
+[18:37:05.779] New Magic Weapon created: Fire Staff
+[18:37:05.815] New Character created: Ned Stark
+[18:37:05.816] New Armour created: Helmet
+[18:37:05.817] New Armour created: Body
+[18:37:05.817] New Armour created: Legs
+[18:37:05.817] Player Ned Stark has equipped: Helmet
+[18:37:05.817] Player Ned Stark has equipped: Body
+[18:37:05.817] Player Ned Stark has equipped: Legs
+[18:37:05.817] Player Ned Stark has equipped: Fire Staff
+[18:37:05.817] Player Ned Stark has equipped: Wooden Arrow
+[18:37:05.887] New World created with size: 3692
+[18:37:05.922] Saved Map: randomMap
+[18:37:05.923] SpawnHandler: tried spawning enemy at -140|-60
+[18:37:05.928] Renderer started
+[18:37:07.256] Damaged actor Ned Stark for 2 damage.
+[18:37:08.037] Damaged actor Ned Stark for 2 damage.
+[18:37:19.089] New Projectile at: -562|-653

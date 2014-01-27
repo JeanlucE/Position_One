@@ -1,8 +1,12 @@
 package Environment;
 
-import WIP.AdvancedVector;
-import WIP.DebugLog;
-import WIP.Vector;
+import Components.PhysicsComponent;
+import Components.Resource;
+import Components.StaticGraphicsComponent;
+import WIP.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,11 +19,15 @@ class TurtleInterpreter {
     private Turtle turtle;
     private int corridorWidth;
     private int scale = 2;
+    private Map<Vector, WorldSpace> generatedMap;
 
-    TurtleInterpreter(Turtle t, int corridorWidth) {
-        this.turtle = t;
+    TurtleInterpreter(int corridorWidth) {
         this.corridorWidth = corridorWidth;
+        generatedMap = new HashMap<>(400);
+    }
 
+    void addTurtle(Turtle t) {
+        this.turtle = t;
         interpret();
     }
 
@@ -180,7 +188,7 @@ class TurtleInterpreter {
     }
 
     protected void add(int x, int y, BlockID id) {
-        turtle.add(new Vector(x, y), id);
+        addToMap(new Vector(x, y), id);
     }
 
     protected Vector interpolatePosition(AdvancedVector v) {
@@ -201,4 +209,49 @@ class TurtleInterpreter {
         }
     }
 
+    Map<Vector, WorldSpace> getGeneratedMap() {
+        return generatedMap;
+    }
+
+    private static StaticGraphicsComponent floor = new StaticGraphicsComponent(Resource.floor01);
+    private static StaticGraphicsComponent wall = new StaticGraphicsComponent(Resource.wall01);
+
+    private void addToMap(Vector vector, BlockID id) {
+
+        WorldSpace worldSpace;
+        if (id == BlockID.FLOOR) {
+            worldSpace = new Floor(new Transform(transformToWorldSpace(vector.clone())), floor);
+            surroundWithWalls(vector);
+        } else {
+            PhysicsComponent p = new PhysicsComponent(Renderer.TILESIZE, Renderer.TILESIZE);
+            worldSpace = new Wall(new Transform(transformToWorldSpace(vector.clone())), wall, p);
+        }
+
+        WorldSpace w = generatedMap.get(vector);
+        if (w == null || w.isWall()) {
+            generatedMap.put(vector, worldSpace);
+        }
+    }
+
+    private Vector transformToWorldSpace(Vector v) {
+        v.setX(v.getX() * Renderer.TILESIZE);
+        v.setY(v.getY() * Renderer.TILESIZE);
+        return v;
+    }
+
+    /**
+     * Surrounds a given floor at a vector with walls. This ensures the palyer does not collide with null Worldspaces
+     *
+     * @param floorVector Vector of the floor space that should be surrounded
+     */
+    private void surroundWithWalls(Vector floorVector) {
+        addToMap(floorVector.shiftedPosition(0, 1), BlockID.WALL);
+        addToMap(floorVector.shiftedPosition(1, 1), BlockID.WALL);
+        addToMap(floorVector.shiftedPosition(1, 0), BlockID.WALL);
+        addToMap(floorVector.shiftedPosition(1, -1), BlockID.WALL);
+        addToMap(floorVector.shiftedPosition(0, -1), BlockID.WALL);
+        addToMap(floorVector.shiftedPosition(-1, -1), BlockID.WALL);
+        addToMap(floorVector.shiftedPosition(-1, 0), BlockID.WALL);
+        addToMap(floorVector.shiftedPosition(-1, 1), BlockID.WALL);
+    }
 }

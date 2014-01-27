@@ -1,12 +1,8 @@
 package Environment;
 
-import Components.PhysicsComponent;
-import Components.Resource;
-import Components.StaticGraphicsComponent;
-import WIP.*;
+import WIP.AdvancedTransform;
+import WIP.AdvancedVector;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 import java.util.Stack;
 
@@ -21,7 +17,6 @@ class Turtle {
     //TODO save this in a tree, which can then include easy implementation of intersections
     private Stack<TurtleMove> positions;
     //TODO outsource this to turtleinterpreter
-    private Map<Vector, WorldSpace> generatedMap;
 
 
     public Turtle() {
@@ -29,9 +24,6 @@ class Turtle {
         positions = new Stack<>();
         positions.push(new TurtleMove(new AdvancedVector(0f, 0f), transform.getPosition().clone()));
         randomMoves();
-        //positions.push(new TurtleMove(new AdvancedVector(0f, 0f), new AdvancedVector(10, 10)));
-        //randomMoves();
-        generatedMap = new HashMap<>(400);
     }
 
     private AdvancedTransform getTransform() {
@@ -96,53 +88,5 @@ class Turtle {
 
     TurtleMove[] getPositions() {
         return positions.toArray(new TurtleMove[positions.size()]);
-    }
-
-    Map<Vector, WorldSpace> getGeneratedMap() {
-        TurtleInterpreter interpreter = new TurtleInterpreter(this, 3);
-
-        return generatedMap;
-    }
-
-    private static StaticGraphicsComponent floor = new StaticGraphicsComponent(Resource.floor01);
-    private static StaticGraphicsComponent wall = new StaticGraphicsComponent(Resource.wall01);
-
-    void add(Vector vector, BlockID id) {
-
-        WorldSpace worldSpace;
-        if (id == BlockID.FLOOR) {
-            worldSpace = new Floor(new Transform(transformToWorldSpace(vector.clone())), floor);
-            surroundWithWalls(vector);
-        } else {
-            PhysicsComponent p = new PhysicsComponent(Renderer.TILESIZE, Renderer.TILESIZE);
-            worldSpace = new Wall(new Transform(transformToWorldSpace(vector.clone())), wall, p);
-        }
-
-        WorldSpace w = generatedMap.get(vector);
-        if (w == null || w.isWall()) {
-            generatedMap.put(vector, worldSpace);
-        }
-    }
-
-    private Vector transformToWorldSpace(Vector v) {
-        v.setX(v.getX() * Renderer.TILESIZE);
-        v.setY(v.getY() * Renderer.TILESIZE);
-        return v;
-    }
-
-    /**
-     * Surrounds a given floor at a vector with walls. This ensures the palyer does not collide with null Worldspaces
-     *
-     * @param floorVector Vector of the floor space that should be surrounded
-     */
-    private void surroundWithWalls(Vector floorVector) {
-        add(floorVector.shiftedPosition(0, 1), BlockID.WALL);
-        add(floorVector.shiftedPosition(1, 1), BlockID.WALL);
-        add(floorVector.shiftedPosition(1, 0), BlockID.WALL);
-        add(floorVector.shiftedPosition(1, -1), BlockID.WALL);
-        add(floorVector.shiftedPosition(0, -1), BlockID.WALL);
-        add(floorVector.shiftedPosition(-1, -1), BlockID.WALL);
-        add(floorVector.shiftedPosition(-1, 0), BlockID.WALL);
-        add(floorVector.shiftedPosition(-1, 1), BlockID.WALL);
     }
 }

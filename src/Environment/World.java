@@ -54,12 +54,12 @@ public class World {
     }
 
     private World() {
-        //currentMap = new WorldMap(new Turtle());
+        currentMap = WorldMap.getRandomMap();
 
         //initiateMap("world");
         try {
-            //saveMap("randomMap");
-            loadMap("coctestinghall");
+            saveMap("randomMap");
+            //loadMap("coctestinghall");
         } catch (IOException e) {
             e.printStackTrace();
         }
