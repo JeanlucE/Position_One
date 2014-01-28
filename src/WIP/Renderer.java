@@ -10,7 +10,9 @@ import Items.Item;
 import Items.Projectile;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.util.Map;
 
@@ -66,6 +68,21 @@ public class Renderer extends JPanel {
         return instance;
     }
 
+    private JButton inventory = new JButton(new AbstractAction() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            DebugLog.write("Inventory opened");
+            requestFocus();
+        }
+    });
+    private JButton character = new JButton(new AbstractAction() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            DebugLog.write("Character screen opened");
+            requestFocus();
+        }
+    });
+
     private Renderer() {
         DebugLog.write("Renderer started");
         setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -73,6 +90,23 @@ public class Renderer extends JPanel {
         addMouseMotionListener(MouseInputComponent.getInstance());
         setFocusable(true);
         addKeyListener(InputComponent.getInstance());
+        JPanel buttons = new JPanel();
+        buttons.setLayout(new GridLayout(1, 3, 5, 20));
+        Border empty = BorderFactory.createEmptyBorder(5, 75, 0, 75);
+        buttons.setBorder(empty);
+        buttons.setOpaque(false);
+
+        inventory.setBackground(Color.DARK_GRAY);
+        inventory.setForeground(Color.LIGHT_GRAY);
+        character.setBackground(Color.DARK_GRAY);
+        character.setForeground(Color.LIGHT_GRAY);
+
+        inventory.setText("Inventory");
+        character.setText("Stats");
+        buttons.add(inventory, 0);
+        buttons.add(character, 1);
+        setLayout(new BorderLayout());
+        add(buttons, BorderLayout.SOUTH);
     }
 
     public static int getScreenWidth() {
@@ -199,7 +233,6 @@ public class Renderer extends JPanel {
         }
     }
 
-
     private void drawActors(Map<Actor, Vector> actorPositionMap) {
         for (Actor a : actorPositionMap.keySet()) {
             Vector drawPosition = actorPositionMap.get(a);
@@ -254,10 +287,11 @@ public class Renderer extends JPanel {
     }
 
     private void drawGUI() {
+        //g2d.fillRect(30, 30, screenWidth - 60, screenHeight - 60);
     }
 
     private enum GUIState {
-        GAME, MAIN_MENU, INVENTORY, MAP, PAUSE_MENU
+        GAME, MAIN_MENU, INVENTORY, MAP, STATS, PAUSE_MENU
     }
 
     //DEBUGGING draws player position and collider

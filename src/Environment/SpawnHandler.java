@@ -18,13 +18,12 @@ import java.util.Random;
  * Time: 12:46
  */
 public class SpawnHandler {
-    //TODO update() method for spawning enemies
 
     private int maxEnemies;
-    private int currentEnemies = 0;
+    private int currentEnemies = 3;
     private List<Enemy> enemies;
     private final World world;
-    private int spawnTime = 5000;
+    private int spawnTime = 10000;
 
     public SpawnHandler(World world, int maxEnemies) {
         this.maxEnemies = maxEnemies;
@@ -70,7 +69,6 @@ public class SpawnHandler {
         }
     }
 
-    //TODO make this definitely spawn an enemy
     void spawnEnemyAround(Vector position, int radius) {
         if (radius <= 0) return;
 

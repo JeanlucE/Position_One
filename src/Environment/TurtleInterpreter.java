@@ -34,7 +34,7 @@ class TurtleInterpreter {
     void interpret() {
         TurtleMove[] positions = turtle.getPositions();
 
-        addCorridor(new AdvancedVector(0, 0), new AdvancedVector(0, 1));
+        addCorridor(new AdvancedVector(0, 0), new AdvancedVector(1, 1));
 
         for (TurtleMove move : positions) {
             addCorridor(move.getStartPos(), move.getEndPos());

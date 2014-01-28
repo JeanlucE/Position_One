@@ -24,12 +24,15 @@ public class InputComponent implements KeyListener {
 
     private int XAxis = 0;
     private int YAxis = 0;
-    private boolean spaceTyped = false;
-    private boolean spaceReleased = true;
-    private boolean shiftDown = false;
-    private boolean qTyped = false;
-    private boolean qReleased = true;
-    private boolean escapeTyped = false;
+    private boolean SPACE_TYPED = false;
+    private boolean SPACE_RELEASED = true;
+    private boolean SHIFT_DOWN = false;
+    private boolean Q_TYPED = false;
+    private boolean Q_RELEASED = true;
+    private boolean ESC_TYPED = false;
+    private boolean I_TYPED = false;
+    private boolean C_TYPED = false;
+    private boolean M_TYPED = false;
 
 
     @Override
@@ -40,7 +43,7 @@ public class InputComponent implements KeyListener {
     public void keyPressed(KeyEvent e) {
 
         if (e.isShiftDown()) {
-            shiftDown = true;
+            SHIFT_DOWN = true;
         }
 
         switch (e.getKeyCode()) {
@@ -74,29 +77,42 @@ public class InputComponent implements KeyListener {
                 break;
 
             case KeyEvent.VK_SPACE:
-                if (spaceReleased) {
-                    spaceTyped = true;
-                    spaceReleased = false;
+                if (SPACE_RELEASED) {
+                    SPACE_TYPED = true;
+                    SPACE_RELEASED = false;
 
                 }
                 break;
 
             case KeyEvent.VK_Q:
-                if (qReleased) {
-                    qTyped = true;
-                    qReleased = false;
+                if (Q_RELEASED) {
+                    Q_TYPED = true;
+                    Q_RELEASED = false;
                 }
                 break;
 
             case KeyEvent.VK_ESCAPE:
-                escapeTyped = true;
+                ESC_TYPED = true;
+                break;
+
+            case KeyEvent.VK_I:
+                I_TYPED = true;
+                break;
+
+            case KeyEvent.VK_C:
+                C_TYPED = true;
+                break;
+
+            case KeyEvent.VK_M:
+                M_TYPED = true;
+                break;
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        if (!e.isShiftDown() && shiftDown) {
-            shiftDown = false;
+        if (!e.isShiftDown() && SHIFT_DOWN) {
+            SHIFT_DOWN = false;
         }
 
         switch (e.getKeyCode()) {
@@ -122,17 +138,17 @@ public class InputComponent implements KeyListener {
                 break;
 
             case KeyEvent.VK_SPACE:
-                spaceReleased = true;
+                SPACE_RELEASED = true;
                 break;
 
             case KeyEvent.VK_Q:
-                qReleased = true;
+                Q_RELEASED = true;
                 break;
         }
     }
 
     public boolean isShiftDown() {
-        return shiftDown;
+        return SHIFT_DOWN;
     }
 
     public int getXAxis() {
@@ -144,25 +160,28 @@ public class InputComponent implements KeyListener {
     }
 
     public boolean isSpaceTyped() {
-        return spaceTyped;
+        return SPACE_TYPED;
     }
 
     public boolean isSpaceDown() {
-        return !spaceReleased;
+        return !SPACE_RELEASED;
     }
 
     public boolean isQTyped() {
-        return qTyped;
+        return Q_TYPED;
     }
 
     public boolean isEscapeTyped() {
-        return escapeTyped;
+        return ESC_TYPED;
     }
 
     //Called every frame to reset typed Keys
     public void resetTypedKeys() {
-        spaceTyped = false;
-        qTyped = false;
-        escapeTyped = false;
+        SPACE_TYPED = false;
+        Q_TYPED = false;
+        ESC_TYPED = false;
+        I_TYPED = false;
+        C_TYPED = false;
+        M_TYPED = false;
     }
 }
