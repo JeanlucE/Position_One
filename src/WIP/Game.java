@@ -25,6 +25,7 @@ public class Game {
     private final Actors.Character player;
     private final Renderer renderer;
     private final GameLoop gameLoop;
+    private GUIState guiState = GUIState.GAME;
 
     //Singleton
     public static Game getInstance() {
@@ -136,9 +137,20 @@ public class Game {
                 DebugLog.write(e1);
             }
 
-            InputComponent.getInstance().resetTypedKeys();
-            getRenderer().repaint();
+            if (InputComponent.getInstance().isI_TYPED()) {
+                toggleState(GUIState.INVENTORY);
+            }
 
+            if (InputComponent.getInstance().isC_TYPED()) {
+                toggleState(GUIState.STATS);
+            }
+
+            if (InputComponent.getInstance().isM_TYPED()) {
+                toggleState(GUIState.MAP);
+            }
+
+            getRenderer().repaint();
+            InputComponent.getInstance().resetTypedKeys();
 
             calcFrameRate();
         }
@@ -160,5 +172,29 @@ public class Game {
         private int getFrameRate() {
             return frameRate;
         }
+    }
+
+    GUIState getGuiState() {
+        return guiState;
+    }
+
+    void toggleState(GUIState guiState) {
+
+        if (!paused) {
+            if (this.guiState != guiState) {
+                this.guiState = guiState;
+            } else {
+                this.guiState = GUIState.GAME;
+            }
+        }
+    }
+
+    //FOR DEBUGGING
+    private void setGuiState(GUIState guiState) {
+        this.guiState = guiState;
+    }
+
+    enum GUIState {
+        GAME, MAIN_MENU, INVENTORY, MAP, STATS, PAUSE_MENU
     }
 }

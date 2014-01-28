@@ -58,8 +58,6 @@ public class Renderer extends JPanel {
     public boolean DEBUG_DRAW_ACTOR_POSITIONS = true;
     public boolean DEBUG_DRAW_ACTOR_COLLIDERS = true;
 
-    private GUIState guiState = GUIState.GAME;
-
     //Singleton Design Pattern
     public static Renderer getInstance() {
         if (instance == null) {
@@ -68,17 +66,27 @@ public class Renderer extends JPanel {
         return instance;
     }
 
-    private JButton inventory = new JButton(new AbstractAction() {
+    private CustomButton inventory = new CustomButton("Inventory [I]", new AbstractAction() {
         @Override
         public void actionPerformed(ActionEvent e) {
             DebugLog.write("Inventory opened");
+            Game.getInstance().toggleState(Game.GUIState.INVENTORY);
             requestFocus();
         }
     });
-    private JButton character = new JButton(new AbstractAction() {
+
+    private CustomButton character = new CustomButton("Character [C]", new AbstractAction() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            DebugLog.write("Character screen opened");
+            Game.getInstance().toggleState(Game.GUIState.STATS);
+            requestFocus();
+        }
+    });
+
+    private CustomButton map = new CustomButton("Map [M]", new AbstractAction() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Game.getInstance().toggleState(Game.GUIState.MAP);
             requestFocus();
         }
     });
@@ -90,21 +98,16 @@ public class Renderer extends JPanel {
         addMouseMotionListener(MouseInputComponent.getInstance());
         setFocusable(true);
         addKeyListener(InputComponent.getInstance());
+
         JPanel buttons = new JPanel();
         buttons.setLayout(new GridLayout(1, 3, 5, 20));
-        Border empty = BorderFactory.createEmptyBorder(5, 75, 0, 75);
+        Border empty = BorderFactory.createEmptyBorder(5, 75, 5, 75);
         buttons.setBorder(empty);
         buttons.setOpaque(false);
-
-        inventory.setBackground(Color.DARK_GRAY);
-        inventory.setForeground(Color.LIGHT_GRAY);
-        character.setBackground(Color.DARK_GRAY);
-        character.setForeground(Color.LIGHT_GRAY);
-
-        inventory.setText("Inventory");
-        character.setText("Stats");
         buttons.add(inventory, 0);
         buttons.add(character, 1);
+        buttons.add(map, 2);
+
         setLayout(new BorderLayout());
         add(buttons, BorderLayout.SOUTH);
     }
@@ -117,6 +120,7 @@ public class Renderer extends JPanel {
         return screenHeight;
     }
 
+    //TODO handle GUISTATE in GAME
     public void paintComponent(Graphics g) {
 
         g2d = (Graphics2D) g;
@@ -142,6 +146,9 @@ public class Renderer extends JPanel {
             g2d.drawString("PAUSED", getWidth() - 65, 20);
             g2d.setFont(thisFont);
         }
+
+        g2d.setColor(Color.WHITE);
+        g2d.drawString(Game.getInstance().getGuiState().name(), screenWidth - 60, screenHeight - 10);
 
         GameWindow.getInstance().setTitle("Frames:" + String.valueOf(Game.getInstance().getFrameRate()));
     }
@@ -288,10 +295,6 @@ public class Renderer extends JPanel {
 
     private void drawGUI() {
         //g2d.fillRect(30, 30, screenWidth - 60, screenHeight - 60);
-    }
-
-    private enum GUIState {
-        GAME, MAIN_MENU, INVENTORY, MAP, STATS, PAUSE_MENU
     }
 
     //DEBUGGING draws player position and collider

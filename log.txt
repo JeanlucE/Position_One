@@ -1,18 +1,23 @@
-Log created at: 19:40:28 28.01.2014
+Log created at: 23:48:50 28.01.2014
 
-[19:40:28.671] New Game started
-[19:40:28.677] New Melee Weapon created: Sword
-[19:40:28.677] New Ranged Weapon created: The OP Bow
-[19:40:28.679] New Magic Weapon created: Fire Staff
-[19:40:28.719] New Character created: Ned Stark
-[19:40:28.720] New Armour created: Helmet
-[19:40:28.720] New Armour created: Body
-[19:40:28.720] New Armour created: Legs
-[19:40:28.721] Player Ned Stark has equipped: Helmet
-[19:40:28.721] Player Ned Stark has equipped: Body
-[19:40:28.721] Player Ned Stark has equipped: Legs
-[19:40:28.721] Player Ned Stark has equipped: Sword
-[19:40:28.721] Player Ned Stark has equipped: Wooden Arrow
-[19:40:28.779] New World created with size: 2925
-[19:40:28.811] Saved Map: randomMap
-[19:40:28.825] Renderer started
+[23:48:50.180] New Game started
+[23:48:50.184] New Melee Weapon created: Sword
+[23:48:50.185] New Ranged Weapon created: The OP Bow
+[23:48:50.187] New Magic Weapon created: Fire Staff
+[23:48:50.227] New Character created: Ned Stark
+[23:48:50.228] New Armour created: Helmet
+[23:48:50.228] New Armour created: Body
+[23:48:50.228] New Armour created: Legs
+[23:48:50.228] Player Ned Stark has equipped: Helmet
+[23:48:50.228] Player Ned Stark has equipped: Body
+[23:48:50.228] Player Ned Stark has equipped: Legs
+[23:48:50.228] Player Ned Stark has equipped: Sword
+[23:48:50.229] Player Ned Stark has equipped: Wooden Arrow
+[23:48:50.291] New World created with size: 3010
+[23:48:50.350] Saved Map: randomMap
+[23:48:50.363] Renderer started
+[23:48:52.465] Inventory opened
+[23:49:06.127] Inventory opened
+[23:49:14.163] Inventory opened
+[23:49:14.614] Inventory opened
+[23:49:19.356] Inventory opened

@@ -12,7 +12,7 @@ import java.awt.event.KeyListener;
 public class InputComponent implements KeyListener {
 
     //If any focus problems occur try this on renderer: jPanel.requestFocusInWindow();
-
+    //TODO put key typed actions in keyTyped method
     private static InputComponent instance;
 
     public static InputComponent getInstance() {
@@ -173,6 +173,18 @@ public class InputComponent implements KeyListener {
 
     public boolean isEscapeTyped() {
         return ESC_TYPED;
+    }
+
+    public boolean isI_TYPED() {
+        return I_TYPED;
+    }
+
+    public boolean isC_TYPED() {
+        return C_TYPED;
+    }
+
+    public boolean isM_TYPED() {
+        return M_TYPED;
     }
 
     //Called every frame to reset typed Keys
