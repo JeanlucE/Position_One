@@ -54,7 +54,7 @@ public class World {
     }
 
     private World() {
-        currentMap = WorldMap.getRandomMap();
+        currentMap = WorldMap.getRandomMap(10, 15, 20, 4);
 
         //initiateMap("world");
         try {

@@ -33,6 +33,21 @@ public class WorldMap {
         return new WorldMap(turtleInterpreter.getGeneratedMap());
     }
 
+    public static WorldMap getRandomMap(long seed) {
+        Turtle t = new Turtle(seed);
+        TurtleInterpreter turtleInterpreter = new TurtleInterpreter(3);
+        turtleInterpreter.addTurtle(t);
+        return new WorldMap(turtleInterpreter.getGeneratedMap());
+    }
+
+    public static WorldMap getRandomMap(int minCorridorLength, int maxCorridorLength, int numOfCorridors,
+                                        int corridorWidth) {
+        Turtle t = new Turtle(minCorridorLength, maxCorridorLength, numOfCorridors);
+        TurtleInterpreter turtleInterpreter = new TurtleInterpreter(corridorWidth);
+        turtleInterpreter.addTurtle(t);
+        return new WorldMap(turtleInterpreter.getGeneratedMap());
+    }
+
     //DEBUGGING
     public WorldMap() {
         int tilesize = Renderer.TILESIZE;

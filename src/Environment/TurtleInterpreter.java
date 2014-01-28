@@ -15,7 +15,7 @@ import java.util.Map;
  * Time: 16:38
  */
 class TurtleInterpreter {
-
+    //TODO interpret positions where turtle doesnt move as rooms
     private Turtle turtle;
     private int corridorWidth;
     private int scale = 2;
@@ -39,6 +39,10 @@ class TurtleInterpreter {
         for (TurtleMove move : positions) {
             addCorridor(move.getStartPos(), move.getEndPos());
         }
+    }
+
+    void setCorridorWidth(int corridorWidth) {
+        this.corridorWidth = corridorWidth;
     }
 
     void addCorridor(AdvancedVector start, AdvancedVector end) {

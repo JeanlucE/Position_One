@@ -13,17 +13,22 @@ import java.util.Stack;
  * Time: 17:25
  */
 class Turtle {
-    private AdvancedTransform transform;
+    private AdvancedTransform transform = new AdvancedTransform();
     //TODO save this in a tree, which can then include easy implementation of intersections
-    private Stack<TurtleMove> positions;
-    //TODO outsource this to turtleinterpreter
-
+    private Stack<TurtleMove> positions = new Stack<>();
+    private Random r;
 
     public Turtle() {
-        transform = new AdvancedTransform();
-        positions = new Stack<>();
-        positions.push(new TurtleMove(new AdvancedVector(0f, 0f), transform.getPosition().clone()));
         randomMoves();
+    }
+
+    public Turtle(long seed) {
+        r = new Random(seed);
+        randomMoves();
+    }
+
+    public Turtle(int minLength, int maxLength, int numOfMoves) {
+        randomMoves(minLength, maxLength, numOfMoves);
     }
 
     private AdvancedTransform getTransform() {
@@ -31,7 +36,10 @@ class Turtle {
     }
 
 
-    private void randomMoves(Random r, int minCorridorLength, int maxCorridorLength, int numOfMoves) {
+    private void randomMoves(int minCorridorLength, int maxCorridorLength, int numOfMoves) {
+        if (r == null) {
+            r = new Random();
+        }
         int max = maxCorridorLength - minCorridorLength + 1;
         for (int i = 0; i < numOfMoves; i++) {
             int action = r.nextInt(2);
@@ -49,7 +57,7 @@ class Turtle {
     }
 
     private void randomMoves() {
-        randomMoves(new Random(), 10, 15, 30);
+        randomMoves(10, 15, 30);
     }
 
     private AdvancedVector endPos;
