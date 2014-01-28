@@ -40,7 +40,7 @@ public class Game {
         DebugLog.write("New Game started");
         Weapon sword = new Weapon_Melee("Sword", 0, 0, 10, 0.65f, new ItemGraphicsComponent());
         Weapon bow = new Weapon_Ranged("The OP Bow", 0, 0, 10, 12, 0.3f, new ItemGraphicsComponent());
-        Weapon staff = new Weapon_Magic("Fire Staff", 0, 0, 10, 6, 0.75f, Weapon_Magic.Element.FIRE,
+        Weapon staff = new Weapon_Magic("Fire Staff", 0, 0, 20, 6, 0.75f, Weapon_Magic.Element.FIRE,
                 new ItemGraphicsComponent());
         player = new Character("Ned Stark");
         player.getTransform().getPosition().setX(60);
@@ -54,7 +54,7 @@ public class Game {
         player.equip(helmet);
         player.equip(body);
         player.equip(legs);
-        player.equip(staff);
+        player.equip(bow);
         player.equip(arrow);
         Enemy.DEBUG_ALL_ENEMIES_MOVE_TOWARD_PLAYER = true;
         Ammunition dropArrow = new Ammunition("Wooden Arrow", 0,
@@ -63,7 +63,7 @@ public class Game {
         getCurrentWorld().dropItem(dropArrow, 100, 100);
 
         World currentWorld = World.getInstance();
-        currentWorld.spawnEnemyAround(getPlayer().getTransform().getPosition(), 250);
+        //currentWorld.spawnEnemyAround(getPlayer().getTransform().getPosition(), 250);
 
         renderer = Renderer.getInstance();
         gameLoop = new GameLoop();
@@ -129,6 +129,7 @@ public class Game {
                         g.update();
                     }
 
+                    getCurrentWorld().update();
                     removeDestroyedGameObjects();
                 }
             } catch (Exception e1) {

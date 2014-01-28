@@ -11,13 +11,14 @@ import WIP.Transform;
  * Time: 23:26
  */
 public class Ammunition extends Equipment {
-    //TODO parent ammo transfrom to player transform when equipped and unparent when unequipped
-    private int stack = 5;
+
+    private int stack = 50;
     private PhysicsComponent physicsComponent;
 
     public Ammunition(String name, int level, ProjectileGraphicsComponent g, PhysicsComponent phys) {
         super(name, level, 0, EquipmentClass.RANGED, g);
         physicsComponent = phys;
+
     }
 
     @Override

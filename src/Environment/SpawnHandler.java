@@ -4,9 +4,7 @@ import Actors.Enemy;
 import Components.ActorGraphicsComponent;
 import Components.DynamicResource;
 import Components.PhysicsComponent;
-import WIP.DebugLog;
-import WIP.Transform;
-import WIP.Vector;
+import WIP.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,15 +18,40 @@ import java.util.Random;
  * Time: 12:46
  */
 public class SpawnHandler {
+    //TODO update() method for spawning enemies
+
     private int maxEnemies;
+    private int currentEnemies = 0;
+    private List<Enemy> enemies;
     private final World world;
+    private int spawnTime = 5000;
 
     public SpawnHandler(World world, int maxEnemies) {
         this.maxEnemies = maxEnemies;
         this.world = world;
+        this.enemies = new ArrayList<>(maxEnemies);
     }
 
-    void spawnEnemyAt(Vector position) {
+    private int currentSpawnTime = 0;
+
+    void update() {
+        if (currentSpawnTime < spawnTime) {
+            currentSpawnTime += Time.deltaTime();
+        } else {
+            currentSpawnTime = 0;
+            if (currentEnemies < maxEnemies) {
+                spawnEnemyAround(Game.getInstance().getPlayer().getTransform().getPosition(), 200);
+            }
+        }
+        for (int i = enemies.size() - 1; i >= 0; i--) {
+            if (enemies.get(i).isDestroyed()) {
+                enemies.remove(i);
+                currentEnemies--;
+            }
+        }
+    }
+
+    boolean spawnEnemyAt(Vector position) {
         Enemy e = new Enemy("Chu Chu", 100, new Transform(),
                 new ActorGraphicsComponent(DynamicResource.ENEMY_CHUCHU),
                 new PhysicsComponent(39, 39));
@@ -40,9 +63,14 @@ public class SpawnHandler {
             e.destroy();
             DebugLog.write("SpawnHandler: could not spawn enemy at: " + position.toString());
             DebugLog.write("SpawnHandler: " + collisionEvent.toString());
+            return false;
+        } else {
+            enemies.add(e);
+            return true;
         }
     }
 
+    //TODO make this definitely spawn an enemy
     void spawnEnemyAround(Vector position, int radius) {
         if (radius <= 0) return;
 
@@ -58,6 +86,9 @@ public class SpawnHandler {
 
         Random r = new Random();
         Vector spawnPoint = floors.get(r.nextInt(floors.size())).shift(20, 20);
-        spawnEnemyAt(spawnPoint);
+        while (!spawnEnemyAt(spawnPoint)) {
+            spawnPoint = floors.get(r.nextInt(floors.size())).shift(20, 20);
+        }
+        currentEnemies++;
     }
 }

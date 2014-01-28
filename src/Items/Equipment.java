@@ -1,5 +1,6 @@
 package Items;
 
+import Actors.Actor;
 import Components.ItemGraphicsComponent;
 import WIP.DebugLog;
 import WIP.Vector;
@@ -14,6 +15,8 @@ public abstract class Equipment extends Item {
     protected int level;
     protected int skillRequirement;
     protected final EquipmentClass equipmentClass;
+    //Actor that has the equipment equipped
+    protected Actor equipped;
 
     protected Equipment(String name, int level, int skillRequirement, EquipmentClass type, ItemGraphicsComponent g) {
         super(name, new Vector(), g);
@@ -35,6 +38,10 @@ public abstract class Equipment extends Item {
     public abstract boolean isArmour();
 
     public abstract boolean isAmmunition();
+
+    public void setEquipped(Actor actor) {
+        equipped = actor;
+    }
 
     public int getLevel() {
         return level;

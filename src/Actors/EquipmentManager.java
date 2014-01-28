@@ -73,6 +73,7 @@ public class EquipmentManager {
         }
 
         if (success) {
+            equipment.setEquipped(parent);
             DebugLog.write("Player " + parent.getName() + " has equipped: " + equipment.getName());
             return true;
         } else {
@@ -84,7 +85,6 @@ public class EquipmentManager {
     private boolean equip(Weapon weapon) {
         if (!mainHandSlot.isOccupied()) {
             mainHandSlot.equip(weapon);
-            weapon.setEquipped(parent);
             return true;
         }
         return false;
