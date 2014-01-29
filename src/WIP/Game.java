@@ -64,7 +64,6 @@ public class Game {
         getCurrentWorld().dropItem(dropArrow, 100, 100);
 
         World currentWorld = World.getInstance();
-        //currentWorld.spawnEnemyAround(getPlayer().getTransform().getPosition(), 250);
 
         renderer = Renderer.getInstance();
         gameLoop = new GameLoop();
@@ -77,8 +76,6 @@ public class Game {
     }
 
     private void removeDestroyedGameObjects() {
-        //Projectile.removeDeadProjectiles();
-        //Actor.removeDeadActors();
         GameObject.removeDestroyedGameObjects();
     }
 
@@ -94,14 +91,8 @@ public class Game {
         return World.getInstance();
     }
 
-    private boolean paused = false;
-
     public boolean isPaused() {
-        return paused;
-    }
-
-    public void setPaused(boolean flag) {
-        paused = flag;
+        return guiState == GUIState.PAUSE_MENU;
     }
 
     private Renderer getRenderer() {
@@ -121,7 +112,7 @@ public class Game {
                 Time.update();
 
                 if (InputComponent.getInstance().isEscapeTyped()) {
-                    setPaused(!isPaused());
+                    toggleState(GUIState.PAUSE_MENU);
                 }
 
                 if (!isPaused()) {
@@ -179,8 +170,16 @@ public class Game {
     }
 
     void toggleState(GUIState guiState) {
+        if (guiState == GUIState.PAUSE_MENU) {
+            if (this.guiState != GUIState.PAUSE_MENU) {
+                this.guiState = GUIState.PAUSE_MENU;
+            } else {
+                this.guiState = GUIState.GAME;
+            }
+            return;
+        }
 
-        if (!paused) {
+        if (!isPaused()) {
             if (this.guiState != guiState) {
                 this.guiState = guiState;
             } else {

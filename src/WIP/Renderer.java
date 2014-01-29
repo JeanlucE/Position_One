@@ -52,7 +52,6 @@ public class Renderer extends JPanel {
     // know the clipping edges but is also important to calculate draw positions from world position.
     private final static int screenWidth = 500, screenHeight = 500;
     private Graphics2D g2d;
-    private static Font boldFont = new Font("Times New Roman", Font.BOLD, 15);
 
     //DEBUGGING
     public boolean DEBUG_DRAW_ACTOR_POSITIONS = true;
@@ -75,7 +74,7 @@ public class Renderer extends JPanel {
         }
     });
 
-    private CustomButton character = new CustomButton("Character [C]", new AbstractAction() {
+    private CustomButton character = new CustomButton("Stats [C]", new AbstractAction() {
         @Override
         public void actionPerformed(ActionEvent e) {
             Game.getInstance().toggleState(Game.GUIState.STATS);
@@ -97,11 +96,13 @@ public class Renderer extends JPanel {
         addMouseListener(MouseInputComponent.getInstance());
         addMouseMotionListener(MouseInputComponent.getInstance());
         setFocusable(true);
+        //TODO test if there are any major changes
+        setDoubleBuffered(true);
         addKeyListener(InputComponent.getInstance());
 
         JPanel buttons = new JPanel();
-        buttons.setLayout(new GridLayout(1, 3, 5, 20));
-        Border empty = BorderFactory.createEmptyBorder(5, 75, 5, 75);
+        buttons.setLayout(new GridLayout(1, 3, 15, 0));
+        Border empty = BorderFactory.createEmptyBorder(5, 60, 5, 60);
         buttons.setBorder(empty);
         buttons.setOpaque(false);
         buttons.add(inventory, 0);
@@ -120,7 +121,6 @@ public class Renderer extends JPanel {
         return screenHeight;
     }
 
-    //TODO handle GUISTATE in GAME
     public void paintComponent(Graphics g) {
 
         g2d = (Graphics2D) g;
@@ -137,14 +137,6 @@ public class Renderer extends JPanel {
         if (mouseListener.isMousePressed()) {
             g2d.setColor(Color.GREEN);
             g2d.fillRect(30, 10, 10, 10);
-        }
-
-        if (Game.getInstance().isPaused()) {
-            g2d.setColor(Color.WHITE);
-            Font thisFont = getFont();
-            g2d.setFont(boldFont);
-            g2d.drawString("PAUSED", getWidth() - 65, 20);
-            g2d.setFont(thisFont);
         }
 
         g2d.setColor(Color.WHITE);
