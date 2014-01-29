@@ -335,22 +335,22 @@ public class Renderer extends JPanel {
     //DEBUGGING draws player position and collider
     private void drawActorPositions(Map<Actor, Vector> actors) {
         g2d.setColor(Color.RED);
-        for (Actor a : actors.keySet()) {
+        for (Map.Entry<Actor, Vector> e : actors.entrySet()) {
             //Position
-            Vector position = actors.get(a);
-            PhysicsComponent p = a.getCollider();
-            g2d.drawString(a.getTransform().getPosition().toString(),
-                    screenWidth / 2 - p.getWidth() / 2 - 5, screenHeight - (position.getY() - 32));
+            Vector position = e.getValue();
+            PhysicsComponent p = e.getKey().getCollider();
+            g2d.drawString(e.getKey().getTransform().getPosition().toString(),
+                    position.getX() - p.getWidth() / 2 - 5, screenHeight - (position.getY() - 32));
         }
     }
 
     private void drawActorColliders(Map<Actor, Vector> actors) {
         //Collider
         g2d.setColor(Color.RED);
-        for (Actor a : actors.keySet()) {
-            Vector position = actors.get(a);
-            PhysicsComponent p = a.getCollider();
-            g2d.drawRect(screenWidth / 2 - p.getWidth() / 2, screenHeight - (position.getY() + p.getHeight() / 2),
+        for (Map.Entry<Actor, Vector> e : actors.entrySet()) {
+            Vector position = e.getValue();
+            PhysicsComponent p = e.getKey().getCollider();
+            g2d.drawRect(position.getX() - p.getWidth() / 2, screenHeight - (position.getY() + p.getHeight() / 2),
                     p.getWidth(), p.getHeight());
         }
     }

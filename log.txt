@@ -1,17 +1,145 @@
-Log created at: 22:57:05 29.01.2014
+Log created at: 23:05:42 29.01.2014
 
-[22:57:05.539] New Game started
-[22:57:05.545] New Melee Weapon created: Sword
-[22:57:05.545] New Ranged Weapon created: The OP Bow
-[22:57:05.547] New Magic Weapon created: Fire Staff
-[22:57:05.589] New Character created: Ned Stark
-[22:57:05.590] New Armour created: Helmet
-[22:57:05.591] New Armour created: Body
-[22:57:05.591] New Armour created: Legs
-[22:57:05.591] Player Ned Stark has equipped: Helmet
-[22:57:05.591] Player Ned Stark has equipped: Body
-[22:57:05.591] Player Ned Stark has equipped: Legs
-[22:57:05.591] Player Ned Stark has equipped: Sword
-[22:57:05.591] Player Ned Stark has equipped: Wooden Arrow
-[22:57:05.653] New World created with size: 2359
-[22:57:05.700] Renderer started
+[23:05:42.683] New Game started
+[23:05:42.689] New Melee Weapon created: Sword
+[23:05:42.690] New Ranged Weapon created: The OP Bow
+[23:05:42.692] New Magic Weapon created: Fire Staff
+[23:05:42.733] New Character created: Ned Stark
+[23:05:42.735] New Armour created: Helmet
+[23:05:42.735] New Armour created: Body
+[23:05:42.735] New Armour created: Legs
+[23:05:42.735] Player Ned Stark has equipped: Helmet
+[23:05:42.735] Player Ned Stark has equipped: Body
+[23:05:42.735] Player Ned Stark has equipped: Legs
+[23:05:42.735] Player Ned Stark has equipped: Sword
+[23:05:42.735] Player Ned Stark has equipped: Wooden Arrow
+[23:05:42.786] New World created with size: 2359
+[23:05:42.837] Renderer started
+[23:05:53.002] SpawnHandler: tried spawning enemy at 100|-60
+[23:05:57.720] Damaged actor Ned Stark for 2 damage.
+[23:05:57.916] Damaged actor Chu Chu for 15 damage.
+[23:05:58.429] Damaged actor Chu Chu for 15 damage.
+[23:05:58.509] Damaged actor Ned Stark for 2 damage.
+[23:05:58.929] Damaged actor Chu Chu for 15 damage.
+[23:05:59.292] Damaged actor Ned Stark for 2 damage.
+[23:05:59.436] Damaged actor Chu Chu for 15 damage.
+[23:05:59.937] Damaged actor Chu Chu for 15 damage.
+[23:06:00.066] Damaged actor Ned Stark for 2 damage.
+[23:06:00.451] Damaged actor Chu Chu for 15 damage.
+[23:06:00.851] Damaged actor Ned Stark for 2 damage.
+[23:06:00.963] Damaged actor Chu Chu for 15 damage.
+[23:06:00.963] Player gained experience: 25
+[23:06:00.963] Actor Chu Chu is dead.
+[23:06:03.333] SpawnHandler: tried spawning enemy at 180|-140
+[23:06:05.549] Damaged actor Ned Stark for 2 damage.
+[23:06:06.322] Damaged actor Ned Stark for 2 damage.
+[23:06:07.108] Damaged actor Ned Stark for 2 damage.
+[23:06:07.893] Damaged actor Ned Stark for 2 damage.
+[23:06:08.070] Damaged actor Chu Chu for 15 damage.
+[23:06:08.576] Damaged actor Chu Chu for 15 damage.
+[23:06:08.676] Damaged actor Ned Stark for 2 damage.
+[23:06:09.078] Damaged actor Chu Chu for 15 damage.
+[23:06:09.462] Damaged actor Ned Stark for 2 damage.
+[23:06:09.590] Damaged actor Chu Chu for 15 damage.
+[23:06:10.105] Damaged actor Chu Chu for 15 damage.
+[23:06:10.249] Damaged actor Ned Stark for 2 damage.
+[23:06:10.618] Damaged actor Chu Chu for 15 damage.
+[23:06:11.030] Damaged actor Ned Stark for 2 damage.
+[23:06:11.128] Damaged actor Chu Chu for 15 damage.
+[23:06:11.128] Player gained experience: 25
+[23:06:11.128] Actor Chu Chu is dead.
+[23:06:13.662] SpawnHandler: tried spawning enemy at 220|-60
+[23:06:13.986] Player Ned Stark has equipped: Wooden Arrow
+[23:06:13.987] Ammunition stacked
+[23:06:14.983] Damaged actor Ned Stark for 2 damage.
+[23:06:15.224] Damaged actor Chu Chu for 15 damage.
+[23:06:15.737] Damaged actor Chu Chu for 15 damage.
+[23:06:15.769] Damaged actor Ned Stark for 2 damage.
+[23:06:16.252] Damaged actor Chu Chu for 15 damage.
+[23:06:16.555] Damaged actor Ned Stark for 2 damage.
+[23:06:16.763] Damaged actor Chu Chu for 15 damage.
+[23:06:17.263] Damaged actor Chu Chu for 15 damage.
+[23:06:17.345] Damaged actor Ned Stark for 2 damage.
+[23:06:17.763] Damaged actor Chu Chu for 15 damage.
+[23:06:18.119] Damaged actor Ned Stark for 2 damage.
+[23:06:18.264] Damaged actor Chu Chu for 15 damage.
+[23:06:18.264] Player gained experience: 25
+[23:06:18.264] Actor Chu Chu is dead.
+[23:06:23.993] SpawnHandler: tried spawning enemy at -140|-60
+[23:06:24.122] Damaged actor Ned Stark for 2 damage.
+[23:06:24.391] Damaged actor Chu Chu for 15 damage.
+[23:06:24.903] Damaged actor Chu Chu for 15 damage.
+[23:06:24.903] Damaged actor Ned Stark for 2 damage.
+[23:06:25.418] Damaged actor Chu Chu for 15 damage.
+[23:06:25.676] Damaged actor Ned Stark for 2 damage.
+[23:06:25.932] Damaged actor Chu Chu for 15 damage.
+[23:06:26.444] Damaged actor Chu Chu for 15 damage.
+[23:06:26.460] Damaged actor Ned Stark for 2 damage.
+[23:06:26.946] Damaged actor Chu Chu for 15 damage.
+[23:06:27.248] Damaged actor Ned Stark for 2 damage.
+[23:06:27.455] Damaged actor Chu Chu for 15 damage.
+[23:06:27.455] Player gained experience: 25
+[23:06:27.455] Player Ned Stark has leveled up.
+[23:06:27.455] Player Ned Stark is now level 2.
+[23:06:27.455] Actor Chu Chu is dead.
+[23:06:34.317] SpawnHandler: tried spawning enemy at 260|-180
+[23:06:34.382] Damaged actor Ned Stark for 2 damage.
+[23:06:34.950] Damaged actor Chu Chu for 15 damage.
+[23:06:35.158] Damaged actor Ned Stark for 2 damage.
+[23:06:35.451] Damaged actor Chu Chu for 15 damage.
+[23:06:35.939] Damaged actor Ned Stark for 2 damage.
+[23:06:35.956] Damaged actor Chu Chu for 15 damage.
+[23:06:36.457] Damaged actor Chu Chu for 15 damage.
+[23:06:36.718] Damaged actor Ned Stark for 2 damage.
+[23:06:36.961] Damaged actor Chu Chu for 15 damage.
+[23:06:37.476] Damaged actor Chu Chu for 15 damage.
+[23:06:37.508] Damaged actor Ned Stark for 2 damage.
+[23:06:37.976] Damaged actor Chu Chu for 15 damage.
+[23:06:37.976] Player gained experience: 25
+[23:06:37.976] Actor Chu Chu is dead.
+[23:06:44.658] SpawnHandler: tried spawning enemy at -20|-20
+[23:06:50.897] Damaged actor Ned Stark for 2 damage.
+[23:06:51.105] Damaged actor Chu Chu for 15 damage.
+[23:06:51.620] Damaged actor Chu Chu for 15 damage.
+[23:06:51.684] Damaged actor Ned Stark for 2 damage.
+[23:06:52.121] Damaged actor Chu Chu for 15 damage.
+[23:06:52.461] Damaged actor Ned Stark for 2 damage.
+[23:06:52.621] Damaged actor Chu Chu for 15 damage.
+[23:06:53.122] Damaged actor Chu Chu for 15 damage.
+[23:06:53.234] Damaged actor Ned Stark for 2 damage.
+[23:06:53.635] Damaged actor Chu Chu for 15 damage.
+[23:06:54.018] Damaged actor Ned Stark for 2 damage.
+[23:06:54.147] Damaged actor Chu Chu for 15 damage.
+[23:06:54.147] Player gained experience: 25
+[23:06:54.147] Actor Chu Chu is dead.
+[23:06:54.976] SpawnHandler: tried spawning enemy at 460|-300
+[23:06:56.958] Damaged actor Ned Stark for 2 damage.
+[23:06:57.022] Damaged actor Chu Chu for 15 damage.
+[23:06:57.534] Damaged actor Chu Chu for 15 damage.
+[23:06:57.742] Damaged actor Ned Stark for 2 damage.
+[23:06:58.037] Damaged actor Chu Chu for 15 damage.
+[23:06:58.518] Damaged actor Ned Stark for 2 damage.
+[23:06:58.550] Damaged actor Chu Chu for 15 damage.
+[23:06:59.064] Damaged actor Chu Chu for 15 damage.
+[23:06:59.304] Damaged actor Ned Stark for 2 damage.
+[23:06:59.564] Damaged actor Chu Chu for 15 damage.
+[23:07:00.079] Damaged actor Chu Chu for 15 damage.
+[23:07:00.079] Player gained experience: 25
+[23:07:00.079] Actor Chu Chu is dead.
+[23:07:05.323] SpawnHandler: tried spawning enemy at -20|-60
+[23:07:05.386] Damaged actor Ned Stark for 2 damage.
+[23:07:05.856] Damaged actor Chu Chu for 15 damage.
+[23:07:06.163] Damaged actor Ned Stark for 2 damage.
+[23:07:06.370] Damaged actor Chu Chu for 15 damage.
+[23:07:06.884] Damaged actor Chu Chu for 15 damage.
+[23:07:06.941] Damaged actor Ned Stark for 2 damage.
+[23:07:07.387] Damaged actor Chu Chu for 15 damage.
+[23:07:07.728] Damaged actor Ned Stark for 2 damage.
+[23:07:07.888] Damaged actor Chu Chu for 15 damage.
+[23:07:08.403] Damaged actor Chu Chu for 15 damage.
+[23:07:08.515] Damaged actor Ned Stark for 2 damage.
+[23:07:08.914] Damaged actor Chu Chu for 15 damage.
+[23:07:08.914] Player gained experience: 25
+[23:07:08.914] Player Ned Stark has leveled up.
+[23:07:08.914] Player Ned Stark is now level 3.
+[23:07:08.914] Actor Chu Chu is dead.
