@@ -51,8 +51,7 @@ public class Renderer extends JPanel {
     public final static int TILESIZE = 40;
     //This variable determines how wide and high the game screen is. This is important information for the camera to
     // know the clipping edges but is also important to calculate draw positions from world position.
-    //FIXME rendering for non square game window
-    private final static int screenWidth = 600, screenHeight = 600;
+    private final static int screenWidth = 800, screenHeight = 600;
     private Graphics2D g2d;
 
     //DEBUGGING
@@ -134,8 +133,6 @@ public class Renderer extends JPanel {
         infoScreen.setPreferredSize(new Dimension(150, screenHeight));
 
         this.add(infoScreen, BorderLayout.EAST);
-
-        //infoScreen.setPreferredSize(new Dimension(75, 400));
     }
 
     public static int getScreenWidth() {
@@ -299,12 +296,12 @@ public class Renderer extends JPanel {
 
     //Draws all items that are lying on the floor.
     private void drawItems(Map<Vector, WorldSpace> toRender) {
-        for (Map.Entry e : toRender.entrySet()) {
+        for (Map.Entry<Vector, WorldSpace> e : toRender.entrySet()) {
             if (e.getValue() == null) continue;
 
-            if (((WorldSpace) e.getValue()).isFloor() && ((Floor) e.getValue()).hasDroppedItems()) {
+            if (e.getValue().isFloor() && ((Floor) e.getValue()).hasDroppedItems()) {
                 Item[] items = ((Floor) e.getValue()).getDroppedItems();
-                drawImage(items[0], (Vector) e.getKey());
+                drawImage(items[0], e.getKey());
             }
         }
 
@@ -343,7 +340,7 @@ public class Renderer extends JPanel {
             Vector position = actors.get(a);
             PhysicsComponent p = a.getCollider();
             g2d.drawString(a.getTransform().getPosition().toString(),
-                    position.getX() - p.getWidth() / 2 - 5, screenWidth - (position.getY() - 32));
+                    screenWidth / 2 - p.getWidth() / 2 - 5, screenHeight - (position.getY() - 32));
         }
     }
 
@@ -353,7 +350,7 @@ public class Renderer extends JPanel {
         for (Actor a : actors.keySet()) {
             Vector position = actors.get(a);
             PhysicsComponent p = a.getCollider();
-            g2d.drawRect(position.getX() - p.getWidth() / 2, screenWidth - (position.getY() + p.getHeight() / 2),
+            g2d.drawRect(screenWidth / 2 - p.getWidth() / 2, screenHeight - (position.getY() + p.getHeight() / 2),
                     p.getWidth(), p.getHeight());
         }
     }

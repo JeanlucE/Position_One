@@ -63,7 +63,7 @@ public class World {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        spawnHandler = new SpawnHandler(this, 1);
+        spawnHandler = new SpawnHandler(this, 0);
     }
 
     public void update() {

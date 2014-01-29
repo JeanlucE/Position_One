@@ -10,7 +10,9 @@ public class Test {
 
 
     public static void main(String[] args) {
-        System.out.println((Long.MAX_VALUE / 40 * 2) / (double) (Integer.MAX_VALUE / 40 * 2));
+        int input = 500;
+        int x = (input >= 0) ? (input / 40) : (input / 40 - 1);
+        System.out.println(x);
     }
 
 

@@ -50,10 +50,10 @@ public class Camera {
         Map<Vector, WorldSpace> walls = new HashMap<>(200);
 
         //Get the camera clipping lines relative to the player
-        int northClip = parent.getY() + clipX;
-        int southClip = parent.getY() - clipX;
-        int westClip = parent.getX() - clipY;
-        int eastClip = parent.getX() + clipY;
+        int northClip = parent.getY() + clipY;
+        int southClip = parent.getY() - clipY;
+        int westClip = parent.getX() - clipX;
+        int eastClip = parent.getX() + clipX;
         visibleSpaces = world.getSubSpace(new Vector(westClip, southClip), new Vector(eastClip, northClip));
         for (Map.Entry<Vector, WorldSpace> e : visibleSpaces.entrySet()) {
             WorldSpace w = e.getValue();

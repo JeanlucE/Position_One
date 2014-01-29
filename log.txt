@@ -1,22 +1,17 @@
-Log created at: 22:18:07 29.01.2014
+Log created at: 22:57:05 29.01.2014
 
-[22:18:07.588] New Game started
-[22:18:07.594] New Melee Weapon created: Sword
-[22:18:07.594] New Ranged Weapon created: The OP Bow
-[22:18:07.596] New Magic Weapon created: Fire Staff
-[22:18:07.639] New Character created: Ned Stark
-[22:18:07.640] New Armour created: Helmet
-[22:18:07.640] New Armour created: Body
-[22:18:07.641] New Armour created: Legs
-[22:18:07.641] Player Ned Stark has equipped: Helmet
-[22:18:07.641] Player Ned Stark has equipped: Body
-[22:18:07.641] Player Ned Stark has equipped: Legs
-[22:18:07.641] Player Ned Stark has equipped: The OP Bow
-[22:18:07.641] Player Ned Stark has equipped: Wooden Arrow
-[22:18:07.702] New World created with size: 2359
-[22:18:07.750] Renderer started
-[22:18:17.672] Player Ned Stark has equipped: Wooden Arrow
-[22:18:17.672] Ammunition stacked
-[22:18:17.916] SpawnHandler: tried spawning enemy at 60|20
-[22:18:18.114] Damaged actor Ned Stark for 2 damage.
-[22:18:18.892] Damaged actor Ned Stark for 2 damage.
+[22:57:05.539] New Game started
+[22:57:05.545] New Melee Weapon created: Sword
+[22:57:05.545] New Ranged Weapon created: The OP Bow
+[22:57:05.547] New Magic Weapon created: Fire Staff
+[22:57:05.589] New Character created: Ned Stark
+[22:57:05.590] New Armour created: Helmet
+[22:57:05.591] New Armour created: Body
+[22:57:05.591] New Armour created: Legs
+[22:57:05.591] Player Ned Stark has equipped: Helmet
+[22:57:05.591] Player Ned Stark has equipped: Body
+[22:57:05.591] Player Ned Stark has equipped: Legs
+[22:57:05.591] Player Ned Stark has equipped: Sword
+[22:57:05.591] Player Ned Stark has equipped: Wooden Arrow
+[22:57:05.653] New World created with size: 2359
+[22:57:05.700] Renderer started
