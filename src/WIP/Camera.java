@@ -58,7 +58,7 @@ public class Camera {
         for (Map.Entry<Vector, WorldSpace> e : visibleSpaces.entrySet()) {
             WorldSpace w = e.getValue();
             Vector v = e.getKey();
-            transformToViewSpace(v);
+            v = transformToViewSpace(v);
             if (w != null) {
                 if (w.isFloor()) {
                     floors.put(v, w);
@@ -75,7 +75,7 @@ public class Camera {
         for (Actor a : Game.getInstance().getActors()) {
             if (withinScreenBounds(a)) {
                 Vector drawPosition = a.getTransform().getPosition().clone();
-                transformToViewSpace(drawPosition);
+                drawPosition = transformToViewSpace(drawPosition);
                 actorPositionMap.put(a, drawPosition);
             }
         }
@@ -87,7 +87,7 @@ public class Camera {
         for (Projectile p : Projectile.getProjectiles()) {
             if (withinScreenBounds(p)) {
                 Vector pos = p.getTransform().getPosition().clone();
-                transformToViewSpace(pos);
+                pos = transformToViewSpace(pos);
                 projectileVectorMap.put(p, pos);
             }
         }
@@ -112,8 +112,9 @@ public class Camera {
     }
 
     private Vector transformToViewSpace(Vector v) {
-        v.setX(screenWidth / 2 + (v.getX() - parent.getX()));
-        v.setY(screenHeight / 2 + (v.getY() - parent.getY()));
+        Vector a = Vector.add(getParentPosition(), Vector.subtract(v, parent));
+        v.setX(a.getX());
+        v.setY(a.getY());
         return v;
     }
 }

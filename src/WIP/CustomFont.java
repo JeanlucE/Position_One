@@ -17,7 +17,6 @@ public class CustomFont {
     static {
         try {
             SHERWOOD_Regular = Font.createFont(Font.PLAIN, new File("./fonts/SherwoodRegular.ttf"));
-            SHERWOOD_Regular = SHERWOOD_Regular.deriveFont(14.0f);
         } catch (FontFormatException e) {
             DebugLog.write("FontLoader: SherwoodRegular does not have the correct file format!");
         } catch (FileNotFoundException e) {

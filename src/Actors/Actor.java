@@ -93,8 +93,6 @@ public abstract class Actor extends Collidable {
      */
     protected final void move() {
         if (currentXVelocity == 0 && currentYVelocity == 0) return;
-        Vector currentPosition = getTransform().getPosition();
-        World world = Game.getInstance().getCurrentWorld();
 
         //TODO slow down character movement for diagonal movement
         int xMove = currentXVelocity;

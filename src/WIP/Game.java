@@ -55,7 +55,7 @@ public class Game {
         player.equip(helmet);
         player.equip(body);
         player.equip(legs);
-        player.equip(sword);
+        player.equip(bow);
         player.equip(arrow);
         Enemy.DEBUG_ALL_ENEMIES_MOVE_TOWARD_PLAYER = true;
         Ammunition dropArrow = new Ammunition("Wooden Arrow", 0,

@@ -20,14 +20,17 @@ class GameWindow extends JFrame {
 
     }
 
+    //TODO Set Icon Image
     private GameWindow() {
 
         Game game = Game.getInstance();
         add(Renderer.getInstance());
         pack();
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setBounds(100, 100, getWidth(), getHeight());
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        setBounds(300, 50, getWidth(), getHeight());
         setVisible(true);
+
 
         //System.out.println(this.getWidth() + "|" + this.getHeight());
         //System.out.println(game.getRenderer().getWidth() + "|" + game.getRenderer().getHeight());

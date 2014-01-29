@@ -54,16 +54,16 @@ public class World {
     }
 
     private World() {
-        currentMap = WorldMap.getRandomMap(10, 15, 20, 4);
+        //currentMap = WorldMap.getRandomMap(10, 15, 20, 4);
 
         //initiateMap("world");
         try {
-            saveMap("randomMap");
-            //loadMap("coctestinghall");
+            //saveMap("randomMap");
+            loadMap("randomMap");
         } catch (IOException e) {
             e.printStackTrace();
         }
-        spawnHandler = new SpawnHandler(this, 3);
+        spawnHandler = new SpawnHandler(this, 1);
     }
 
     public void update() {

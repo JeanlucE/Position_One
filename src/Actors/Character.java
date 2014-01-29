@@ -38,7 +38,7 @@ public class Character extends Actor {
 
     //Regen per second
     private float healthRegenRate = 0f;
-    private float staminaRegenRate = 60f;
+    private float staminaRegenRate = 100f;
     private float manaRegenRate = 3.5f;
     //endregion
 
@@ -123,6 +123,14 @@ public class Character extends Actor {
         return f.getName().charAt(0) + f.getName().substring(1, f.getName().length()).toLowerCase();
     }
     //endregion
+
+    public String[] getSkills() {
+        String[] result = new String[skills.length];
+        for (int i = 0; i < skills.length; i++) {
+            result[i] = skills[i].toString();
+        }
+        return result;
+    }
 
     private Vector lastDirection = new Vector(0, 0), newDirection;
 
@@ -396,7 +404,11 @@ public class Character extends Actor {
         return 750;
     }
 
-    private int getTotalDefense() {
+    public int getAttack() {
+        return getMainHand() != null ? getMainHand().getBaseDamage() : 0;
+    }
+
+    public int getDefense() {
         int result = 0;
         result += (equipment.hasHelmetEquipped()) ? (getHelmet().getDefence()) : 0;
         result += (equipment.hasBodyEquipped()) ? (getBody().getDefence()) : 0;
@@ -406,7 +418,7 @@ public class Character extends Actor {
 
     @Override
     protected int actualDamage(int damage) {
-        int actualDamage = damage - getTotalDefense();
+        int actualDamage = damage - getDefense();
         return (actualDamage > 1) ? (actualDamage) : 1;
     }
 

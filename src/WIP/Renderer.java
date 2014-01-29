@@ -11,6 +11,7 @@ import Items.Projectile;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
@@ -50,7 +51,8 @@ public class Renderer extends JPanel {
     public final static int TILESIZE = 40;
     //This variable determines how wide and high the game screen is. This is important information for the camera to
     // know the clipping edges but is also important to calculate draw positions from world position.
-    private final static int screenWidth = 500, screenHeight = 500;
+    //FIXME rendering for non square game window
+    private final static int screenWidth = 600, screenHeight = 600;
     private Graphics2D g2d;
 
     //DEBUGGING
@@ -65,30 +67,12 @@ public class Renderer extends JPanel {
         return instance;
     }
 
-    private CustomButton inventory = new CustomButton("Inventory [I]", new AbstractAction() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            DebugLog.write("Inventory opened");
-            Game.getInstance().toggleState(Game.GUIState.INVENTORY);
-            requestFocus();
-        }
-    });
+    private JPanel infoScreen;
+    private CardLayout c;
 
-    private CustomButton character = new CustomButton("Stats [C]", new AbstractAction() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            Game.getInstance().toggleState(Game.GUIState.STATS);
-            requestFocus();
-        }
-    });
-
-    private CustomButton map = new CustomButton("Map [M]", new AbstractAction() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            Game.getInstance().toggleState(Game.GUIState.MAP);
-            requestFocus();
-        }
-    });
+    private InfoPanel inventoryPanel = new InventoryPanel();
+    private InfoPanel statsPanel = new StatsPanel();
+    private InfoPanel mapPanel = new MapPanel();
 
     private Renderer() {
         DebugLog.write("Renderer started");
@@ -100,17 +84,58 @@ public class Renderer extends JPanel {
         setDoubleBuffered(true);
         addKeyListener(InputComponent.getInstance());
 
+        setLayout(new BorderLayout());
+
+        //Buttons for inventory, stats and map
         JPanel buttons = new JPanel();
         buttons.setLayout(new GridLayout(1, 3, 15, 0));
         Border empty = BorderFactory.createEmptyBorder(5, 60, 5, 60);
         buttons.setBorder(empty);
         buttons.setOpaque(false);
+        CustomButton inventory = new CustomButton("Inventory [I]", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DebugLog.write("Inventory opened");
+                Game.getInstance().toggleState(Game.GUIState.INVENTORY);
+                requestFocus();
+            }
+        });
+        CustomButton character = new CustomButton("Stats [C]", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Game.getInstance().toggleState(Game.GUIState.STATS);
+                requestFocus();
+            }
+        });
+        CustomButton map = new CustomButton("Map [M]", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Game.getInstance().toggleState(Game.GUIState.MAP);
+                requestFocus();
+            }
+        });
         buttons.add(inventory, 0);
         buttons.add(character, 1);
         buttons.add(map, 2);
 
-        setLayout(new BorderLayout());
         add(buttons, BorderLayout.SOUTH);
+
+        //Panels for inventory, stats and map
+        infoScreen = new JPanel();
+        infoScreen.setBackground(Color.WHITE);
+
+        c = new CardLayout();
+        infoScreen.setLayout(c);
+
+        infoScreen.add(inventoryPanel, "inventory");
+        infoScreen.add(statsPanel, "stats");
+        infoScreen.add(mapPanel, "map");
+        infoScreen.setVisible(false);
+        infoScreen.setPreferredSize(new Dimension(150, screenHeight));
+
+        this.add(infoScreen, BorderLayout.EAST);
+
+        //infoScreen.setPreferredSize(new Dimension(75, 400));
     }
 
     public static int getScreenWidth() {
@@ -140,7 +165,7 @@ public class Renderer extends JPanel {
         }
 
         g2d.setColor(Color.WHITE);
-        g2d.drawString(Game.getInstance().getGuiState().name(), screenWidth - 60, screenHeight - 10);
+        g2d.drawString(Game.getInstance().getGuiState().name(), screenWidth - 55, screenHeight - 10);
 
         GameWindow.getInstance().setTitle("Frames:" + String.valueOf(Game.getInstance().getFrameRate()));
     }
@@ -176,21 +201,21 @@ public class Renderer extends JPanel {
         PhysicsComponent phys = player.getCollider();
 
         g2d.setColor(Color.RED);
-        g2d.fillRect(250 + xOffset,
-                screenHeight - (phys.getHeight() / 2 + 250 + 14),
+        g2d.fillRect(screenWidth / 2 + xOffset,
+                screenHeight - (phys.getHeight() / 2 + screenHeight / 2 + 14),
                 30, 5);
         g2d.setColor(Color.BLUE);
-        g2d.fillRect(250 + xOffset,
-                screenHeight - (phys.getHeight() / 2 + 250 + 14),
+        g2d.fillRect(screenWidth / 2 + xOffset,
+                screenHeight - (phys.getHeight() / 2 + screenHeight / 2 + 14),
                 (int) (30 * player.getManaPercentage()), 5);
 
         g2d.setColor(Color.RED);
-        g2d.fillRect(250 + xOffset,
-                screenHeight - (phys.getHeight() / 2 + 250 + 21),
+        g2d.fillRect(screenWidth / 2 + xOffset,
+                screenHeight - (phys.getHeight() / 2 + screenHeight / 2 + 21),
                 30, 5);
         g2d.setColor(new Color(0xFFE41C));
-        g2d.fillRect(250 + xOffset,
-                screenHeight - (phys.getHeight() / 2 + 250 + 21),
+        g2d.fillRect(screenWidth / 2 + xOffset,
+                screenHeight - (phys.getHeight() / 2 + screenHeight / 2 + 21),
                 (int) (30 * player.getStaminaPercentage()), 5);
     }
 
@@ -225,25 +250,25 @@ public class Renderer extends JPanel {
 
     //Gets all worldspaces that are visible to the camera and renders these
     private void drawWorld(Map<Vector, WorldSpace> toRender) {
-        for (Map.Entry e : toRender.entrySet()) {
-            WorldSpace w = (WorldSpace) e.getValue();
-            Vector v = (Vector) e.getKey();
+        for (Map.Entry<Vector, WorldSpace> e : toRender.entrySet()) {
+            WorldSpace w = e.getValue();
+            Vector v = e.getKey();
             drawImage(w, v);
         }
     }
 
     private void drawActors(Map<Actor, Vector> actorPositionMap) {
-        for (Actor a : actorPositionMap.keySet()) {
-            Vector drawPosition = actorPositionMap.get(a);
-            PhysicsComponent phys = a.getCollider();
-            drawImage(a, drawPosition, phys.getWidth(), phys.getHeight());
+        for (Map.Entry<Actor, Vector> e : actorPositionMap.entrySet()) {
+            Vector drawPosition = e.getValue();
+            PhysicsComponent phys = e.getKey().getCollider();
+            drawImage(e.getKey(), drawPosition, phys.getWidth(), phys.getHeight());
 
         }
 
         //Draws all health bars
-        for (Actor a : actorPositionMap.keySet()) {
-            Vector drawPosition = actorPositionMap.get(a);
-            drawHealthBar(a, drawPosition);
+        for (Map.Entry<Actor, Vector> e : actorPositionMap.entrySet()) {
+            Vector drawPosition = e.getValue();
+            drawHealthBar(e.getKey(), drawPosition);
         }
     }
 
@@ -264,10 +289,10 @@ public class Renderer extends JPanel {
 
     private void drawProjectiles() {
         Map<Projectile, Vector> projectiles = Camera.getInstance().projectilesToRender();
-        for (Projectile p : projectiles.keySet()) {
-            Vector drawPosition = projectiles.get(p);
-            PhysicsComponent phys = p.getCollider();
-            drawImage(p, drawPosition, phys.getWidth(), phys.getHeight());
+        for (Map.Entry<Projectile, Vector> e : projectiles.entrySet()) {
+            Vector drawPosition = e.getValue();
+            PhysicsComponent phys = e.getKey().getCollider();
+            drawImage(e.getKey(), drawPosition, phys.getWidth(), phys.getHeight());
         }
         //drawImage(p, projectiles.get(p));
     }
@@ -286,7 +311,28 @@ public class Renderer extends JPanel {
     }
 
     private void drawGUI() {
-        //g2d.fillRect(30, 30, screenWidth - 60, screenHeight - 60);
+        Game.GUIState g = Game.getInstance().getGuiState();
+
+        if (Game.getInstance().isPaused()) {
+            infoScreen.setVisible(false);
+            return;
+        }
+
+        if (g != Game.GUIState.GAME) {
+            infoScreen.setVisible(true);
+            if (g == Game.GUIState.INVENTORY) {
+                inventoryPanel.update();
+                c.show(infoScreen, "inventory");
+            } else if (g == Game.GUIState.STATS) {
+                statsPanel.update();
+                c.show(infoScreen, "stats");
+            } else if (g == Game.GUIState.MAP) {
+                mapPanel.update();
+                c.show(infoScreen, "map");
+            }
+        } else {
+            infoScreen.setVisible(false);
+        }
     }
 
     //DEBUGGING draws player position and collider
@@ -309,6 +355,103 @@ public class Renderer extends JPanel {
             PhysicsComponent p = a.getCollider();
             g2d.drawRect(position.getX() - p.getWidth() / 2, screenWidth - (position.getY() + p.getHeight() / 2),
                     p.getWidth(), p.getHeight());
+        }
+    }
+
+    private abstract class InfoPanel extends JPanel {
+        private InfoPanel(String title) {
+            setBackground(Color.DARK_GRAY);
+            setForeground(Color.LIGHT_GRAY);
+
+            setLayout(new BorderLayout());
+
+            Border lineBorder = BorderFactory.createLineBorder(Color.LIGHT_GRAY, 3, true);
+            Border titledBorder = BorderFactory.createTitledBorder(lineBorder, title,
+                    TitledBorder.CENTER, TitledBorder.CENTER,
+                    CustomFont.SHERWOOD_Regular.deriveFont(20.0f), Color.LIGHT_GRAY);
+            Border emptyBorder = BorderFactory.createEmptyBorder(3, 3, 3, 3);
+            Border compoundBorder = BorderFactory.createCompoundBorder(emptyBorder, titledBorder);
+            this.setBorder(compoundBorder);
+        }
+
+        abstract void update();
+    }
+
+    private class InventoryPanel extends InfoPanel {
+
+        private InventoryPanel() {
+            super("Inventory");
+        }
+
+        @Override
+        void update() {
+
+        }
+    }
+
+    private class StatsPanel extends InfoPanel {
+        private JLabel level;
+        private JLabel skillPoints;
+        private JLabel[] skills = new JLabel[8];
+        private JLabel attack;
+        private JLabel defense;
+
+        private StatsPanel() {
+            super("Stats");
+
+            setLayout(new GridLayout(12, 1, 0, 3));
+
+            Font font = CustomFont.SHERWOOD_Regular.deriveFont(14.0f);
+
+            level = new JLabel();
+            level.setForeground(Color.LIGHT_GRAY);
+            level.setFont(font);
+            add(level);
+
+            skillPoints = new JLabel();
+            skillPoints.setForeground(Color.LIGHT_GRAY);
+            skillPoints.setFont(font);
+            add(skillPoints);
+
+            attack = new JLabel();
+            attack.setForeground(Color.LIGHT_GRAY);
+            attack.setFont(font);
+            add(attack);
+
+            defense = new JLabel();
+            defense.setForeground(Color.LIGHT_GRAY);
+            defense.setFont(font);
+            add(defense);
+
+            for (int i = 0; i < skills.length; i++) {
+                skills[i] = new JLabel();
+                skills[i].setForeground(Color.LIGHT_GRAY);
+                skills[i].setFont(font);
+                add(skills[i]);
+            }
+        }
+
+        void update() {
+            Actors.Character player = Game.getInstance().getPlayer();
+            level.setText("Player level: " + player.getLevel());
+            skillPoints.setText("Skill points: " + player.getSkillPoints());
+            attack.setText("Attack: " + player.getAttack());
+            defense.setText("Defense: " + player.getDefense());
+            String[] strings = player.getSkills();
+            for (int i = 0; i < strings.length; i++) {
+                skills[i].setText(strings[i]);
+            }
+        }
+    }
+
+    private class MapPanel extends InfoPanel {
+        private MapPanel() {
+            super("Map");
+        }
+
+        @Override
+        void update() {
+
         }
     }
 }

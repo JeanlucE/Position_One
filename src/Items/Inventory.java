@@ -14,16 +14,15 @@ import WIP.DebugLog;
  */
 public class Inventory {
 
-    private static final int INVENTORYSIZE = 5;
+    private static final int INVENTORYSIZE = 24;
 
-    private InventorySlot[][] inventorySlots;
+    private InventorySlot[] inventorySlots;
 
     public Inventory() {
-        inventorySlots = new InventorySlot[INVENTORYSIZE][INVENTORYSIZE];
+        inventorySlots = new InventorySlot[INVENTORYSIZE];
         for (int i = 0; i < inventorySlots.length; i++) {
-            for (int j = 0; j < inventorySlots[0].length; j++) {
-                inventorySlots[i][j] = new InventorySlot();
-            }
+            inventorySlots[i] = new InventorySlot();
+
         }
     }
 
@@ -34,46 +33,44 @@ public class Inventory {
         }
     }
 
-    public InventorySlot getSlot(int x, int y) {
+    public InventorySlot getSlot(int x) {
         try {
-            return inventorySlots[x][y];
+            return inventorySlots[x];
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("There is no inventory slot with position: " + x + "|" + y);
+            System.out.println("There is no inventory slot at position: " + x);
         }
         return null;
     }
 
     //Called when an item is moved from one inventory slot to another
     //Player can only move an item from an inventory slot, if it actually contains an item
-    public void swap(int fromX, int fromY, int toX, int toY) {
-        if (getSlot(toX, toY).isOccupied()) {
+    public void swap(int from, int to) {
+        if (getSlot(to).isOccupied()) {
 
-            Item item = getSlot(toX, toY).getItem();
-            getSlot(toX, toY).addItem(getSlot(fromX, fromY).getItem());
-            getSlot(fromX, fromY).addItem(item);
+            Item item = getSlot(to).getItem();
+            getSlot(to).addItem(getSlot(from).getItem());
+            getSlot(from).addItem(item);
 
         } else {
-            getSlot(toX, toY).addItem(getSlot(fromX, fromY).getItem());
-            getSlot(fromX, fromY).empty();
+            getSlot(to).addItem(getSlot(from).getItem());
+            getSlot(from).empty();
         }
     }
 
     public boolean isFull() {
         for (int i = 0; i < inventorySlots.length; i++) {
-            for (int j = 0; j < inventorySlots[0].length; j++) {
-                if (!getSlot(i, j).isOccupied())
-                    return false;
-            }
+            if (!getSlot(i).isOccupied())
+                return false;
+
         }
         return true;
     }
 
     private InventorySlot getFirstEmpty() {
         for (int i = 0; i < INVENTORYSIZE; i++) {
-            for (int j = 0; j < INVENTORYSIZE; j++) {
-                if (!getSlot(i, j).isOccupied())
-                    return getSlot(i, j);
-            }
+            if (!getSlot(i).isOccupied())
+                return getSlot(i);
+
         }
         DebugLog.write("No empty inventory slot found!");
         return null;
@@ -82,27 +79,26 @@ public class Inventory {
     public String toString() {
         String str = "";
         for (int i = 0; i < INVENTORYSIZE; i++) {
-            for (int j = 0; j < INVENTORYSIZE; j++) {
-                if (getSlot(i, j).isOccupied()) {
-                    str += ("Item at " + i + "|" + j + ": " + getSlot(i, j).toString() + "; ");
-                }
+            if (getSlot(i).isOccupied()) {
+                str += ("Item at " + i + ": " + getSlot(i).toString() + "; ");
             }
+
         }
         return str;
     }
 
-    public class InventorySlot {
+    private class InventorySlot {
         private Item item = null;
 
         //Should only be called when isOccupied returns true
-        public Item getItem() {
+        private Item getItem() {
             if (isOccupied()) {
                 return item;
             }
             return null;
         }
 
-        public void addItem(Item item) {
+        private void addItem(Item item) {
             if (!isOccupied()) {
                 this.item = item;
             } else {
@@ -111,11 +107,11 @@ public class Inventory {
             }
         }
 
-        public boolean isOccupied() {
+        private boolean isOccupied() {
             return item != null;
         }
 
-        public void empty() {
+        private void empty() {
             addItem(null);
         }
 

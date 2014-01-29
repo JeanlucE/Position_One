@@ -20,7 +20,7 @@ import java.util.Random;
 public class SpawnHandler {
 
     private int maxEnemies;
-    private int currentEnemies = 3;
+    private int currentEnemies = 0;
     private List<Enemy> enemies;
     private final World world;
     private int spawnTime = 10000;

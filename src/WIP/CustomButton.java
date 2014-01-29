@@ -26,7 +26,7 @@ public class CustomButton extends JButton {
         setBackground(Color.DARK_GRAY);
         setForeground(Color.LIGHT_GRAY);
         setText(str);
-        setFont(CustomFont.SHERWOOD_Regular);
+        setFont(CustomFont.SHERWOOD_Regular.deriveFont(14.0f));
 
         final Border buttonBorder = BorderFactory.createBevelBorder(BevelBorder.RAISED);
         final Border clickedBorder = BorderFactory.createBevelBorder(BevelBorder.LOWERED);

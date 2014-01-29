@@ -29,7 +29,7 @@ public class Skill {
     }
 
     public String toString() {
-        return "PlayerSkill: " + this.name + ", " + this.level;
+        return this.name + ": " + this.level;
     }
 }
 
