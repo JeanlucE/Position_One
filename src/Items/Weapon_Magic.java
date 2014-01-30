@@ -24,6 +24,9 @@ import WIP.Transform;
  */
 public class Weapon_Magic extends Weapon {
 
+    /*
+    The element of a magic weapon only serves an aesthetic purpose for now.
+     */
     private final Element element;
 
     public Weapon_Magic
@@ -69,20 +72,5 @@ public class Weapon_Magic extends Weapon {
                 + "Element: " + this.element.toString();
     }
 
-    /*
-    The element of a magic weapon only serves an aesthetic purpose for now.
-     */
-    public enum Element {
-        FIRE("Fire"), WATER("Water"), LIGHTNING("Lightning");
 
-        private final String name;
-
-        private Element(String name) {
-            this.name = name;
-        }
-
-        public String toString() {
-            return name;
-        }
-    }
 }

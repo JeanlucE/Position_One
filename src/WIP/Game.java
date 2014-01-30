@@ -41,7 +41,7 @@ public class Game {
         DebugLog.write("New Game started");
         Weapon sword = new Weapon_Melee("Sword", 0, 0, 15, 0.5f, new ItemGraphicsComponent(Resource.weapon_melee_01_FLOOR));
         Weapon bow = new Weapon_Ranged("The OP Bow", 0, 0, 10, 12, 0.3f, new ItemGraphicsComponent());
-        Weapon staff = new Weapon_Magic("Fire Staff", 0, 0, 20, 6, 0.75f, Weapon_Magic.Element.FIRE,
+        Weapon staff = new Weapon_Magic("Fire Staff", 0, 0, 20, 8, 0.75f, Element.FIRE,
                 new ItemGraphicsComponent());
         player = new Character("Ned Stark");
         player.getTransform().getPosition().setX(60);

@@ -20,9 +20,6 @@ import java.util.Map;
  */
 public class Camera {
     private static Camera instance = null;
-    private Vector parent;
-    private int clipX, clipY;
-    private int screenWidth, screenHeight;
 
     public static Camera getInstance() {
         if (instance == null) {
@@ -31,15 +28,29 @@ public class Camera {
         return instance;
     }
 
+    private Vector parent;
+
     private Camera() {
-        screenWidth = Renderer.getScreenWidth();
-        screenHeight = Renderer.getScreenHeight();
-        clipX = screenWidth / 2 + Renderer.TILESIZE;
-        clipY = screenHeight / 2 + Renderer.TILESIZE;
+    }
+
+    private int getScreenWidth() {
+        return Renderer.getScreenWidth();
+    }
+
+    private int getScreenHeight() {
+        return Renderer.getScreenHeight();
+    }
+
+    private int getClipX() {
+        return getScreenWidth() / 2 + Renderer.TILESIZE;
+    }
+
+    private int getClipY() {
+        return getScreenHeight() / 2 + Renderer.TILESIZE;
     }
 
     public Vector getParentPosition() {
-        return new Vector(screenWidth / 2, screenHeight / 2);
+        return new Vector(getScreenWidth() / 2, getScreenHeight() / 2);
     }
 
     public Map<Vector, WorldSpace> worldToRender() {
@@ -50,10 +61,10 @@ public class Camera {
         Map<Vector, WorldSpace> walls = new HashMap<>(200);
 
         //Get the camera clipping lines relative to the player
-        int northClip = parent.getY() + clipY;
-        int southClip = parent.getY() - clipY;
-        int westClip = parent.getX() - clipX;
-        int eastClip = parent.getX() + clipX;
+        int northClip = parent.getY() + getClipY();
+        int southClip = parent.getY() - getClipY();
+        int westClip = parent.getX() - getClipX();
+        int eastClip = parent.getX() + getClipX();
         visibleSpaces = world.getSubSpace(new Vector(westClip, southClip), new Vector(eastClip, northClip));
         for (Map.Entry<Vector, WorldSpace> e : visibleSpaces.entrySet()) {
             WorldSpace w = e.getValue();
@@ -100,11 +111,11 @@ public class Camera {
         int yDist = Math.abs(v.getY() - parent.getY());
         if (go.isCollidable()) {
             PhysicsComponent p = ((Collidable) go).getCollider();
-            if (xDist < screenWidth / 2 + p.getWidth() / 2 && yDist < screenHeight / 2 + p.getHeight() / 2) {
+            if (xDist < getScreenWidth() / 2 + p.getWidth() / 2 && yDist < getScreenHeight() / 2 + p.getHeight() / 2) {
                 return true;
             }
         } else {
-            if (xDist < screenWidth / 2 && yDist < screenHeight / 2) {
+            if (xDist < getScreenWidth() / 2 && yDist < getScreenHeight() / 2) {
                 return true;
             }
         }

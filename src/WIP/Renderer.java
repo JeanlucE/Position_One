@@ -15,6 +15,8 @@ import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
 import java.util.Map;
 
@@ -52,7 +54,7 @@ public class Renderer extends JPanel {
     public final static int TILESIZE = 40;
     //This variable determines how wide and high the game screen is. This is important information for the camera to
     // know the clipping edges but is also important to calculate draw positions from world position.
-    private final static int screenWidth = 800, screenHeight = 600;
+    private static int screenWidth = 800, screenHeight = 600;
     private Graphics2D g2d;
 
     //DEBUGGING
@@ -83,8 +85,16 @@ public class Renderer extends JPanel {
         //TODO test if there are any major changes
         setDoubleBuffered(true);
         addKeyListener(InputComponent.getInstance());
-
         setLayout(new BorderLayout());
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                screenWidth = getWidth();
+                screenHeight = getHeight();
+                System.out.println(getWidth() + "|" + getScreenHeight());
+                setPreferredSize(new Dimension(screenWidth, screenHeight));
+            }
+        });
 
         //Buttons for inventory, stats and map
         JPanel buttons = new JPanel();
@@ -292,7 +302,6 @@ public class Renderer extends JPanel {
             PhysicsComponent phys = e.getKey().getCollider();
             drawImage(e.getKey(), drawPosition, phys.getWidth(), phys.getHeight());
         }
-        //drawImage(p, projectiles.get(p));
     }
 
     //Draws all items that are lying on the floor.
@@ -301,11 +310,10 @@ public class Renderer extends JPanel {
             if (e.getValue() == null) continue;
 
             if (e.getValue().isFloor() && ((Floor) e.getValue()).hasDroppedItems()) {
-                Item[] items = ((Floor) e.getValue()).getDroppedItems();
-                drawImage(items[0], e.getKey());
+                Item item = ((Floor) e.getValue()).peekTopItem();
+                drawImage(item, e.getKey());
             }
         }
-
     }
 
     private void drawGUI() {
@@ -380,22 +388,47 @@ public class Renderer extends JPanel {
 
         private int size = Inventory.INVENTORYSIZE;
         private JLabel[] itemSlots = new ItemSlot[size];
+        private JLabel weaponSlot;
+        private JLabel offhandSlot;
+        private JLabel helmetSlot;
+        private JLabel bodySlot;
+        private JLabel legsSlot;
+        private JLabel ammunitionSlot;
 
         private InventoryPanel() {
             super("Inventory");
-            setLayout(new FlowLayout());
+            setLayout(new BorderLayout());
             JPanel inventorySlots = new JPanel(new GridLayout(6, 4, 0, 0));
 
             for (int i = 0; i < size; i++) {
-                itemSlots[i] = new ItemSlot(i);
+                itemSlots[i] = new ItemSlot(i, new Dimension(40, 40));
                 inventorySlots.add(itemSlots[i]);
             }
             inventorySlots.setOpaque(false);
-            add(inventorySlots);
+            add(inventorySlots, BorderLayout.NORTH);
+
+            JPanel equipmentSlots = new JPanel();
+            equipmentSlots.setBackground(Color.DARK_GRAY);
+            equipmentSlots.setPreferredSize(new Dimension(100, 220));
+            equipmentSlots.setLayout(new FlowLayout(FlowLayout.CENTER));
+            weaponSlot = new ItemSlot(-1, new Dimension(60, 60));
+            offhandSlot = new ItemSlot(-2, new Dimension(60, 60));
+            helmetSlot = new ItemSlot(-3, new Dimension(60, 60));
+            bodySlot = new ItemSlot(-4, new Dimension(60, 60));
+            legsSlot = new ItemSlot(-5, new Dimension(60, 60));
+            ammunitionSlot = new ItemSlot(-6, new Dimension(60, 60));
+            equipmentSlots.add(weaponSlot);
+            equipmentSlots.add(offhandSlot);
+            equipmentSlots.add(helmetSlot);
+            equipmentSlots.add(bodySlot);
+            equipmentSlots.add(legsSlot);
+            equipmentSlots.add(ammunitionSlot);
+            add(equipmentSlots, BorderLayout.SOUTH);
         }
 
         @Override
         void update() {
+            Actors.Character player = Game.getInstance().getPlayer();
             Inventory inventory = Game.getInstance().getPlayer().getInventory();
             for (int i = 0; i < 24; i++) {
                 Item item = inventory.getItemAt(i);
@@ -405,11 +438,23 @@ public class Renderer extends JPanel {
                     itemSlots[i].setText("");
                 }
             }
+            String weaponName = player.getMainHand() != null ? player.getMainHand().getName() : "";
+            weaponSlot.setText(weaponName);
+            String offhandName = player.getOffHand() != null ? player.getOffHand().getName() : "";
+            offhandSlot.setText(offhandName);
+            String helmetName = player.getHelmet() != null ? player.getHelmet().getName() : "";
+            helmetSlot.setText(helmetName);
+            String bodyName = player.getBody() != null ? player.getBody().getName() : "";
+            bodySlot.setText(bodyName);
+            String legsName = player.getLegs() != null ? player.getLegs().getName() : "";
+            legsSlot.setText(legsName);
+            String ammunitionName = player.getAmmunition() != null ? player.getAmmunition().getName() : "";
+            ammunitionSlot.setText(ammunitionName);
         }
 
         private class ItemSlot extends JLabel {
-            private ItemSlot(int num) {
-                setPreferredSize(new Dimension(45, 45));
+            private ItemSlot(int num, Dimension d) {
+                setPreferredSize(d);
                 Border border = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK);
                 Border titleBorder = new TitledBorder(border, String.valueOf(num), TitledBorder.CENTER,
                         TitledBorder.BELOW_TOP, getFont(), Color.LIGHT_GRAY);

@@ -51,6 +51,13 @@ public class Floor extends WorldSpace {
         return null;
     }
 
+    public Item peekTopItem() {
+        if (itemStack.size() > 0)
+            return itemStack.peek();
+
+        return null;
+    }
+
     public void dropItem(Item item) {
         itemStack.push(item);
     }
