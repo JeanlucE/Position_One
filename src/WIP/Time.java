@@ -8,11 +8,10 @@ package WIP;
  */
 public class Time {
     private static long timeLastFrame = System.nanoTime() - 15000;
-    private static long timeThisFrame = System.nanoTime();
     private static long timeBetweenFrames;
 
     public static void update() {
-        timeThisFrame = System.nanoTime();
+        long timeThisFrame = System.nanoTime();
         timeBetweenFrames = timeThisFrame - timeLastFrame;
         timeLastFrame = timeThisFrame;
     }

@@ -57,13 +57,9 @@ public class World {
         //currentMap = WorldMap.getRandomMap(10, 15, 20, 4);
 
         //initiateMap("world");
-        try {
-            //saveMap("randomMap");
-            loadMap("randomMap");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        spawnHandler = new SpawnHandler(this, 1);
+        //saveMap("randomMap");
+        loadMap("randomMap");
+        spawnHandler = new SpawnHandler(this, 0);
     }
 
     public void update() {
@@ -286,11 +282,11 @@ public class World {
         currentMap = WorldMap.instantiateFromFile(worldName);
     }
 
-    public void loadMap(String worldName) throws IOException {
+    public void loadMap(String worldName) {
         currentMap = WorldMap.loadFromFile(worldName);
     }
 
-    public void saveMap(String worldName) throws IOException {
+    public void saveMap(String worldName) {
 
         try {
             currentMap.saveToFile(worldName);

@@ -1,6 +1,5 @@
 package Items;
 
-import Actors.*;
 import Actors.Character;
 import Components.DynamicResource;
 import Components.ItemGraphicsComponent;
@@ -8,7 +7,6 @@ import Components.PhysicsComponent;
 import Components.ProjectileGraphicsComponent;
 import WIP.DebugLog;
 import WIP.Transform;
-import WIP.Vector;
 
 /**
  * Created with IntelliJ IDEA.
@@ -37,11 +35,11 @@ public class Weapon_Magic extends Weapon {
     }
 
     protected void useThis() {
-        if(element.equals(Element.FIRE)){
+        if (element.equals(Element.FIRE)) {
 
-            //TODO Spell class
+            //TODO Spell class: mana usage, equipped, collider, element, speed
 
-            if(equipped instanceof Actors.Character && !((Character)equipped).useMana(5)) return;
+            if (equipped instanceof Actors.Character && !((Character) equipped).useMana(5)) return;
 
             Transform origin = equipped.getTransform().clone();
 

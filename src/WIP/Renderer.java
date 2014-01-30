@@ -6,6 +6,7 @@ import Components.MouseInputComponent;
 import Components.PhysicsComponent;
 import Environment.Floor;
 import Environment.WorldSpace;
+import Items.Inventory;
 import Items.Item;
 import Items.Projectile;
 
@@ -130,7 +131,7 @@ public class Renderer extends JPanel {
         infoScreen.add(statsPanel, "stats");
         infoScreen.add(mapPanel, "map");
         infoScreen.setVisible(false);
-        infoScreen.setPreferredSize(new Dimension(150, screenHeight));
+        infoScreen.setPreferredSize(new Dimension(200, screenHeight));
 
         this.add(infoScreen, BorderLayout.EAST);
     }
@@ -317,6 +318,7 @@ public class Renderer extends JPanel {
 
         if (g != Game.GUIState.GAME) {
             infoScreen.setVisible(true);
+
             if (g == Game.GUIState.INVENTORY) {
                 inventoryPanel.update();
                 c.show(infoScreen, "inventory");
@@ -376,27 +378,63 @@ public class Renderer extends JPanel {
 
     private class InventoryPanel extends InfoPanel {
 
+        private int size = Inventory.INVENTORYSIZE;
+        private JLabel[] itemSlots = new ItemSlot[size];
+
         private InventoryPanel() {
             super("Inventory");
+            setLayout(new FlowLayout());
+            JPanel inventorySlots = new JPanel(new GridLayout(6, 4, 0, 0));
+
+            for (int i = 0; i < size; i++) {
+                itemSlots[i] = new ItemSlot(i);
+                inventorySlots.add(itemSlots[i]);
+            }
+            inventorySlots.setOpaque(false);
+            add(inventorySlots);
         }
 
         @Override
         void update() {
+            Inventory inventory = Game.getInstance().getPlayer().getInventory();
+            for (int i = 0; i < 24; i++) {
+                Item item = inventory.getItemAt(i);
+                if (item != null) {
+                    itemSlots[i].setText(item.getName());
+                } else {
+                    itemSlots[i].setText("");
+                }
+            }
+        }
 
+        private class ItemSlot extends JLabel {
+            private ItemSlot(int num) {
+                setPreferredSize(new Dimension(45, 45));
+                Border border = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK);
+                Border titleBorder = new TitledBorder(border, String.valueOf(num), TitledBorder.CENTER,
+                        TitledBorder.BELOW_TOP, getFont(), Color.LIGHT_GRAY);
+                setBorder(titleBorder);
+                setForeground(Color.LIGHT_GRAY);
+            }
         }
     }
 
     private class StatsPanel extends InfoPanel {
         private JLabel level;
         private JLabel skillPoints;
-        private JLabel[] skills = new JLabel[8];
+        private JLabel experience;
         private JLabel attack;
         private JLabel defense;
+        private JLabel health;
+        private JLabel mana;
+        private JLabel stamina;
+        private JLabel[] skills = new JLabel[8];
+
 
         private StatsPanel() {
             super("Stats");
 
-            setLayout(new GridLayout(12, 1, 0, 3));
+            setLayout(new GridLayout(16, 1, 0, 3));
 
             Font font = CustomFont.SHERWOOD_Regular.deriveFont(14.0f);
 
@@ -409,6 +447,26 @@ public class Renderer extends JPanel {
             skillPoints.setForeground(Color.LIGHT_GRAY);
             skillPoints.setFont(font);
             add(skillPoints);
+
+            experience = new JLabel();
+            experience.setForeground(Color.LIGHT_GRAY);
+            experience.setFont(font);
+            add(experience);
+
+            health = new JLabel();
+            health.setForeground(Color.LIGHT_GRAY);
+            health.setFont(font);
+            add(health);
+
+            mana = new JLabel();
+            mana.setForeground(Color.LIGHT_GRAY);
+            mana.setFont(font);
+            add(mana);
+
+            stamina = new JLabel();
+            stamina.setForeground(Color.LIGHT_GRAY);
+            stamina.setFont(font);
+            add(stamina);
 
             attack = new JLabel();
             attack.setForeground(Color.LIGHT_GRAY);
@@ -432,6 +490,10 @@ public class Renderer extends JPanel {
             Actors.Character player = Game.getInstance().getPlayer();
             level.setText("Player level: " + player.getLevel());
             skillPoints.setText("Skill points: " + player.getSkillPoints());
+            experience.setText("Experience: " + player.getCurrentXPProgress() + "/" + player.getXPOfNextLevel());
+            health.setText("Health: " + player.getCurrentHealth() + "/" + player.getMaxHealth());
+            mana.setText("Mana: " + player.getCurrentMana() + "/" + player.getMaxMana());
+            stamina.setText("Stamina: " + player.getCurrentStamina() + "/" + player.getMaxStamina());
             attack.setText("Attack: " + player.getAttack());
             defense.setText("Defense: " + player.getDefense());
             String[] strings = player.getSkills();

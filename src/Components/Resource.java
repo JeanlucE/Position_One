@@ -34,7 +34,7 @@ public enum Resource implements Serializable {
     projectile_fire_01_FLOOR_EAST("projectile_fire_01_FLOOR_EAST.png"),
     projectile_fire_01_FLOOR_WEST("projectile_fire_01_FLOOR_WEST.png");
 
-    private String imagePath = "./images/";
+    private final String imagePath = "./images/";
     private BufferedImage image;
 
     private Resource(String fileName) {

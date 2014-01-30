@@ -45,7 +45,7 @@ public class EquipmentManager {
      */
     boolean equip(Equipment equipment) {
         //TODO if isOccupied throw the current equipment into the inventory and equip the new Equipment
-        boolean success = false;
+        boolean success;
 
         if (canEquip(equipment)) {
             if (equipment.isWeapon()) {

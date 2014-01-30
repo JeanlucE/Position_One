@@ -145,14 +145,14 @@ public abstract class Actor extends Collidable {
     /**
      * Returns the nearest worldSpace
      *
-     * @return
+     * @return Returns the nearest worldSpace
      */
     protected final Vector getNextWorldPosition() {
         Vector currentPos = getTransform().getPosition();
         int x = (currentPos.getX() >= 0) ? (currentPos.getX() - currentPos.getX() % Renderer.TILESIZE)
-                : (currentPos.getX() + currentPos.getX() % Renderer.TILESIZE - Renderer.TILESIZE);
+                : (currentPos.getX() - currentPos.getX() % Renderer.TILESIZE - Renderer.TILESIZE);
         int y = (currentPos.getY() >= 0) ? (currentPos.getY() - currentPos.getY() % Renderer.TILESIZE)
-                : (currentPos.getY() + currentPos.getY() % Renderer.TILESIZE - Renderer.TILESIZE);
+                : (currentPos.getY() - currentPos.getY() % Renderer.TILESIZE - Renderer.TILESIZE);
         return new Vector(x, y);
     }
 
@@ -234,7 +234,7 @@ public abstract class Actor extends Collidable {
     /**
      * Damages the actor, if the actor can be damaged.
      *
-     * @param damage
+     * @param damage Raw damage taken without any modifications
      * @see Actor#actualDamage(int)
      * @see Actors.Actor#canBeDamaged()
      */

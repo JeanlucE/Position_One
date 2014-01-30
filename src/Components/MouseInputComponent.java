@@ -1,8 +1,5 @@
 package Components;
 
-import WIP.Renderer;
-
-import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
@@ -26,18 +23,11 @@ public class MouseInputComponent extends MouseMotionAdapter implements MouseList
     }
 
     public void mouseMoved(MouseEvent e) {
-        Point mousePos = Renderer.getInstance().getMousePosition();
     }
 
     //Fields providing state of mouse
     private boolean mouseInScreen = false;
     private boolean mousePressed = false;
-    /*
-    Mousehover is an integer that gives information on where the mouse is hovering.
-    This can be used for hover areas in menus, where some action could happen when the mouse hovers over that area
-    (e.g. it gets highlighted)
-     */
-    private int mouseHover = -1;
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -71,9 +61,5 @@ public class MouseInputComponent extends MouseMotionAdapter implements MouseList
 
     public boolean isMousePressed() {
         return mousePressed;
-    }
-
-    public int getMouseHover() {
-        return mouseHover;
     }
 }

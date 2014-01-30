@@ -97,7 +97,7 @@ public class WorldMap {
         worldSpaceMap.put(new Vector(x, y), worldSpace);
     }
 
-    public static WorldMap loadFromFile(String filename) throws IOException {
+    public static WorldMap loadFromFile(String filename) {
         String[] worldSpaces;
         try {
             worldSpaces = readFile(mapsPath + filename + ".txt");

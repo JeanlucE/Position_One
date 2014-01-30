@@ -64,6 +64,7 @@ public class SpawnHandler {
             DebugLog.write("SpawnHandler: " + collisionEvent.toString());
             return false;
         } else {
+            DebugLog.write("SpawnHandler: Success");
             enemies.add(e);
             return true;
         }

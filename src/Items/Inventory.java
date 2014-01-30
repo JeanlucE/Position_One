@@ -14,7 +14,7 @@ import WIP.DebugLog;
  */
 public class Inventory {
 
-    private static final int INVENTORYSIZE = 24;
+    public static final int INVENTORYSIZE = 24;
 
     private InventorySlot[] inventorySlots;
 
@@ -74,6 +74,10 @@ public class Inventory {
         }
         DebugLog.write("No empty inventory slot found!");
         return null;
+    }
+
+    public Item getItemAt(int slot) {
+        return getSlot(slot).getItem();
     }
 
     public String toString() {

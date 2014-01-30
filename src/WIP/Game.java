@@ -39,7 +39,7 @@ public class Game {
         new FileStructureHandler();
 
         DebugLog.write("New Game started");
-        Weapon sword = new Weapon_Melee("Sword", 0, 0, 15, 0.5f, new ItemGraphicsComponent());
+        Weapon sword = new Weapon_Melee("Sword", 0, 0, 15, 0.5f, new ItemGraphicsComponent(Resource.weapon_melee_01_FLOOR));
         Weapon bow = new Weapon_Ranged("The OP Bow", 0, 0, 10, 12, 0.3f, new ItemGraphicsComponent());
         Weapon staff = new Weapon_Magic("Fire Staff", 0, 0, 20, 6, 0.75f, Weapon_Magic.Element.FIRE,
                 new ItemGraphicsComponent());
@@ -55,13 +55,14 @@ public class Game {
         player.equip(helmet);
         player.equip(body);
         player.equip(legs);
-        player.equip(sword);
+        player.equip(staff);
         player.equip(arrow);
         Enemy.DEBUG_ALL_ENEMIES_MOVE_TOWARD_PLAYER = true;
         Ammunition dropArrow = new Ammunition("Wooden Arrow", 0,
                 new ProjectileGraphicsComponent(null, DynamicResource.WOODEN_ARROW),
                 new PhysicsComponent(10, 25));
         getCurrentWorld().dropItem(dropArrow, 100, 100);
+        getCurrentWorld().dropItem(sword, -100, -100);
 
         World currentWorld = World.getInstance();
 

@@ -18,6 +18,7 @@ import java.lang.reflect.Field;
  * Time: 16:00
  */
 public class Character extends Actor {
+    //TODO make stamina a percentage number, implement a stamina drain rate
     //region Skills
     public Skill STRENGTH;
     public Skill ENDURANCE;
@@ -60,7 +61,7 @@ public class Character extends Actor {
 
     //Constructor for final build
     public Character(String name) {
-        this(name, 1, 0, 0);
+        this(name, 0, 0, 0);
     }
 
     //Debug Purposes
@@ -94,7 +95,7 @@ public class Character extends Actor {
     }
 
     public static int getXPOfLevel(int level) {
-        return 20 * level * level;
+        return 20 * level * level * level;
     }
 
     /*
@@ -130,6 +131,27 @@ public class Character extends Actor {
             result[i] = skills[i].toString();
         }
         return result;
+    }
+
+    public boolean levelUpSkill(String skill) {
+        Skill s = null;
+        for (Skill skillToSearch : skills) {
+            if (skillToSearch.getName().equals(skill)) {
+                s = skillToSearch;
+                break;
+            }
+        }
+        if (s != null) {
+            s.setLevel(getLevel() + 1);
+            recalculateStats();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private void recalculateStats() {
+        //TODO implement this
     }
 
     private Vector lastDirection = new Vector(0, 0), newDirection;
@@ -301,17 +323,17 @@ public class Character extends Actor {
     public void addExperience(int experience) {
         this.experience += experience;
         DebugLog.write("Player gained experience: " + experience);
-        while (getNextLevelXP() <= 0) {
+        while (getXPToNextLevel() <= 0) {
             levelUp();
         }
 
     }
 
-    //TODO: separate method for assigning skill points
-    //TODO: every time skill points are newly assigned recalculate maxHealth, maxMana, maxStamina
     private void levelUp() {
         level++;
         skillPoints++;
+
+        recalculateStats();
 
         DebugLog.write("Player " + getName() + " has leveled up.");
         DebugLog.write("Player " + getName() + " is now level " + level + ".");
@@ -322,8 +344,16 @@ public class Character extends Actor {
      *
      * @return Returns how much xp is needed for this character to level up
      */
-    public int getNextLevelXP() {
+    public int getXPToNextLevel() {
         return Character.getXPOfLevel(level + 1) - this.experience;
+    }
+
+    public int getXPOfNextLevel() {
+        return Character.getXPOfLevel(level + 1) - Character.getXPOfLevel(level);
+    }
+
+    public int getCurrentXPProgress() {
+        return getXPOfNextLevel() - getXPToNextLevel();
     }
 
     /**
