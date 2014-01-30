@@ -234,6 +234,7 @@ public class World {
         if (w != null && w.isFloor()) {
             Floor f = (Floor) w;
             f.dropItem(item);
+            System.out.println("World: " + item.getName() + " dropped at " + w.getTransform().getPosition());
         }
     }
 

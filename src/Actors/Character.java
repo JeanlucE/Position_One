@@ -232,7 +232,7 @@ public class Character extends Actor {
      * Picks up an item nearest to the player
      */
     private void pickupNextItem() {
-        WorldSpace nextAbsPos = Game.getInstance().getCurrentWorld().get(getNextWorldPosition());
+        WorldSpace nextAbsPos = Game.getInstance().getCurrentWorld().get(getTransform().getPosition());
         if (nextAbsPos != null && nextAbsPos.isFloor()) {
             Floor floor = (Floor) nextAbsPos;
             addItem(floor.hasDroppedItems() ? (floor.getTopItem()) : (null));
