@@ -1,6 +1,9 @@
 package WIP;
 
+import Components.Resource;
+
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -30,9 +33,7 @@ class GameWindow extends JFrame {
 
         setBounds(300, 50, getWidth(), getHeight());
         setVisible(true);
-
-
-        //System.out.println(this.getWidth() + "|" + this.getHeight());
-        //System.out.println(game.getRenderer().getWidth() + "|" + game.getRenderer().getHeight());
+        setMinimumSize(new Dimension(560, 560));
+        setIconImage(Resource.weapon_melee_01_FLOOR.getImage());
     }
 }

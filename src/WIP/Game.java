@@ -52,10 +52,12 @@ public class Game {
         Armour helmet = new Helmet("Helmet", 0, 0, Equipment.EquipmentClass.MELEE, 1, new ItemGraphicsComponent());
         Armour body = new Body("Body", 0, 0, Equipment.EquipmentClass.MELEE, 1, new ItemGraphicsComponent());
         Armour legs = new Legs("Legs", 0, 0, Equipment.EquipmentClass.MELEE, 1, new ItemGraphicsComponent());
+        Armour shield = new Shield("Shield", 0, 0, 1, new ItemGraphicsComponent());
         player.equip(helmet);
         player.equip(body);
         player.equip(legs);
-        player.equip(staff);
+        player.equip(shield);
+        player.equip(bow);
         player.equip(arrow);
         Enemy.DEBUG_ALL_ENEMIES_MOVE_TOWARD_PLAYER = true;
         Ammunition dropArrow = new Ammunition("Wooden Arrow", 0,

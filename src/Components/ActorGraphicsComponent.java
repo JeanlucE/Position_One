@@ -1,7 +1,7 @@
 package Components;
 
 import Actors.Actor;
-import WIP.DebugLog;
+import Actors.AnimationState;
 import WIP.Vector;
 
 import java.awt.image.BufferedImage;
@@ -15,27 +15,23 @@ import java.awt.image.BufferedImage;
 public class ActorGraphicsComponent extends GraphicsComponent {
 
     private Actor parent;
-    private DynamicResource images;
+    private ActorGraphicsResource images;
 
-    public ActorGraphicsComponent(DynamicResource dynamicResource) {
-        if (dynamicResource.getSize() != 4) {
-            DebugLog.write("Dynamic Resource size for Actor graphics must be of length 4");
-            throw new IllegalArgumentException();
-        }
-        images = dynamicResource;
+    public ActorGraphicsComponent(ActorGraphicsResource images) {
+        this.images = images;
     }
 
     public BufferedImage getImage() {
-        if (parent.getTransform().getDirection().equals(Vector.NORTH))
-            return images.getNorth();
-        else if (parent.getTransform().getDirection().equals(Vector.SOUTH))
-            return images.getSouth();
-        else if (parent.getTransform().getDirection().equals(Vector.WEST))
-            return images.getWest();
-        else if (parent.getTransform().getDirection().equals(Vector.EAST))
-            return images.getEast();
+        if (parent.isFacing(Vector.NORTH))
+            return getNorth();
+        else if (parent.isFacing(Vector.EAST))
+            return getEast();
+        else if (parent.isFacing(Vector.SOUTH))
+            return getSouth();
+        else if (parent.isFacing(Vector.WEST))
+            return getWest();
         else
-            return images.getNorth();
+            return getSouth();
     }
 
     //This must be called right after the actors graphic component is created
@@ -45,5 +41,43 @@ public class ActorGraphicsComponent extends GraphicsComponent {
 
     public ActorGraphicsComponent clone() {
         return new ActorGraphicsComponent(images);
+    }
+
+    private BufferedImage getNorth() {
+        if (parent.getAnimationState() == AnimationState.IDLE) {
+            images.resetAnimations();
+            return images.getNorthIdle();
+        } else {
+            return images.getNorthWalk();
+        }
+    }
+
+    private BufferedImage getEast() {
+        if (parent.getAnimationState() == AnimationState.IDLE) {
+            images.resetAnimations();
+            return images.getEastIdle();
+        } else {
+            return images.getEastWalk();
+        }
+    }
+
+
+    private BufferedImage getSouth() {
+        if (parent.getAnimationState() == AnimationState.IDLE) {
+            images.resetAnimations();
+            return images.getSouthIdle();
+        } else {
+            return images.getSouthWalk();
+
+        }
+    }
+
+    private BufferedImage getWest() {
+        if (parent.getAnimationState() == AnimationState.IDLE) {
+            images.resetAnimations();
+            return images.getWestIdle();
+        } else {
+            return images.getWestWalk();
+        }
     }
 }

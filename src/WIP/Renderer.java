@@ -58,8 +58,8 @@ public class Renderer extends JPanel {
     private Graphics2D g2d;
 
     //DEBUGGING
-    public boolean DEBUG_DRAW_ACTOR_POSITIONS = true;
-    public boolean DEBUG_DRAW_ACTOR_COLLIDERS = true;
+    public boolean DEBUG_DRAW_ACTOR_POSITIONS = false;
+    public boolean DEBUG_DRAW_ACTOR_COLLIDERS = false;
 
     //Singleton Design Pattern
     public static Renderer getInstance() {
@@ -91,8 +91,7 @@ public class Renderer extends JPanel {
             public void componentResized(ComponentEvent e) {
                 screenWidth = getWidth();
                 screenHeight = getHeight();
-                System.out.println(getWidth() + "|" + getScreenHeight());
-                setPreferredSize(new Dimension(screenWidth, screenHeight));
+                //setPreferredSize(new Dimension(screenWidth, screenHeight));
             }
         });
 
@@ -399,12 +398,14 @@ public class Renderer extends JPanel {
             super("Inventory");
             setLayout(new BorderLayout());
             JPanel inventorySlots = new JPanel(new GridLayout(6, 4, 0, 0));
+            //JPanel inventorySlots = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
             for (int i = 0; i < size; i++) {
                 itemSlots[i] = new ItemSlot(i, new Dimension(40, 40));
                 inventorySlots.add(itemSlots[i]);
             }
             inventorySlots.setOpaque(false);
+            inventorySlots.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
             add(inventorySlots, BorderLayout.NORTH);
 
             JPanel equipmentSlots = new JPanel();
@@ -433,7 +434,8 @@ public class Renderer extends JPanel {
             for (int i = 0; i < 24; i++) {
                 Item item = inventory.getItemAt(i);
                 if (item != null) {
-                    itemSlots[i].setText(item.getName());
+                    itemSlots[i].setIcon(new ImageIcon(item.getGraphic().getImage()));
+                    //itemSlots[i].setText(item.getName());
                 } else {
                     itemSlots[i].setText("");
                 }
@@ -455,7 +457,7 @@ public class Renderer extends JPanel {
         private class ItemSlot extends JLabel {
             private ItemSlot(int num, Dimension d) {
                 setPreferredSize(d);
-                Border border = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK);
+                Border border = BorderFactory.createEmptyBorder();
                 Border titleBorder = new TitledBorder(border, String.valueOf(num), TitledBorder.CENTER,
                         TitledBorder.BELOW_TOP, getFont(), Color.LIGHT_GRAY);
                 setBorder(titleBorder);

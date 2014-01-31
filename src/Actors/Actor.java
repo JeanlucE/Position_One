@@ -29,6 +29,8 @@ public abstract class Actor extends Collidable {
     private int currentXVelocity, currentYVelocity;
     //time how long the actor is invincible in ms
     private int currentDamageTimeout;
+    //flag if player is moving
+    private boolean isMoving = false;
 
     /**
      * Returns an array of all instantiated Actors on the level.
@@ -92,8 +94,11 @@ public abstract class Actor extends Collidable {
      * are not 0.
      */
     protected final void move() {
-        if (currentXVelocity == 0 && currentYVelocity == 0) return;
-
+        if (currentXVelocity == 0 && currentYVelocity == 0) {
+            isMoving = false;
+            return;
+        }
+        isMoving = true;
         //TODO slow down character movement for diagonal movement
         int xMove = currentXVelocity;
         int yMove = currentYVelocity;
@@ -128,7 +133,7 @@ public abstract class Actor extends Collidable {
 
     private void slide(int xMove, int yMove) {
         if (!move(xMove, 0)) {
-            move(0, yMove);
+            isMoving = move(0, yMove);
         }
     }
 
@@ -368,4 +373,27 @@ public abstract class Actor extends Collidable {
      * @see Actors.Actor#canBeDamaged()
      */
     protected abstract int getDamageTimeout();
+
+    boolean isMoving() {
+        return isMoving;
+    }
+
+    private AnimationState animationState = AnimationState.IDLE;
+
+    public AnimationState getAnimationState() {
+        return animationState;
+    }
+
+    protected void setAnimationState(AnimationState animationState) {
+        this.animationState = animationState;
+    }
+
+    public boolean isFacing(Vector v) {
+        if ((Math.abs(v.getX()) == 1 && v.getY() == 0) || (Math.abs(v.getY()) == 1 && v.getX() == 0)) {
+            return getTransform().getDirection().equals(v);
+        } else {
+            DebugLog.write("Actor cannot face " + v);
+            return false;
+        }
+    }
 }

@@ -69,7 +69,7 @@ public class Character extends Actor {
         super(name,
                 new Transform(),
                 new ActorGraphicsComponent(DynamicResource.PLAYER),
-                new PhysicsComponent(30, 30));
+                new PhysicsComponent(30, 40));
         ((ActorGraphicsComponent) this.getGraphic()).setParent(this);
 
         this.level = level;
@@ -168,8 +168,11 @@ public class Character extends Actor {
         }
 
         regenerate();
+        animate();
     }
 
+    //TODo apply animation speed
+    //TODO dont drain stamina when the player cant move
     private void applyMovement() {
         int moveDistance;
         if (InputComponent.getInstance().isShiftDown()) {
@@ -184,6 +187,7 @@ public class Character extends Actor {
         } else {
             moveDistance = walkSpeed;
             sprinting = false;
+            setAnimationState(AnimationState.WALKING);
         }
 
         int XAxis = InputComponent.getInstance().getXAxis();
@@ -271,6 +275,16 @@ public class Character extends Actor {
                 currentMana++;
                 manaRegen -= manaTimer;
             }
+        }
+    }
+
+    private void animate() {
+        if (isMoving() && sprinting) {
+            setAnimationState(AnimationState.SPRINTING);
+        } else if (isMoving()) {
+            setAnimationState(AnimationState.WALKING);
+        } else {
+            setAnimationState(AnimationState.IDLE);
         }
     }
 
@@ -443,6 +457,7 @@ public class Character extends Actor {
         result += (equipment.hasHelmetEquipped()) ? (getHelmet().getDefence()) : 0;
         result += (equipment.hasBodyEquipped()) ? (getBody().getDefence()) : 0;
         result += (equipment.hasLegsEquipped()) ? (getLegs().getDefence()) : 0;
+        result += (equipment.hasOffHandEquipped()) ? (getOffHand().getDefence()) : 0;
         return result;
     }
 
