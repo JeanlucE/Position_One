@@ -1,19 +1,71 @@
-Log created at: 23:07:20 31.01.2014
+Log created at: 13:52:28 01.02.2014
 
-[23:07:20.795] New Game started
-[23:07:20.879] New Melee Weapon created: Sword
-[23:07:20.880] New Ranged Weapon created: The OP Bow
-[23:07:20.882] New Magic Weapon created: Fire Staff
-[23:07:20.895] New Character created: Ned Stark
-[23:07:20.896] New Armour created: Helmet
-[23:07:20.896] New Armour created: Body
-[23:07:20.896] New Armour created: Legs
-[23:07:20.896] New Armour created: Shield
-[23:07:20.896] Player Ned Stark has equipped: Helmet
-[23:07:20.896] Player Ned Stark has equipped: Body
-[23:07:20.896] Player Ned Stark has equipped: Legs
-[23:07:20.896] Player Ned Stark has equipped: Shield
-[23:07:20.896] Player Ned Stark has equipped: The OP Bow
-[23:07:20.896] Player Ned Stark has equipped: Wooden Arrow
-[23:07:20.934] New World created with size: 2359
-[23:07:20.993] Renderer started
+[13:52:28.378] New Game started
+[13:52:28.454] New Melee Weapon created: Sword
+[13:52:28.455] New Ranged Weapon created: The OP Bow
+[13:52:28.457] New Magic Weapon created: Fire Staff
+[13:52:28.468] New Character created: Ned Stark
+[13:52:28.469] New Armour created: Helmet
+[13:52:28.469] New Armour created: Body
+[13:52:28.469] New Armour created: Legs
+[13:52:28.469] New Armour created: Shield
+[13:52:28.469] Player Ned Stark has equipped: Helmet
+[13:52:28.470] Player Ned Stark has equipped: Body
+[13:52:28.470] Player Ned Stark has equipped: Legs
+[13:52:28.470] Player Ned Stark has equipped: Shield
+[13:52:28.470] Player Ned Stark has equipped: The OP Bow
+[13:52:28.470] Player Ned Stark has equipped: Wooden Arrow
+[13:52:28.531] New World created with size: 2891
+[13:52:28.597] Saved Map: randomMap
+[13:52:28.649] Renderer started
+[13:52:38.787] SpawnHandler: tried spawning enemy at 300|1620
+[13:52:38.787] SpawnHandler: Success
+[13:52:38.803] Damaged actor Ned Stark for 1 damage.
+[13:52:40.890] New Projectile at: 294|1851
+[13:52:41.018] Chu Chu(100/100) hit!
+[13:52:41.019] Projectile destroyed at 294|1766
+[13:52:41.019] Damaged actor Chu Chu for 10 damage.
+[13:52:41.200] New Projectile at: 294|1851
+[13:52:41.296] Chu Chu(90/100) hit!
+[13:52:41.296] Projectile destroyed at 294|1786
+[13:52:41.296] Damaged actor Chu Chu for 10 damage.
+[13:52:41.380] Damaged actor Ned Stark for 1 damage.
+[13:52:41.513] New Projectile at: 294|1851
+[13:52:41.577] Chu Chu(80/100) hit!
+[13:52:41.577] Projectile destroyed at 294|1806
+[13:52:41.580] Damaged actor Chu Chu for 10 damage.
+[13:52:41.838] New Projectile at: 294|1851
+[13:52:41.870] Chu Chu(70/100) hit!
+[13:52:41.871] Projectile destroyed at 294|1826
+[13:52:41.871] Damaged actor Chu Chu for 10 damage.
+[13:52:42.170] Damaged actor Ned Stark for 1 damage.
+[13:52:42.206] New Projectile at: 294|1851
+[13:52:42.238] Chu Chu(60/100) hit!
+[13:52:42.239] Projectile destroyed at 294|1826
+[13:52:42.239] Damaged actor Chu Chu for 10 damage.
+[13:52:42.588] New Projectile at: 294|1851
+[13:52:42.621] Chu Chu(50/100) hit!
+[13:52:42.622] Projectile destroyed at 294|1826
+[13:52:42.622] Damaged actor Chu Chu for 10 damage.
+[13:52:42.948] Damaged actor Ned Stark for 1 damage.
+[13:52:42.980] New Projectile at: 294|1851
+[13:52:43.012] Chu Chu(40/100) hit!
+[13:52:43.012] Projectile destroyed at 294|1826
+[13:52:43.013] Damaged actor Chu Chu for 10 damage.
+[13:52:43.369] New Projectile at: 294|1851
+[13:52:43.401] Chu Chu(30/100) hit!
+[13:52:43.401] Projectile destroyed at 294|1826
+[13:52:43.401] Damaged actor Chu Chu for 10 damage.
+[13:52:43.728] Damaged actor Ned Stark for 1 damage.
+[13:52:43.759] New Projectile at: 294|1851
+[13:52:43.791] Chu Chu(20/100) hit!
+[13:52:43.792] Projectile destroyed at 294|1826
+[13:52:43.792] Damaged actor Chu Chu for 10 damage.
+[13:52:44.063] New Projectile at: 294|1851
+[13:52:44.099] Chu Chu(10/100) hit!
+[13:52:44.099] Projectile destroyed at 294|1826
+[13:52:44.100] Damaged actor Chu Chu for 10 damage.
+[13:52:44.100] Player gained experience: 25
+[13:52:44.100] Player Ned Stark has leveled up.
+[13:52:44.100] Player Ned Stark is now level 1.
+[13:52:44.100] Actor Chu Chu is dead.
