@@ -9,6 +9,7 @@ import Environment.WorldSpace;
 import Items.Inventory;
 import Items.Item;
 import Items.Projectile;
+import Items.Stackable;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -61,8 +62,8 @@ public class Renderer extends JPanel {
     private Graphics2D g2d;
 
     //DEBUGGING
-    public boolean DEBUG_DRAW_ACTOR_POSITIONS = false;
-    public boolean DEBUG_DRAW_ACTOR_COLLIDERS = false;
+    public boolean DEBUG_DRAW_ACTOR_POSITIONS = true;
+    public boolean DEBUG_DRAW_ACTOR_COLLIDERS = true;
 
     //Singleton Design Pattern
     public static Renderer getInstance() {
@@ -75,14 +76,13 @@ public class Renderer extends JPanel {
     /**
      * Resizes a Dimension to a boundary, keeping aspect ratio
      *
-     * @param imgSize
      * @param boundary
      * @return
      */
-    public static Dimension getScaledDimension(Dimension imgSize, Dimension boundary) {
+    public Image getScaledDimension(Image original, Dimension boundary) {
 
-        int original_width = imgSize.width;
-        int original_height = imgSize.height;
+        int original_width = original.getWidth(this);
+        int original_height = original.getHeight(this);
         int bound_width = boundary.width;
         int bound_height = boundary.height;
         int new_width = original_width;
@@ -103,8 +103,8 @@ public class Renderer extends JPanel {
             //scale width to maintain aspect ratio
             new_width = (new_height * original_width) / original_height;
         }
-
-        return new Dimension(new_width, new_height);
+        return original.getScaledInstance(new_width, new_height,
+                Image.SCALE_DEFAULT);
     }
 
     private JPanel infoScreen;
@@ -281,15 +281,11 @@ public class Renderer extends JPanel {
 
     private void drawImage_ASPECT(GameObject go, Vector position, int width, int height) {
         BufferedImage bf = go.getGraphic().getImage();
-        Dimension currentDimension = new Dimension(bf.getWidth(), bf.getHeight());
         Dimension boundary = new Dimension(width, height);
-        Dimension scaledDimension = getScaledDimension(currentDimension, boundary);
-        Image scaledImage = bf.getScaledInstance(scaledDimension.width, scaledDimension.height,
-                Image.SCALE_DEFAULT);
+        Image scaledImage = getScaledDimension(bf, boundary);
         g2d.drawImage(scaledImage,
-                position.getX() - scaledDimension.width / 2,
-                screenHeight - (position.getY() + scaledDimension.height / 2),
-                scaledDimension.width, scaledDimension.height, this);
+                position.getX() - scaledImage.getWidth(this) / 2,
+                screenHeight - (position.getY() + scaledImage.getHeight(this) / 2), this);
     }
 
     private void drawImage_COLLIDER(GameObject go, Vector position, int width, int height) {
@@ -421,7 +417,9 @@ public class Renderer extends JPanel {
         for (Map.Entry<Actor, Vector> e : actors.entrySet()) {
             Vector position = e.getValue();
             PhysicsComponent p = e.getKey().getCollider();
-            g2d.drawRect(position.getX() - p.getWidth() / 2, screenHeight - (position.getY() + p.getHeight() / 2),
+            g2d.drawRect(position.getX() - p.getWidth() / 2,
+                    screenHeight - (position.getY() + p.getHeight() / 2) - 1, //-1 because rectangles are drawn
+                    // directly at given coordinates
                     p.getWidth(), p.getHeight());
         }
     }
@@ -448,13 +446,13 @@ public class Renderer extends JPanel {
     private class InventoryPanel extends InfoPanel {
 
         private int size = Inventory.INVENTORYSIZE;
-        private JLabel[] itemSlots = new ItemSlot[size];
-        private JLabel weaponSlot;
-        private JLabel offhandSlot;
-        private JLabel helmetSlot;
-        private JLabel bodySlot;
-        private JLabel legsSlot;
-        private JLabel ammunitionSlot;
+        private ItemSlot[] itemSlots = new ItemSlot[size];
+        private ItemSlot weaponSlot;
+        private ItemSlot offhandSlot;
+        private ItemSlot helmetSlot;
+        private ItemSlot bodySlot;
+        private ItemSlot legsSlot;
+        private ItemSlot ammunitionSlot;
 
         private InventoryPanel() {
             super("Inventory");
@@ -464,6 +462,8 @@ public class Renderer extends JPanel {
 
             for (int i = 0; i < size; i++) {
                 itemSlots[i] = new ItemSlot(i, new Dimension(40, 40));
+                itemSlots[i].setHorizontalAlignment(JLabel.CENTER);
+                itemSlots[i].setVerticalAlignment(JLabel.CENTER);
                 inventorySlots.add(itemSlots[i]);
             }
             inventorySlots.setOpaque(false);
@@ -480,6 +480,8 @@ public class Renderer extends JPanel {
             bodySlot = new ItemSlot(-4, new Dimension(60, 60));
             legsSlot = new ItemSlot(-5, new Dimension(60, 60));
             ammunitionSlot = new ItemSlot(-6, new Dimension(60, 60));
+            ammunitionSlot.setHorizontalAlignment(JLabel.RIGHT);
+            ammunitionSlot.setHorizontalTextPosition(JLabel.LEADING);
             equipmentSlots.add(weaponSlot);
             equipmentSlots.add(offhandSlot);
             equipmentSlots.add(helmetSlot);
@@ -495,35 +497,41 @@ public class Renderer extends JPanel {
             Inventory inventory = Game.getInstance().getPlayer().getInventory();
             for (int i = 0; i < 24; i++) {
                 Item item = inventory.getItemAt(i);
-                if (item != null) {
-                    itemSlots[i].setIcon(new ImageIcon(item.getGraphic().getImage()));
-                    //itemSlots[i].setText(item.getName());
-                } else {
-                    itemSlots[i].setText("");
-                }
+                itemSlots[i].setItem(item);
             }
-            String weaponName = player.getMainHand() != null ? player.getMainHand().getName() : "";
-            weaponSlot.setText(weaponName);
-            String offhandName = player.getOffHand() != null ? player.getOffHand().getName() : "";
-            offhandSlot.setText(offhandName);
-            String helmetName = player.getHelmet() != null ? player.getHelmet().getName() : "";
-            helmetSlot.setText(helmetName);
-            String bodyName = player.getBody() != null ? player.getBody().getName() : "";
-            bodySlot.setText(bodyName);
-            String legsName = player.getLegs() != null ? player.getLegs().getName() : "";
-            legsSlot.setText(legsName);
-            String ammunitionName = player.getAmmunition() != null ? player.getAmmunition().getName() : "";
-            ammunitionSlot.setText(ammunitionName);
+            weaponSlot.setItem(player.getMainHand());
+            offhandSlot.setItem(player.getOffHand());
+            helmetSlot.setItem(player.getHelmet());
+            bodySlot.setItem(player.getBody());
+            legsSlot.setItem(player.getLegs());
+            ammunitionSlot.setItem(player.getAmmunition());
         }
 
         private class ItemSlot extends JLabel {
             private ItemSlot(int num, Dimension d) {
                 setPreferredSize(d);
-                Border border = BorderFactory.createEmptyBorder();
+                Border border = BorderFactory.createLineBorder(Color.WHITE);
                 Border titleBorder = new TitledBorder(border, String.valueOf(num), TitledBorder.CENTER,
                         TitledBorder.BELOW_TOP, getFont(), Color.LIGHT_GRAY);
                 setBorder(titleBorder);
                 setForeground(Color.LIGHT_GRAY);
+            }
+
+            private void setItem(Item item) {
+                if (item == null) {
+                    setText("empty");
+                } else {
+                    BufferedImage b = item.getGraphic().getImage();
+                    if (b != null) {
+                        setIcon(new ImageIcon(b));
+                        setText("");
+                    } else {
+                        setIcon(null);
+                        setText(item.getName());
+                    }
+                    if (item.isStackable())
+                        ammunitionSlot.setText(String.valueOf(((Stackable) item).getStack()));
+                }
             }
         }
     }

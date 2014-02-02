@@ -1,29 +1,19 @@
-Log created at: 14:38:32 02.02.2014
+Log created at: 18:36:19 02.02.2014
 
-[14:38:32.294] New Game started
-[14:38:32.375] New Melee Weapon created: Sword
-[14:38:32.375] New Ranged Weapon created: The OP Bow
-[14:38:32.378] New Magic Weapon created: Fire Staff
-[14:38:32.388] New Character created: Ned Stark
-[14:38:32.389] New Armour created: Helmet
-[14:38:32.389] New Armour created: Body
-[14:38:32.389] New Armour created: Legs
-[14:38:32.389] New Armour created: Shield
-[14:38:32.389] Player Ned Stark has equipped: Helmet
-[14:38:32.389] Player Ned Stark has equipped: Body
-[14:38:32.390] Player Ned Stark has equipped: Legs
-[14:38:32.390] Player Ned Stark has equipped: Shield
-[14:38:32.390] Player Ned Stark has equipped: The OP Bow
-[14:38:32.390] Player Ned Stark has equipped: Wooden Arrow
-[14:38:32.453] New World created with size: 3185
-[14:38:32.496] Saved Map: randomMap
-[14:38:32.553] Renderer started
-[14:38:42.704] SpawnHandler: tried spawning enemy at -1020|-20
-[14:38:42.704] SpawnHandler: Success
-[14:38:53.037] SpawnHandler: tried spawning enemy at -1940|-860
-[14:38:53.038] SpawnHandler: Success
-[14:38:53.053] Damaged actor Ned Stark for 1 damage.
-[14:38:53.845] Damaged actor Ned Stark for 1 damage.
-[14:38:54.630] Damaged actor Ned Stark for 1 damage.
-[14:38:55.414] Damaged actor Ned Stark for 1 damage.
-[14:38:56.188] Damaged actor Ned Stark for 1 damage.
+[18:36:19.230] New Game started
+[18:36:19.311] New Melee Weapon created: Sword
+[18:36:19.312] New Ranged Weapon created: The OP Bow
+[18:36:19.314] New Magic Weapon created: Fire Staff
+[18:36:19.325] New Character created: Ned Stark
+[18:36:19.327] New Armour created: Helmet
+[18:36:19.327] New Armour created: Body
+[18:36:19.327] New Armour created: Legs
+[18:36:19.327] New Armour created: Shield
+[18:36:19.327] Player Ned Stark has equipped: Helmet
+[18:36:19.327] Player Ned Stark has equipped: Body
+[18:36:19.327] Player Ned Stark has equipped: Legs
+[18:36:19.327] Player Ned Stark has equipped: Shield
+[18:36:19.327] Player Ned Stark has equipped: The OP Bow
+[18:36:19.327] Player Ned Stark has equipped: Wooden Arrow
+[18:36:19.339] New World created with size: 436
+[18:36:19.392] Renderer started

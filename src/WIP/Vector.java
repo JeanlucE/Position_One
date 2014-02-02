@@ -60,9 +60,12 @@ public class Vector implements Serializable {
         return a;
     }
 
-    public void normalize() {
+    public Vector normalize() {
+        if (x == 0 && y == 0)
+            DebugLog.write("Vector: Cannot normalize this vector: " + this);
         x = Integer.signum(x);
         y = Integer.signum(y);
+        return this;
     }
 
     public Vector clone() {

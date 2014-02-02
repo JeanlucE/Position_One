@@ -27,7 +27,7 @@ public class Weapon_Ranged extends Weapon {
 
     protected void useThis() {
         Ammunition ammunition = ((Actors.Character) equipped).getAmmunition();
-        if (ammunition == null || ammunition.getStack() <= 0) {
+        if (ammunition == null || !ammunition.removeFromStack(1)) {
             //ammunition.destroy();
             DebugLog.write("No ammunition left");
             return;

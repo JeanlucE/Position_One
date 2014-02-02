@@ -1,7 +1,6 @@
 package Components;
 
 import Actors.Actor;
-import Actors.AnimationState;
 import WIP.Vector;
 
 import java.awt.image.BufferedImage;
@@ -44,39 +43,54 @@ public class ActorGraphicsComponent extends GraphicsComponent {
     }
 
     private BufferedImage getNorth() {
-        if (parent.getAnimationState() == AnimationState.IDLE) {
+        if (parent.getAnimationState().isIdle()) {
             images.resetAnimations();
             return images.getNorthIdle();
+        } else if (parent.getAnimationState().isWalking()) {
+            images.getNORTH_WALK().setAnimationIncrement(55);
+            return images.getNorthWalk();
         } else {
+            images.getNORTH_WALK().setAnimationIncrement(35);
             return images.getNorthWalk();
         }
     }
 
     private BufferedImage getEast() {
-        if (parent.getAnimationState() == AnimationState.IDLE) {
+        if (parent.getAnimationState().isIdle()) {
             images.resetAnimations();
             return images.getEastIdle();
+        } else if (parent.getAnimationState().isWalking()) {
+            images.getEAST_WALK().setAnimationIncrement(60);
+            return images.getEastWalk();
         } else {
+            images.getEAST_WALK().setAnimationIncrement(40);
             return images.getEastWalk();
         }
     }
 
 
     private BufferedImage getSouth() {
-        if (parent.getAnimationState() == AnimationState.IDLE) {
+        if (parent.getAnimationState().isIdle()) {
             images.resetAnimations();
             return images.getSouthIdle();
-        } else {
+        } else if (parent.getAnimationState().isWalking()) {
+            images.getSOUTH_WALK().setAnimationIncrement(55);
             return images.getSouthWalk();
-
+        } else {
+            images.getSOUTH_WALK().setAnimationIncrement(35);
+            return images.getSouthWalk();
         }
     }
 
     private BufferedImage getWest() {
-        if (parent.getAnimationState() == AnimationState.IDLE) {
+        if (parent.getAnimationState().isIdle()) {
             images.resetAnimations();
             return images.getWestIdle();
+        } else if (parent.getAnimationState().isWalking()) {
+            images.getWEST_WALK().setAnimationIncrement(60);
+            return images.getWestWalk();
         } else {
+            images.getWEST_WALK().setAnimationIncrement(40);
             return images.getWestWalk();
         }
     }

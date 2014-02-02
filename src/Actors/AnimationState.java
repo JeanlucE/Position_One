@@ -7,5 +7,17 @@ package Actors;
  * Time: 19:02
  */
 public enum AnimationState {
-    IDLE, WALKING, SPRINTING
+    IDLE, WALKING, SPRINTING;
+
+    public boolean isIdle() {
+        return this == IDLE;
+    }
+
+    public boolean isWalking() {
+        return this == WALKING;
+    }
+
+    public boolean isSprinting() {
+        return this == SPRINTING;
+    }
 }

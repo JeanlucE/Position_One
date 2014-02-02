@@ -22,8 +22,11 @@ public class ItemGraphicsComponent extends GraphicsComponent {
         images[0] = resource.getImage();
     }
 
+    //TODO change so that all items have a sprite
     //returns dropped image
     public BufferedImage getImage() {
+        if (images == null)
+            return null;
         return images[0];
     }
 

@@ -10,7 +10,7 @@ public class Test {
 
 
     public static void main(String[] args) {
-        System.out.println(nearestPosition(-100));
+        g(-6, -6);
     }
 
     public static int getXPToNextLevel(int level) {
@@ -22,9 +22,46 @@ public class Test {
         return level * level * level * 20;
     }
 
-    private static int nearestPosition(int x) {
-        return (x >= 0) ? (x - x % Renderer.TILESIZE)
-                : (x - x % Renderer.TILESIZE - Renderer.TILESIZE);
+    private static void f(int x, int y) {
+        int xMove = x;
+        int yMove = y;
+        while (xMove != 0 || yMove != 0) {
+            if (Math.abs(xMove) >= Math.abs(yMove)) {
+                if (yMove > 0) {
+                    yMove--;
+                } else if (yMove < 0) {
+                    yMove++;
+                }
+            } else {
+                if (xMove > 0) {
+                    xMove--;
+                } else if (xMove < 0) {
+                    xMove++;
+                }
+            }
+            System.out.println(xMove + "|" + yMove);
+        }
+
+    }
+
+    private static void g(int xMove, int yMove) {
+        while (!(xMove == 0 && yMove == 0)) {
+
+            if (yMove == 0 || Math.abs(xMove) > Math.abs(yMove)) {
+                if (xMove > 0) {
+                    xMove--;
+                } else {
+                    xMove++;
+                }
+            } else {
+                if (yMove > 0) {
+                    yMove--;
+                } else {
+                    yMove++;
+                }
+            }
+        }
+
     }
 
     public Test() {

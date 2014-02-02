@@ -14,7 +14,7 @@ import java.util.List;
  * Date: 13.11.13
  * Time: 14:26
  * <p/>
- * This class is used for any Gameobject that can move by its own
+ * This class is used for any Gameobject that can canMove by its own
  */
 public abstract class Actor extends Collidable {
 
@@ -78,9 +78,24 @@ public abstract class Actor extends Collidable {
             currentDamageTimeout -= Time.deltaTime();
         }
         updateThis();
+        //System.out.println(isMoving);
+        move();
+        animate();
+        lateUpdate();
     }
 
+
     protected abstract void updateThis();
+
+    protected abstract void lateUpdate();
+
+    protected void animate() {
+        if (isMoving()) {
+            setAnimationState(AnimationState.WALKING);
+        } else {
+            setAnimationState(AnimationState.IDLE);
+        }
+    }
 
     public boolean isCollidable() {
         return true;
@@ -89,7 +104,7 @@ public abstract class Actor extends Collidable {
     /**
      * Moves the actor according to the values set at currentXVelocity and currentYVelocity. These fields should be
      * changed before move is called. If the movement is hindered by a collision the method tries to reduce the
-     * velocity of the actor in this frame only to move as close as possible to the collision object. If that still
+     * velocity of the actor in this frame only to canMove as close as possible to the collision object. If that still
      * results in a collision the method tried to slide past if any of the orthagonal axes relative to the collision
      * are not 0.
      */
@@ -98,43 +113,97 @@ public abstract class Actor extends Collidable {
             isMoving = false;
             return;
         }
-        isMoving = true;
-        //TODO slow down character movement for diagonal movement
+
         int xMove = currentXVelocity;
         int yMove = currentYVelocity;
-        while (xMove != 0 || yMove != 0) {
-            boolean hasMoved = move(xMove, yMove);
+
+        while (!(xMove == 0 && yMove == 0)) {
+
+            boolean hasMoved = canMove(xMove, yMove);
             if (hasMoved)
-                return;
-            else {
-                if (xMove != 0) {
-                    xMove = (xMove > 0) ? (xMove - 1) : (xMove + 1);
+                break;
+
+            if (yMove == 0 || Math.abs(xMove) > Math.abs(yMove)) {
+                if (xMove > 0) {
+                    xMove--;
+                } else {
+                    xMove++;
                 }
-                if (yMove != 0) {
-                    yMove = (yMove > 0) ? (yMove - 1) : (yMove + 1);
+            } else {
+                if (yMove > 0) {
+                    yMove--;
+                } else {
+                    yMove++;
                 }
             }
         }
+        int possibleXSlide = xSlide(currentXVelocity);
+        int possibleYSlide = ySlide(currentYVelocity);
 
-        slide(currentXVelocity, currentYVelocity);
+        if (Math.abs(possibleXSlide) > Math.abs(xMove)) {
+            xMove = possibleXSlide;
+            yMove = 0;
+        } else if (Math.abs(possibleYSlide) > Math.abs(yMove)) {
+            xMove = 0;
+            yMove = possibleYSlide;
+        }
+
+        translate(xMove, yMove);
+
+        if (xMove != 0 || yMove != 0) {
+            isMoving = true;
+            if (yMove == 0) {
+                getTransform().setDirection(new Vector(xMove, 0).normalize());
+            } else if (xMove == 0) {
+                getTransform().setDirection(new Vector(0, yMove).normalize());
+            } else { //Prioritze east west axis
+                getTransform().setDirection(new Vector(xMove, 0).normalize());
+            }
+        } else
+            isMoving = false;
     }
 
-    private boolean move(int x, int y) {
+    private boolean canMove(int x, int y) {
         Vector currentPosition = getTransform().getPosition();
         World world = Game.getInstance().getCurrentWorld();
 
         World.CollisionEvent w = world.resolveCollision(this, currentPosition.shiftedPosition(x, y));
         if (w.isNoCollision()) {
-            translate(x, y);
             return true;
         }
         return false;
     }
 
-    private void slide(int xMove, int yMove) {
-        if (!move(xMove, 0)) {
-            isMoving = move(0, yMove);
+    private int xSlide(int x) {
+        while (x != 0) {
+
+            boolean hasMoved = canMove(x, 0);
+            if (hasMoved)
+                break;
+
+            if (x > 0) {
+                x--;
+            } else {
+                x++;
+            }
         }
+        return x;
+    }
+
+    private int ySlide(int y) {
+        while (y != 0) {
+
+            boolean hasMoved = canMove(0, y);
+            if (hasMoved)
+                break;
+
+            if (y > 0) {
+                y--;
+            } else {
+                y++;
+            }
+        }
+        return y;
     }
 
     /**

@@ -69,7 +69,7 @@ public class Character extends Actor {
         super(name,
                 new Transform(),
                 new ActorGraphicsComponent(DynamicResource.PLAYER),
-                new PhysicsComponent(30, 40));
+                new PhysicsComponent(30, 39));
         ((ActorGraphicsComponent) this.getGraphic()).setParent(this);
 
         this.level = level;
@@ -154,8 +154,6 @@ public class Character extends Actor {
         //TODO implement this
     }
 
-    private Vector lastDirection = new Vector(0, 0), newDirection;
-
     protected void updateThis() {
         applyMovement();
 
@@ -166,20 +164,14 @@ public class Character extends Actor {
         if (InputComponent.getInstance().isQTyped()) {
             pickupNextItem();
         }
-
-        regenerate();
-        animate();
     }
 
-    //TODo apply animation speed
-    //TODO dont drain stamina when the player cant move
     private void applyMovement() {
         int moveDistance;
         if (InputComponent.getInstance().isShiftDown()) {
             if (currentStamina >= 3) {
                 moveDistance = sprintSpeed;
                 sprinting = true;
-                currentStamina -= 3;
             } else {
                 moveDistance = walkSpeed;
                 sprinting = false;
@@ -187,48 +179,19 @@ public class Character extends Actor {
         } else {
             moveDistance = walkSpeed;
             sprinting = false;
-            setAnimationState(AnimationState.WALKING);
         }
 
         int XAxis = InputComponent.getInstance().getXAxis();
         int YAxis = InputComponent.getInstance().getYAxis();
 
-        calculateDirection(XAxis, YAxis);
-
         setXVel(XAxis * moveDistance);
         setYVel(YAxis * moveDistance);
-
-        move();
-
-        lastDirection = new Vector(XAxis, YAxis);
     }
 
     private void attack() {
         Weapon weapon = equipment.getMainHand();
         if (weapon != null) {
             weapon.use();
-        }
-    }
-
-    /**
-     * Given the input of x and y from the InputComponent this method determines where the player is facing
-     *
-     * @param x x Direction
-     * @param y y Direction
-     */
-    private void calculateDirection(int x, int y) {
-        newDirection = new Vector(x, y);
-        if (!newDirection.equals(lastDirection)) {
-
-            if (newDirection.getY() == 1)
-                getTransform().setDirection(Vector.NORTH);
-            else if (newDirection.getY() == -1)
-                getTransform().setDirection(Vector.SOUTH);
-
-            if (newDirection.getX() == 1)
-                getTransform().setDirection(Vector.EAST);
-            else if (newDirection.getX() == -1)
-                getTransform().setDirection(Vector.WEST);
         }
     }
 
@@ -248,7 +211,8 @@ public class Character extends Actor {
         if (item.isStackable()) {
             if (equipment.hasAmmunitionEquipped() && item instanceof Ammunition && equip((Equipment) item)) {
                 DebugLog.write("Ammunition stacked");
-            }
+            } else
+                inventory.add(item);
         } else {
             inventory.add(item);
         }
@@ -275,16 +239,6 @@ public class Character extends Actor {
                 currentMana++;
                 manaRegen -= manaTimer;
             }
-        }
-    }
-
-    private void animate() {
-        if (isMoving() && sprinting) {
-            setAnimationState(AnimationState.SPRINTING);
-        } else if (isMoving()) {
-            setAnimationState(AnimationState.WALKING);
-        } else {
-            setAnimationState(AnimationState.IDLE);
         }
     }
 
@@ -473,5 +427,20 @@ public class Character extends Actor {
 
     public float getManaPercentage() {
         return currentMana / (float) maxMana;
+    }
+
+    @Override
+    protected void animate() {
+        super.animate();
+        if (isMoving() && sprinting)
+            setAnimationState(AnimationState.SPRINTING);
+    }
+
+    @Override
+    protected void lateUpdate() {
+        if (isMoving() && sprinting)
+            currentStamina -= 3;
+
+        regenerate();
     }
 }

@@ -10,7 +10,7 @@ import WIP.Transform;
  * Date: 27.11.13
  * Time: 23:26
  */
-public class Ammunition extends Equipment {
+public class Ammunition extends Equipment implements Stackable {
 
     private int stack = 50;
     private PhysicsComponent physicsComponent;
@@ -39,20 +39,26 @@ public class Ammunition extends Equipment {
         return physicsComponent;
     }
 
+    @Override
+    public void setStack(int stack) {
+        this.stack = stack;
+    }
+
+    @Override
+    public boolean removeFromStack(int remove) {
+        if (stack - remove >= 0) {
+            addToStack(-remove);
+            return true;
+        }
+        return false;
+    }
+
     public int getStack() {
         return stack;
     }
 
     public void addToStack(int amount) {
         stack += amount;
-    }
-
-    public int removeFromStack() {
-        if (stack > 0) {
-            return 1;
-        } else {
-            return 0;
-        }
     }
 
     @Override
@@ -68,7 +74,6 @@ public class Ammunition extends Equipment {
     }
 
     public Projectile createProjectile(Transform origin, Weapon_Ranged weapon) {
-        stack--;
 
         //Rotate collider when arrow is pointing east or west
         PhysicsComponent phys = getCollider().clone();

@@ -101,4 +101,20 @@ public class ActorGraphicsResource extends DynamicResource {
             WEST_WALK.resetAnimation();
         }
     }
+
+    Animation getNORTH_WALK() {
+        return NORTH_WALK;
+    }
+
+    Animation getEAST_WALK() {
+        return EAST_WALK;
+    }
+
+    Animation getSOUTH_WALK() {
+        return SOUTH_WALK;
+    }
+
+    Animation getWEST_WALK() {
+        return WEST_WALK;
+    }
 }

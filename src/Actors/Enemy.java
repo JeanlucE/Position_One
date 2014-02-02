@@ -36,6 +36,11 @@ public class Enemy extends NPC {
     }
 
     @Override
+    protected void lateUpdate() {
+
+    }
+
+    @Override
     public Faction getFaction() {
         return Faction.ENEMY;
     }
