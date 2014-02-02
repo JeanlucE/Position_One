@@ -2,7 +2,6 @@ package WIP;
 
 import Actors.Actor;
 import Actors.Character;
-import Actors.Enemy;
 import Components.*;
 import Environment.World;
 import Items.*;
@@ -59,7 +58,6 @@ public class Game {
         player.equip(shield);
         player.equip(bow);
         player.equip(arrow);
-        Enemy.DEBUG_ALL_ENEMIES_MOVE_TOWARD_PLAYER = true;
         Ammunition dropArrow = new Ammunition("Wooden Arrow", 0,
                 new ProjectileGraphicsComponent(null, DynamicResource.WOODEN_ARROW),
                 new PhysicsComponent(10, 25));

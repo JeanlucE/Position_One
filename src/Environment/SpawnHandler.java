@@ -90,4 +90,9 @@ public class SpawnHandler {
         }
         currentEnemies++;
     }
+
+    public void setMaxEnemies(int maxEnemies) {
+        if (maxEnemies < 0) return;
+        this.maxEnemies = maxEnemies;
+    }
 }

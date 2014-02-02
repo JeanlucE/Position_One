@@ -60,10 +60,11 @@ public class Renderer extends JPanel {
     // know the clipping edges but is also important to calculate draw positions from world position.
     private static int screenWidth = 800, screenHeight = 600;
     private Graphics2D g2d;
+    private Game game;
 
     //DEBUGGING
-    public boolean DEBUG_DRAW_ACTOR_POSITIONS = true;
-    public boolean DEBUG_DRAW_ACTOR_COLLIDERS = true;
+    public boolean DEBUG_DRAW_ACTOR_POSITIONS = false;
+    public boolean DEBUG_DRAW_ACTOR_COLLIDERS = false;
 
     //Singleton Design Pattern
     public static Renderer getInstance() {
@@ -212,8 +213,8 @@ public class Renderer extends JPanel {
         g2d.setColor(Color.WHITE);
         g2d.drawString(Game.getInstance().getGuiState().name(), screenWidth - 55, screenHeight - 10);
 
-        GameWindow.getInstance().setTitle("Frames:" + String.valueOf(Game.getInstance().getFrameRate()) + " " +
-                "Memory:" + String.valueOf(Game.getInstance().getCurrentMemory()) + "MB");
+        ((JFrame) SwingUtilities.getWindowAncestor(this)).setTitle("Frames:" + String.valueOf(Game.getInstance()
+                .getFrameRate()) + " " + "Memory:" + String.valueOf(Game.getInstance().getCurrentMemory()) + "MB");
     }
 
     private void drawGame() {

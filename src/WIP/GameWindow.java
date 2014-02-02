@@ -34,5 +34,6 @@ class GameWindow extends JFrame {
         setVisible(true);
         setMinimumSize(new Dimension(560, 560));
         setIconImage(Resource.player_SOUTH.getImage());
+
     }
 }

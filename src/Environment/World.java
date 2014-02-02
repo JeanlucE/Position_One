@@ -66,6 +66,10 @@ public class World {
         spawnHandler.update();
     }
 
+    public void setMaxEnemies(int maxEnemies) {
+        spawnHandler.setMaxEnemies(maxEnemies);
+    }
+
     /**
      * Gets all WorldSpaces in the area of the rectangle defined by the bottomLeft Vector and the topRight Vector.
      * Then a Map of Real Vectors to WorldSpaces is returned.
