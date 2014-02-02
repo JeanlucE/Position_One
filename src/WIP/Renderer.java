@@ -46,6 +46,9 @@ import java.util.Map;
  * *                |
  * *               \/ +y
  */
+//TODO make a unified drawImage method which handles all gameobject specific checks,
+// - possibly put some flags into Graphicscomponent
+// - possibly subclass Graphics2D
 public class Renderer extends JPanel {
 
     private static Renderer instance = null;
@@ -67,6 +70,41 @@ public class Renderer extends JPanel {
             instance = new Renderer();
         }
         return instance;
+    }
+
+    /**
+     * Resizes a Dimension to a boundary, keeping aspect ratio
+     *
+     * @param imgSize
+     * @param boundary
+     * @return
+     */
+    public static Dimension getScaledDimension(Dimension imgSize, Dimension boundary) {
+
+        int original_width = imgSize.width;
+        int original_height = imgSize.height;
+        int bound_width = boundary.width;
+        int bound_height = boundary.height;
+        int new_width = original_width;
+        int new_height = original_height;
+
+        // first check if we need to scale width
+        if (original_width < bound_width) {
+            //scale width to fit
+            new_width = bound_width;
+            //scale height to maintain aspect ratio
+            new_height = (new_width * original_height) / original_width;
+        }
+
+        // then check if we need to scale even with the new height
+        if (new_height < bound_height) {
+            //scale height to fit instead
+            new_height = bound_height;
+            //scale width to maintain aspect ratio
+            new_width = (new_height * original_width) / original_height;
+        }
+
+        return new Dimension(new_width, new_height);
     }
 
     private JPanel infoScreen;
@@ -154,7 +192,7 @@ public class Renderer extends JPanel {
     }
 
     public void paintComponent(Graphics g) {
-
+        super.paintComponent(g);
         g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
@@ -241,17 +279,38 @@ public class Renderer extends JPanel {
         }
     }
 
-    private void drawImage(GameObject go, Vector position, int width, int height) {
+    private void drawImage_ASPECT(GameObject go, Vector position, int width, int height) {
+        BufferedImage bf = go.getGraphic().getImage();
+        Dimension currentDimension = new Dimension(bf.getWidth(), bf.getHeight());
+        Dimension boundary = new Dimension(width, height);
+        Dimension scaledDimension = getScaledDimension(currentDimension, boundary);
+        Image scaledImage = bf.getScaledInstance(scaledDimension.width, scaledDimension.height,
+                Image.SCALE_DEFAULT);
+        g2d.drawImage(scaledImage,
+                position.getX() - scaledDimension.width / 2,
+                screenHeight - (position.getY() + scaledDimension.height / 2),
+                scaledDimension.width, scaledDimension.height, this);
+    }
+
+    private void drawImage_COLLIDER(GameObject go, Vector position, int width, int height) {
+        BufferedImage bf = go.getGraphic().getImage();
+        PhysicsComponent p = ((Collidable) go).getCollider();
+        g2d.drawImage(bf,
+                position.getX() - p.getWidth() / 2,
+                screenHeight - (position.getY() + p.getHeight() / 2),
+                width, height, this);
+
+    }
+
+    private void drawImage(GameObject go, Vector centerOfImage, int width, int height, boolean keepAspect) {
         if (go != null) {
-            BufferedImage bf = go.getGraphic().getImage();
-            PhysicsComponent p = ((Collidable) go).getCollider();
-            g2d.drawImage(bf,
-                    position.getX() - p.getWidth() / 2,
-                    screenHeight - (position.getY() + p.getHeight() / 2),
-                    width, height, this);
+            if (keepAspect)
+                drawImage_ASPECT(go, centerOfImage, width, height);
+            else
+                drawImage_COLLIDER(go, centerOfImage, width, height);
         } else {
             g2d.setColor(Color.RED);
-            g2d.fillRect(position.getX(), screenHeight - (TILESIZE + position.getY()), TILESIZE, TILESIZE);
+            g2d.fillRect(centerOfImage.getX(), screenHeight - (TILESIZE + centerOfImage.getY()), TILESIZE, TILESIZE);
         }
     }
 
@@ -268,7 +327,10 @@ public class Renderer extends JPanel {
         for (Map.Entry<Actor, Vector> e : actorPositionMap.entrySet()) {
             Vector drawPosition = e.getValue();
             PhysicsComponent phys = e.getKey().getCollider();
-            drawImage(e.getKey(), drawPosition, phys.getWidth(), phys.getHeight());
+            if (e.getKey().equals(Game.getInstance().getPlayer()))
+                drawImage(e.getKey(), drawPosition, phys.getWidth(), phys.getHeight(), true);
+            else
+                drawImage(e.getKey(), drawPosition, phys.getWidth(), phys.getHeight(), false);
 
         }
 
@@ -299,7 +361,7 @@ public class Renderer extends JPanel {
         for (Map.Entry<Projectile, Vector> e : projectiles.entrySet()) {
             Vector drawPosition = e.getValue();
             PhysicsComponent phys = e.getKey().getCollider();
-            drawImage(e.getKey(), drawPosition, phys.getWidth(), phys.getHeight());
+            drawImage_ASPECT(e.getKey(), drawPosition, phys.getWidth(), phys.getHeight());
         }
     }
 

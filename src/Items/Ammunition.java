@@ -18,7 +18,6 @@ public class Ammunition extends Equipment {
     public Ammunition(String name, int level, ProjectileGraphicsComponent g, PhysicsComponent phys) {
         super(name, level, 0, EquipmentClass.RANGED, g);
         physicsComponent = phys;
-
     }
 
     @Override

@@ -19,19 +19,19 @@ public class DynamicResource {
             new Animation(new Resource[]{Resource.player_NORTH_WALK01, Resource.player_NORTH_WALK02,
                     Resource.player_NORTH_WALK03, Resource.player_NORTH_WALK04, Resource.player_NORTH_WALK05,
                     Resource.player_NORTH_WALK06, Resource.player_NORTH_WALK07, Resource.player_NORTH_WALK08,
-                    Resource.player_NORTH_WALK09, Resource.player_NORTH_WALK10}, 40),
+                    Resource.player_NORTH_WALK09, Resource.player_NORTH_WALK10}, 55),
             new Animation(new Resource[]{Resource.player_EAST_WALK01, Resource.player_EAST_WALK02,
                     Resource.player_EAST_WALK03, Resource.player_EAST_WALK04, Resource.player_EAST_WALK05,
                     Resource.player_EAST_WALK06, Resource.player_EAST_WALK07, Resource.player_EAST_WALK08,
-                    Resource.player_EAST_WALK09, Resource.player_EAST_WALK10}, 40),
+                    Resource.player_EAST_WALK09, Resource.player_EAST_WALK10}, 55),
             new Animation(new Resource[]{Resource.player_SOUTH_WALK01, Resource.player_SOUTH_WALK02,
                     Resource.player_SOUTH_WALK03, Resource.player_SOUTH_WALK04, Resource.player_SOUTH_WALK05,
                     Resource.player_SOUTH_WALK06, Resource.player_SOUTH_WALK07, Resource.player_SOUTH_WALK08,
-                    Resource.player_SOUTH_WALK09, Resource.player_SOUTH_WALK10}, 40),
+                    Resource.player_SOUTH_WALK09, Resource.player_SOUTH_WALK10}, 55),
             new Animation(new Resource[]{Resource.player_WEST_WALK01, Resource.player_WEST_WALK02,
                     Resource.player_WEST_WALK03, Resource.player_WEST_WALK04, Resource.player_WEST_WALK05,
                     Resource.player_WEST_WALK06, Resource.player_WEST_WALK07, Resource.player_WEST_WALK08,
-                    Resource.player_WEST_WALK09, Resource.player_WEST_WALK10}, 40));
+                    Resource.player_WEST_WALK09, Resource.player_WEST_WALK10}, 55));
     public static final DynamicResource WOODEN_ARROW = new DynamicResource(new Resource[]{
             Resource.projectile_arrow_01_wooden_FLOOR_NORTH,
             Resource.projectile_arrow_01_wooden_FLOOR_EAST,
