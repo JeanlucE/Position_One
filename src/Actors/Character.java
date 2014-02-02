@@ -41,6 +41,9 @@ public class Character extends Actor {
     private float healthRegenRate = 0f;
     private float staminaRegenRate = 100f;
     private float manaRegenRate = 3.5f;
+
+    //Drain per second
+    private float staminaDrainRate = 150f;
     //endregion
 
     //Array of all skills
@@ -226,8 +229,10 @@ public class Character extends Actor {
         //Regens stamina
         if (currentStamina < maxStamina && !sprinting) {
             staminaRegen += Time.deltaTime();
-            if (staminaRegen >= staminaTimer) {
-                currentStamina++;
+            while (staminaRegen >= staminaTimer) {
+                if (currentStamina + 1 <= maxStamina) {
+                    currentStamina++;
+                }
                 staminaRegen -= staminaTimer;
             }
         }
@@ -235,8 +240,9 @@ public class Character extends Actor {
         //Regens Mana
         if (currentMana < maxMana) {
             manaRegen += Time.deltaTime();
-            if (manaRegen >= manaTimer) {
-                currentMana++;
+            while (manaRegen >= manaTimer) {
+                if (currentMana + 1 <= maxMana)
+                    currentMana++;
                 manaRegen -= manaTimer;
             }
         }
@@ -435,6 +441,9 @@ public class Character extends Actor {
         if (isMoving() && sprinting)
             setAnimationState(AnimationState.SPRINTING);
     }
+
+
+    private int staminaDrainTimer = 0;
 
     @Override
     protected void lateUpdate() {

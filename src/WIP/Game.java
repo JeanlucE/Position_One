@@ -82,10 +82,6 @@ public class Game {
         GameObject.removeDestroyedGameObjects();
     }
 
-    public int getFrameRate() {
-        return gameLoop.getFrameRate();
-    }
-
     public Character getPlayer() {
         return player;
     }
@@ -102,12 +98,21 @@ public class Game {
         return renderer;
     }
 
+    public int getFrameRate() {
+        return gameLoop.frameRate;
+    }
+
+    public long getCurrentMemory() {
+        return gameLoop.currentMemory;
+    }
+
     private class GameLoop implements ActionListener {
 
         int frames = 0;
         int frameRate = 60;
         long timeBetween;
-        long milliseconds = System.currentTimeMillis();
+        long milliseconds = Time.getTimeStamp();
+        long currentMemory = 0;
 
 
         public void actionPerformed(ActionEvent e) {
@@ -147,6 +152,7 @@ public class Game {
             InputComponent.getInstance().resetTypedKeys();
 
             calcFrameRate();
+            calcMemory();
         }
 
         /**
@@ -154,19 +160,27 @@ public class Game {
          */
         private void calcFrameRate() {
             frames++;
-            timeBetween = System.currentTimeMillis();
+            timeBetween = Time.getTimeStamp();
             //if one second has passed
             if (timeBetween - milliseconds >= 1000) {
                 frameRate = frames;
                 frames = 0;
-                milliseconds = System.currentTimeMillis();
+                milliseconds = timeBetween;
             }
         }
 
-        private int getFrameRate() {
-            return frameRate;
+        private long lastMeasurement = Time.getTimeStamp();
+
+        private void calcMemory() {
+            long currentTime = Time.getTimeStamp();
+            if (currentTime - lastMeasurement >= 1000) {
+                currentMemory = (Runtime.getRuntime().totalMemory() - Runtime
+                        .getRuntime().freeMemory()) / (1024L * 1024L);
+                lastMeasurement = currentTime;
+            }
         }
     }
+
 
     GUIState getGuiState() {
         return guiState;

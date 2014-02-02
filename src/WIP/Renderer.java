@@ -212,7 +212,8 @@ public class Renderer extends JPanel {
         g2d.setColor(Color.WHITE);
         g2d.drawString(Game.getInstance().getGuiState().name(), screenWidth - 55, screenHeight - 10);
 
-        GameWindow.getInstance().setTitle("Frames:" + String.valueOf(Game.getInstance().getFrameRate()));
+        GameWindow.getInstance().setTitle("Frames:" + String.valueOf(Game.getInstance().getFrameRate()) + " " +
+                "Memory:" + String.valueOf(Game.getInstance().getCurrentMemory()) + "MB");
     }
 
     private void drawGame() {
@@ -418,8 +419,8 @@ public class Renderer extends JPanel {
             Vector position = e.getValue();
             PhysicsComponent p = e.getKey().getCollider();
             g2d.drawRect(position.getX() - p.getWidth() / 2,
-                    screenHeight - (position.getY() + p.getHeight() / 2) - 1, //-1 because rectangles are drawn
-                    // directly at given coordinates
+                    screenHeight - (position.getY() + p.getHeight() / 2) - 1,
+                    //-1 because rectangles are drawn directly at given coordinates
                     p.getWidth(), p.getHeight());
         }
     }
