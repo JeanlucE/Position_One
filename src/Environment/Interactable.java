@@ -1,7 +1,6 @@
 package Environment;
 
 import Components.InteractableGraphicsComponent;
-import Components.PhysicsComponent;
 import WIP.Transform;
 
 /**
@@ -10,12 +9,12 @@ import WIP.Transform;
  * Date: 12/12/13
  * Time: 10:23 PM
  */
-public abstract class Interactable extends WorldSpace{
+public abstract class Interactable extends WorldSpace {
 
     protected boolean activated;
 
-    public Interactable(Transform transform, InteractableGraphicsComponent g, PhysicsComponent physicsComponent) {
-        super(transform, g, physicsComponent);
+    public Interactable(Transform transform, InteractableGraphicsComponent g) {
+        super(transform, g);
     }
 
     @Override

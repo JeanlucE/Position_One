@@ -59,7 +59,7 @@ public class World {
         //initiateMap("world");
         //saveMap("randomMap");
         loadMap("coctestinghall");
-        spawnHandler = new SpawnHandler(this, 0);
+        spawnHandler = new SpawnHandler(this, 1);
     }
 
     public void update() {

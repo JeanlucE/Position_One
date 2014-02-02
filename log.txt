@@ -1,19 +1,117 @@
-Log created at: 18:36:19 02.02.2014
+Log created at: 20:16:50 02.02.2014
 
-[18:36:19.230] New Game started
-[18:36:19.311] New Melee Weapon created: Sword
-[18:36:19.312] New Ranged Weapon created: The OP Bow
-[18:36:19.314] New Magic Weapon created: Fire Staff
-[18:36:19.325] New Character created: Ned Stark
-[18:36:19.327] New Armour created: Helmet
-[18:36:19.327] New Armour created: Body
-[18:36:19.327] New Armour created: Legs
-[18:36:19.327] New Armour created: Shield
-[18:36:19.327] Player Ned Stark has equipped: Helmet
-[18:36:19.327] Player Ned Stark has equipped: Body
-[18:36:19.327] Player Ned Stark has equipped: Legs
-[18:36:19.327] Player Ned Stark has equipped: Shield
-[18:36:19.327] Player Ned Stark has equipped: The OP Bow
-[18:36:19.327] Player Ned Stark has equipped: Wooden Arrow
-[18:36:19.339] New World created with size: 436
-[18:36:19.392] Renderer started
+[20:16:50.799] New Game started
+[20:16:50.883] New Melee Weapon created: Sword
+[20:16:50.883] New Ranged Weapon created: The OP Bow
+[20:16:50.885] New Magic Weapon created: Fire Staff
+[20:16:50.897] New Character created: Ned Stark
+[20:16:50.898] New Armour created: Helmet
+[20:16:50.898] New Armour created: Body
+[20:16:50.898] New Armour created: Legs
+[20:16:50.898] New Armour created: Shield
+[20:16:50.899] Player Ned Stark has equipped: Helmet
+[20:16:50.899] Player Ned Stark has equipped: Body
+[20:16:50.899] Player Ned Stark has equipped: Legs
+[20:16:50.899] Player Ned Stark has equipped: Shield
+[20:16:50.899] Player Ned Stark has equipped: The OP Bow
+[20:16:50.899] Player Ned Stark has equipped: Wooden Arrow
+[20:16:50.910] New World created with size: 436
+[20:16:50.964] Renderer started
+[20:17:01.229] SpawnHandler: tried spawning enemy at 180|100
+[20:17:01.229] SpawnHandler: Success
+[20:17:02.667] New Projectile at: 441|156
+[20:17:02.888] Chu Chu(100/100) hit!
+[20:17:02.889] Projectile destroyed at 296|156
+[20:17:02.889] Damaged actor Chu Chu for 10 damage.
+[20:17:03.047] New Projectile at: 441|156
+[20:17:03.239] Chu Chu(90/100) hit!
+[20:17:03.240] Projectile destroyed at 316|156
+[20:17:03.240] Damaged actor Chu Chu for 10 damage.
+[20:17:03.539] New Projectile at: 441|156
+[20:17:03.685] Chu Chu(80/100) hit!
+[20:17:03.685] Projectile destroyed at 346|156
+[20:17:03.685] Damaged actor Chu Chu for 10 damage.
+[20:17:05.753] New Projectile at: 684|84
+[20:17:06.059] Chu Chu(70/100) hit!
+[20:17:06.059] Projectile destroyed at 489|84
+[20:17:06.059] Damaged actor Chu Chu for 10 damage.
+[20:17:06.139] New Projectile at: 684|84
+[20:17:06.391] Chu Chu(60/100) hit!
+[20:17:06.391] Projectile destroyed at 519|84
+[20:17:06.391] Damaged actor Chu Chu for 10 damage.
+[20:17:06.442] New Projectile at: 684|84
+[20:17:06.687] Chu Chu(50/100) hit!
+[20:17:06.687] Projectile destroyed at 529|84
+[20:17:06.687] Damaged actor Chu Chu for 10 damage.
+[20:17:06.750] New Projectile at: 684|84
+[20:17:06.956] Chu Chu(40/100) hit!
+[20:17:06.956] Projectile destroyed at 549|84
+[20:17:06.956] Damaged actor Chu Chu for 10 damage.
+[20:17:07.084] New Projectile at: 684|84
+[20:17:07.261] Chu Chu(30/100) hit!
+[20:17:07.261] Projectile destroyed at 569|84
+[20:17:07.261] Damaged actor Chu Chu for 10 damage.
+[20:17:07.391] New Projectile at: 684|84
+[20:17:07.532] Chu Chu(20/100) hit!
+[20:17:07.533] Projectile destroyed at 589|84
+[20:17:07.533] Damaged actor Chu Chu for 10 damage.
+[20:17:07.692] New Projectile at: 684|84
+[20:17:07.817] Chu Chu(10/100) hit!
+[20:17:07.817] Projectile destroyed at 599|84
+[20:17:07.817] Damaged actor Chu Chu for 10 damage.
+[20:17:07.817] Player gained experience: 25
+[20:17:07.818] Player Ned Stark has leveled up.
+[20:17:07.818] Player Ned Stark is now level 1.
+[20:17:07.818] Actor Chu Chu is dead.
+[20:17:11.564] SpawnHandler: tried spawning enemy at 540|60
+[20:17:11.564] SpawnHandler: Success
+[20:17:12.360] New Projectile at: 684|84
+[20:17:12.474] Chu Chu(100/100) hit!
+[20:17:12.474] Projectile destroyed at 609|84
+[20:17:12.474] Damaged actor Chu Chu for 10 damage.
+[20:17:12.694] New Projectile at: 684|84
+[20:17:12.709] Damaged actor Ned Stark for 1 damage.
+[20:17:12.773] Chu Chu(90/100) hit!
+[20:17:12.773] Projectile destroyed at 629|84
+[20:17:12.773] Damaged actor Chu Chu for 10 damage.
+[20:17:12.997] New Projectile at: 684|84
+[20:17:13.043] Chu Chu(80/100) hit!
+[20:17:13.044] Projectile destroyed at 649|84
+[20:17:13.044] Damaged actor Chu Chu for 10 damage.
+[20:17:13.302] New Projectile at: 684|84
+[20:17:13.335] Chu Chu(70/100) hit!
+[20:17:13.335] Projectile destroyed at 659|84
+[20:17:13.335] Damaged actor Chu Chu for 10 damage.
+[20:17:13.493] Damaged actor Ned Stark for 1 damage.
+[20:17:13.617] New Projectile at: 684|84
+[20:17:13.649] Chu Chu(60/100) hit!
+[20:17:13.649] Projectile destroyed at 659|84
+[20:17:13.649] Damaged actor Chu Chu for 10 damage.
+[20:17:13.926] New Projectile at: 684|84
+[20:17:13.955] Chu Chu(50/100) hit!
+[20:17:13.956] Projectile destroyed at 659|84
+[20:17:13.956] Damaged actor Chu Chu for 10 damage.
+[20:17:14.226] New Projectile at: 684|84
+[20:17:14.258] Chu Chu(40/100) hit!
+[20:17:14.258] Projectile destroyed at 659|84
+[20:17:14.258] Damaged actor Chu Chu for 10 damage.
+[20:17:14.273] Damaged actor Ned Stark for 1 damage.
+[20:17:14.536] New Projectile at: 684|84
+[20:17:14.568] Chu Chu(30/100) hit!
+[20:17:14.568] Projectile destroyed at 659|84
+[20:17:14.568] Damaged actor Chu Chu for 10 damage.
+[20:17:14.847] New Projectile at: 684|84
+[20:17:14.889] Chu Chu(20/100) hit!
+[20:17:14.890] Projectile destroyed at 659|84
+[20:17:14.890] Damaged actor Chu Chu for 10 damage.
+[20:17:15.060] Damaged actor Ned Stark for 1 damage.
+[20:17:15.148] New Projectile at: 684|84
+[20:17:15.179] Chu Chu(10/100) hit!
+[20:17:15.179] Projectile destroyed at 659|84
+[20:17:15.179] Damaged actor Chu Chu for 10 damage.
+[20:17:15.179] Player gained experience: 25
+[20:17:15.179] Actor Chu Chu is dead.
+[20:17:15.454] New Projectile at: 684|84
+[20:17:15.759] New Projectile at: 684|84
+[20:17:15.854] Projectile destroyed
+[20:17:16.160] Projectile destroyed

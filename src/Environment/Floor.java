@@ -17,7 +17,7 @@ public class Floor extends WorldSpace {
     private Stack<Item> itemStack;
 
     public Floor(Transform transform, StaticGraphicsComponent g) {
-        super(transform, g, null);
+        super(transform, g);
         itemStack = new Stack<>();
     }
 

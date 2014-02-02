@@ -2,6 +2,7 @@ package Environment;
 
 import Components.PhysicsComponent;
 import Components.StaticGraphicsComponent;
+import WIP.Collidable;
 import WIP.Transform;
 
 /**
@@ -10,10 +11,23 @@ import WIP.Transform;
  * Date: 07.11.13
  * Time: 15:19
  */
-public class Wall extends WorldSpace {
+public class Wall extends WorldSpace implements Collidable {
+    private PhysicsComponent collider;
 
     public Wall(Transform transform, StaticGraphicsComponent g, PhysicsComponent p) {
-        super(transform, g, p);
+        super(transform, g);
+        setCollider(p);
+        p.setParent(getTransform());
+    }
+
+    @Override
+    public PhysicsComponent getCollider() {
+        return collider;
+    }
+
+    @Override
+    public void setCollider(PhysicsComponent physicsComponent) {
+        this.collider = physicsComponent;
     }
 
     @Override

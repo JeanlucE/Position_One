@@ -15,9 +15,11 @@ public class ActorGraphicsComponent extends GraphicsComponent {
 
     private Actor parent;
     private ActorGraphicsResource images;
+    private boolean hasAnimations;
 
-    public ActorGraphicsComponent(ActorGraphicsResource images) {
+    public ActorGraphicsComponent(ActorGraphicsResource images, boolean hasAnimations) {
         this.images = images;
+        this.hasAnimations = hasAnimations;
     }
 
     public BufferedImage getImage() {
@@ -39,11 +41,11 @@ public class ActorGraphicsComponent extends GraphicsComponent {
     }
 
     public ActorGraphicsComponent clone() {
-        return new ActorGraphicsComponent(images);
+        return new ActorGraphicsComponent(images, hasAnimations);
     }
 
     private BufferedImage getNorth() {
-        if (parent.getAnimationState().isIdle()) {
+        if (parent.getAnimationState().isIdle() || !hasAnimations) {
             images.resetAnimations();
             return images.getNorthIdle();
         } else if (parent.getAnimationState().isWalking()) {
@@ -56,7 +58,7 @@ public class ActorGraphicsComponent extends GraphicsComponent {
     }
 
     private BufferedImage getEast() {
-        if (parent.getAnimationState().isIdle()) {
+        if (parent.getAnimationState().isIdle() || !hasAnimations) {
             images.resetAnimations();
             return images.getEastIdle();
         } else if (parent.getAnimationState().isWalking()) {
@@ -70,7 +72,7 @@ public class ActorGraphicsComponent extends GraphicsComponent {
 
 
     private BufferedImage getSouth() {
-        if (parent.getAnimationState().isIdle()) {
+        if (parent.getAnimationState().isIdle() || !hasAnimations) {
             images.resetAnimations();
             return images.getSouthIdle();
         } else if (parent.getAnimationState().isWalking()) {
@@ -83,7 +85,7 @@ public class ActorGraphicsComponent extends GraphicsComponent {
     }
 
     private BufferedImage getWest() {
-        if (parent.getAnimationState().isIdle()) {
+        if (parent.getAnimationState().isIdle() || !hasAnimations) {
             images.resetAnimations();
             return images.getWestIdle();
         } else if (parent.getAnimationState().isWalking()) {

@@ -16,7 +16,7 @@ import java.util.List;
  * <p/>
  * This class is used for any Gameobject that can canMove by its own
  */
-public abstract class Actor extends Collidable {
+public abstract class Actor extends GameObject implements Collidable {
 
     //Static list of all actors to iterate over when updating or rendering
     private static List<Actor> actors = new ArrayList<>(10);
@@ -31,6 +31,8 @@ public abstract class Actor extends Collidable {
     private int currentDamageTimeout;
     //flag if player is moving
     private boolean isMoving = false;
+    //Actors collider
+    private PhysicsComponent collider;
 
     /**
      * Returns an array of all instantiated Actors on the level.
@@ -64,10 +66,22 @@ public abstract class Actor extends Collidable {
      */
     protected Actor(String name, Transform transform, ActorGraphicsComponent graphic,
                     PhysicsComponent physicsComponent) {
-        super(transform, graphic, physicsComponent);
+        super(transform, graphic);
+        setCollider(physicsComponent);
+        physicsComponent.setParent(getTransform());
+
         this.name = name;
         actors.add(this);
         currentDamageTimeout = getDamageTimeout();
+    }
+
+    @Override
+    public PhysicsComponent getCollider() {
+        return collider;
+    }
+
+    public void setCollider(PhysicsComponent collider) {
+        this.collider = collider;
     }
 
     /**

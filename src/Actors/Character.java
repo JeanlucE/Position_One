@@ -68,7 +68,7 @@ public class Character extends Actor {
     public Character(String name, int level, int experience, int skillPoints) {
         super(name,
                 new Transform(),
-                new ActorGraphicsComponent(DynamicResource.PLAYER),
+                new ActorGraphicsComponent(DynamicResource.PLAYER, true),
                 new PhysicsComponent(30, 39));
         ((ActorGraphicsComponent) this.getGraphic()).setParent(this);
 

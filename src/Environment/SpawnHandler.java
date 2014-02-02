@@ -52,7 +52,7 @@ public class SpawnHandler {
 
     boolean spawnEnemyAt(Vector position) {
         Enemy e = new Enemy("Chu Chu", 100, new Transform(),
-                new ActorGraphicsComponent(DynamicResource.ENEMY_CHUCHU),
+                new ActorGraphicsComponent(DynamicResource.ENEMY_CHUCHU, false),
                 new PhysicsComponent(39, 39));
         e.getTransform().setPosition(position);
 

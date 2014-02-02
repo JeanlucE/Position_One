@@ -15,16 +15,19 @@ import java.util.List;
  * Date: 28.11.13
  * Time: 10:00
  */
-public class Projectile extends Collidable {
+public class Projectile extends GameObject implements Collidable {
     private static List<Projectile> projectiles = new ArrayList<>();
     private Vector flyVector;
     private Vector origin;
     private int range;
     private int damage;
+    private PhysicsComponent collider;
 
     public Projectile(Transform origin, GraphicsComponent graphic, PhysicsComponent phys, int speed, int range,
                       int damage) {
-        super(origin, graphic, phys);
+        super(origin, graphic);
+        setCollider(phys);
+        phys.setParent(getTransform());
 
         //Spawn position
         this.origin = origin.getPosition();
@@ -58,6 +61,16 @@ public class Projectile extends Collidable {
             if (projectiles.get(i).isDestroyed()) {
                 projectiles.remove(i);
             }
+    }
+
+    @Override
+    public PhysicsComponent getCollider() {
+        return collider;
+    }
+
+    @Override
+    public void setCollider(PhysicsComponent physicsComponent) {
+        collider = physicsComponent;
     }
 
     @Override

@@ -1,8 +1,7 @@
 package Environment;
 
 import Components.GraphicsComponent;
-import Components.PhysicsComponent;
-import WIP.Collidable;
+import WIP.GameObject;
 import WIP.Transform;
 
 /**
@@ -11,10 +10,10 @@ import WIP.Transform;
  * Date: 07.11.13
  * Time: 15:05
  */
-public abstract class WorldSpace extends Collidable {
+public abstract class WorldSpace extends GameObject {
 
-    protected WorldSpace(Transform transform, GraphicsComponent g, PhysicsComponent physicsComponent) {
-        super(transform, g, physicsComponent);
+    protected WorldSpace(Transform transform, GraphicsComponent g) {
+        super(transform, g);
     }
 
     public void update() {

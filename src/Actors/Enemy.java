@@ -29,10 +29,6 @@ public class Enemy extends NPC {
             aggressiveBehaviour();
             damageOnTouch();
         }
-
-        if (getXVel() != 0 || getYVel() != 0) {
-            move();
-        }
     }
 
     @Override
