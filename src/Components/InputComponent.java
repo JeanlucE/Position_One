@@ -12,7 +12,6 @@ import java.awt.event.KeyListener;
 public class InputComponent implements KeyListener {
 
     //If any focus problems occur try this on renderer: jPanel.requestFocusInWindow();
-    //TODO put key typed actions in keyTyped method
     private static InputComponent instance;
 
     public static InputComponent getInstance() {

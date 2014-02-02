@@ -9,13 +9,13 @@ import Components.PhysicsComponent;
  * Date: 11.12.13
  * Time: 19:18
  */
+//TODO make interface
 public abstract class Collidable extends GameObject {
     private PhysicsComponent physicsComponent;
 
     public Collidable(Transform transform, GraphicsComponent graphic, PhysicsComponent phys) {
         super(transform, graphic);
         this.physicsComponent = phys;
-        //TODO find a better solution to this
         if (phys != null) {
             phys.setParent(transform);
         }

@@ -8,7 +8,6 @@ package Environment;
  */
 
 //TODO Enhance this class to include IDs of all non-generated items in game
-//TODO Rewrite other classes to take BlocksID
 public enum BlockID {
     WALL, FLOOR
 }

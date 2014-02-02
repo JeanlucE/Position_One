@@ -30,7 +30,6 @@ public abstract class GameObject {
         return gameObjects.toArray(new GameObject[gameObjects.size()]);
     }
 
-    //TODO Make renderer iterate over all gameobject and draw them accordingly, possibly change camera too
     public static void removeDestroyedGameObjects() {
         GameObject[] g = getGameObjects();
         for (int i = g.length - 1; i >= 0; i--) {

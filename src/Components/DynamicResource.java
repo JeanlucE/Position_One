@@ -10,7 +10,6 @@ import java.awt.image.BufferedImage;
  */
 public class DynamicResource {
 
-    //TODO refine animation images for player or get other images
     public static final ActorGraphicsResource PLAYER = new ActorGraphicsResource(
             Resource.player_NORTH,
             Resource.player_EAST,

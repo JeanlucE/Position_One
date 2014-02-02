@@ -216,22 +216,6 @@ public abstract class Actor extends Collidable {
         getTransform().getPosition().shift(x, y);
     }
 
-    /**
-     * Returns the nearest worldSpace
-     *
-     * @return Returns the nearest worldSpace
-     */
-    protected final Vector getNextWorldPosition() {
-        //TODO fix picking up item in "negative" worldspace
-        Vector currentPos = getTransform().getPosition();
-        int x = (currentPos.getX() >= 0) ? (currentPos.getX() - currentPos.getX() % Renderer.TILESIZE)
-                : (currentPos.getX() - currentPos.getX() % Renderer.TILESIZE - Renderer.TILESIZE);
-        int y = (currentPos.getY() >= 0) ? (currentPos.getY() - currentPos.getY() % Renderer.TILESIZE)
-                : (currentPos.getY() - currentPos.getY() % Renderer.TILESIZE - Renderer.TILESIZE);
-        Vector v = new Vector(x, y);
-        return v;
-    }
-
     protected final void setXVel(int xVel) {
         this.currentXVelocity = xVel;
     }

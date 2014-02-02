@@ -23,7 +23,6 @@ class GameWindow extends JFrame {
 
     }
 
-    //TODO Set Icon Image
     private GameWindow() {
 
         Game game = Game.getInstance();
@@ -34,6 +33,6 @@ class GameWindow extends JFrame {
         setBounds(300, 50, getWidth(), getHeight());
         setVisible(true);
         setMinimumSize(new Dimension(560, 560));
-        setIconImage(Resource.weapon_melee_01_FLOOR.getImage());
+        setIconImage(Resource.player_SOUTH.getImage());
     }
 }
