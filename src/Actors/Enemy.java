@@ -28,6 +28,9 @@ public class Enemy extends NPC {
         if (DEBUG_ALL_ENEMIES_MOVE_TOWARD_PLAYER) {
             aggressiveBehaviour();
             damageOnTouch();
+        } else {
+            setXVel(0);
+            setYVel(0);
         }
     }
 

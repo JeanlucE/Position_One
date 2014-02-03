@@ -66,10 +66,6 @@ public class World {
         spawnHandler.update();
     }
 
-    public void setMaxEnemies(int maxEnemies) {
-        spawnHandler.setMaxEnemies(maxEnemies);
-    }
-
     /**
      * Gets all WorldSpaces in the area of the rectangle defined by the bottomLeft Vector and the topRight Vector.
      * Then a Map of Real Vectors to WorldSpaces is returned.
@@ -309,4 +305,17 @@ public class World {
     public void spawnEnemyAround(Vector position, int radius) {
         spawnHandler.spawnEnemyAround(position, radius);
     }
+
+    public void setMaxEnemies(int maxEnemies) {
+        spawnHandler.setMaxEnemies(maxEnemies);
+    }
+
+    public void setEnemySpawnTime(int spawnTimeInMillis) {
+        spawnHandler.setSpawnTime(spawnTimeInMillis);
+    }
+
+    public float getSpawnTime() {
+        return spawnHandler.getSpawnTime();
+    }
+
 }

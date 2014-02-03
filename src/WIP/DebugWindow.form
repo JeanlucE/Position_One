@@ -1,22 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="WIP.DebugWindow">
-  <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+  <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="GridBagLayout">
     <constraints>
-      <xy x="20" y="20" width="568" height="400"/>
+      <xy x="127" y="196" width="425" height="148"/>
     </constraints>
     <properties/>
-    <border type="none">
+    <border type="empty">
+      <size top="5" left="5" bottom="5" right="5"/>
       <color color="-65485"/>
     </border>
     <children>
       <component id="d4d4f" class="javax.swing.JRadioButton" binding="drawActorPositionsRadioButton" default-binding="true">
-        <constraints/>
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="324" height="28"/>
+          </grid>
+          <gridbag weightx="1.0" weighty="1.0"/>
+        </constraints>
         <properties>
           <text value="Draw Actor Positions"/>
         </properties>
       </component>
       <component id="ddf95" class="javax.swing.JRadioButton" binding="drawActorCollidersRadioButton" default-binding="true">
-        <constraints/>
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="324" height="28"/>
+          </grid>
+          <gridbag weightx="1.0" weighty="1.0"/>
+        </constraints>
         <properties>
           <hideActionText value="false"/>
           <horizontalAlignment value="2"/>
@@ -25,14 +36,24 @@
         </properties>
       </component>
       <component id="28200" class="javax.swing.JRadioButton" binding="enemiesAttackPlayerRadioButton" default-binding="true">
-        <constraints/>
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="324" height="124"/>
+          </grid>
+          <gridbag weightx="1.0" weighty="1.0"/>
+        </constraints>
         <properties>
           <selected value="false"/>
           <text value="Enemies attack Player"/>
         </properties>
       </component>
       <component id="a01e1" class="javax.swing.JSlider" binding="slider1" default-binding="true">
-        <constraints/>
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="324" height="54"/>
+          </grid>
+          <gridbag weightx="1.0" weighty="1.0"/>
+        </constraints>
         <properties>
           <enabled value="true"/>
           <maximum value="10"/>
@@ -43,10 +64,40 @@
           <valueIsAdjusting value="false"/>
         </properties>
       </component>
-      <component id="5166a" class="javax.swing.JLabel" binding="numberOfEnemiesLabel">
-        <constraints/>
+      <component id="44e9c" class="javax.swing.JSlider" binding="slider2" default-binding="true">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="324" height="27"/>
+          </grid>
+          <gridbag weightx="1.0" weighty="0.0"/>
+        </constraints>
         <properties>
-          <text value="Number of Enemies: 0"/>
+          <maximum value="30"/>
+          <paintLabels value="false"/>
+          <paintTicks value="true"/>
+          <snapToTicks value="true"/>
+          <value value="10"/>
+          <valueIsAdjusting value="false"/>
+        </properties>
+      </component>
+      <component id="d1cd5" class="javax.swing.JLabel" binding="enemySpawnTimeLabel">
+        <constraints>
+          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <text value="Enemy Spawn Time: 10s "/>
+        </properties>
+      </component>
+      <component id="5166a" class="javax.swing.JLabel" binding="numberOfEnemiesLabel">
+        <constraints>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="152" height="54"/>
+          </grid>
+          <gridbag weightx="0.0" weighty="1.0"/>
+        </constraints>
+        <properties>
+          <text value="Maximum Number of Enemies: 0"/>
         </properties>
       </component>
     </children>

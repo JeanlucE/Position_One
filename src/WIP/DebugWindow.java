@@ -16,12 +16,15 @@ import java.awt.event.ActionListener;
  * Time: 21:52
  */
 public class DebugWindow {
+
     private JRadioButton drawActorPositionsRadioButton;
     private JPanel panel1;
     private JRadioButton drawActorCollidersRadioButton;
     private JRadioButton enemiesAttackPlayerRadioButton;
     private JSlider slider1;
     private JLabel numberOfEnemiesLabel;
+    private JSlider slider2;
+    private JLabel enemySpawnTimeLabel;
 
     public DebugWindow() {
         drawActorCollidersRadioButton.addActionListener(new ActionListener() {
@@ -53,14 +56,20 @@ public class DebugWindow {
                 numberOfEnemiesLabel.setText("Number of Enemies: " + slider1.getValue());
             }
         });
+        slider2.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                World.getInstance().setEnemySpawnTime(slider2.getValue() * 1000);
+                enemySpawnTimeLabel.setText("Enemy Spawn Time: " + slider2.getValue() + "s");
+            }
+        });
     }
 
-    public static void main(String[] args) {
+    public static void show() {
         JFrame frame = new JFrame("DebugWindow");
         frame.setContentPane(new DebugWindow().panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-
     }
 }

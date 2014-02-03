@@ -95,4 +95,12 @@ public class SpawnHandler {
         if (maxEnemies < 0) return;
         this.maxEnemies = maxEnemies;
     }
+
+    public int getSpawnTime() {
+        return spawnTime;
+    }
+
+    public void setSpawnTime(int spawnTime) {
+        this.spawnTime = spawnTime;
+    }
 }
