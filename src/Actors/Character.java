@@ -38,7 +38,7 @@ public class Character extends Actor {
 
     //Regen per second
     private float healthRegenRate = 0f;
-    private float staminaRegenRate = 100f;
+    private float staminaRegenRate = 5f;
     private float manaRegenRate = 3.5f;
 
     //Drain per second

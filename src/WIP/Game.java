@@ -68,7 +68,7 @@ public class Game {
 
         renderer = Renderer.getInstance();
         gameLoop = new GameLoop();
-        Timer refresh = new Timer(15, gameLoop);
+        Timer refresh = new Timer(17, gameLoop);
         refresh.start();
     }
 
