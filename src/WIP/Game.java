@@ -56,13 +56,13 @@ public class Game {
         player.equip(body);
         player.equip(legs);
         player.equip(shield);
-        player.equip(bow);
+        player.equip(staff);
         player.equip(arrow);
         Ammunition dropArrow = new Ammunition("Wooden Arrow", 0,
                 new ProjectileGraphicsComponent(null, DynamicResource.WOODEN_ARROW),
                 new PhysicsComponent(10, 25));
         getCurrentWorld().dropItem(dropArrow, 80, 80);
-        getCurrentWorld().dropItem(sword, 120, 80);
+        //getCurrentWorld().dropItem(sword, 120, 80);
 
         World currentWorld = World.getInstance();
 

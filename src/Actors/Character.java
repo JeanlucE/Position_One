@@ -18,7 +18,6 @@ import java.lang.reflect.Field;
  * Time: 16:00
  */
 public class Character extends Actor {
-    //TODO make stamina a percentage number, implement a stamina drain rate
     //region Skills
     public Skill STRENGTH;
     public Skill ENDURANCE;
@@ -43,7 +42,7 @@ public class Character extends Actor {
     private float manaRegenRate = 3.5f;
 
     //Drain per second
-    private float staminaDrainRate = 150f;
+    private float staminaDrainRate = 10f;
     //endregion
 
     //Array of all skills
@@ -85,11 +84,12 @@ public class Character extends Actor {
         maxMana = 20;
         currentMana = maxMana;
 
-        maxStamina = 1000;
+        maxStamina = 100;
         currentStamina = maxStamina;
 
         staminaTimer = Math.round(1000 / staminaRegenRate);
         manaTimer = Math.round(1000 / manaRegenRate);
+        staminaDrainRate = Math.round(1000 / staminaDrainRate);
 
         this.inventory = new Inventory();
         equipment = new EquipmentManager(this);
@@ -445,11 +445,24 @@ public class Character extends Actor {
 
     private int staminaDrainTimer = 0;
 
+    private void drainStamina() {
+
+        if (isSprinting()) {
+            staminaDrainTimer += Time.deltaTime();
+            while (staminaDrainTimer >= staminaDrainRate) {
+                currentStamina--;
+                staminaDrainTimer -= staminaDrainRate;
+            }
+        }
+    }
+
+    public boolean isSprinting() {
+        return isMoving() && sprinting;
+    }
+
     @Override
     protected void lateUpdate() {
-        if (isMoving() && sprinting)
-            currentStamina -= 3;
-
+        drainStamina();
         regenerate();
     }
 }
