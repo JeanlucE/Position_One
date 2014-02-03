@@ -77,8 +77,8 @@ public class Renderer extends JPanel {
     /**
      * Resizes a Dimension to a boundary, keeping aspect ratio
      *
-     * @param boundary
-     * @return
+     * @param boundary Boundary to resize image to
+     * @return Returns original image resized to fit in boundary
      */
     public Image getScaledDimension(Image original, Dimension boundary) {
 

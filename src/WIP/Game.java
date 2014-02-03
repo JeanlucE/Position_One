@@ -64,7 +64,7 @@ public class Game {
         getCurrentWorld().dropItem(dropArrow, 80, 80);
         //getCurrentWorld().dropItem(sword, 120, 80);
 
-        World currentWorld = World.getInstance();
+        World.getInstance();
 
         renderer = Renderer.getInstance();
         gameLoop = new GameLoop();

@@ -16,6 +16,6 @@ public class Main {
             e.printStackTrace();
         }
         GameWindow.getInstance();
-        //DebugWindow.show();
+        DebugWindow.show();
     }
 }

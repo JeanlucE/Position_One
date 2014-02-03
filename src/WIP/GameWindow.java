@@ -25,7 +25,7 @@ class GameWindow extends JFrame {
 
     private GameWindow() {
 
-        Game game = Game.getInstance();
+        Game.getInstance();
         add(Renderer.getInstance());
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

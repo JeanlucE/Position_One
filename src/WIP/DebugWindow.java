@@ -68,7 +68,7 @@ public class DebugWindow {
     public static void show() {
         JFrame frame = new JFrame("DebugWindow");
         frame.setContentPane(new DebugWindow().panel1);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }

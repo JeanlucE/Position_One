@@ -219,6 +219,7 @@ public class World {
     private CollisionEvent resolveActorCollision(Actor actor, Vector nextPosition) {
         Actor[] actors = Actor.getActors();
         for (Actor otherActor : actors) {
+            //Collisions between same faction
             if (actor != otherActor /*&& !actor.getFaction().equals(otherActor.getFaction())*/) {
                 PhysicsComponent nextCollider = actor.getCollider().clone(nextPosition);
                 PhysicsComponent otherCollider = otherActor.getCollider();

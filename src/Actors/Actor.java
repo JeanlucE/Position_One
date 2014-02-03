@@ -182,10 +182,7 @@ public abstract class Actor extends GameObject implements Collidable {
         World world = Game.getInstance().getCurrentWorld();
 
         World.CollisionEvent w = world.resolveCollision(this, currentPosition.shiftedPosition(x, y));
-        if (w.isNoCollision()) {
-            return true;
-        }
-        return false;
+        return w.isNoCollision();
     }
 
     private int xSlide(int x) {
