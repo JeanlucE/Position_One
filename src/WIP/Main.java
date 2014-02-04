@@ -15,7 +15,8 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        GameWindow.getInstance();
         DebugWindow.show();
+        GameWindow.getInstance();
+
     }
 }

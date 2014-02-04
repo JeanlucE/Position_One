@@ -24,16 +24,17 @@ class GameWindow extends JFrame {
     }
 
     private GameWindow() {
-
         Game.getInstance();
         add(Renderer.getInstance());
         pack();
+
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         setBounds(300, 50, getWidth(), getHeight());
         setVisible(true);
         setMinimumSize(new Dimension(560, 560));
         setIconImage(Resource.player_SOUTH.getImage());
+
 
     }
 }

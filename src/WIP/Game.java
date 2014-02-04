@@ -56,7 +56,7 @@ public class Game {
         player.equip(body);
         player.equip(legs);
         player.equip(shield);
-        player.equip(staff);
+        player.equip(bow);
         player.equip(arrow);
         Ammunition dropArrow = new Ammunition("Wooden Arrow", 0,
                 new ProjectileGraphicsComponent(null, DynamicResource.WOODEN_ARROW),
@@ -68,8 +68,8 @@ public class Game {
 
         renderer = Renderer.getInstance();
         gameLoop = new GameLoop();
-        Timer refresh = new Timer(17, gameLoop);
-        refresh.start();
+        Timer updateLoop = new Timer(17, gameLoop);
+        updateLoop.start();
     }
 
     public Actor[] getActors() {
@@ -90,10 +90,6 @@ public class Game {
 
     public boolean isPaused() {
         return guiState == GUIState.PAUSE_MENU;
-    }
-
-    private Renderer getRenderer() {
-        return renderer;
     }
 
     public int getFrameRate() {
@@ -146,7 +142,8 @@ public class Game {
                 toggleState(GUIState.MAP);
             }
 
-            getRenderer().repaint();
+            //CanvasRenderer.getInstance().paint();
+            Renderer.getInstance().repaint();
             InputComponent.getInstance().resetTypedKeys();
 
             calcFrameRate();

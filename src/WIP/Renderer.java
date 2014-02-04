@@ -58,9 +58,9 @@ public class Renderer extends JPanel {
     public final static int TILESIZE = 40;
     //This variable determines how wide and high the game screen is. This is important information for the camera to
     // know the clipping edges but is also important to calculate draw positions from world position.
-    private static int screenWidth = 800, screenHeight = 600;
+    private static int screenWidth = 800;
+    private static int screenHeight = 600;
     private Graphics2D g2d;
-    private Game game;
 
     //DEBUGGING
     public boolean DEBUG_DRAW_ACTOR_POSITIONS = false;
@@ -74,40 +74,6 @@ public class Renderer extends JPanel {
         return instance;
     }
 
-    /**
-     * Resizes a Dimension to a boundary, keeping aspect ratio
-     *
-     * @param boundary Boundary to resize image to
-     * @return Returns original image resized to fit in boundary
-     */
-    public Image getScaledDimension(Image original, Dimension boundary) {
-
-        int original_width = original.getWidth(this);
-        int original_height = original.getHeight(this);
-        int bound_width = boundary.width;
-        int bound_height = boundary.height;
-        int new_width = original_width;
-        int new_height = original_height;
-
-        // first check if we need to scale width
-        if (original_width < bound_width) {
-            //scale width to fit
-            new_width = bound_width;
-            //scale height to maintain aspect ratio
-            new_height = (new_width * original_height) / original_width;
-        }
-
-        // then check if we need to scale even with the new height
-        if (new_height < bound_height) {
-            //scale height to fit instead
-            new_height = bound_height;
-            //scale width to maintain aspect ratio
-            new_width = (new_height * original_width) / original_height;
-        }
-        return original.getScaledInstance(new_width, new_height,
-                Image.SCALE_DEFAULT);
-    }
-
     private JPanel infoScreen;
     private CardLayout c;
 
@@ -116,13 +82,12 @@ public class Renderer extends JPanel {
     private InfoPanel mapPanel = new MapPanel();
 
     private Renderer() {
-        DebugLog.write("Renderer started");
         setPreferredSize(new Dimension(screenWidth, screenHeight));
         addMouseListener(MouseInputComponent.getInstance());
         addMouseMotionListener(MouseInputComponent.getInstance());
         setFocusable(true);
         //TODO test if there are any major changes
-        setDoubleBuffered(true);
+        //setDoubleBuffered(true);
         addKeyListener(InputComponent.getInstance());
         setLayout(new BorderLayout());
         addComponentListener(new ComponentAdapter() {
@@ -130,7 +95,6 @@ public class Renderer extends JPanel {
             public void componentResized(ComponentEvent e) {
                 screenWidth = getWidth();
                 screenHeight = getHeight();
-                //setPreferredSize(new Dimension(screenWidth, screenHeight));
             }
         });
 
@@ -182,6 +146,7 @@ public class Renderer extends JPanel {
         infoScreen.setPreferredSize(new Dimension(200, screenHeight));
 
         this.add(infoScreen, BorderLayout.EAST);
+        DebugLog.write("Renderer started");
     }
 
     public static int getScreenWidth() {
@@ -191,6 +156,8 @@ public class Renderer extends JPanel {
     public static int getScreenHeight() {
         return screenHeight;
     }
+
+    private long lastTime = Time.getTimeStamp();
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -213,8 +180,13 @@ public class Renderer extends JPanel {
         g2d.setColor(Color.WHITE);
         g2d.drawString(Game.getInstance().getGuiState().name(), screenWidth - 55, screenHeight - 10);
 
-        ((JFrame) SwingUtilities.getWindowAncestor(this)).setTitle("Frames:" + String.valueOf(Game.getInstance()
-                .getFrameRate()) + " " + "Memory:" + String.valueOf(Game.getInstance().getCurrentMemory()) + "MB");
+        long currentTime = Time.getTimeStamp();
+        if (currentTime - lastTime >= 1000) {
+            ((JFrame) SwingUtilities.getWindowAncestor(this)).setTitle("Frames:" + String.valueOf(Game.getInstance()
+                    .getFrameRate()) + " " + "Memory:" + String.valueOf(Game.getInstance().getCurrentMemory()) + "MB");
+            lastTime = currentTime;
+        }
+
     }
 
     private void drawGame() {
@@ -241,29 +213,38 @@ public class Renderer extends JPanel {
         drawGUI();
     }
 
-    private void drawPlayerManaAndStamina() {
-        int xOffset = -14;
+    /**
+     * Resizes a Dimension to a boundary, keeping aspect ratio
+     *
+     * @param boundary Boundary to resize image to
+     * @return Returns original image resized to fit in boundary
+     */
+    public Image getScaledImage(Image original, Dimension boundary) {
 
-        Actors.Character player = Game.getInstance().getPlayer();
-        PhysicsComponent phys = player.getCollider();
+        int original_width = original.getWidth(this);
+        int original_height = original.getHeight(this);
+        int bound_width = boundary.width;
+        int bound_height = boundary.height;
+        int new_width = original_width;
+        int new_height = original_height;
 
-        g2d.setColor(Color.RED);
-        g2d.fillRect(screenWidth / 2 + xOffset,
-                screenHeight - (phys.getHeight() / 2 + screenHeight / 2 + 14),
-                30, 5);
-        g2d.setColor(Color.BLUE);
-        g2d.fillRect(screenWidth / 2 + xOffset,
-                screenHeight - (phys.getHeight() / 2 + screenHeight / 2 + 14),
-                (int) (30 * player.getManaPercentage()), 5);
+        // first check if we need to scale width
+        if (original_width < bound_width) {
+            //scale width to fit
+            new_width = bound_width;
+            //scale height to maintain aspect ratio
+            new_height = (new_width * original_height) / original_width;
+        }
 
-        g2d.setColor(Color.RED);
-        g2d.fillRect(screenWidth / 2 + xOffset,
-                screenHeight - (phys.getHeight() / 2 + screenHeight / 2 + 21),
-                30, 5);
-        g2d.setColor(new Color(0xFFE41C));
-        g2d.fillRect(screenWidth / 2 + xOffset,
-                screenHeight - (phys.getHeight() / 2 + screenHeight / 2 + 21),
-                (int) (30 * player.getStaminaPercentage()), 5);
+        // then check if we need to scale even with the new height
+        if (new_height < bound_height) {
+            //scale height to fit instead
+            new_height = bound_height;
+            //scale width to maintain aspect ratio
+            new_width = (new_height * original_width) / original_height;
+        }
+        return original.getScaledInstance(new_width, new_height,
+                Image.SCALE_DEFAULT);
     }
 
     /*
@@ -284,7 +265,7 @@ public class Renderer extends JPanel {
     private void drawImage_ASPECT(GameObject go, Vector position, int width, int height) {
         BufferedImage bf = go.getGraphic().getImage();
         Dimension boundary = new Dimension(width, height);
-        Image scaledImage = getScaledDimension(bf, boundary);
+        Image scaledImage = getScaledImage(bf, boundary);
         g2d.drawImage(scaledImage,
                 position.getX() - scaledImage.getWidth(this) / 2,
                 screenHeight - (position.getY() + scaledImage.getHeight(this) / 2), this);
@@ -352,6 +333,31 @@ public class Renderer extends JPanel {
         g2d.fillRect(drawPosition.getX() + xOffset,
                 screenHeight - (phys.getHeight() / 2 + drawPosition.getY() + yOffset),
                 (int) (30 * actor.getHealthPercentage()), 5);
+    }
+
+    private void drawPlayerManaAndStamina() {
+        int xOffset = -14;
+
+        Actors.Character player = Game.getInstance().getPlayer();
+        PhysicsComponent phys = player.getCollider();
+
+        g2d.setColor(Color.RED);
+        g2d.fillRect(screenWidth / 2 + xOffset,
+                screenHeight - (phys.getHeight() / 2 + screenHeight / 2 + 14),
+                30, 5);
+        g2d.setColor(Color.BLUE);
+        g2d.fillRect(screenWidth / 2 + xOffset,
+                screenHeight - (phys.getHeight() / 2 + screenHeight / 2 + 14),
+                (int) (30 * player.getManaPercentage()), 5);
+
+        g2d.setColor(Color.RED);
+        g2d.fillRect(screenWidth / 2 + xOffset,
+                screenHeight - (phys.getHeight() / 2 + screenHeight / 2 + 21),
+                30, 5);
+        g2d.setColor(new Color(0xFFE41C));
+        g2d.fillRect(screenWidth / 2 + xOffset,
+                screenHeight - (phys.getHeight() / 2 + screenHeight / 2 + 21),
+                (int) (30 * player.getStaminaPercentage()), 5);
     }
 
     private void drawProjectiles() {
@@ -448,13 +454,13 @@ public class Renderer extends JPanel {
     private class InventoryPanel extends InfoPanel {
 
         private int size = Inventory.INVENTORYSIZE;
-        private ItemSlot[] itemSlots = new ItemSlot[size];
-        private ItemSlot weaponSlot;
-        private ItemSlot offhandSlot;
-        private ItemSlot helmetSlot;
-        private ItemSlot bodySlot;
-        private ItemSlot legsSlot;
-        private ItemSlot ammunitionSlot;
+        private ItemDisplaySlot[] itemDisplaySlots = new ItemDisplaySlot[size];
+        private ItemDisplaySlot weaponSlot;
+        private ItemDisplaySlot offhandSlot;
+        private ItemDisplaySlot helmetSlot;
+        private ItemDisplaySlot bodySlot;
+        private ItemDisplaySlot legsSlot;
+        private ItemDisplaySlot ammunitionSlot;
 
         private InventoryPanel() {
             super("Inventory");
@@ -463,10 +469,10 @@ public class Renderer extends JPanel {
             //JPanel inventorySlots = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
             for (int i = 0; i < size; i++) {
-                itemSlots[i] = new ItemSlot(i, new Dimension(40, 40));
-                itemSlots[i].setHorizontalAlignment(JLabel.CENTER);
-                itemSlots[i].setVerticalAlignment(JLabel.CENTER);
-                inventorySlots.add(itemSlots[i]);
+                itemDisplaySlots[i] = new ItemDisplaySlot(i, new Dimension(40, 40));
+                itemDisplaySlots[i].setHorizontalAlignment(JLabel.CENTER);
+                itemDisplaySlots[i].setVerticalAlignment(JLabel.CENTER);
+                inventorySlots.add(itemDisplaySlots[i]);
             }
             inventorySlots.setOpaque(false);
             inventorySlots.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
@@ -476,12 +482,12 @@ public class Renderer extends JPanel {
             equipmentSlots.setBackground(Color.DARK_GRAY);
             equipmentSlots.setPreferredSize(new Dimension(100, 220));
             equipmentSlots.setLayout(new FlowLayout(FlowLayout.CENTER));
-            weaponSlot = new ItemSlot(-1, new Dimension(60, 60));
-            offhandSlot = new ItemSlot(-2, new Dimension(60, 60));
-            helmetSlot = new ItemSlot(-3, new Dimension(60, 60));
-            bodySlot = new ItemSlot(-4, new Dimension(60, 60));
-            legsSlot = new ItemSlot(-5, new Dimension(60, 60));
-            ammunitionSlot = new ItemSlot(-6, new Dimension(60, 60));
+            weaponSlot = new ItemDisplaySlot(-1, new Dimension(60, 60));
+            offhandSlot = new ItemDisplaySlot(-2, new Dimension(60, 60));
+            helmetSlot = new ItemDisplaySlot(-3, new Dimension(60, 60));
+            bodySlot = new ItemDisplaySlot(-4, new Dimension(60, 60));
+            legsSlot = new ItemDisplaySlot(-5, new Dimension(60, 60));
+            ammunitionSlot = new ItemDisplaySlot(-6, new Dimension(60, 60));
             ammunitionSlot.setHorizontalAlignment(JLabel.RIGHT);
             ammunitionSlot.setHorizontalTextPosition(JLabel.LEADING);
             equipmentSlots.add(weaponSlot);
@@ -499,7 +505,7 @@ public class Renderer extends JPanel {
             Inventory inventory = Game.getInstance().getPlayer().getInventory();
             for (int i = 0; i < 24; i++) {
                 Item item = inventory.getItemAt(i);
-                itemSlots[i].setItem(item);
+                itemDisplaySlots[i].setItem(item);
             }
             weaponSlot.setItem(player.getMainHand());
             offhandSlot.setItem(player.getOffHand());
@@ -509,8 +515,8 @@ public class Renderer extends JPanel {
             ammunitionSlot.setItem(player.getAmmunition());
         }
 
-        private class ItemSlot extends JLabel {
-            private ItemSlot(int num, Dimension d) {
+        private class ItemDisplaySlot extends JLabel {
+            private ItemDisplaySlot(int num, Dimension d) {
                 setPreferredSize(d);
                 Border border = BorderFactory.createLineBorder(Color.WHITE);
                 Border titleBorder = new TitledBorder(border, String.valueOf(num), TitledBorder.CENTER,
@@ -519,10 +525,15 @@ public class Renderer extends JPanel {
                 setForeground(Color.LIGHT_GRAY);
             }
 
+            private Item currentItem;
+
             private void setItem(Item item) {
                 if (item == null) {
-                    setText("empty");
-                } else {
+                    setText("");
+                    return;
+                }
+                if (this.currentItem == null || !this.currentItem.equals(item)) {
+                    this.currentItem = item;
                     BufferedImage b = item.getGraphic().getImage();
                     if (b != null) {
                         setIcon(new ImageIcon(b));
@@ -532,7 +543,7 @@ public class Renderer extends JPanel {
                         setText(item.getName());
                     }
                     if (item.isStackable())
-                        ammunitionSlot.setText(String.valueOf(((Stackable) item).getStack()));
+                        setText(String.valueOf(((Stackable) item).getStack()));
                 }
             }
         }

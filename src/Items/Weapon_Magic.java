@@ -52,7 +52,7 @@ public class Weapon_Magic extends Weapon {
                 phys.rotate90();
             }
             new Projectile(origin, new ProjectileGraphicsComponent(origin.getDirection(),
-                    DynamicResource.FIRE_PROJECTILE), phys, 5, getBaseRange(), getBaseDamage());
+                    DynamicResource.FIRE_PROJECTILE), phys, 7, getBaseRange(), getBaseDamage());
         }
     }
 

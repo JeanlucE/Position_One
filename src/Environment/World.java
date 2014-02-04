@@ -54,11 +54,11 @@ public class World {
     }
 
     private World() {
-        currentMap = WorldMap.getRandomMap(10, 15, 20, 4);
+        //currentMap = WorldMap.getRandomMap(10, 15, 20, 4);
 
         //initiateMap("world");
-        saveMap("randomMap");
-        //loadMap("coctestinghall");
+        //saveMap("randomMap");
+        loadMap("coctestinghall");
         spawnHandler = new SpawnHandler(this, 0);
     }
 

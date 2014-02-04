@@ -4,15 +4,13 @@ import WIP.Renderer;
 import WIP.Transform;
 import WIP.Vector;
 
-import java.io.Serializable;
-
 /**
  * Created with IntelliJ IDEA.
  * User: Jean-Luc
  * Date: 09.11.13
  * Time: 16:15
  */
-public class PhysicsComponent implements Serializable {
+public class PhysicsComponent {
     private int width;
     private int height;
     private Transform parent;
