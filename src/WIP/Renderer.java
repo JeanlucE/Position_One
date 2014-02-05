@@ -530,6 +530,7 @@ public class Renderer extends JPanel {
             private void setItem(Item item) {
                 if (item == null) {
                     setText("");
+                    this.currentItem = null;
                     return;
                 }
                 if (this.currentItem == null || !this.currentItem.equals(item)) {
@@ -542,6 +543,7 @@ public class Renderer extends JPanel {
                         setIcon(null);
                         setText(item.getName());
                     }
+                } else if (currentItem != null) {
                     if (item.isStackable())
                         setText(String.valueOf(((Stackable) item).getStack()));
                 }

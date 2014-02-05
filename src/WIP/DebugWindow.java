@@ -53,7 +53,7 @@ public class DebugWindow {
             @Override
             public void stateChanged(ChangeEvent e) {
                 World.getInstance().setMaxEnemies(slider1.getValue());
-                numberOfEnemiesLabel.setText("Number of Enemies: " + slider1.getValue());
+                numberOfEnemiesLabel.setText("Maximum Number of Enemies: " + slider1.getValue());
             }
         });
         slider2.addChangeListener(new ChangeListener() {
@@ -65,11 +65,17 @@ public class DebugWindow {
         });
     }
 
-    public static void show() {
-        JFrame frame = new JFrame("DebugWindow");
-        frame.setContentPane(new DebugWindow().panel1);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
+    private static JFrame instance;
+
+    public static JFrame getInstance() {
+        if (instance == null) {
+            JFrame frame = new JFrame("DebugWindow");
+            frame.setContentPane(new DebugWindow().panel1);
+            frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            frame.pack();
+            frame.setVisible(true);
+            instance = frame;
+        }
+        return instance;
     }
 }

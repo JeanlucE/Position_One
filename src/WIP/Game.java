@@ -43,8 +43,7 @@ public class Game {
         Weapon staff = new Weapon_Magic("Fire Staff", 0, 0, 20, 8, 0.75f, Element.FIRE,
                 new ItemGraphicsComponent());
         player = new Character("Ned Stark");
-        player.getTransform().getPosition().setX(60);
-        player.getTransform().getPosition().setY(60);
+        player.getTransform().getPosition().set(60, 60);
         Ammunition arrow = new Ammunition("Wooden Arrow", 0,
                 new ProjectileGraphicsComponent(null, DynamicResource.WOODEN_ARROW),
                 new PhysicsComponent(10, 25));
@@ -56,7 +55,7 @@ public class Game {
         player.equip(body);
         player.equip(legs);
         player.equip(shield);
-        player.equip(bow);
+        player.equip(staff);
         player.equip(arrow);
         Ammunition dropArrow = new Ammunition("Wooden Arrow", 0,
                 new ProjectileGraphicsComponent(null, DynamicResource.WOODEN_ARROW),

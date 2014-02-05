@@ -99,8 +99,12 @@ public class Vector implements Serializable {
     }
 
     public void set(Vector newVector) {
-        this.x = newVector.getX();
-        this.y = newVector.getY();
+        set(newVector.getX(), newVector.getY());
+    }
+
+    public void set(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
     public boolean ofAxisWestEast() {

@@ -38,7 +38,7 @@ public class Character extends Actor {
 
     //Regen per second
     private float healthRegenRate = 0f;
-    private float staminaRegenRate = 5f;
+    private float staminaRegenRate = 7.5f;
     private float manaRegenRate = 3.5f;
 
     //Drain per second
@@ -49,7 +49,7 @@ public class Character extends Actor {
     private Skill[] skills;
 
     //Manages all the equipment of the player
-    private EquipmentManager equipment;
+    private final EquipmentManager equipment;
 
     //Manages the inventory of the player
     private final Inventory inventory;
@@ -77,13 +77,11 @@ public class Character extends Actor {
         this.level = level;
         this.experience = experience;
         this.skillPoints = skillPoints;
+        this.instantiateSkills();
 
-        maxHealth = 100;
+        recalculateStats();
         currentHealth = maxHealth;
-
-        maxMana = 20;
         currentMana = maxMana;
-
         maxStamina = 100;
         currentStamina = maxStamina;
 
@@ -93,7 +91,7 @@ public class Character extends Actor {
 
         this.inventory = new Inventory();
         equipment = new EquipmentManager(this);
-        this.instantiateSkills();
+
         DebugLog.write("New Character created: " + name);
     }
 
@@ -154,7 +152,14 @@ public class Character extends Actor {
     }
 
     private void recalculateStats() {
-        //TODO implement this
+        //TODO damage bonuses
+        setMaxHealth(100 + STRENGTH.getLevel() * 15);
+        setCurrentHealth(maxHealth);
+        setStaminaDrainRate(10f - ENDURANCE.getLevel() * 0.5f);
+        setStaminaRegenRate(7.5f + ENDURANCE.getLevel() * 0.5f);
+        setMaxMana(20 + INTELLIGENCE.getLevel() * 4);
+        setCurrentMana(getMaxMana());
+        setManaRegenRate(3.6f + INTELLIGENCE.getLevel() * 0.2f);
     }
 
     protected void updateThis() {
@@ -257,6 +262,10 @@ public class Character extends Actor {
         return maxMana;
     }
 
+    public void setMaxMana(int maxMana) {
+        this.maxMana = maxMana;
+    }
+
     public int getCurrentMana() {
         return currentMana;
     }
@@ -282,6 +291,39 @@ public class Character extends Actor {
     public void setCurrentStamina(int currentStamina) {
         this.currentStamina = currentStamina;
     }
+
+    public float getHealthRegenRate() {
+        return healthRegenRate;
+    }
+
+    public void setHealthRegenRate(float healthRegenRate) {
+        this.healthRegenRate = healthRegenRate;
+    }
+
+    public float getStaminaRegenRate() {
+        return staminaRegenRate;
+    }
+
+    public void setStaminaRegenRate(float staminaRegenRate) {
+        this.staminaRegenRate = staminaRegenRate;
+    }
+
+    public float getManaRegenRate() {
+        return manaRegenRate;
+    }
+
+    public void setManaRegenRate(float manaRegenRate) {
+        this.manaRegenRate = manaRegenRate;
+    }
+
+    public float getStaminaDrainRate() {
+        return staminaDrainRate;
+    }
+
+    public void setStaminaDrainRate(float staminaDrainRate) {
+        this.staminaDrainRate = staminaDrainRate;
+    }
+
     //endregion
 
     //region Level and Skill Methods
@@ -306,6 +348,10 @@ public class Character extends Actor {
     private void levelUp() {
         level++;
         skillPoints++;
+
+        for (Skill s : skills) {
+            s.setLevel(s.getLevel() + 1);
+        }
 
         recalculateStats();
 

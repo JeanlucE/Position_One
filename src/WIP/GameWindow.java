@@ -26,7 +26,8 @@ class GameWindow extends JFrame {
     private GameWindow() {
         Game.getInstance();
         add(Renderer.getInstance());
-        pack();
+        setSize(Renderer.getScreenWidth() + 16, Renderer.getScreenHeight() + 38);
+        //pack();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 

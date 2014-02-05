@@ -173,8 +173,16 @@ public abstract class Actor extends GameObject implements Collidable {
             } else { //Prioritze east west axis
                 getTransform().setDirection(new Vector(xMove, 0).normalize());
             }
-        } else
+        } else {
+            if (currentYVelocity == 0) {
+                getTransform().setDirection(new Vector(currentXVelocity, 0).normalize());
+            } else if (currentXVelocity == 0) {
+                getTransform().setDirection(new Vector(0, currentYVelocity).normalize());
+            } else { //Prioritze east west axis
+                getTransform().setDirection(new Vector(currentXVelocity, 0).normalize());
+            }
             isMoving = false;
+        }
     }
 
     private boolean canMove(int x, int y) {
