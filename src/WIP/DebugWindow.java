@@ -27,6 +27,7 @@ public class DebugWindow {
     private JLabel enemySpawnTimeLabel;
 
     public DebugWindow() {
+        //FIXME if "enemies attack player" is not ticked, player cannot damage enemies either
         drawActorCollidersRadioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
