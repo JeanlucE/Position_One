@@ -4,6 +4,7 @@ import Actors.Actor;
 import Components.InputComponent;
 import Components.MouseInputComponent;
 import Components.PhysicsComponent;
+import Components.Resource;
 import Environment.Floor;
 import Environment.WorldSpace;
 import Items.Inventory;
@@ -149,8 +150,6 @@ public class Renderer extends JPanel {
 
         JPanel paddingPanel = new JPanel(null);
         paddingPanel.setOpaque(false);
-        //TODO set empty border insets to always make the infoscreen same size
-        //paddingPanel.setBorder(BorderFactory.createEmptyBorder(50, 200, 50, 200));
         paddingPanel.add(infoScreen);
 
         this.add(paddingPanel, BorderLayout.CENTER);
@@ -396,12 +395,12 @@ public class Renderer extends JPanel {
             int width = 100;
             int height = 100;
             boolean centered = false;
-            if(g == Game.GUIState.PAUSE_MENU){
+            if (g == Game.GUIState.PAUSE_MENU) {
                 c.show(infoScreen, "pause");
                 width = 200;
                 height = 250;
                 centered = true;
-            }else if (g == Game.GUIState.INVENTORY) {
+            } else if (g == Game.GUIState.INVENTORY) {
                 inventoryPanel.update();
                 c.show(infoScreen, "inventory");
                 width = 250;
@@ -421,9 +420,9 @@ public class Renderer extends JPanel {
                 centered = true;
             }
             if (centered) {
-                infoScreen.setBounds(screenWidth/2 - width/2, screenHeight/2 - height/2, width, height);
+                infoScreen.setBounds(screenWidth / 2 - width / 2, screenHeight / 2 - height / 2, width, height);
             } else {
-                infoScreen.setBounds(screenWidth - width - 10, screenHeight/2 - height/2, width, height);
+                infoScreen.setBounds(screenWidth - width - 10, screenHeight / 2 - height / 2, width, height);
             }
             infoScreen.setVisible(true);
         } else {
@@ -606,7 +605,7 @@ public class Renderer extends JPanel {
                         setText(item.getName());
                     }
                 } else if (currentItem.isStackable()) {
-                        setText(String.valueOf(((Stackable) item).getStack()));
+                    setText(String.valueOf(((Stackable) item).getStack()));
                 }
             }
         }
@@ -703,12 +702,47 @@ public class Renderer extends JPanel {
 
         @Override
         void update() {
-
+            repaint();
         }
+
+        @Override
+        public void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            Graphics2D graphics2D = (Graphics2D) g;
+            Map<Vector, WorldSpace> mapSpaces = Camera.getInstance().mapToRender();
+            int horizCenter = this.getWidth() / 2;
+            int vertCenter = this.getHeight() / 2;
+
+            for (Map.Entry<Vector, WorldSpace> e : mapSpaces.entrySet()) {
+                Vector v = Vector.multiply(e.getKey(), 4);
+                WorldSpace w = e.getValue();
+                if (w == null || w.isWall()) {
+                    graphics2D.fillRect(horizCenter + v.getX(), vertCenter - v.getY(), 4, 4);
+                }
+            }
+            //player position
+            Actor player = Game.getInstance().getPlayer();
+            BufferedImage bf;
+            if (player.isFacing(Vector.NORTH)) {
+                bf = Resource.player_MAP_NORTH.getImage();
+            } else if (player.isFacing(Vector.EAST)) {
+                bf = Resource.player_MAP_EAST.getImage();
+            } else if (player.isFacing(Vector.SOUTH)) {
+                bf = Resource.player_MAP_SOUTH.getImage();
+            } else if (player.isFacing(Vector.WEST)) {
+                bf = Resource.player_MAP_WEST.getImage();
+            } else {
+                bf = Resource.player_MAP_SOUTH.getImage();
+                DebugLog.write("Player is not facing any cardinal direction!", true);
+            }
+            graphics2D.drawImage(bf, this.getWidth() / 2 - bf.getWidth() / 2, this.getHeight() / 2 - bf.getHeight() / 2, this);
+        }
+
+
     }
 
-    private class PausePanel extends RoundedInfoPanel{
-        private PausePanel(){
+    private class PausePanel extends RoundedInfoPanel {
+        private PausePanel() {
             super("Pause Menu");
         }
 

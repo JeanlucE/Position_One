@@ -31,6 +31,7 @@ public class Camera {
     private Vector parent;
 
     private Camera() {
+        this.parent = Game.getInstance().getPlayer().getTransform().getPosition();
     }
 
     private int getScreenWidth() {
@@ -55,7 +56,6 @@ public class Camera {
 
     public Map<Vector, WorldSpace> worldToRender() {
         World world = Game.getInstance().getCurrentWorld();
-        this.parent = Game.getInstance().getPlayer().getTransform().getPosition();
         Map<Vector, WorldSpace> visibleSpaces;
         Map<Vector, WorldSpace> floors = new HashMap<>(200);
         Map<Vector, WorldSpace> walls = new HashMap<>(200);
@@ -65,6 +65,7 @@ public class Camera {
         int southClip = parent.getY() - getClipY();
         int westClip = parent.getX() - getClipX();
         int eastClip = parent.getX() + getClipX();
+
         visibleSpaces = world.getSubSpace(new Vector(westClip, southClip), new Vector(eastClip, northClip));
         for (Map.Entry<Vector, WorldSpace> e : visibleSpaces.entrySet()) {
             WorldSpace w = e.getValue();
@@ -123,9 +124,38 @@ public class Camera {
     }
 
     private Vector transformToViewSpace(Vector v) {
-        Vector a = Vector.add(getParentPosition(), Vector.subtract(v, parent));
-        v.setX(a.getX());
-        v.setY(a.getY());
+        v.set(Vector.add(getParentPosition(), Vector.subtract(v, parent)));
         return v;
+    }
+
+    public Map<Vector, WorldSpace> mapToRender(){
+        World world = Game.getInstance().getCurrentWorld();
+        Map<Vector, WorldSpace> visibleSpaces;
+        int tilesize = Renderer.TILESIZE;
+        //1600/40 = 40 blocks in each direction
+        //Get the camera clipping lines relative to the player
+        Vector playerRealVector = parent.toReal();
+        int northClip = playerRealVector.getY() + 40;
+        int southClip = playerRealVector.getY() - 40;
+        int westClip = playerRealVector.getX() - 40;
+        int eastClip = playerRealVector.getX() + 40;
+
+        visibleSpaces = world.getRealSubSpace(new Vector(westClip, southClip), new Vector(eastClip, northClip));
+        int yBottom = 0;
+        int yTop = 0;
+        for(Map.Entry<Vector, WorldSpace> e: visibleSpaces.entrySet()){
+            Vector v = e.getKey();
+            Vector a = Vector.subtract(v, playerRealVector);
+            v.set(a);
+            /*if(v.getX() > yTop){
+                yTop = v.getX();
+            }
+            if(v.getX() < yBottom){
+                yBottom = v.getY();
+            } */
+        }
+        //System.out.println(new Vector(yBottom, yTop));
+
+        return visibleSpaces;
     }
 }

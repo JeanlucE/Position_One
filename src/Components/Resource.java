@@ -72,7 +72,11 @@ public enum Resource implements Serializable {
     projectile_fire_01_FLOOR_NORTH("projectile_fire_01_FLOOR_NORTH.png"),
     projectile_fire_01_FLOOR_SOUTH("projectile_fire_01_FLOOR_SOUTH.png"),
     projectile_fire_01_FLOOR_EAST("projectile_fire_01_FLOOR_EAST.png"),
-    projectile_fire_01_FLOOR_WEST("projectile_fire_01_FLOOR_WEST.png");
+    projectile_fire_01_FLOOR_WEST("projectile_fire_01_FLOOR_WEST.png"),
+    player_MAP_NORTH("player_MAP_NORTH.png"),
+    player_MAP_EAST("player_MAP_EAST.png"),
+    player_MAP_SOUTH("player_MAP_SOUTH.png"),
+    player_MAP_WEST("player_MAP_WEST.png");
 
     private final String imagePath = "./images/";
     private BufferedImage image;

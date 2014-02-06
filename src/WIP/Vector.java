@@ -60,6 +60,18 @@ public class Vector implements Serializable {
         return a;
     }
 
+    public static Vector divide(Vector a, int b){
+        a.x /= b;
+        a.y /= b;
+        return a;
+    }
+
+    public Vector toReal(){
+        int xReal = (x >= 0) ? (x/Renderer.TILESIZE) : (x/Renderer.TILESIZE - 1);
+        int yReal = (y >= 0) ? (y/Renderer.TILESIZE) : (y/Renderer.TILESIZE - 1);
+        return new Vector(xReal, yReal);
+    }
+
     public Vector normalize() {
         if (x == 0 && y == 0)
             DebugLog.write("Vector: Cannot normalize this vector: " + this);

@@ -93,6 +93,23 @@ public class World {
         return result;
     }
 
+    public Map<Vector, WorldSpace> getRealSubSpace(Vector bottomLeft, Vector topRight) {
+        int x0 = bottomLeft.getX();
+        int y0 = bottomLeft.getY();
+        int x1 = topRight.getX();
+        int y1 = topRight.getY();
+
+        Map<Vector, WorldSpace> result = new HashMap<>(Math.abs(x1 - x0) * Math.abs(y1 - y0)); //Approximate Size
+        for (int x = x0; x < x1; x++) {
+            for (int y = y0; y < y1; y++) {
+                Vector v = new Vector(x, y);
+                WorldSpace w = getReal(x, y);
+                result.put(v, w);
+            }
+        }
+        return result;
+    }
+
     /**
      * A method which returns the WorldSpace stored at a coordinate
      *
