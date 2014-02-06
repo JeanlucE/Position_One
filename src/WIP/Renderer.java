@@ -65,6 +65,7 @@ public class Renderer extends JPanel {
     //DEBUGGING
     public boolean DEBUG_DRAW_ACTOR_POSITIONS = false;
     public boolean DEBUG_DRAW_ACTOR_COLLIDERS = false;
+    private Color nullColor = Color.DARK_GRAY;
 
     //Singleton Design Pattern
     public static Renderer getInstance() {
@@ -80,6 +81,7 @@ public class Renderer extends JPanel {
     private RoundedInfoPanel inventoryPanel = new InventoryPanel();
     private RoundedInfoPanel statsPanel = new StatsPanel();
     private RoundedInfoPanel mapPanel = new MapPanel();
+    private RoundedInfoPanel pausePanel = new PausePanel();
 
     private Renderer() {
         setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -142,13 +144,14 @@ public class Renderer extends JPanel {
         infoScreen.add(inventoryPanel, "inventory");
         infoScreen.add(statsPanel, "stats");
         infoScreen.add(mapPanel, "map");
+        infoScreen.add(pausePanel, "pause");
         infoScreen.setVisible(false);
-        infoScreen.setPreferredSize(new Dimension(200, 200));
-        JPanel paddingPanel = new JPanel(new BorderLayout());
+
+        JPanel paddingPanel = new JPanel(null);
         paddingPanel.setOpaque(false);
         //TODO set empty border insets to always make the infoscreen same size
-        paddingPanel.setBorder(BorderFactory.createEmptyBorder(50, 150, 50, 150));
-        paddingPanel.add(infoScreen, BorderLayout.CENTER);
+        //paddingPanel.setBorder(BorderFactory.createEmptyBorder(50, 200, 50, 200));
+        paddingPanel.add(infoScreen);
 
         this.add(paddingPanel, BorderLayout.CENTER);
         DebugLog.write("Renderer started");
@@ -262,7 +265,7 @@ public class Renderer extends JPanel {
             g2d.drawImage(bf, position.getX(), screenHeight - (bf.getHeight() + position.getY()),
                     this);
         } else {
-            g2d.setColor(Color.RED);
+            g2d.setColor(nullColor);
             g2d.fillRect(position.getX(), screenHeight - (TILESIZE + position.getY()), TILESIZE, TILESIZE);
         }
     }
@@ -293,7 +296,7 @@ public class Renderer extends JPanel {
             else
                 drawImage_COLLIDER(go, centerOfImage, width, height);
         } else {
-            g2d.setColor(Color.RED);
+            g2d.setColor(nullColor);
             g2d.fillRect(centerOfImage.getX(), screenHeight - (TILESIZE + centerOfImage.getY()), TILESIZE, TILESIZE);
         }
     }
@@ -390,18 +393,39 @@ public class Renderer extends JPanel {
         Game.GUIState g = Game.getInstance().getGuiState();
 
         if (g != Game.GUIState.GAME) {
-            infoScreen.setVisible(true);
-
-            if (g == Game.GUIState.INVENTORY) {
+            int width = 100;
+            int height = 100;
+            boolean centered = false;
+            if(g == Game.GUIState.PAUSE_MENU){
+                c.show(infoScreen, "pause");
+                width = 200;
+                height = 250;
+                centered = true;
+            }else if (g == Game.GUIState.INVENTORY) {
                 inventoryPanel.update();
                 c.show(infoScreen, "inventory");
+                width = 250;
+                height = 500;
+                centered = false;
             } else if (g == Game.GUIState.STATS) {
                 statsPanel.update();
                 c.show(infoScreen, "stats");
+                width = 200;
+                height = 400;
+                centered = false;
             } else if (g == Game.GUIState.MAP) {
                 mapPanel.update();
                 c.show(infoScreen, "map");
+                width = 400;
+                height = 400;
+                centered = true;
             }
+            if (centered) {
+                infoScreen.setBounds(screenWidth/2 - width/2, screenHeight/2 - height/2, width, height);
+            } else {
+                infoScreen.setBounds(screenWidth - width - 10, screenHeight/2 - height/2, width, height);
+            }
+            infoScreen.setVisible(true);
         } else {
             infoScreen.setVisible(false);
         }
@@ -453,13 +477,12 @@ public class Renderer extends JPanel {
             setForeground(Color.LIGHT_GRAY);
 
             setLayout(new BorderLayout());
-
-            Border lineBorder = BorderFactory.createLineBorder(Color.LIGHT_GRAY, 0, true);
-            Border titledBorder = BorderFactory.createTitledBorder(lineBorder, title,
+            Border emptyBorder = BorderFactory.createEmptyBorder(30, 9, 9, 9);
+            Border titledBorder = BorderFactory.createTitledBorder(emptyBorder, title,
                     TitledBorder.CENTER, TitledBorder.CENTER,
                     CustomFont.SHERWOOD_Regular.deriveFont(20.0f), Color.LIGHT_GRAY);
-            Border emptyBorder = BorderFactory.createEmptyBorder(3, 3, 3, 3);
-            Border compoundBorder = BorderFactory.createCompoundBorder(emptyBorder, titledBorder);
+            Border anotherEmptyBorder = BorderFactory.createEmptyBorder(5, 0, 0, 0);
+            Border compoundBorder = BorderFactory.createCompoundBorder(titledBorder, anotherEmptyBorder);
             this.setBorder(compoundBorder);
 
             setOpaque(false);
@@ -505,18 +528,21 @@ public class Renderer extends JPanel {
             JPanel inventorySlots = new JPanel(new GridLayout(6, 4, 0, 0));
 
             for (int i = 0; i < size; i++) {
-                itemDisplaySlots[i] = new ItemDisplaySlot(i, new Dimension(40, 40));
+                itemDisplaySlots[i] = new ItemDisplaySlot(i, new Dimension(50, 50));
                 itemDisplaySlots[i].setHorizontalAlignment(JLabel.CENTER);
                 itemDisplaySlots[i].setVerticalAlignment(JLabel.CENTER);
                 inventorySlots.add(itemDisplaySlots[i]);
             }
             inventorySlots.setOpaque(false);
-            inventorySlots.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
-            add(inventorySlots, BorderLayout.NORTH);
+
+            JPanel paddingPanel = new JPanel();
+            paddingPanel.setOpaque(false);
+            paddingPanel.add(inventorySlots);
+            add(paddingPanel, BorderLayout.NORTH);
 
             JPanel equipmentSlots = new JPanel();
             equipmentSlots.setBackground(Color.DARK_GRAY);
-            equipmentSlots.setPreferredSize(new Dimension(100, 80));
+            equipmentSlots.setPreferredSize(new Dimension(100, 120));
             equipmentSlots.setLayout(new FlowLayout(FlowLayout.CENTER));
             weaponSlot = new ItemDisplaySlot(-1, new Dimension(60, 60));
             offhandSlot = new ItemDisplaySlot(-2, new Dimension(60, 60));
@@ -532,7 +558,7 @@ public class Renderer extends JPanel {
             equipmentSlots.add(bodySlot);
             equipmentSlots.add(legsSlot);
             equipmentSlots.add(ammunitionSlot);
-            add(equipmentSlots, BorderLayout.SOUTH);
+            add(equipmentSlots, BorderLayout.CENTER);
         }
 
         @Override
@@ -579,8 +605,7 @@ public class Renderer extends JPanel {
                         setIcon(null);
                         setText(item.getName());
                     }
-                } else if (currentItem != null) {
-                    if (item.isStackable())
+                } else if (currentItem.isStackable()) {
                         setText(String.valueOf(((Stackable) item).getStack()));
                 }
             }
@@ -674,6 +699,17 @@ public class Renderer extends JPanel {
     private class MapPanel extends RoundedInfoPanel {
         private MapPanel() {
             super("Map");
+        }
+
+        @Override
+        void update() {
+
+        }
+    }
+
+    private class PausePanel extends RoundedInfoPanel{
+        private PausePanel(){
+            super("Pause Menu");
         }
 
         @Override

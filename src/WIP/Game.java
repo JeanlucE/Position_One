@@ -86,7 +86,7 @@ public class Game {
     }
 
     public boolean isPaused() {
-        return guiState != GUIState.GAME;
+        return guiState == GUIState.PAUSE_MENU;
     }
 
     public int getFrameRate() {

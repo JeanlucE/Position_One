@@ -1,6 +1,7 @@
 package Components;
 
 import WIP.DebugLog;
+import WIP.Game;
 import WIP.Time;
 
 import java.awt.image.BufferedImage;
@@ -37,7 +38,7 @@ public class Animation {
             lastAnimationFrame = Time.getTimeStamp();
 
         BufferedImage b = componentImages[iterator].getImage();
-        if (Time.getTimeStamp() - lastAnimationFrame >= getAnimationIncrement()) {
+        if (Time.getTimeStamp() - lastAnimationFrame >= getAnimationIncrement() && !Game.getInstance().isPaused()) {
             iterator = (iterator + 1) % componentImages.length;
             lastAnimationFrame = Time.getTimeStamp();
         }

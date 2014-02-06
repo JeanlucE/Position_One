@@ -27,7 +27,6 @@ class GameWindow extends JFrame {
         Game.getInstance();
         add(Renderer.getInstance());
         setSize(Renderer.getScreenWidth() + 16, Renderer.getScreenHeight() + 38);
-        //pack();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -35,7 +34,5 @@ class GameWindow extends JFrame {
         setVisible(true);
         setMinimumSize(new Dimension(560, 560));
         setIconImage(Resource.player_SOUTH.getImage());
-
-
     }
 }
