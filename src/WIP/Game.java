@@ -22,7 +22,6 @@ import java.awt.event.ActionListener;
 public class Game {
     private static Game instance = null;
     private final Actors.Character player;
-    private final Renderer renderer;
     private final GameLoop gameLoop;
     private GUIState guiState = GUIState.GAME;
 
@@ -65,9 +64,8 @@ public class Game {
 
         World.getInstance();
 
-        renderer = Renderer.getInstance();
         gameLoop = new GameLoop();
-        Timer updateLoop = new Timer(17, gameLoop);
+        Timer updateLoop = new Timer(16, gameLoop);
         updateLoop.start();
     }
 
@@ -88,7 +86,7 @@ public class Game {
     }
 
     public boolean isPaused() {
-        return guiState == GUIState.PAUSE_MENU;
+        return guiState != GUIState.GAME;
     }
 
     public int getFrameRate() {
@@ -188,9 +186,7 @@ public class Game {
                 this.guiState = GUIState.GAME;
             }
             return;
-        }
-
-        if (!isPaused()) {
+        } else {
             if (this.guiState != guiState) {
                 this.guiState = guiState;
             } else {

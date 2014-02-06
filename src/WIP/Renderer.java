@@ -77,9 +77,9 @@ public class Renderer extends JPanel {
     private JPanel infoScreen;
     private CardLayout c;
 
-    private InfoPanel inventoryPanel = new InventoryPanel();
-    private InfoPanel statsPanel = new StatsPanel();
-    private InfoPanel mapPanel = new MapPanel();
+    private RoundedInfoPanel inventoryPanel = new InventoryPanel();
+    private RoundedInfoPanel statsPanel = new StatsPanel();
+    private RoundedInfoPanel mapPanel = new MapPanel();
 
     private Renderer() {
         setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -134,7 +134,7 @@ public class Renderer extends JPanel {
 
         //Panels for inventory, stats and map
         infoScreen = new JPanel();
-        infoScreen.setBackground(Color.WHITE);
+        infoScreen.setOpaque(false);
 
         c = new CardLayout();
         infoScreen.setLayout(c);
@@ -143,9 +143,14 @@ public class Renderer extends JPanel {
         infoScreen.add(statsPanel, "stats");
         infoScreen.add(mapPanel, "map");
         infoScreen.setVisible(false);
-        infoScreen.setPreferredSize(new Dimension(200, screenHeight));
+        infoScreen.setPreferredSize(new Dimension(200, 200));
+        JPanel paddingPanel = new JPanel(new BorderLayout());
+        paddingPanel.setOpaque(false);
+        //TODO set empty border insets to always make the infoscreen same size
+        paddingPanel.setBorder(BorderFactory.createEmptyBorder(50, 150, 50, 150));
+        paddingPanel.add(infoScreen, BorderLayout.CENTER);
 
-        this.add(infoScreen, BorderLayout.EAST);
+        this.add(paddingPanel, BorderLayout.CENTER);
         DebugLog.write("Renderer started");
     }
 
@@ -384,11 +389,6 @@ public class Renderer extends JPanel {
     private void drawGUI() {
         Game.GUIState g = Game.getInstance().getGuiState();
 
-        if (Game.getInstance().isPaused()) {
-            infoScreen.setVisible(false);
-            return;
-        }
-
         if (g != Game.GUIState.GAME) {
             infoScreen.setVisible(true);
 
@@ -432,26 +432,63 @@ public class Renderer extends JPanel {
         }
     }
 
-    private abstract class InfoPanel extends JPanel {
-        private InfoPanel(String title) {
+    /**
+     * Info panel that is used as a superclass for the inventory, character screen and map screen
+     * It also has a rounded border which uses source code from here:
+     * http://www.codeproject.com/Articles/114959/Rounded-Border-JPanel-JPanel-graphics-improvements
+     */
+    private abstract class RoundedInfoPanel extends JPanel {
+
+        /**
+         * Stroke size. it is recommended to set it to 1 for better view
+         */
+        private int strokeSize = 3;
+        /**
+         * Double values for Horizontal and Vertical radius of corner arcs
+         */
+        private Dimension arcs = new Dimension(30, 30);
+
+        private RoundedInfoPanel(String title) {
             setBackground(Color.DARK_GRAY);
             setForeground(Color.LIGHT_GRAY);
 
             setLayout(new BorderLayout());
 
-            Border lineBorder = BorderFactory.createLineBorder(Color.LIGHT_GRAY, 3, true);
+            Border lineBorder = BorderFactory.createLineBorder(Color.LIGHT_GRAY, 0, true);
             Border titledBorder = BorderFactory.createTitledBorder(lineBorder, title,
                     TitledBorder.CENTER, TitledBorder.CENTER,
                     CustomFont.SHERWOOD_Regular.deriveFont(20.0f), Color.LIGHT_GRAY);
             Border emptyBorder = BorderFactory.createEmptyBorder(3, 3, 3, 3);
             Border compoundBorder = BorderFactory.createCompoundBorder(emptyBorder, titledBorder);
             this.setBorder(compoundBorder);
+
+            setOpaque(false);
         }
 
         abstract void update();
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            int width = getWidth();
+            int height = getHeight();
+            Graphics2D graphics = (Graphics2D) g;
+            graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                    RenderingHints.VALUE_ANTIALIAS_ON);
+
+            //Draws the rounded opaque panel with borders.
+            graphics.setColor(getBackground());
+            graphics.fillRoundRect(0, 0, width, height, arcs.width, arcs.height);
+            graphics.setColor(getForeground());
+            graphics.setStroke(new BasicStroke(strokeSize));
+            graphics.drawRoundRect(0, 0, width - 1, height - 1, arcs.width, arcs.height);
+
+            //Sets strokes to default, is better.
+            graphics.setStroke(new BasicStroke());
+        }
     }
 
-    private class InventoryPanel extends InfoPanel {
+    private class InventoryPanel extends RoundedInfoPanel {
 
         private int size = Inventory.INVENTORYSIZE;
         private ItemDisplaySlot[] itemDisplaySlots = new ItemDisplaySlot[size];
@@ -466,7 +503,6 @@ public class Renderer extends JPanel {
             super("Inventory");
             setLayout(new BorderLayout());
             JPanel inventorySlots = new JPanel(new GridLayout(6, 4, 0, 0));
-            //JPanel inventorySlots = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
             for (int i = 0; i < size; i++) {
                 itemDisplaySlots[i] = new ItemDisplaySlot(i, new Dimension(40, 40));
@@ -480,7 +516,7 @@ public class Renderer extends JPanel {
 
             JPanel equipmentSlots = new JPanel();
             equipmentSlots.setBackground(Color.DARK_GRAY);
-            equipmentSlots.setPreferredSize(new Dimension(100, 220));
+            equipmentSlots.setPreferredSize(new Dimension(100, 80));
             equipmentSlots.setLayout(new FlowLayout(FlowLayout.CENTER));
             weaponSlot = new ItemDisplaySlot(-1, new Dimension(60, 60));
             offhandSlot = new ItemDisplaySlot(-2, new Dimension(60, 60));
@@ -551,7 +587,7 @@ public class Renderer extends JPanel {
         }
     }
 
-    private class StatsPanel extends InfoPanel {
+    private class StatsPanel extends RoundedInfoPanel {
         private JLabel level;
         private JLabel skillPoints;
         private JLabel experience;
@@ -635,7 +671,7 @@ public class Renderer extends JPanel {
         }
     }
 
-    private class MapPanel extends InfoPanel {
+    private class MapPanel extends RoundedInfoPanel {
         private MapPanel() {
             super("Map");
         }
