@@ -744,6 +744,20 @@ public class Renderer extends JPanel {
     private class PausePanel extends RoundedInfoPanel {
         private PausePanel() {
             super("Pause Menu");
+            CustomButton resume = new CustomButton("Resume Game", null);
+            CustomButton save = new CustomButton("Save Game", null);
+            CustomButton options = new CustomButton("Options", null);
+            CustomButton quit = new CustomButton("Quit Game", null);
+            JPanel buttons = new JPanel(new GridLayout(4, 1, 0, 7));
+            buttons.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+            buttons.add(resume);
+            buttons.add(save);
+            buttons.add(options);
+            buttons.add(quit);
+            buttons.setBackground(getBackground());
+            buttons.setForeground(getForeground());
+
+            add(buttons);
         }
 
         @Override

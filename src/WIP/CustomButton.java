@@ -35,7 +35,9 @@ public class CustomButton extends JButton {
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                a.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
+                if (a != null) {
+                    a.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
+                }
             }
 
             @Override
@@ -46,16 +48,6 @@ public class CustomButton extends JButton {
             @Override
             public void mouseReleased(MouseEvent e) {
                 setBorder(buttonBorder);
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                //setText("Hi");
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                //setText(str);
             }
         });
     }

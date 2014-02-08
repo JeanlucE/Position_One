@@ -85,9 +85,7 @@ public class Character extends Actor {
         maxStamina = 100;
         currentStamina = maxStamina;
 
-        staminaTimer = Math.round(1000 / staminaRegenRate);
-        manaTimer = Math.round(1000 / manaRegenRate);
-        staminaDrainRate = Math.round(1000 / staminaDrainRate);
+
 
         this.inventory = new Inventory();
         equipment = new EquipmentManager(this);
@@ -160,6 +158,10 @@ public class Character extends Actor {
         setMaxMana(20 + INTELLIGENCE.getLevel() * 4);
         setCurrentMana(getMaxMana());
         setManaRegenRate(3.6f + INTELLIGENCE.getLevel() * 0.2f);
+
+        staminaTimer = Math.round(1000 / staminaRegenRate);
+        manaTimer = Math.round(1000 / manaRegenRate);
+        staminaDrainRate = Math.round(1000 / staminaDrainRate);
     }
 
     protected void updateThis() {
